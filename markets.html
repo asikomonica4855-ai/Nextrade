@@ -54,7 +54,7 @@ nav a:hover{
 
 .title{
   text-align:center;
-  margin-bottom:35px;
+  margin-bottom:30px;
 }
 
 .title h1{
@@ -70,28 +70,49 @@ nav a:hover{
   color:#9fb1c7;
 }
 
-/* LIVE MARKET */
+/* MARKET PANEL */
 
-.live-market{
+.market-panel{
   background:#0d1b2d;
   border:1px solid #1c3550;
   border-radius:15px;
   padding:25px;
-  margin-bottom:35px;
+  margin-bottom:30px;
 }
 
-.live-top{
+.panel-title{
+  color:#35a7ff;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+/* SELECTOR */
+
+.selector{
+  width:100%;
+  padding:14px;
+  border-radius:8px;
+  border:1px solid #294663;
+  background:#07111f;
+  color:white;
+  font-size:15px;
+  outline:none;
+}
+
+.selector:focus{
+  border-color:#35a7ff;
+}
+
+/* STATUS */
+
+.live-row{
+  margin-top:20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
-  gap:15px;
-}
-
-.live-title{
-  color:#35a7ff;
-  font-size:20px;
-  font-weight:bold;
+  gap:10px;
 }
 
 .connection{
@@ -103,18 +124,16 @@ nav a:hover{
   font-weight:bold;
 }
 
-.price-box{
-  margin-top:25px;
-}
-
 .symbol{
   color:#9fb1c7;
   font-size:14px;
-  margin-bottom:8px;
 }
 
+/* PRICE */
+
 .price{
-  font-size:42px;
+  margin-top:20px;
+  font-size:44px;
   font-weight:bold;
 }
 
@@ -124,9 +143,11 @@ nav a:hover{
   font-size:13px;
 }
 
+/* CHART */
+
 .chart{
   width:100%;
-  height:220px;
+  height:280px;
   margin-top:25px;
   background:#081525;
   border:1px solid #1b3048;
@@ -139,7 +160,7 @@ canvas{
   height:100%;
 }
 
-/* MARKET CARDS */
+/* CARDS */
 
 .market-grid{
   display:grid;
@@ -204,7 +225,11 @@ footer{
   }
 
   .price{
-    font-size:34px;
+    font-size:35px;
+  }
+
+  .chart{
+    height:220px;
   }
 }
 </style></head><body><header><div class="logo">NEXTRADE</div><nav>
@@ -214,35 +239,56 @@ footer{
 </nav></header><div class="container"><div class="title">
 <h1>Explore <span>Markets</span></h1>
 <p>Monitor live markets and prepare your trading analysis.</p>
-</div><!-- LIVE DERIV MARKET --><div class="live-market"><div class="live-top"><div class="live-title">
-LIVE DERIV MARKET
+</div><!-- LIVE MARKET --><div class="market-panel"><div class="panel-title">
+Live Volatility Market
+</div><select id="symbolSelector" class="selector"><option value="1HZ10V">
+Volatility 10 (1s)
+</option><option value="1HZ25V">
+Volatility 25 (1s)
+</option><option value="1HZ50V">
+Volatility 50 (1s)
+</option><option value="1HZ75V">
+Volatility 75 (1s)
+</option><option value="1HZ100V" selected>
+Volatility 100 (1s)
+</option><option value="R_10">
+Volatility 10
+</option><option value="R_25">
+Volatility 25
+</option><option value="R_50">
+Volatility 50
+</option><option value="R_75">
+Volatility 75
+</option><option value="R_100">
+Volatility 100
+</option></select><div class="live-row"><div id="symbolName" class="symbol">
+Volatility 100 (1s) — 1HZ100V
 </div><div id="connection" class="connection">
 Connecting...
-</div></div><div class="price-box"><div class="symbol">
-Volatility 100 (1s) — 1HZ100V
-</div><div id="price" class="price">
+</div></div><div id="price" class="price">
 Waiting...
 </div><div class="tick-info">
-Ticks received: <span id="ticks">0</span>
-</div></div><div class="chart">
-<canvas id="priceChart"></canvas>
-</div></div><!-- MARKET CARDS --><div class="market-grid"><div class="market">
-<h3>Volatility Indices</h3>
-<p>Explore synthetic volatility markets and analyze live price movements.</p>
-<span class="status">Live</span>
-</div><div class="market">
-<h3>Major Markets</h3>
-<p>Monitor major market instruments and organize your analysis.</p>
-<span class="status">Available</span>
-</div><div class="market">
-<h3>Market Analysis</h3>
-<p>Study market movements before making trading decisions.</p>
-<span class="status">Available</span>
-</div><div class="market">
-<h3>Trading Signals</h3>
-<p>View market information and organize your trading analysis.</p>
-<span class="status">Coming Soon</span>
-</div></div></div><footer>
+Ticks received:
+<span id="ticks">0</span>
+</div><div class="chart"><canvas id="priceChart"></canvas>
+
+</div></div><!-- OTHER MARKET AREAS --><div class="market-grid"><div class="market"><h3>Volatility Indices</h3><p>
+Explore synthetic volatility markets and analyze live price movements.
+</p><span class="status">
+Live
+</span></div><div class="market"><h3>Major Markets</h3><p>
+Monitor major market instruments and organize your analysis.
+</p><span class="status">
+Available
+</span></div><div class="market"><h3>Market Analysis</h3><p>
+Study market movements before making trading decisions.
+</p><span class="status">
+Available
+</span></div><div class="market"><h3>Trading Signals</h3><p>
+View market information and organize your trading analysis.
+</p><span class="status">
+Coming Soon
+</span></div></div></div><footer>
 © 2026 NEXTRADE. All rights reserved.
 </footer><script>
 
@@ -252,7 +298,11 @@ let ticksReceived = 0;
 
 let prices = [];
 
-const symbol = "1HZ100V";
+let currentSymbol = "1HZ100V";
+
+
+const selector =
+document.getElementById("symbolSelector");
 
 const connection =
 document.getElementById("connection");
@@ -263,12 +313,17 @@ document.getElementById("price");
 const ticks =
 document.getElementById("ticks");
 
+const symbolName =
+document.getElementById("symbolName");
+
 const canvas =
 document.getElementById("priceChart");
 
 const ctx =
 canvas.getContext("2d");
 
+
+/* Resize chart */
 
 function resizeCanvas(){
 
@@ -291,6 +346,8 @@ window.addEventListener(
   resizeCanvas
 );
 
+
+/* Connection status */
 
 function setConnection(
   message,
@@ -321,26 +378,13 @@ function setConnection(
 }
 
 
+/* Connect */
+
 function connect(){
 
   ticksReceived = 0;
 
   prices = [];
-
-  if(ws){
-
-    try{
-
-      ws.close();
-
-    }catch(e){}
-
-  }
-
-  setConnection(
-    "Connecting...",
-    false
-  );
 
   price.textContent =
     "Waiting...";
@@ -349,9 +393,32 @@ function connect(){
     "0";
 
 
+  if(ws){
+
+    try{
+      ws.close();
+    }catch(e){}
+
+  }
+
+
+  setConnection(
+    "Connecting...",
+    false
+  );
+
+
+  symbolName.textContent =
+    selector.options[
+      selector.selectedIndex
+    ].text +
+    " — " +
+    currentSymbol;
+
+
   /*
     SAME WORKING DERIV ENDPOINT
-    FROM THE SUCCESSFUL TEST
+    USED BY YOUR SUCCESSFUL TEST
   */
 
   ws = new WebSocket(
@@ -369,7 +436,8 @@ function connect(){
 
     ws.send(JSON.stringify({
 
-      ticks: symbol,
+      ticks: currentSymbol,
+
       subscribe: 1
 
     }));
@@ -380,6 +448,7 @@ function connect(){
   ws.onmessage = function(event){
 
     let response;
+
 
     try{
 
@@ -393,6 +462,8 @@ function connect(){
     }
 
 
+    /* API error */
+
     if(response.error){
 
       setConnection(
@@ -405,13 +476,17 @@ function connect(){
     }
 
 
+    /* Live tick */
+
     if(response.msg_type === "tick"){
 
       ticksReceived++;
 
 
       const quote =
-        Number(response.tick.quote);
+        Number(
+          response.tick.quote
+        );
 
 
       price.textContent =
@@ -425,7 +500,7 @@ function connect(){
       prices.push(quote);
 
 
-      if(prices.length > 60){
+      if(prices.length > 80){
 
         prices.shift();
 
@@ -474,10 +549,6 @@ function connect(){
     }
 
 
-    /*
-      Automatically reconnect.
-    */
-
     setTimeout(
       connect,
       3000
@@ -487,6 +558,8 @@ function connect(){
 
 }
 
+
+/* Draw chart */
 
 function drawChart(){
 
@@ -521,6 +594,33 @@ function drawChart(){
   const range =
     max - min || 1;
 
+
+  /* Grid */
+
+  ctx.strokeStyle =
+    "#14283d";
+
+  ctx.lineWidth =
+    1;
+
+
+  for(let i=1;i<5;i++){
+
+    const y =
+      (height / 5) * i;
+
+    ctx.beginPath();
+
+    ctx.moveTo(0,y);
+
+    ctx.lineTo(width,y);
+
+    ctx.stroke();
+
+  }
+
+
+  /* Price line */
 
   ctx.beginPath();
 
@@ -564,8 +664,59 @@ function drawChart(){
 
   ctx.stroke();
 
+
+  /* Current price dot */
+
+  const last =
+    prices[prices.length - 1];
+
+
+  const lastX =
+    width;
+
+
+  const lastY =
+    height -
+    ((last - min) /
+    range) *
+    (height - 20) -
+    10;
+
+
+  ctx.beginPath();
+
+  ctx.arc(
+    lastX,
+    lastY,
+    4,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle =
+    "#35a7ff";
+
+  ctx.fill();
+
 }
 
+
+/* Change market */
+
+selector.addEventListener(
+  "change",
+  function(){
+
+    currentSymbol =
+      this.value;
+
+    connect();
+
+  }
+);
+
+
+/* Start */
 
 resizeCanvas();
 
