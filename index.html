@@ -14,22 +14,21 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#040b14;
+  background:#07111f;
   color:white;
   min-height:100vh;
 }
 
 header{
-  height:72px;
-  padding:0 6%;
+  padding:18px 25px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  background:#07111d;
-  border-bottom:1px solid #19344c;
+  align-items:center;
+  border-bottom:1px solid #1b3048;
+  background:#081525;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:10;
 }
 
 .logo{
@@ -39,16 +38,16 @@ header{
 }
 
 .logo span{
-  color:#18a6ff;
+  color:#159ff0;
 }
 
 nav{
   display:flex;
-  gap:24px;
+  gap:22px;
 }
 
 nav a{
-  color:#9db1c3;
+  color:#a7b8c8;
   text-decoration:none;
   font-size:14px;
 }
@@ -64,62 +63,63 @@ nav a:hover{
 }
 
 .login{
-  color:#d9e6f0;
+  color:white;
   text-decoration:none;
-  padding:10px 14px;
-  font-size:13px;
+  padding:9px 12px;
 }
 
 .signup{
-  background:#159ff0;
   color:white;
+  background:#159ff0;
   text-decoration:none;
-  padding:11px 17px;
-  border-radius:8px;
+  padding:10px 15px;
+  border-radius:7px;
   font-size:13px;
   font-weight:bold;
 }
 
 .hero{
-  min-height:670px;
-  padding:65px 6%;
-  display:grid;
-  grid-template-columns:43% 57%;
+  padding:85px 7%;
+  min-height:570px;
+  display:flex;
   align-items:center;
-  gap:30px;
+  justify-content:space-between;
+  gap:40px;
   background:
-    radial-gradient(circle at 85% 45%,rgba(0,142,255,.17),transparent 38%),
-    radial-gradient(circle at 10% 80%,rgba(0,70,160,.12),transparent 35%);
+    radial-gradient(
+      circle at 80% 45%,
+      rgba(0,145,255,.15),
+      transparent 40%
+    );
 }
 
 .hero-content{
-  z-index:2;
+  max-width:600px;
 }
 
 .badge{
   display:inline-block;
+  color:#46baff;
+  background:#0b263e;
+  border:1px solid #1e5479;
   padding:8px 13px;
   border-radius:20px;
-  background:#09233a;
-  border:1px solid #20587f;
-  color:#58bfff;
   font-size:11px;
   margin-bottom:22px;
 }
 
 .hero h1{
-  font-size:clamp(45px,6vw,73px);
-  line-height:1;
-  margin-bottom:23px;
+  font-size:clamp(45px,6vw,70px);
+  line-height:1.02;
+  margin-bottom:22px;
 }
 
 .hero h1 span{
-  color:#19a7ff;
+  color:#159ff0;
 }
 
 .hero p{
-  color:#8fa5b8;
-  max-width:540px;
+  color:#91a5b7;
   line-height:1.7;
   font-size:16px;
   margin-bottom:30px;
@@ -132,11 +132,12 @@ nav a:hover{
 }
 
 .btn{
+  display:inline-block;
+  padding:14px 21px;
+  border-radius:8px;
   text-decoration:none;
-  padding:15px 23px;
-  border-radius:9px;
-  font-size:14px;
   font-weight:bold;
+  font-size:14px;
 }
 
 .primary{
@@ -145,105 +146,99 @@ nav a:hover{
 }
 
 .secondary{
-  background:#091725;
-  border:1px solid #29465e;
+  background:#0a1928;
+  border:1px solid #29445a;
   color:white;
 }
 
-.terminal{
-  background:#081421;
-  border:1px solid #25465f;
-  border-radius:18px;
-  padding:14px;
-  box-shadow:0 35px 90px rgba(0,0,0,.55);
+.market-preview{
+  width:430px;
+  max-width:100%;
+  background:#091725;
+  border:1px solid #21445e;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 25px 70px rgba(0,0,0,.45);
 }
 
-.terminal-header{
+.preview-top{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:5px 5px 13px;
+  margin-bottom:20px;
 }
 
-.symbol{
-  font-size:13px;
+.preview-title{
+  font-size:14px;
   font-weight:bold;
 }
 
 .live{
+  color:#2edb9c;
+  font-size:11px;
+}
+
+.screen{
+  height:230px;
+  border-radius:10px;
+  background:
+    linear-gradient(rgba(30,65,90,.2) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(30,65,90,.2) 1px,transparent 1px),
+    #050e18;
+  background-size:35px 35px;
   display:flex;
   align-items:center;
-  gap:6px;
-  color:#2fdb9c;
-  font-size:10px;
-}
-
-.live-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#2fdb9c;
-  box-shadow:0 0 10px #2fdb9c;
-}
-
-.price-panel{
-  background:#050e18;
-  border:1px solid #18344b;
-  border-radius:9px;
-  padding:12px;
-  margin-bottom:10px;
-}
-
-.price-title{
-  color:#6f8598;
-  font-size:9px;
-}
-
-#price{
-  font-size:24px;
-  font-weight:bold;
-  margin-top:4px;
-}
-
-#movement{
-  font-size:10px;
-  margin-top:4px;
-  color:#7890a3;
-}
-
-.chart{
+  justify-content:center;
   position:relative;
-  height:315px;
-  border-radius:10px;
   overflow:hidden;
-  background:
-    linear-gradient(rgba(34,72,98,.17) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(34,72,98,.17) 1px,transparent 1px),
-    #050d17;
-  background-size:42px 42px;
 }
 
-#candleChart{
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.chart-tag{
+.line{
   position:absolute;
-  top:10px;
-  left:10px;
-  background:rgba(4,13,23,.9);
-  border:1px solid #1d4058;
-  padding:6px 8px;
-  border-radius:5px;
-  font-size:9px;
-  color:#8ea5b7;
+  width:110%;
+  height:3px;
+  background:#159ff0;
+  transform:rotate(-8deg);
+  box-shadow:0 0 15px rgba(21,159,240,.7);
+}
+
+.line:before,
+.line:after{
+  content:"";
+  position:absolute;
+  width:45%;
+  height:3px;
+  background:#159ff0;
+}
+
+.line:before{
+  left:0;
+  top:22px;
+  transform:rotate(10deg);
+}
+
+.line:after{
+  right:0;
+  top:-18px;
+  transform:rotate(-8deg);
+}
+
+.price{
+  position:absolute;
+  bottom:15px;
+  left:15px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.status{
+  margin-top:15px;
+  color:#8095a8;
+  font-size:11px;
 }
 
 .stats{
   max-width:1100px;
-  margin:-30px auto 0;
+  margin:-25px auto 0;
   padding:0 6%;
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -251,7 +246,7 @@ nav a:hover{
 }
 
 .stat{
-  background:#091624;
+  background:#091725;
   border:1px solid #19364e;
   border-radius:12px;
   padding:20px;
@@ -259,7 +254,7 @@ nav a:hover{
 
 .stat strong{
   display:block;
-  font-size:22px;
+  font-size:23px;
   margin-bottom:5px;
 }
 
@@ -268,8 +263,8 @@ nav a:hover{
   font-size:12px;
 }
 
-section:not(.hero){
-  padding:90px 6%;
+section{
+  padding:85px 7%;
 }
 
 .title{
@@ -283,7 +278,7 @@ section:not(.hero){
 }
 
 .title p{
-  color:#8095a8;
+  color:#8196a8;
   max-width:600px;
   margin:auto;
   line-height:1.6;
@@ -298,22 +293,22 @@ section:not(.hero){
 }
 
 .card{
-  background:#091522;
+  background:#091725;
   border:1px solid #19364e;
-  border-radius:15px;
-  padding:30px;
+  border-radius:14px;
+  padding:28px;
 }
 
 .icon{
-  width:48px;
-  height:48px;
-  border-radius:12px;
-  background:#092a43;
-  color:#36adff;
+  width:45px;
+  height:45px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:21px;
+  background:#0a2b45;
+  color:#31adff;
+  border-radius:10px;
+  font-size:20px;
   margin-bottom:18px;
 }
 
@@ -322,7 +317,7 @@ section:not(.hero){
 }
 
 .card p{
-  color:#8096aa;
+  color:#8196a8;
   font-size:14px;
   line-height:1.6;
 }
@@ -334,16 +329,16 @@ section:not(.hero){
 .market-box{
   max-width:1000px;
   margin:auto;
+  background:#091725;
   border:1px solid #19364e;
-  border-radius:15px;
+  border-radius:14px;
   overflow:hidden;
-  background:#091624;
 }
 
 .market-row{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
-  padding:18px 22px;
+  padding:17px 22px;
   border-bottom:1px solid #142c40;
   font-size:13px;
 }
@@ -358,28 +353,32 @@ section:not(.hero){
 }
 
 .green{
-  color:#2fdb9c;
+  color:#2edb9c;
 }
 
 .cta{
   text-align:center;
   background:
-    radial-gradient(circle,rgba(0,125,255,.16),transparent 50%),
+    radial-gradient(
+      circle,
+      rgba(0,125,255,.15),
+      transparent 50%
+    ),
     #050e18;
 }
 
 .cta h2{
-  font-size:40px;
+  font-size:38px;
   margin-bottom:14px;
 }
 
 .cta p{
-  color:#8096a9;
+  color:#8196a8;
   margin-bottom:25px;
 }
 
 footer{
-  padding:30px 6%;
+  padding:30px 7%;
   border-top:1px solid #162e43;
   display:flex;
   justify-content:space-between;
@@ -387,28 +386,28 @@ footer{
   font-size:12px;
 }
 
-@media(max-width:950px){
+@media(max-width:900px){
 
   nav{
     display:none;
   }
 
   .hero{
-    grid-template-columns:1fr;
-    padding-top:50px;
-  }
-
-  .hero-content{
+    flex-direction:column;
     text-align:center;
   }
 
-  .hero p{
-    margin-left:auto;
-    margin-right:auto;
+  .hero-content{
+    max-width:700px;
   }
 
   .buttons{
     justify-content:center;
+  }
+
+  .market-preview{
+    width:100%;
+    max-width:500px;
   }
 
   .stats{
@@ -424,34 +423,41 @@ footer{
 @media(max-width:550px){
 
   header{
-    padding:0 5%;
+    padding:16px;
   }
 
   .logo{
-    font-size:22px;
+    font-size:21px;
+  }
+
+  .auth{
+    gap:2px;
+  }
+
+  .login{
+    padding:8px;
+    font-size:12px;
+  }
+
+  .signup{
+    padding:9px 11px;
   }
 
   .hero{
-    padding-left:5%;
-    padding-right:5%;
+    padding:60px 5%;
   }
 
   .hero h1{
-    font-size:46px;
+    font-size:45px;
   }
 
-  .chart{
-    height:260px;
+  section{
+    padding:65px 5%;
   }
 
   .market-row{
-    grid-template-columns:1.7fr 1fr 1fr;
-    padding:15px 12px;
+    padding:14px 11px;
     font-size:11px;
-  }
-
-  section:not(.hero){
-    padding:65px 5%;
   }
 
   footer{
@@ -490,7 +496,7 @@ footer{
   <div class="hero-content">
 
     <div class="badge">
-      ● LIVE MARKET TECHNOLOGY
+      ● LIVE MARKET DATA
     </div>
 
     <h1>
@@ -499,8 +505,8 @@ footer{
     </h1>
 
     <p>
-      NEXTRADE brings live market data, powerful analysis tools
-      and a clean trading environment together in one platform.
+      NEXTRADE brings live market data, powerful analysis
+      tools and a clean trading environment together in one platform.
     </p>
 
     <div class="buttons">
@@ -518,47 +524,33 @@ footer{
   </div>
 
 
-  <div class="terminal">
+  <div class="market-preview">
 
-    <div class="terminal-header">
+    <div class="preview-top">
 
-      <div class="symbol">
+      <div class="preview-title">
         Volatility 100 (1s)
       </div>
 
       <div class="live">
-        <span class="live-dot"></span>
-        LIVE
+        ● LIVE
       </div>
 
     </div>
 
 
-    <div class="price-panel">
+    <div class="screen">
 
-      <div class="price-title">
-        LIVE PRICE
-      </div>
+      <div class="line"></div>
 
-      <div id="price">
-        Connecting...
-      </div>
-
-      <div id="movement">
-        Connecting to market...
+      <div class="price">
+        LIVE MARKET
       </div>
 
     </div>
 
-
-    <div class="chart">
-
-      <div class="chart-tag">
-        LIVE • 1 SECOND CANDLES
-      </div>
-
-      <canvas id="candleChart"></canvas>
-
+    <div class="status">
+      ● Real-time market monitoring
     </div>
 
   </div>
@@ -593,8 +585,8 @@ footer{
     <h2>Built for smarter trading</h2>
 
     <p>
-      Monitor markets, study price movement and prepare
-      your next trading decision from one clean interface.
+      Everything you need to monitor markets and analyze
+      price movement from one clean interface.
     </p>
 
   </div>
@@ -609,8 +601,8 @@ footer{
       <h3>Manual Trading</h3>
 
       <p>
-        Monitor live price movement and prepare trades
-        using a responsive trading environment.
+        Monitor live price movement and prepare your trades
+        using a clean and responsive trading environment.
       </p>
 
     </div>
@@ -623,8 +615,8 @@ footer{
       <h3>Market Analysis</h3>
 
       <p>
-        Study live price action and market movement
-        before making your next trading decision.
+        Study price action and live market movement before
+        making your next trading decision.
       </p>
 
     </div>
@@ -655,7 +647,7 @@ footer{
     <h2>Live Markets</h2>
 
     <p>
-      Quickly access markets available on NEXTRADE.
+      Quickly access the markets available on NEXTRADE.
     </p>
 
   </div>
@@ -672,25 +664,25 @@ footer{
     <div class="market-row">
       <strong>Volatility 100 (1s)</strong>
       <span class="green">● Live</span>
-      <span class="green">Streaming</span>
+      <span class="green">Live</span>
     </div>
 
     <div class="market-row">
       <strong>Volatility 75 (1s)</strong>
       <span class="green">● Live</span>
-      <span class="green">Streaming</span>
+      <span class="green">Live</span>
     </div>
 
     <div class="market-row">
       <strong>Volatility 50 (1s)</strong>
       <span class="green">● Live</span>
-      <span class="green">Streaming</span>
+      <span class="green">Live</span>
     </div>
 
     <div class="market-row">
       <strong>Volatility 25 (1s)</strong>
       <span class="green">● Live</span>
-      <span class="green">Streaming</span>
+      <span class="green">Live</span>
     </div>
 
   </div>
@@ -712,7 +704,7 @@ footer{
   <h2>Ready to explore the markets?</h2>
 
   <p>
-    Create your NEXTRADE account and start analyzing live markets.
+    Join NEXTRADE and start analyzing live market movement.
   </p>
 
   <a href="signup.html" class="btn primary">
@@ -730,431 +722,6 @@ footer{
 
 </footer>
 
-
-<script>
-
-const priceElement =
-  document.getElementById("price");
-
-const movementElement =
-  document.getElementById("movement");
-
-const canvas =
-  document.getElementById("candleChart");
-
-const ctx =
-  canvas.getContext("2d");
-
-let socket = null;
-
-let candles = [];
-
-let currentCandle = null;
-
-let previousPrice = null;
-
-
-/* -------------------------
-   CANVAS
-------------------------- */
-
-function resizeCanvas(){
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-  const ratio =
-    window.devicePixelRatio || 1;
-
-  canvas.width =
-    rect.width * ratio;
-
-  canvas.height =
-    rect.height * ratio;
-
-  ctx.setTransform(
-    ratio,
-    0,
-    0,
-    ratio,
-    0,
-    0
-  );
-
-  drawCandles();
-}
-
-
-/* -------------------------
-   PROCESS TICK
-------------------------- */
-
-function processTick(price, epoch){
-
-  const second =
-    Math.floor(epoch);
-
-  if(
-    currentCandle === null ||
-    currentCandle.time !== second
-  ){
-
-    if(currentCandle !== null){
-
-      candles.push(
-        currentCandle
-      );
-
-      if(candles.length > 50){
-        candles.shift();
-      }
-
-    }
-
-    currentCandle = {
-
-      time:second,
-      open:price,
-      high:price,
-      low:price,
-      close:price
-
-    };
-
-  }else{
-
-    currentCandle.high =
-      Math.max(
-        currentCandle.high,
-        price
-      );
-
-    currentCandle.low =
-      Math.min(
-        currentCandle.low,
-        price
-      );
-
-    currentCandle.close =
-      price;
-
-  }
-
-  drawCandles();
-}
-
-
-/* -------------------------
-   DRAW CANDLES
-------------------------- */
-
-function drawCandles(){
-
-  const width =
-    canvas.clientWidth;
-
-  const height =
-    canvas.clientHeight;
-
-  ctx.clearRect(
-    0,
-    0,
-    width,
-    height
-  );
-
-  let data =
-    candles.slice();
-
-  if(currentCandle){
-    data.push(currentCandle);
-  }
-
-  if(data.length < 2){
-    return;
-  }
-
-  let min =
-    Math.min(
-      ...data.map(c => c.low)
-    );
-
-  let max =
-    Math.max(
-      ...data.map(c => c.high)
-    );
-
-  if(max === min){
-    max += 0.01;
-    min -= 0.01;
-  }
-
-  const padding = 25;
-
-  const chartWidth =
-    width - padding * 2;
-
-  const chartHeight =
-    height - padding * 2;
-
-  function y(value){
-
-    return (
-      height -
-      padding -
-      (
-        (value - min) /
-        (max - min)
-      ) *
-      chartHeight
-    );
-
-  }
-
-  const spacing =
-    chartWidth / data.length;
-
-  const candleWidth =
-    Math.max(
-      3,
-      spacing * 0.55
-    );
-
-
-  data.forEach((candle,index)=>{
-
-    const x =
-      padding +
-      index * spacing +
-      spacing / 2;
-
-    const openY =
-      y(candle.open);
-
-    const closeY =
-      y(candle.close);
-
-    const highY =
-      y(candle.high);
-
-    const lowY =
-      y(candle.low);
-
-    const bullish =
-      candle.close >=
-      candle.open;
-
-    const candleColor =
-      bullish
-      ? "#2edb9c"
-      : "#ff5f6d";
-
-    ctx.strokeStyle =
-      candleColor;
-
-    ctx.fillStyle =
-      candleColor;
-
-    /* WICK */
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      x,
-      highY
-    );
-
-    ctx.lineTo(
-      x,
-      lowY
-    );
-
-    ctx.lineWidth = 1;
-
-    ctx.stroke();
-
-
-    /* BODY */
-
-    const top =
-      Math.min(
-        openY,
-        closeY
-      );
-
-    const bodyHeight =
-      Math.max(
-        2,
-        Math.abs(
-          closeY -
-          openY
-        )
-      );
-
-    ctx.fillRect(
-      x - candleWidth / 2,
-      top,
-      candleWidth,
-      bodyHeight
-    );
-
-  });
-
-}
-
-
-/* -------------------------
-   DERIV CONNECTION
-------------------------- */
-
-function connect(){
-
-  movementElement.textContent =
-    "Connecting to market...";
-
-  socket =
-    new WebSocket(
-      "wss://ws.binaryws.com/websockets/v3"
-    );
-
-
-  socket.onopen =
-    function(){
-
-      movementElement.textContent =
-        "Live market connection active";
-
-      socket.send(
-        JSON.stringify({
-          ticks:"1HZ100V",
-          subscribe:1
-        })
-      );
-
-    };
-
-
-  socket.onmessage =
-    function(event){
-
-      try{
-
-        const data =
-          JSON.parse(event.data);
-
-        if(!data.tick){
-          return;
-        }
-
-        const price =
-          Number(
-            data.tick.quote
-          );
-
-        const epoch =
-          Number(
-            data.tick.epoch
-          );
-
-
-        priceElement.textContent =
-          price.toFixed(2);
-
-
-        if(previousPrice !== null){
-
-          if(price > previousPrice){
-
-            movementElement.textContent =
-              "▲ Market moving higher";
-
-            movementElement.style.color =
-              "#2edb9c";
-
-          }
-
-          else if(price < previousPrice){
-
-            movementElement.textContent =
-              "▼ Market moving lower";
-
-            movementElement.style.color =
-              "#ff5f6d";
-
-          }
-
-          else{
-
-            movementElement.textContent =
-              "● Market unchanged";
-
-          }
-
-        }
-
-
-        previousPrice =
-          price;
-
-
-        processTick(
-          price,
-          epoch
-        );
-
-      }
-
-      catch(error){
-
-        console.log(
-          "Tick error:",
-          error
-        );
-
-      }
-
-    };
-
-
-  socket.onerror =
-    function(){
-
-      movementElement.textContent =
-        "Connection error — retrying...";
-
-    };
-
-
-  socket.onclose =
-    function(){
-
-      movementElement.textContent =
-        "Connection closed — reconnecting...";
-
-      setTimeout(
-        connect,
-        3000
-      );
-
-    };
-
-}
-
-
-/* START */
-
-window.addEventListener(
-  "resize",
-  resizeCanvas
-);
-
-resizeCanvas();
-
-connect();
-
-</script>
-
 </body>
-  </html>
-
+      </html>
 
