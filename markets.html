@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Markets</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NEXTRADE | Markets</title><style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -70,19 +70,26 @@ color:#35a7ff;
 color:#9fb1c7;
 }
 
-.panel{
+.market-panel{
 background:#0d1b2d;
 border:1px solid #1c3550;
 border-radius:15px;
 padding:25px;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 .panel-title{
-color:#35a7ff;
 font-size:20px;
 font-weight:bold;
+color:#35a7ff;
 margin-bottom:18px;
+}
+
+.selector-label{
+display:block;
+color:#9fb1c7;
+font-size:13px;
+margin-bottom:8px;
 }
 
 select{
@@ -96,13 +103,17 @@ font-size:15px;
 outline:none;
 }
 
-.live-row{
-margin-top:20px;
+select:focus{
+border-color:#35a7ff;
+}
+
+.market-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
+gap:15px;
 flex-wrap:wrap;
-gap:10px;
+margin-top:20px;
 }
 
 .symbol{
@@ -110,7 +121,7 @@ color:#9fb1c7;
 font-size:14px;
 }
 
-.connection{
+.live{
 padding:7px 12px;
 border-radius:20px;
 background:#123a2a;
@@ -119,10 +130,20 @@ font-size:12px;
 font-weight:bold;
 }
 
+.connecting{
+background:#3a2612;
+color:#f5b041;
+}
+
+.error{
+background:#3a1515;
+color:#ff7777;
+}
+
 .price{
-margin-top:20px;
-font-size:44px;
+font-size:46px;
 font-weight:bold;
+margin-top:22px;
 }
 
 .tick-info{
@@ -132,18 +153,27 @@ font-size:13px;
 }
 
 .chart{
-width:100%;
-height:280px;
+height:320px;
 margin-top:25px;
 background:#081525;
 border:1px solid #1b3048;
 border-radius:10px;
 overflow:hidden;
+position:relative;
 }
 
 canvas{
+display:block;
 width:100%;
 height:100%;
+}
+
+.chart-label{
+position:absolute;
+top:12px;
+left:14px;
+color:#71849b;
+font-size:12px;
 }
 
 .market-grid{
@@ -209,14 +239,15 @@ font-size:32px;
 }
 
 .price{
-font-size:35px;
+font-size:36px;
 }
 
 .chart{
-height:220px;
+height:250px;
 }
 
 }
+
 </style></head><body><header><div class="logo">
 NEXTRADE
 </div><nav><a href="index.html">
@@ -228,15 +259,25 @@ Tools
 </a></nav></header><div class="container"><div class="title"><h1>
 Explore <span>Markets</span>
 </h1><p>
-Monitor verified live markets and prepare your trading analysis.
-</p></div><div class="panel"><div class="panel-title">
-Live Volatility Market
-</div><select id="symbolSelector"><option value="1HZ100V">
+Monitor live markets and prepare your trading analysis.
+</p></div><!-- LIVE MARKET --><div class="market-panel"><div class="panel-title">
+Live Deriv Market
+</div><label
+class="selector-label"
+for="symbolSelector"
+
+«»
+
+Select Market
+
+</label><select id="symbolSelector"><option value="1HZ100V">
 Volatility 100 (1s)
 </option><option value="1HZ10V">
 Volatility 10 (1s)
 </option><option value="1HZ25V">
 Volatility 25 (1s)
+</option><option value="1HZ50V">
+Volatility 50 (1s)
 </option><option value="1HZ75V">
 Volatility 75 (1s)
 </option><option value="R_10">
@@ -249,14 +290,14 @@ Volatility 50
 Volatility 75
 </option><option value="R_100">
 Volatility 100
-</option></select><div class="live-row"><div
+</option></select><div class="market-header"><div
 id="symbolName"
 class="symbol"
 >Volatility 100 (1s) — 1HZ100V
 
 </div><div
 id="connection"
-class="connection"
+class="live"
 >Connecting...
 
 </div></div><div
@@ -268,98 +309,129 @@ class="price"
 
 <span id="ticks">
 0
-</span></div><div class="chart"><canvas
+</span></div><div class="chart"><div class="chart-label">
+LIVE PRICE
+</div><canvas
 id="priceChart"
 
 «</canvas>»
 
-</div></div><div class="market-grid"><div class="market"><h3>
+</div></div><!-- MARKET CARDS --><div class="market-grid"><div class="market"><h3>
 Volatility Indices
 </h3><p>
-Explore verified synthetic volatility markets and analyze live price movements.
+Explore synthetic volatility markets and analyze live price movements.
 </p><span class="status">
 LIVE
 </span></div><div class="market"><h3>
 Major Markets
 </h3><p>
-Monitor major market instruments and organize your analysis.
+Monitor major market instruments and organize your market analysis.
 </p><span class="status">
 Available
 </span></div><div class="market"><h3>
 Market Analysis
 </h3><p>
-Study market movements before making trading decisions.
+Study price movements before making trading decisions.
 </p><span class="status">
 Available
 </span></div><div class="market"><h3>
 Trading Signals
 </h3><p>
-Trading signal tools will be added after the live market system is complete.
+Advanced trading analysis and signals will be added next.
 </p><span class="status">
 Coming Soon
 </span></div></div></div><footer>© 2026 NEXTRADE. All rights reserved.
 
 </footer><script>
 
-let ws=null;
-
-let ticksReceived=0;
-
-let prices=[];
-
-let currentSymbol="1HZ100V";
+/*
+=========================================
+NEXTRADE LIVE MARKET ENGINE
+=========================================
+*/
 
 
-const selector=
+let ws = null;
+
+let currentSymbol = "1HZ100V";
+
+let ticksReceived = 0;
+
+let prices = [];
+
+let reconnectTimer = null;
+
+
+const selector =
 document.getElementById(
 "symbolSelector"
 );
 
 
-const connection=
+const connection =
 document.getElementById(
 "connection"
 );
 
 
-const price=
+const price =
 document.getElementById(
 "price"
 );
 
 
-const ticks=
+const ticks =
 document.getElementById(
 "ticks"
 );
 
 
-const symbolName=
+const symbolName =
 document.getElementById(
 "symbolName"
 );
 
 
-const canvas=
+const canvas =
 document.getElementById(
 "priceChart"
 );
 
 
-const ctx=
-canvas.getContext("2d");
+const ctx =
+canvas.getContext(
+"2d"
+);
 
+
+/*
+=========================================
+CANVAS SIZE
+=========================================
+*/
 
 function resizeCanvas(){
 
-const rect=
+const rect =
 canvas.getBoundingClientRect();
 
-canvas.width=
-rect.width;
+const dpr =
+window.devicePixelRatio || 1;
 
-canvas.height=
-rect.height;
+canvas.width =
+rect.width * dpr;
+
+canvas.height =
+rect.height * dpr;
+
+ctx.setTransform(
+dpr,
+0,
+0,
+dpr,
+0,
+0
+);
 
 drawChart();
 
@@ -372,45 +444,91 @@ resizeCanvas
 );
 
 
-function setConnection(
+/*
+=========================================
+STATUS
+=========================================
+*/
+
+function setStatus(
 message,
-good
+type
 ){
 
-connection.textContent=
+connection.textContent =
 message;
 
-if(good){
+connection.className =
+"live";
 
-connection.style.background=
-"#123a2a";
+if(type === "connecting"){
 
-connection.style.color=
-"#58d68d";
+connection.classList.add(
+"connecting"
+);
 
-}else{
+}
 
-connection.style.background=
-"#3a2612";
+if(type === "error"){
 
-connection.style.color=
-"#f5b041";
+connection.classList.add(
+"error"
+);
 
 }
 
 }
 
+
+/*
+=========================================
+UPDATE MARKET NAME
+=========================================
+*/
+
+function updateMarketName(){
+
+const selected =
+selector.options[
+selector.selectedIndex
+];
+
+symbolName.textContent =
+selected.text +
+" — " +
+currentSymbol;
+
+}
+
+
+/*
+=========================================
+CONNECT TO DERIV
+=========================================
+*/
 
 function connect(){
 
-ticksReceived=0;
+if(reconnectTimer){
 
-prices=[];
+clearTimeout(
+reconnectTimer
+);
 
-price.textContent=
+reconnectTimer =
+null;
+
+}
+
+
+ticksReceived = 0;
+
+prices = [];
+
+price.textContent =
 "Waiting...";
 
-ticks.textContent=
+ticks.textContent =
 "0";
 
 
@@ -418,49 +536,53 @@ if(ws){
 
 try{
 
+ws.onclose = null;
+
 ws.close();
 
 }catch(e){}
 
+ws = null;
+
 }
 
 
-setConnection(
+updateMarketName();
+
+
+setStatus(
 "Connecting...",
-false
+"connecting"
 );
 
 
-symbolName.textContent=
-selector.options[
-selector.selectedIndex
-].text
-+
-" — "
-+
-currentSymbol;
+/*
+Current public Deriv WebSocket
+*/
 
-
-ws=
+ws =
 new WebSocket(
 "wss://api.derivws.com/trading/v1/options/ws/public"
 );
 
 
-ws.onopen=function(){
+ws.onopen =
+function(){
 
-setConnection(
-"CONNECTED — requesting data",
-true
+setStatus(
+"CONNECTED",
+"live"
 );
 
 
 ws.send(
 JSON.stringify({
 
-ticks:currentSymbol,
+ticks:
+currentSymbol,
 
-subscribe:1
+subscribe:
+1
 
 })
 );
@@ -468,28 +590,34 @@ subscribe:1
 };
 
 
-ws.onmessage=function(event){
+ws.onmessage =
+function(event){
 
 let response;
 
-
 try{
 
-response=
-JSON.parse(event.data);
+response =
+JSON.parse(
+event.data
+);
 
-}catch(e){
+}catch(error){
 
 return;
 
 }
 
 
+/*
+DERIV ERROR
+*/
+
 if(response.error){
 
-setConnection(
+setStatus(
 "DERIV ERROR",
-false
+"error"
 );
 
 return;
@@ -497,24 +625,28 @@ return;
 }
 
 
+/*
+LIVE TICK
+*/
+
 if(
-response.msg_type==="tick"
+response.msg_type === "tick"
 ){
 
 ticksReceived++;
 
 
-const quote=
+const quote =
 Number(
 response.tick.quote
 );
 
 
-price.textContent=
+price.textContent =
 quote.toFixed(2);
 
 
-ticks.textContent=
+ticks.textContent =
 ticksReceived;
 
 
@@ -523,8 +655,12 @@ quote
 );
 
 
+/*
+Keep the latest 100 ticks
+*/
+
 if(
-prices.length>80
+prices.length > 100
 ){
 
 prices.shift();
@@ -532,9 +668,9 @@ prices.shift();
 }
 
 
-setConnection(
+setStatus(
 "LIVE • Connected",
-true
+"live"
 );
 
 
@@ -545,50 +681,74 @@ drawChart();
 };
 
 
-ws.onerror=function(){
+ws.onerror =
+function(){
 
-setConnection(
-"WEBSOCKET ERROR",
-false
+setStatus(
+"CONNECTION ERROR",
+"error"
 );
 
 };
 
 
-ws.onclose=function(){
+ws.onclose =
+function(){
 
 if(
-ticksReceived===0
+ticksReceived > 0
 ){
 
-setConnection(
+setStatus(
+"RECONNECTING...",
+"connecting"
+);
+
+}else{
+
+setStatus(
 "CONNECTION CLOSED",
-false
+"error"
 );
 
 }
+
+
+/*
+Reconnect after 3 seconds
+*/
+
+reconnectTimer =
+setTimeout(
+function(){
+
+connect();
+
+},
+3000
+);
 
 };
 
 }
 
+
+/*
+=========================================
+LIVE CHART
+=========================================
+*/
 
 function drawChart(){
 
-if(
-prices.length<2
-){
+const rect =
+canvas.getBoundingClientRect();
 
-return;
+const width =
+rect.width;
 
-}
-
-
-const width=
-canvas.width;
-
-const height=
-canvas.height;
+const height =
+rect.height;
 
 
 ctx.clearRect(
@@ -599,38 +759,54 @@ height
 );
 
 
-const min=
+/*
+Nothing to draw yet
+*/
+
+if(
+prices.length < 2
+){
+
+return;
+
+}
+
+
+const min =
 Math.min(
 ...prices
 );
 
 
-const max=
+const max =
 Math.max(
 ...prices
 );
 
 
-const range=
-max-min||1;
+const range =
+max - min || 1;
 
 
-/* Grid */
+/*
+GRID
+*/
 
-ctx.strokeStyle=
+ctx.strokeStyle =
 "#14283d";
 
-ctx.lineWidth=1;
+ctx.lineWidth = 1;
 
 
 for(
-let i=1;
-i<5;
+let i = 1;
+i < 5;
 i++
 ){
 
-const y=
-(height/5)*i;
+const y =
+(height / 5) * i;
+
 
 ctx.beginPath();
 
@@ -649,32 +825,37 @@ ctx.stroke();
 }
 
 
-/* Price line */
+/*
+PRICE LINE
+*/
 
 ctx.beginPath();
 
 
 prices.forEach(
-(value,index)=>{
+function(value,index){
 
-const x=
-(index/
-(prices.length-1))
+const x =
+(index /
+(prices.length - 1))
 *
 width;
 
 
-const y=
-height-
-((value-min)/
-range)
+const y =
+height -
+(
+(value - min) /
+range
+)
 *
-(height-20)
--10;
+(height - 25)
+-
+10;
 
 
 if(
-index===0
+index === 0
 ){
 
 ctx.moveTo(
@@ -695,23 +876,69 @@ y
 );
 
 
-ctx.strokeStyle=
+ctx.strokeStyle =
 "#35a7ff";
 
-ctx.lineWidth=2;
+ctx.lineWidth = 2;
 
 ctx.stroke();
+
+
+/*
+LATEST PRICE DOT
+*/
+
+const last =
+prices[
+prices.length - 1
+];
+
+
+const lastX =
+width;
+
+
+const lastY =
+height -
+(
+(last - min) /
+range
+)
+*
+(height - 25)
+-
+10;
+
+
+ctx.beginPath();
+
+ctx.arc(
+lastX,
+lastY,
+4,
+0,
+Math.PI * 2
+);
+
+ctx.fillStyle =
+"#35a7ff";
+
+ctx.fill();
 
 }
 
 
-/* Change market */
+/*
+=========================================
+MARKET SELECTION
+=========================================
+*/
 
 selector.addEventListener(
 "change",
 function(){
 
-currentSymbol=
+currentSymbol =
 this.value;
 
 connect();
@@ -720,11 +947,14 @@ connect();
 );
 
 
-/* Start */
+/*
+=========================================
+START
+=========================================
+*/
 
 resizeCanvas();
 
 connect();
 
-</script></body>
-</html>
+</script></body></html>
