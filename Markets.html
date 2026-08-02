@@ -3,199 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NexTrade Markets</title>
+<title>NEXTRADE | Markets</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#07111f;
-    color:#fff;
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:white;
+  min-height:100vh;
 }
 
 header{
-    background:linear-gradient(135deg,#0066ff,#003b99);
-    padding:25px 18px;
-    text-align:center;
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #1b3048;
+  background:#081525;
 }
 
-header h1{
-    margin:0;
-    font-size:32px;
-}
-
-header p{
-    margin:8px 0 0;
-    color:#dbeafe;
+.logo{
+  font-size:25px;
+  font-weight:bold;
+  color:#35a7ff;
 }
 
 nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-    background:#0d1726;
-    padding:15px;
+  display:flex;
+  gap:20px;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    padding:10px 14px;
-    border-radius:8px;
+  color:#cbd5e1;
+  text-decoration:none;
+  font-size:14px;
 }
 
 nav a:hover{
-    background:#0066ff;
+  color:#35a7ff;
 }
 
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px;
 }
 
-.section-title{
-    margin-top:10px;
-    font-size:25px;
+.title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.title h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.title h1 span{
+  color:#35a7ff;
+}
+
+.title p{
+  color:#9fb1c7;
 }
 
 .market-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
 }
 
-.card{
-    background:#111d2d;
-    border:1px solid #20324a;
-    border-radius:15px;
-    padding:18px;
-    margin-bottom:20px;
+.market{
+  background:#0d1b2d;
+  border:1px solid #1c3550;
+  border-radius:12px;
+  padding:25px;
 }
 
-.market-card{
-    cursor:pointer;
-    transition:.2s;
+.market h3{
+  color:#35a7ff;
+  margin-bottom:10px;
 }
 
-.market-card:hover{
-    transform:translateY(-3px);
-    border-color:#1683ff;
+.market p{
+  color:#9fb1c7;
+  line-height:1.6;
 }
 
-.market-card h3{
-    margin-top:0;
-}
-
-.price{
-    font-size:25px;
-    font-weight:bold;
-}
-
-.up{
-    color:#22c55e;
-}
-
-.down{
-    color:#ef4444;
-}
-
-.chart{
-    height:300px;
-    position:relative;
-    overflow:hidden;
-    background:#091522;
-    border-radius:12px;
-    border:1px solid #26384e;
-}
-
-.line{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:35px;
-    height:150px;
-}
-
-svg{
-    width:100%;
-    height:100%;
-}
-
-.controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:15px;
-}
-
-button{
-    border:0;
-    background:#0066ff;
-    color:white;
-    padding:12px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    background:#0050c7;
-}
-
-button.active{
-    background:#22c55e;
-}
-
-.signal{
-    border-left:4px solid #22c55e;
-    padding:12px;
-    background:#0b1928;
-    border-radius:8px;
-    margin:10px 0;
-}
-
-.signal.sell{
-    border-left-color:#ef4444;
-}
-
-.badge{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:20px;
-    background:#17304e;
-    font-size:12px;
-}
-
-.trade-box{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-input,select{
-    width:100%;
-    padding:12px;
-    margin-top:7px;
-    background:#091522;
-    color:white;
-    border:1px solid #30445c;
-    border-radius:8px;
+.status{
+  margin-top:18px;
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#123a2a;
+  color:#58d68d;
+  font-size:12px;
 }
 
 footer{
-    text-align:center;
-    padding:25px;
-    color:#8293a8;
+  text-align:center;
+  padding:50px 20px 30px;
+  color:#71849b;
+  font-size:13px;
 }
 
 @media(max-width:600px){
-    .trade-box{
-        grid-template-columns:1fr;
-    }
+
+  header{
+    padding:16px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  nav{
+    gap:10px;
+  }
+
+  nav a{
+    font-size:12px;
+  }
+
+  .title h1{
+    font-size:32px;
+  }
 }
 </style>
 </head>
@@ -203,38 +141,74 @@ footer{
 <body>
 
 <header>
-    <h1>NexTrade</h1>
-    <p>Trade Smarter • Analyze Better • Execute With Confidence</p>
-</header>
 
-<nav>
+  <div class="logo">NEXTRADE</div>
+
+  <nav>
     <a href="index.html">Home</a>
-    <a href="market.html">Markets</a>
-    <a href="#charts">Market Charts</a>
-    <a href="#analysis">Market Analysis</a>
-    <a href="#signals">Signals</a>
-    <a href="#manual">Manual Trading</a>
-</nav>
+    <a href="markets.html">Markets</a>
+    <a href="tools.html">Tools</a>
+  </nav>
+
+</header>
 
 <div class="container">
 
-<h2 class="section-title">Markets</h2>
+  <div class="title">
 
-<div class="market-grid">
+    <h1>Explore <span>Markets</span></h1>
 
-    <div class="card market-card" onclick="selectMarket('Volatility 10 Index')">
-        <span class="badge">VOLATILITY</span>
-        <h3>Volatility 10 Index</h3>
-        <div class="price" id="v10">10.00</div>
-        <p class="up">▲ Market Active</p>
+    <p>
+      Monitor markets and prepare your trading analysis.
+    </p>
+
+  </div>
+
+  <div class="market-grid">
+
+    <div class="market">
+      <h3>Volatility Indices</h3>
+      <p>
+        Explore synthetic volatility markets and
+        analyze price movements.
+      </p>
+      <span class="status">Available</span>
     </div>
 
-    <div class="card market-card" onclick="selectMarket('Volatility 25 Index')">
-        <span class="badge">VOLATILITY</span>
-        <h3>Volatility 25 Index</h3>
-        <div class="price" id="v25">25.00</div>
-        <p class="up">▲ Market Active</p>
+    <div class="market">
+      <h3>Major Markets</h3>
+      <p>
+        Monitor major market instruments and
+        organize your analysis.
+      </p>
+      <span class="status">Available</span>
     </div>
 
-    <div class="card market-card" onclick="selectMarket('Volatility 50 Index')">
-        <
+    <div class="market">
+      <h3>Market Analysis</h3>
+      <p>
+        Study market movements before making
+        trading decisions.
+      </p>
+      <span class="status">Available</span>
+    </div>
+
+    <div class="market">
+      <h3>Trading Signals</h3>
+      <p>
+        A dedicated area for viewing and organizing
+        market signals.
+      </p>
+      <span class="status">Coming Soon</span>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 NEXTRADE. All rights reserved.
+</footer>
+
+</body>
+</html>
