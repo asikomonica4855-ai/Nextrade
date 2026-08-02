@@ -78,15 +78,14 @@ nav a:hover{
   border-radius:15px;
   padding:25px;
   margin-bottom:35px;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 .live-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
   flex-wrap:wrap;
+  gap:15px;
 }
 
 .live-title{
@@ -101,6 +100,7 @@ nav a:hover{
   background:#123a2a;
   color:#58d68d;
   font-size:12px;
+  font-weight:bold;
 }
 
 .price-box{
@@ -246,151 +246,329 @@ Ticks received: <span id="ticks">0</span>
 © 2026 NEXTRADE. All rights reserved.
 </footer><script>
 
-const symbol = "1HZ100V";
+let ws = null;
 
-let socket;
-let tickCount = 0;
+let ticksReceived = 0;
+
 let prices = [];
 
-const priceElement = document.getElementById("price");
-const ticksElement = document.getElementById("ticks");
-const connectionElement = document.getElementById("connection");
+const symbol = "1HZ100V";
 
-const canvas = document.getElementById("priceChart");
-const ctx = canvas.getContext("2d");
+const connection =
+document.getElementById("connection");
+
+const price =
+document.getElementById("price");
+
+const ticks =
+document.getElementById("ticks");
+
+const canvas =
+document.getElementById("priceChart");
+
+const ctx =
+canvas.getContext("2d");
+
 
 function resizeCanvas(){
 
-  const rect = canvas.getBoundingClientRect();
+  const rect =
+    canvas.getBoundingClientRect();
 
-  canvas.width = rect.width;
-  canvas.height = rect.height;
+  canvas.width =
+    rect.width;
+
+  canvas.height =
+    rect.height;
 
   drawChart();
+
 }
 
-window.addEventListener("resize", resizeCanvas);
 
-function setConnection(text, connected){
+window.addEventListener(
+  "resize",
+  resizeCanvas
+);
 
-  connectionElement.textContent = text;
 
-  if(connected){
+function setConnection(
+  message,
+  good
+){
 
-    connectionElement.style.background = "#123a2a";
-    connectionElement.style.color = "#58d68d";
+  connection.textContent =
+    message;
+
+  if(good){
+
+    connection.style.background =
+      "#123a2a";
+
+    connection.style.color =
+      "#58d68d";
 
   }else{
 
-    connectionElement.style.background = "#3a2612";
-    connectionElement.style.color = "#f5b041";
+    connection.style.background =
+      "#3a2612";
+
+    connection.style.color =
+      "#f5b041";
 
   }
+
 }
+
 
 function connect(){
 
-  setConnection("Connecting...", false);
+  ticksReceived = 0;
 
-  socket = new WebSocket(
-    "wss://ws.derivws.com/websockets/v3?app_id=1089"
+  prices = [];
+
+  if(ws){
+
+    try{
+
+      ws.close();
+
+    }catch(e){}
+
+  }
+
+  setConnection(
+    "Connecting...",
+    false
   );
 
-  socket.onopen = function(){
+  price.textContent =
+    "Waiting...";
 
-    setConnection("LIVE • Connected", true);
+  ticks.textContent =
+    "0";
 
-    socket.send(JSON.stringify({
+
+  /*
+    SAME WORKING DERIV ENDPOINT
+    FROM THE SUCCESSFUL TEST
+  */
+
+  ws = new WebSocket(
+    "wss://api.derivws.com/trading/v1/options/ws/public"
+  );
+
+
+  ws.onopen = function(){
+
+    setConnection(
+      "CONNECTED — requesting data",
+      true
+    );
+
+
+    ws.send(JSON.stringify({
+
       ticks: symbol,
       subscribe: 1
+
     }));
 
   };
 
-  socket.onmessage = function(event){
 
-    const data = JSON.parse(event.data);
+  ws.onmessage = function(event){
 
-    if(data.tick){
+    let response;
 
-      const price = Number(data.tick.quote);
+    try{
 
-      tickCount++;
+      response =
+        JSON.parse(event.data);
 
-      priceElement.textContent = price.toFixed(2);
+    }catch(error){
 
-      ticksElement.textContent = tickCount;
+      return;
 
-      prices.push(price);
+    }
+
+
+    if(response.error){
+
+      setConnection(
+        "DERIV ERROR",
+        false
+      );
+
+      return;
+
+    }
+
+
+    if(response.msg_type === "tick"){
+
+      ticksReceived++;
+
+
+      const quote =
+        Number(response.tick.quote);
+
+
+      price.textContent =
+        quote.toFixed(2);
+
+
+      ticks.textContent =
+        ticksReceived;
+
+
+      prices.push(quote);
+
 
       if(prices.length > 60){
+
         prices.shift();
+
       }
 
+
+      setConnection(
+        "LIVE • Connected",
+        true
+      );
+
+
       drawChart();
+
     }
 
   };
 
-  socket.onerror = function(){
 
-    setConnection("Connection error", false);
+  ws.onerror = function(){
+
+    setConnection(
+      "WEBSOCKET ERROR",
+      false
+    );
 
   };
 
-  socket.onclose = function(){
 
-    setConnection("Reconnecting...", false);
+  ws.onclose = function(){
 
-    setTimeout(connect, 3000);
+    if(ticksReceived === 0){
+
+      setConnection(
+        "CONNECTION CLOSED",
+        false
+      );
+
+    }else{
+
+      setConnection(
+        "RECONNECTING...",
+        false
+      );
+
+    }
+
+
+    /*
+      Automatically reconnect.
+    */
+
+    setTimeout(
+      connect,
+      3000
+    );
 
   };
 
 }
+
 
 function drawChart(){
 
   if(prices.length < 2){
+
     return;
+
   }
 
-  const width = canvas.width;
-  const height = canvas.height;
 
-  ctx.clearRect(0,0,width,height);
+  const width =
+    canvas.width;
 
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
+  const height =
+    canvas.height;
 
-  const range = max - min || 1;
+
+  ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  const min =
+    Math.min(...prices);
+
+  const max =
+    Math.max(...prices);
+
+  const range =
+    max - min || 1;
+
 
   ctx.beginPath();
 
-  prices.forEach((price,index)=>{
 
-    const x =
-      (index / (prices.length - 1)) * width;
+  prices.forEach(
+    (value,index)=>{
 
-    const y =
-      height -
-      ((price - min) / range) * (height - 20) -
-      10;
+      const x =
+        (index /
+        (prices.length - 1))
+        * width;
 
-    if(index === 0){
-      ctx.moveTo(x,y);
-    }else{
-      ctx.lineTo(x,y);
+
+      const y =
+        height -
+        ((value - min) /
+        range) *
+        (height - 20) -
+        10;
+
+
+      if(index === 0){
+
+        ctx.moveTo(x,y);
+
+      }else{
+
+        ctx.lineTo(x,y);
+
+      }
+
     }
+  );
 
-  });
 
-  ctx.strokeStyle = "#35a7ff";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle =
+    "#35a7ff";
+
+  ctx.lineWidth =
+    2;
+
   ctx.stroke();
 
 }
 
+
 resizeCanvas();
+
 connect();
 
 </script></body>
