@@ -3,21 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXTRADE | Connection Test</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
 body{
 font-family:Arial,sans-serif;
 background:#07111f;
 color:white;
-min-height:100vh;
+margin:0;
 padding:25px;
 }
 
@@ -27,9 +20,9 @@ margin:auto;
 }
 
 .logo{
-color:#35a7ff;
 font-size:25px;
 font-weight:bold;
+color:#35a7ff;
 margin-bottom:25px;
 }
 
@@ -38,51 +31,32 @@ background:#0d1b2d;
 border:1px solid #1c3550;
 border-radius:12px;
 padding:25px;
-margin-bottom:20px;
 }
 
 h1{
 color:#35a7ff;
-margin-bottom:10px;
-}
-
-p{
-color:#9fb1c7;
-line-height:1.6;
-margin-bottom:15px;
 }
 
 .status{
 padding:15px;
+margin:20px 0;
 border-radius:8px;
 background:#102238;
-margin-bottom:15px;
 font-weight:bold;
 }
 
-.live{
+.ok{
 color:#58d68d;
 }
 
-.error{
+.bad{
 color:#ff7777;
 }
 
-.data{
-background:#07111f;
-padding:15px;
-border-radius:8px;
-font-size:20px;
-letter-spacing:3px;
-word-break:break-word;
-min-height:55px;
-}
-
 .info{
-margin-top:15px;
-font-size:13px;
 color:#9fb1c7;
-line-height:1.6;
+line-height:1.7;
+font-size:14px;
 }
 
 button{
@@ -92,7 +66,6 @@ border:0;
 border-radius:7px;
 background:#35a7ff;
 font-weight:bold;
-cursor:pointer;
 }
 </style>
 </head>
@@ -101,146 +74,112 @@ cursor:pointer;
 
 <div class="container">
 
-<div class="logo">
-NEXTRADE
-</div>
+<div class="logo">NEXTRADE</div>
 
 <div class="card">
 
-<h1>Deriv Connection Test</h1>
+<h1>Deriv WebSocket Test</h1>
 
-<p>
-Testing public live data from Volatility 100 (1s).
+<p class="info">
+Testing whether NEXTRADE can establish a public
+connection to Deriv.
 </p>
 
 <div id="status" class="status">
-Connecting...
+Testing connection...
 </div>
 
-<div class="data" id="data">
-Waiting for tick data...
+<div id="details" class="info">
+Waiting for Deriv response...
 </div>
 
-<div class="info" id="info">
-Symbol: 1HZ100V<br>
-Ticks received: 0
-</div>
-
-<button onclick="connect()">
-Reconnect
+<button onclick="testConnection()">
+Test Again
 </button>
 
 </div>
 
 </div>
 
-
 <script>
 
-let ws=null;
-let tickCount=0;
-let reconnectTimer=null;
+let socket=null;
+
+function showStatus(text,good){
 
 const status=
 document.getElementById("status");
 
-const data=
-document.getElementById("data");
-
-const info=
-document.getElementById("info");
-
-
-function setStatus(text,type){
-
 status.textContent=text;
 
 status.className=
-"status "+(type||"");
+"status "+(good?"ok":"bad");
 
 }
 
+function testConnection(){
 
-function connect(){
-
-clearTimeout(reconnectTimer);
-
-if(ws){
+if(socket){
 
 try{
-ws.close();
+socket.close();
 }catch(e){}
 
 }
 
-tickCount=0;
-
-setStatus(
-"Connecting to Deriv..."
+showStatus(
+"Opening WebSocket...",
+false
 );
 
-data.textContent=
-"Waiting for tick data...";
-
-info.innerHTML=
-"Symbol: 1HZ100V<br>"+
-"Ticks received: 0";
+document.getElementById(
+"details"
+).innerHTML=
+"Connecting to Deriv public API...";
 
 
-/*
-Use Deriv's public WebSocket endpoint.
-No account login or token is used.
-*/
-
-ws=new WebSocket(
+socket=new WebSocket(
 "wss://ws.binaryws.com/websockets/v3"
 );
 
 
-ws.onopen=function(){
+socket.onopen=function(){
 
-setStatus(
-"CONNECTED — requesting live ticks",
-"live"
+showStatus(
+"WEBSOCKET CONNECTED",
+true
 );
 
-ws.send(JSON.stringify({
+document.getElementById(
+"details"
+).innerHTML=
+"Connection established successfully.<br><br>"+
+"Sending public ping request...";
 
-ticks:"1HZ100V",
-subscribe:1,
-req_id:1001
+
+socket.send(JSON.stringify({
+
+ping:1,
+req_id:999
 
 }));
 
 };
 
 
-ws.onmessage=function(event){
+socket.onmessage=function(event){
 
-let response;
+let data;
 
 try{
 
-response=
-JSON.parse(event.data);
+data=JSON.parse(event.data);
 
-}catch(error){
+}catch(e){
 
-return;
-
-}
-
-
-/*
-Display API errors clearly.
-*/
-
-if(response.error){
-
-setStatus(
-"DERIV ERROR: "+
-response.error.message,
-"error"
+showStatus(
+"CONNECTED — INVALID RESPONSE",
+false
 );
 
 return;
@@ -248,78 +187,88 @@ return;
 }
 
 
-/*
-Live tick received.
-*/
+if(data.error){
 
-if(response.msg_type==="tick"){
-
-tickCount++;
-
-let quote=
-response.tick.quote;
-
-let symbol=
-response.tick.symbol;
-
-let epoch=
-response.tick.epoch;
-
-data.textContent=
-String(quote);
-
-info.innerHTML=
-"Symbol: "+
-symbol+
-"<br>"+
-"Ticks received: "+
-tickCount+
-"<br>"+
-"Last update: "+
-new Date(
-epoch*1000
-).toLocaleTimeString();
-
-
-setStatus(
-"LIVE CONNECTION WORKING",
-"live"
+showStatus(
+"DERIV RETURNED AN ERROR",
+false
 );
+
+document.getElementById(
+"details"
+).innerHTML=
+"Error: "+
+data.error.message;
+
+return;
+
+}
+
+
+if(data.msg_type==="ping"){
+
+showStatus(
+"SUCCESS — DERIV CONNECTION WORKS",
+true
+);
+
+document.getElementById(
+"details"
+).innerHTML=
+"Deriv accepted the public ping request.<br><br>"+
+"WebSocket connection is working.<br>"+
+"No Deriv account or API token was used.";
 
 }
 
 };
 
 
-ws.onerror=function(){
+socket.onerror=function(){
 
-setStatus(
+showStatus(
 "WEBSOCKET ERROR",
-"error"
+false
 );
+
+document.getElementById(
+"details"
+).innerHTML=
+"The browser could not establish a WebSocket connection.";
 
 };
 
 
-ws.onclose=function(){
+socket.onclose=function(){
 
-setStatus(
-"Connection closed — reconnecting...",
-"error"
+/*
+Don't overwrite a successful ping message.
+*/
+
+if(
+!document.getElementById(
+"status"
+).textContent.includes("SUCCESS")
+){
+
+showStatus(
+"CONNECTION CLOSED",
+false
 );
 
-reconnectTimer=
-setTimeout(
-connect,
-5000
-);
+document.getElementById(
+"details"
+).innerHTML=
+"Deriv closed the WebSocket before "+
+"a successful response was received.";
+
+}
 
 };
 
 }
 
-
-connect();
+testConnection();
 
 </script>
 
