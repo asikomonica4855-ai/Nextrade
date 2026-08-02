@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deriv Live Test</title>
+</head>
 
+<body style="font-family:Arial;background:#07111f;color:white;padding:25px">
+
+<h2>NEXTRADE Deriv Test</h2>
+
+<p id="status">Connecting...</p>
+<p>Symbol: 1HZ100V</p>
+<p>Ticks received: <b id="count">0</b></p>
+<h1 id="price">---</h1>
+
+<script>
+
+const status = document.getElementById("status");
+const price = document.getElementById("price");
+const count = document.getElementById("count");
+
+let ticks = 0;
+
+const ws = new WebSocket(
+  "wss://ws.binaryws.com/websockets/v3"
+);
+
+ws.onopen = function(){
+
+  status.textContent =
+    "CONNECTED — waiting for ticks";
+
+  ws.send(JSON.stringify({
+    ticks: "1HZ100V",
+    subscribe: 1
+  }));
+
+};
+
+ws.onmessage = function(event){
+
+  const data = JSON.parse(event.data);
+
+  console.log(data);
+
+  if(data.error){
+
+    status.textContent =
+      "ERROR: " +
+      data.error.message;
+
+    return;
+  }
+
+  if(data.msg_type === "tick"){
+
+    ticks++;
+
+    count.textContent = ticks;
+
+    price.textContent =
+      data.tick.quote;
+
+    status.textContent =
+      "LIVE — receiving ticks";
+
+  }
+
+};
+
+ws.onerror = function(){
+
+  status.textContent =
+    "WEBSOCKET ERROR";
+
+};
+
+ws.onclose = function(event){
+
+  status.textContent =
+    "CLOSED — code " +
+    event.code;
+
+};
+
+</script>
+
+</body>
+</html>
