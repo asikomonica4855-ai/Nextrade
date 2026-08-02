@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>NEXTRADE | Signal Center</title>
 
 <style>
@@ -16,28 +16,28 @@ min-height:100vh;
 }
 
 header{
-padding:20px;
+padding:18px 20px;
 background:#081525;
 border-bottom:1px solid #1b3048;
 }
 
 .logo{
-color:#35a7ff;
 font-size:24px;
 font-weight:bold;
+color:#35a7ff;
 }
 
 nav{margin-top:12px}
 
 nav a{
-color:white;
+color:#cbd5e1;
 text-decoration:none;
-margin-right:18px;
+margin-right:16px;
 font-size:14px;
 }
 
 main{
-max-width:1100px;
+max-width:1000px;
 margin:auto;
 padding:30px 20px;
 }
@@ -45,22 +45,22 @@ padding:30px 20px;
 h1{
 text-align:center;
 color:#35a7ff;
-margin-bottom:10px;
+margin-bottom:8px;
 }
 
 .subtitle{
 text-align:center;
 color:#9fb1c7;
-margin-bottom:20px;
+margin-bottom:22px;
 }
 
 .connection{
 text-align:center;
 padding:14px;
+border-radius:10px;
 background:#0d1b2d;
 border:1px solid #1c3550;
-border-radius:10px;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .live{
@@ -78,7 +78,6 @@ background:#0d1b2d;
 border:1px solid #1c3550;
 border-radius:12px;
 padding:20px;
-margin-bottom:20px;
 }
 
 .card h2{
@@ -105,11 +104,12 @@ font-weight:bold;
 
 .digits{
 background:#07111f;
+padding:13px;
 border-radius:8px;
-padding:12px;
 font-size:18px;
 letter-spacing:3px;
 word-break:break-word;
+min-height:48px;
 margin-bottom:15px;
 }
 
@@ -151,4 +151,588 @@ margin-bottom:10px;
 .conditions{
 font-size:13px;
 line-height:1.7;
-color:#cbd
+color:#cbd5e1;
+}
+
+.entry{
+margin-top:12px;
+padding:12px;
+border-radius:8px;
+background:#102238;
+text-align:center;
+font-weight:bold;
+}
+
+.wait{color:#cbd5e1}
+.watch{color:#ffd166}
+.met{color:#58d68d}
+.avoid{color:#ff7777}
+
+.reason{
+margin-top:10px;
+font-size:12px;
+line-height:1.5;
+color:#9fb1c7;
+}
+
+.note{
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:#0d1b2d;
+border:1px solid #1c3550;
+color:#9fb1c7;
+font-size:13px;
+line-height:1.6;
+}
+
+button{
+display:block;
+margin:20px auto;
+padding:11px 20px;
+border:0;
+border-radius:7px;
+background:#35a7ff;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">NEXTRADE</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+<a href="bots.html">Bots</a>
+</nav>
+
+</header>
+
+<main>
+
+<h1>Signal Center</h1>
+
+<p class="subtitle">
+Live Volatility Index analysis — Over 2 & Under 7
+</p>
+
+<div id="connection" class="connection">
+Connecting...
+</div>
+
+<div id="dashboard"></div>
+
+<div class="note">
+<strong>Analysis only:</strong>
+This dashboard reads public market data. It does not place trades.
+The conditions shown are statistical alerts and are not guarantees
+of profitable results.
+</div>
+
+<button onclick="connect()">
+Reconnect
+</button>
+
+</main>
+
+<script>
+
+let ws=null;
+let digits=[];
+let reconnectTimer=null;
+
+const connection=
+document.getElementById("connection");
+
+const dashboard=
+document.getElementById("dashboard");
+
+
+function setStatus(text,type){
+
+connection.textContent=text;
+connection.className=
+"connection "+(type||"");
+
+}
+
+
+/* Always create the dashboard first.
+This prevents the page appearing blank. */
+
+function createDashboard(){
+
+dashboard.innerHTML=`
+
+<div class="card">
+
+<h2>Volatility 100 (1s) Index</h2>
+
+<div class="symbol">
+LIVE SYMBOL: 1HZ100V
+</div>
+
+<div id="rating"
+class="rating caution">
+MARKET RATING: COLLECTING DATA
+</div>
+
+<div id="digits"
+class="digits">
+Waiting for live ticks...
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="label">OVER 2 — 3 TO 9</div>
+<div id="overRate" class="value">0%</div>
+</div>
+
+<div class="stat">
+<div class="label">UNDER 7 — 0 TO 6</div>
+<div id="underRate" class="value">0%</div>
+</div>
+
+<div class="stat">
+<div class="label">SAMPLE SIZE</div>
+<div id="sample" class="value">0</div>
+</div>
+
+<div class="stat">
+<div class="label">LAST DIGIT</div>
+<div id="last" class="value">-</div>
+</div>
+
+</div>
+
+
+<div class="strategy">
+
+<h3>OVER 2 BOT</h3>
+
+<div id="overConditions"
+class="conditions">
+Collecting data...
+</div>
+
+<div id="overEntry"
+class="entry wait">
+ENTRY: WAIT
+</div>
+
+<div id="overReason"
+class="reason">
+Waiting for enough live ticks.
+</div>
+
+</div>
+
+
+<div class="strategy">
+
+<h3>UNDER 7 BOT</h3>
+
+<div id="underConditions"
+class="conditions">
+Collecting data...
+</div>
+
+<div id="underEntry"
+class="entry wait">
+ENTRY: WAIT
+</div>
+
+<div id="underReason"
+class="reason">
+Waiting for enough live ticks.
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* Start connection */
+
+function connect(){
+
+clearTimeout(reconnectTimer);
+
+if(ws){
+
+try{
+ws.close();
+}catch(e){}
+
+}
+
+setStatus(
+"Connecting to Deriv live market data..."
+);
+
+ws=new WebSocket(
+"wss://ws.binaryws.com/websockets/v3"
+);
+
+
+ws.onopen=function(){
+
+setStatus(
+"LIVE DATA — Volatility 100 (1s) connected",
+"live"
+);
+
+ws.send(JSON.stringify({
+
+ticks:"1HZ100V",
+subscribe:1,
+req_id:1
+
+}));
+
+};
+
+
+ws.onmessage=function(event){
+
+let data;
+
+try{
+data=JSON.parse(event.data);
+}catch(e){
+return;
+}
+
+if(data.error){
+
+setStatus(
+"Deriv error: "+
+data.error.message,
+"error"
+);
+
+return;
+}
+
+if(data.msg_type==="tick"){
+
+processTick(data.tick);
+
+}
+
+};
+
+
+ws.onerror=function(){
+
+setStatus(
+"Connection error — reconnecting...",
+"error"
+);
+
+};
+
+
+ws.onclose=function(){
+
+setStatus(
+"Connection closed — reconnecting...",
+"error"
+);
+
+reconnectTimer=
+setTimeout(connect,5000);
+
+};
+
+}
+
+
+/* Receive tick */
+
+function processTick(tick){
+
+if(!tick)return;
+
+let price=
+Number(tick.quote);
+
+if(!Number.isFinite(price))
+return;
+
+/*
+Volatility 100 (1s) uses two decimal places.
+The final decimal is the last digit.
+*/
+
+let formatted=
+price.toFixed(2);
+
+let digit=
+parseInt(
+formatted.charAt(
+formatted.length-1
+),
+10
+);
+
+if(!Number.isInteger(digit))
+return;
+
+digits.push(digit);
+
+if(digits.length>30)
+digits.shift();
+
+update();
+
+}
+
+
+/* Update dashboard */
+
+function update(){
+
+let total=digits.length;
+
+if(total===0)return;
+
+let over=
+digits.filter(
+d=>d>=3
+).length;
+
+let under=
+digits.filter(
+d=>d<=6
+).length;
+
+let overPercent=
+(over/total)*100;
+
+let underPercent=
+(under/total)*100;
+
+let last=
+digits[digits.length-1];
+
+
+/* Basic market rating */
+
+let rating=
+total>=20?
+"GOOD":
+"CAUTION";
+
+const ratingElement=
+document.getElementById("rating");
+
+ratingElement.textContent=
+"MARKET RATING: "+rating;
+
+ratingElement.className=
+"rating "+
+(
+rating==="GOOD"?
+"good":
+"caution"
+);
+
+
+/* Numbers */
+
+document.getElementById(
+"digits"
+).textContent=
+digits.join(" ");
+
+document.getElementById(
+"overRate"
+).textContent=
+overPercent.toFixed(1)+"%";
+
+document.getElementById(
+"underRate"
+).textContent=
+underPercent.toFixed(1)+"%";
+
+document.getElementById(
+"sample"
+).textContent=
+total;
+
+document.getElementById(
+"last"
+).textContent=
+last;
+
+
+/* OVER 2 */
+
+let overConditions=0;
+
+if(overPercent>=60)
+overConditions++;
+
+if(total>=20)
+overConditions++;
+
+if(last>=3)
+overConditions++;
+
+setStrategy(
+"over",
+overConditions,
+total
+);
+
+
+/* UNDER 7 */
+
+let underConditions=0;
+
+if(underPercent>=60)
+underConditions++;
+
+if(total>=20)
+underConditions++;
+
+if(last<=6)
+underConditions++;
+
+setStrategy(
+"under",
+underConditions,
+total
+);
+
+}
+
+
+/* Strategy status */
+
+function setStrategy(
+type,
+conditions,
+total
+){
+
+let status="WAIT";
+let className="wait";
+
+if(total<10){
+
+status="WAIT";
+className="wait";
+
+}else if(conditions>=3){
+
+status="ENTRY CONDITION MET";
+className="met";
+
+}else if(conditions===2){
+
+status="WATCH";
+className="watch";
+
+}else{
+
+status="AVOID";
+className="avoid";
+
+}
+
+
+let name=
+type==="over"?
+"Over 2":
+"Under 7";
+
+
+document.getElementById(
+type+"Conditions"
+).innerHTML=
+
+"Conditions met: "+
+conditions+
+"/3<br>"+
+"Sample requirement: "+
+(total>=20?"MET":"NOT MET")+"<br>"+
+"Last-digit condition: "+
+(
+type==="over"
+?
+(digits[digits.length-1]>=3?
+"MET":
+"NOT MET")
+:
+(digits[digits.length-1]<=6?
+"MET":
+"NOT MET")
+);
+
+
+document.getElementById(
+type+"Entry"
+).textContent=
+"ENTRY: "+status;
+
+document.getElementById(
+type+"Entry"
+).className=
+"entry "+className;
+
+
+let reason;
+
+if(total<10){
+
+reason=
+"Collecting more live observations.";
+
+}else if(conditions>=3){
+
+reason=
+"All dashboard conditions are currently met. "+
+"This is an analytical alert, not a guaranteed winning entry.";
+
+}else if(conditions===2){
+
+reason=
+"Two conditions are present. Continue monitoring.";
+
+}else{
+
+reason=
+"Current data does not meet the dashboard threshold.";
+
+}
+
+document.getElementById(
+type+"Reason"
+).textContent=
+reason;
+
+}
+
+
+/* Build UI BEFORE connecting */
+
+createDashboard();
+
+connect();
+
+</script>
+
+</body>
+</html>
