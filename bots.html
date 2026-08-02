@@ -3,299 +3,1008 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Live Connection</title>
+
+<title>NEXTRADE | Trading Bots</title>
 
 <style>
-body{
-  margin:0;
-  padding:25px;
-  font-family:Arial,sans-serif;
-  background:#07111f;
-  color:white;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-.container{
-  max-width:700px;
-  margin:auto;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050b12;
+    color:#fff;
+    min-height:100vh;
+}
+
+header{
+    min-height:72px;
+    background:#08131f;
+    border-bottom:1px solid #193247;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 5%;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-  color:#35a7ff;
-  font-size:25px;
-  font-weight:bold;
-  margin-bottom:25px;
+    font-size:25px;
+    font-weight:800;
+    white-space:nowrap;
 }
 
-.card{
-  background:#0d1b2d;
-  border:1px solid #1c3550;
-  border-radius:12px;
-  padding:25px;
+.logo span{
+    color:#159ff0;
 }
 
-h1{
-  color:#35a7ff;
+.nav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    overflow-x:auto;
 }
 
-.status{
-  padding:15px;
-  margin:20px 0;
-  border-radius:8px;
-  background:#102238;
-  font-weight:bold;
+.nav a{
+    color:#8ea5b7;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:bold;
+    padding:10px;
+    border-radius:6px;
+    white-space:nowrap;
 }
 
-.good{
-  color:#58d68d;
+.nav a:hover{
+    color:#fff;
+    background:#102536;
 }
 
-.bad{
-  color:#ff7777;
+.nav a.active{
+    color:#159ff0;
 }
 
-.data{
-  background:#07111f;
-  padding:15px;
-  border-radius:8px;
-  font-size:20px;
-  min-height:45px;
+.nav .signup{
+    background:#159ff0;
+    color:#fff;
 }
 
-.info{
-  margin-top:15px;
-  color:#9fb1c7;
-  line-height:1.7;
-  font-size:14px;
+.page{
+    width:92%;
+    max-width:1400px;
+    margin:auto;
+    padding:42px 0 70px;
+}
+
+.heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.heading p{
+    color:#71899a;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.demo-badge{
+    color:#f0ad28;
+    border:1px solid #5b471d;
+    background:#171208;
+    padding:9px 12px;
+    border-radius:7px;
+    font-size:9px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:16px;
+}
+
+/* SETTINGS */
+
+.settings{
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:12px;
+    padding:22px;
+}
+
+.settings h2{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.settings-intro{
+    color:#627a8c;
+    font-size:9px;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    color:#71899a;
+    font-size:9px;
+    margin:12px 0 6px;
+}
+
+input,
+select{
+    width:100%;
+    padding:11px;
+    border-radius:6px;
+    border:1px solid #234055;
+    background:#050d15;
+    color:#fff;
+    outline:none;
+    font-size:11px;
+}
+
+input:focus,
+select:focus{
+    border-color:#159ff0;
+}
+
+.bot-controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:18px;
 }
 
 button{
-  margin-top:20px;
-  padding:12px 20px;
-  border:0;
-  border-radius:7px;
-  background:#35a7ff;
-  font-weight:bold;
+    border:0;
+    border-radius:7px;
+    padding:12px;
+    color:#fff;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.start{
+    background:#159ff0;
+}
+
+.start:hover{
+    background:#0d8bd7;
+}
+
+.stop{
+    background:#29151a;
+    border:1px solid #65313a;
+}
+
+.stop:hover{
+    background:#381b21;
+}
+
+/* MAIN */
+
+.main{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.status-card{
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:12px;
+    padding:22px;
+}
+
+.status-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.status-title{
+    font-size:15px;
+    font-weight:bold;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#8ca1b0;
+    font-size:9px;
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#7c8b95;
+}
+
+.status-dot.running{
+    background:#2edb9c;
+    box-shadow:0 0 9px #2edb9c;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+    padding:14px;
+    border-right:1px solid #193247;
+}
+
+.stat:last-child{
+    border-right:0;
+}
+
+.stat-label{
+    color:#60788a;
+    font-size:8px;
+    margin-bottom:7px;
+}
+
+.stat-value{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.green{
+    color:#2edb9c;
+}
+
+/* ACTIVITY */
+
+.activity{
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.activity-head{
+    padding:18px 20px;
+    border-bottom:1px solid #193247;
+    display:flex;
+    justify-content:space-between;
+}
+
+.activity-head h2{
+    font-size:13px;
+}
+
+.activity-head span{
+    color:#60788a;
+    font-size:8px;
+}
+
+.log{
+    height:250px;
+    overflow-y:auto;
+    padding:10px 20px;
+    font-family:monospace;
+    font-size:9px;
+    color:#71899a;
+}
+
+.log-row{
+    padding:9px 0;
+    border-bottom:1px solid #102535;
+}
+
+.log-row .time{
+    color:#426175;
+    margin-right:8px;
+}
+
+.log-row.live{
+    color:#2edb9c;
+}
+
+/* WARNING */
+
+.warning{
+    padding:14px 16px;
+    background:#171208;
+    border:1px solid #5b471d;
+    border-radius:8px;
+    color:#a9915b;
+    font-size:9px;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid #193247;
+    background:#06101a;
+    padding:28px 5%;
+    display:flex;
+    justify-content:space-between;
+    color:#526a7c;
+    font-size:9px;
+}
+
+.footer-logo{
+    color:#fff;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.footer-logo span{
+    color:#159ff0;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.dashboard{
+    grid-template-columns:1fr;
+}
+
+.stats{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.stat:nth-child(2){
+    border-right:0;
+}
+
+}
+
+@media(max-width:700px){
+
+header{
+    align-items:flex-start;
+}
+
+.nav{
+    max-width:72%;
+}
+
+.heading{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.heading h1{
+    font-size:28px;
+}
+
+.stats{
+    grid-template-columns:1fr 1fr;
+}
+
+footer{
+    flex-direction:column;
+    gap:12px;
+    text-align:center;
+}
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
 
-<div class="logo">NEXTRADE</div>
-
-<div class="card">
-
-<h1>Live Connection Test</h1>
-
-<div id="status" class="status">
-Connecting...
+<div class="logo">
+NEX<span>TRADE</span>
 </div>
 
-<div class="data" id="data">
-Waiting for live data...
+<nav class="nav">
+
+<a href="index.html">HOME</a>
+
+<a href="markets.html">MARKETS</a>
+
+<a href="tools.html">TOOLS</a>
+
+<a href="bots.html" class="active">BOTS</a>
+
+<a href="analysis.html">ANALYSIS</a>
+
+<a href="manual-trading.html">MANUAL TRADING</a>
+
+<a href="login.html">LOGIN</a>
+
+<a href="signup.html" class="signup">SIGN UP</a>
+
+</nav>
+
+</header>
+
+
+<div class="page">
+
+<div class="heading">
+
+<div>
+
+<h1>Trading Bots</h1>
+
+<p>
+Configure and monitor automated trading strategies from the
+NEXTRADE bot dashboard.
+</p>
+
 </div>
 
-<div class="info" id="info">
-Symbol: 1HZ100V<br>
-Ticks received: 0
+<div class="demo-badge">
+● DEMO MODE
 </div>
 
-<button onclick="connect()">
-Reconnect
+</div>
+
+
+<div class="dashboard">
+
+
+<!-- SETTINGS -->
+
+<aside class="settings">
+
+<h2>Bot Configuration</h2>
+
+<p class="settings-intro">
+This dashboard currently runs in simulation mode.
+No real Deriv trades are placed.
+</p>
+
+
+<label>Strategy</label>
+
+<select id="strategy">
+
+<option>Over / Under</option>
+<option>Even / Odd</option>
+<option>Digit Strategy</option>
+<option>Manual Test Strategy</option>
+
+</select>
+
+
+<label>Market</label>
+
+<select id="market">
+
+<option value="1HZ100V">
+Volatility 100 (1s)
+</option>
+
+<option value="1HZ75V">
+Volatility 75 (1s)
+</option>
+
+<option value="1HZ50V">
+Volatility 50 (1s)
+</option>
+
+<option value="1HZ25V">
+Volatility 25 (1s)
+</option>
+
+<option value="1HZ10V">
+Volatility 10 (1s)
+</option>
+
+</select>
+
+
+<label>Stake</label>
+
+<input
+id="stake"
+type="number"
+value="1"
+min="0.01"
+step="0.01"
+>
+
+
+<label>Maximum Trades</label>
+
+<input
+id="maxTrades"
+type="number"
+value="10"
+min="1"
+>
+
+
+<div class="bot-controls">
+
+<button
+class="start"
+onclick="startBot()"
+>
+START BOT
+</button>
+
+<button
+class="stop"
+onclick="stopBot()"
+>
+STOP BOT
 </button>
 
 </div>
 
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+<!-- STATUS -->
+
+<div class="status-card">
+
+<div class="status-top">
+
+<div class="status-title">
+Bot Dashboard
 </div>
+
+<div class="status">
+
+<span
+id="statusDot"
+class="status-dot"
+></span>
+
+<span id="statusText">
+OFFLINE
+</span>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-label">
+TRADES
+</div>
+
+<div
+id="trades"
+class="stat-value"
+>
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+WIN RATE
+</div>
+
+<div
+id="winRate"
+class="stat-value"
+>
+0%
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+DEMO P/L
+</div>
+
+<div
+id="profit"
+class="stat-value green"
+>
+$0.00
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+BOT STATE
+</div>
+
+<div
+id="state"
+class="stat-value"
+>
+IDLE
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACTIVITY -->
+
+<div class="activity">
+
+<div class="activity-head">
+
+<h2>Bot Activity</h2>
+
+<span id="activityStatus">
+WAITING
+</span>
+
+</div>
+
+<div
+id="log"
+class="log"
+>
+
+<div class="log-row">
+<span class="time">--:--:--</span>
+Bot waiting to start.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="warning">
+
+<strong>DEMO MODE:</strong>
+This bot dashboard is a simulation interface. It does not place
+real trades or use your Deriv account. Real-money automation should
+only be connected after the strategy, risk controls and account
+authentication have been properly implemented and tested.
+
+</div>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-logo">
+NEX<span>TRADE</span>
+</div>
+
+<div>
+© 2026 NEXTRADE. Trading automation platform.
+</div>
+
+</footer>
+
 
 <script>
 
-let ws = null;
-let ticksReceived = 0;
+let running = false;
 
-const status =
-document.getElementById("status");
+let trades = 0;
 
-const data =
-document.getElementById("data");
+let wins = 0;
 
-const info =
-document.getElementById("info");
+let profit = 0;
+
+let timer = null;
 
 
-function showStatus(message, good){
+const statusText =
+document.getElementById("statusText");
 
-  status.textContent = message;
+const statusDot =
+document.getElementById("statusDot");
 
-  status.className =
-    "status " + (good ? "good" : "bad");
+const state =
+document.getElementById("state");
+
+const tradesDisplay =
+document.getElementById("trades");
+
+const winRateDisplay =
+document.getElementById("winRate");
+
+const profitDisplay =
+document.getElementById("profit");
+
+const log =
+document.getElementById("log");
+
+const activityStatus =
+document.getElementById("activityStatus");
+
+
+function getTime(){
+
+return new Date()
+.toLocaleTimeString();
 
 }
 
 
-function connect(){
+function addLog(message,live=false){
 
-  ticksReceived = 0;
+const row =
+document.createElement("div");
 
-  if(ws){
+row.className =
+"log-row" +
+(live ? " live" : "");
 
-    try{
-      ws.close();
-    }catch(e){}
+row.innerHTML =
+'<span class="time">' +
+getTime() +
+'</span>' +
+message;
 
-  }
+log.appendChild(row);
 
-  showStatus(
-    "Opening current Deriv connection...",
-    false
-  );
-
-  data.textContent =
-    "Waiting for live data...";
-
-  info.innerHTML =
-    "Symbol: 1HZ100V<br>" +
-    "Ticks received: 0";
-
-
-  /*
-   Current public Deriv endpoint.
-   No account or API token is used.
-  */
-
-  ws = new WebSocket(
-    "wss://api.derivws.com/trading/v1/options/ws/public"
-  );
-
-
-  ws.onopen = function(){
-
-    showStatus(
-      "CONNECTED — requesting market data",
-      true
-    );
-
-
-    /*
-     Current public API request.
-     */
-
-    ws.send(JSON.stringify({
-
-      ticks: "1HZ100V",
-      subscribe: 1
-
-    }));
-
-  };
-
-
-  ws.onmessage = function(event){
-
-    let response;
-
-    try{
-
-      response =
-        JSON.parse(event.data);
-
-    }catch(error){
-
-      return;
-
-    }
-
-
-    /*
-     Display any API error.
-    */
-
-    if(response.error){
-
-      showStatus(
-        "DERIV ERROR",
-        false
-      );
-
-      info.innerHTML =
-        response.error.message ||
-        "Unknown Deriv error.";
-
-      return;
-
-    }
-
-
-    /*
-     Live tick.
-    */
-
-    if(response.msg_type === "tick"){
-
-      ticksReceived++;
-
-      let quote =
-        response.tick.quote;
-
-      let symbol =
-        response.tick.symbol;
-
-      data.textContent =
-        String(quote);
-
-      info.innerHTML =
-        "Symbol: " +
-        symbol +
-        "<br>" +
-        "Ticks received: " +
-        ticksReceived;
-
-      showStatus(
-        "SUCCESS — LIVE DATA RECEIVED",
-        true
-      );
-
-    }
-
-  };
-
-
-  ws.onerror = function(){
-
-    showStatus(
-      "WEBSOCKET ERROR",
-      false
-    );
-
-    info.innerHTML =
-      "The current Deriv endpoint could not be reached.";
-
-  };
-
-
-  ws.onclose = function(){
-
-    if(ticksReceived === 0){
-
-      showStatus(
-        "CONNECTION CLOSED",
-        false
-      );
-
-      info.innerHTML =
-        "The current Deriv connection closed before " +
-        "a live tick was received.";
-
-    }
-
-  };
+log.scrollTop =
+log.scrollHeight;
 
 }
 
 
-connect();
+function startBot(){
+
+if(running){
+
+addLog(
+"Bot is already running."
+);
+
+return;
+
+}
+
+const strategy =
+document.getElementById(
+"strategy"
+).value;
+
+const market =
+document.getElementById(
+"market"
+).value;
+
+const stake =
+Number(
+document.getElementById(
+"stake"
+).value
+);
+
+const maxTrades =
+Number(
+document.getElementById(
+"maxTrades"
+).value
+);
+
+
+if(
+stake <= 0 ||
+maxTrades <= 0
+){
+
+alert(
+"Enter valid bot settings."
+);
+
+return;
+
+}
+
+
+running = true;
+
+trades = 0;
+
+wins = 0;
+
+profit = 0;
+
+
+statusText.textContent =
+"RUNNING";
+
+statusDot.className =
+"status-dot running";
+
+state.textContent =
+"ACTIVE";
+
+activityStatus.textContent =
+"LIVE";
+
+updateStats();
+
+
+addLog(
+"Bot started in DEMO MODE.",
+true
+);
+
+addLog(
+"Strategy: " +
+strategy
+);
+
+addLog(
+"Market: " +
+market
+);
+
+addLog(
+"Demo stake: $" +
+stake.toFixed(2)
+);
+
+
+timer =
+setInterval(
+function(){
+
+if(!running){
+
+return;
+
+}
+
+if(trades >= maxTrades){
+
+stopBot();
+
+addLog(
+"Maximum demo trades reached."
+);
+
+return;
+
+}
+
+simulateTrade(stake);
+
+},
+2500
+);
+
+}
+
+
+function simulateTrade(stake){
+
+trades++;
+
+/*
+Demo-only random result.
+This does NOT represent a real
+trading strategy or market signal.
+*/
+
+const win =
+Math.random() > 0.5;
+
+if(win){
+
+wins++;
+
+profit +=
+stake * 0.8;
+
+addLog(
+"DEMO WIN +" +
+(stake * 0.8).toFixed(2),
+true
+);
+
+}else{
+
+profit -=
+stake;
+
+addLog(
+"DEMO LOSS -" +
+stake.toFixed(2)
+);
+
+}
+
+updateStats();
+
+}
+
+
+function updateStats(){
+
+tradesDisplay.textContent =
+trades;
+
+const rate =
+trades === 0
+? 0
+: (wins / trades) * 100;
+
+winRateDisplay.textContent =
+rate.toFixed(0) + "%";
+
+profitDisplay.textContent =
+(profit >= 0 ? "$" : "-$") +
+Math.abs(profit).toFixed(2);
+
+}
+
+
+function stopBot(){
+
+running = false;
+
+if(timer){
+
+clearInterval(timer);
+
+timer = null;
+
+}
+
+statusText.textContent =
+"OFFLINE";
+
+statusDot.className =
+"status-dot";
+
+state.textContent =
+"IDLE";
+
+activityStatus.textContent =
+"STOPPED";
+
+addLog(
+"Bot stopped."
+);
+
+}
 
 </script>
 
