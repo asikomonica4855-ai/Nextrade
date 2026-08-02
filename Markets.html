@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE Markets</title>
 
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #07111f;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: #0b1727;
+  border-bottom: 1px solid #1d344d;
+}
+
+.logo {
+  color: #35a7ff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.back {
+  color: #b8c7d9;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.container {
+  padding: 22px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.account {
+  background: #0d1b2d;
+  border: 1px solid #1d344d;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.account small {
+  color: #8295aa;
+}
+
+.balance {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.panel {
+  background: #0d1b2d;
+  border: 1px solid #1d344d;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: #07111f;
+  color: white;
+  border: 1px solid #36516d;
+  border-radius: 8px;
+}
+
+.price {
+  font-size: 30px;
+  margin: 20px 0;
+  color: #35a7ff;
+}
+
+.chart {
+  height: 280px;
+  border: 1px solid #28425e;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(#172b40 1px, transparent 1px),
+    linear-gradient(90deg, #172b40 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.line {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  height: 3px;
+  background: #35a7ff;
+  transform: rotate(-8deg);
+  box-shadow:
+    45px 30px 0 #35a7ff,
+    90px -15px 0 #35a7ff,
+    135px 20px 0 #35a7ff,
+    180px -35px 0 #35a7ff,
+    225px 10px 0 #35a7ff;
+}
+
+.trade-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+button {
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy {
+  background: #20b26b;
+  color: white;
+}
+
+.sell {
+  background: #e04b5a;
+  color: white;
+}
+
+.info {
+  margin-top: 20px;
+  color: #8fa2b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 750px) {
+  .market-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NEXTRADE</div>
+  <a class="back" href="index.html">← Home</a>
+</header>
+
+<div class="container">
+
+  <div class="account">
+    <small>Demo Account Balance</small>
+    <div class="balance">$10.00</div>
+  </div>
+
+  <div class="market-grid">
+
+    <div class="panel">
+      <h2>Markets</h2>
+
+      <select>
+        <option>Volatility 10 Index</option>
+        <option>Volatility 25 Index</option>
+        <option>Volatility 50 Index</option>
+        <option>Volatility 75 Index</option>
+        <option>Volatility 100 Index</option>
+      </select>
+
+      <div class="price">10,245.82</div>
+
+      <p class="info">
+        Demo market data<br>
+        Status: Market available
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2>Market Chart</h2>
+
+      <div class="chart">
+        <div class="line"></div>
+      </div>
+
+      <div class="trade-buttons">
+        <button class="buy">BUY</button>
+        <button class="sell">SELL</button>
+      </div>
+
+      <p class="info">
+        Trading controls shown for interface testing.
+        Real trading connectivity will be added separately.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
