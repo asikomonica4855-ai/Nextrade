@@ -3,377 +3,476 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXTRADE | Live Markets</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050b12;
-    color:#fff;
-    min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:#fff;
+min-height:100vh;
 }
 
 header{
-    height:70px;
-    background:#08131f;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
+height:70px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:800;
+font-size:25px;
+font-weight:800;
 }
 
 .logo span{
-    color:#159ff0;
+color:#159ff0;
 }
 
 .nav{
-    display:flex;
-    gap:8px;
+display:flex;
+gap:8px;
 }
 
 .nav a{
-    text-decoration:none;
-    font-size:12px;
-    padding:10px 14px;
+text-decoration:none;
+font-size:12px;
+padding:10px 14px;
 }
 
 .login{
-    color:#fff;
+color:#fff;
 }
 
 .signup{
-    background:#159ff0;
-    color:#fff;
-    border-radius:7px;
-    font-weight:bold;
+background:#159ff0;
+color:white;
+border-radius:7px;
+font-weight:bold;
 }
 
 .page{
-    width:92%;
-    max-width:1400px;
-    margin:auto;
-    padding:28px 0;
+width:92%;
+max-width:1400px;
+margin:auto;
+padding:28px 0;
 }
 
 .top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:22px;
 }
 
 .top h1{
-    font-size:29px;
+font-size:29px;
 }
 
 .top p{
-    color:#71889b;
-    font-size:12px;
-    margin-top:6px;
+color:#71889b;
+font-size:12px;
+margin-top:6px;
 }
 
 .connection{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:10px;
-    color:#8298a9;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:10px;
+color:#8298a9;
 }
 
 .dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#f0ad28;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#f0ad28;
 }
 
 .dot.live{
-    background:#2edb9c;
-    box-shadow:0 0 10px #2edb9c;
+background:#2edb9c;
+box-shadow:0 0 10px #2edb9c;
 }
 
 .dot.error{
-    background:#ff5969;
+background:#ff5969;
 }
 
 .layout{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    gap:18px;
+display:grid;
+grid-template-columns:260px 1fr;
+gap:18px;
 }
 
 .sidebar{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    overflow:hidden;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden;
 }
 
 .sidebar-title{
-    padding:17px;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1px;
-    color:#72899b;
-    border-bottom:1px solid #193247;
+padding:17px;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
+color:#72899b;
+border-bottom:1px solid #193247;
 }
 
 .market{
-    width:100%;
-    padding:15px;
-    background:transparent;
-    border:0;
-    border-bottom:1px solid #142a3b;
-    color:white;
-    text-align:left;
-    cursor:pointer;
-    position:relative;
+width:100%;
+padding:15px;
+background:transparent;
+border:0;
+border-bottom:1px solid #142a3b;
+color:white;
+text-align:left;
+cursor:pointer;
+position:relative;
 }
 
 .market:hover,
 .market.active{
-    background:#0c263b;
+background:#0c263b;
 }
 
 .market.active{
-    border-left:3px solid #159ff0;
-    padding-left:12px;
+border-left:3px solid #159ff0;
+padding-left:12px;
 }
 
 .market-name{
-    display:block;
-    font-size:12px;
-    font-weight:bold;
+display:block;
+font-size:12px;
+font-weight:bold;
 }
 
 .market-symbol{
-    display:block;
-    font-size:9px;
-    color:#61798b;
-    margin-top:5px;
+display:block;
+font-size:9px;
+color:#61798b;
+margin-top:5px;
 }
 
 .market-price{
-    position:absolute;
-    right:14px;
-    top:21px;
-    font-size:10px;
-    color:#9db2c0;
+position:absolute;
+right:14px;
+top:21px;
+font-size:10px;
+color:#9db2c0;
 }
 
 .panel{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    overflow:hidden;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden;
 }
 
 .panel-head{
-    padding:18px;
-    border-bottom:1px solid #193247;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+padding:18px;
+border-bottom:1px solid #193247;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .selected-name{
-    font-size:16px;
-    font-weight:bold;
+font-size:16px;
+font-weight:bold;
 }
 
 .selected-symbol{
-    font-size:10px;
-    color:#657e91;
-    margin-top:5px;
+font-size:10px;
+color:#657e91;
+margin-top:5px;
 }
 
 .live-label{
-    font-size:10px;
-    color:#2edb9c;
+font-size:10px;
+color:#2edb9c;
 }
 
 .price-area{
-    padding:20px;
-    background:#060e16;
-    border-bottom:1px solid #193247;
+padding:20px;
+background:#060e16;
+border-bottom:1px solid #193247;
 }
 
 .price-label{
-    font-size:9px;
-    color:#60788a;
-    margin-bottom:7px;
+font-size:9px;
+color:#60788a;
+margin-bottom:7px;
 }
 
 .price{
-    font-size:35px;
-    font-weight:bold;
+font-size:35px;
+font-weight:bold;
 }
 
 .price-status{
-    font-size:10px;
-    color:#71899a;
-    margin-top:6px;
+font-size:10px;
+color:#71899a;
+margin-top:6px;
 }
 
 .chart-toolbar{
-    height:48px;
-    background:#07121d;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 14px;
+height:50px;
+background:#07121d;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 14px;
 }
 
 .timeframes{
-    display:flex;
-    gap:5px;
+display:flex;
+gap:5px;
 }
 
 .timeframe{
-    border:1px solid #193247;
-    background:#091724;
-    color:#7890a2;
-    padding:6px 9px;
-    border-radius:5px;
-    font-size:9px;
-    cursor:pointer;
+border:1px solid #193247;
+background:#091724;
+color:#7890a2;
+padding:6px 9px;
+border-radius:5px;
+font-size:9px;
+cursor:pointer;
 }
 
 .timeframe.active{
-    background:#159ff0;
-    border-color:#159ff0;
-    color:white;
+background:#159ff0;
+border-color:#159ff0;
+color:white;
 }
 
-.chart-type{
-    font-size:9px;
-    color:#71899a;
+.chart-tools{
+display:flex;
+gap:6px;
+}
+
+.chart-tool{
+border:1px solid #193247;
+background:#091724;
+color:#7890a2;
+padding:6px 9px;
+border-radius:5px;
+font-size:9px;
+cursor:pointer;
+}
+
+.chart-tool:hover{
+background:#0c263b;
+color:white;
+}
+
+.chart-wrapper{
+height:520px;
+display:flex;
+background:#050d15;
 }
 
 .chart-area{
-    height:500px;
-    position:relative;
-    background:
-        linear-gradient(rgba(30,65,90,.13) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(30,65,90,.13) 1px,transparent 1px),
-        #050d15;
-    background-size:45px 45px;
-    overflow:hidden;
+position:relative;
+flex:1;
+overflow:hidden;
+background:
+linear-gradient(rgba(30,65,90,.13) 1px,transparent 1px),
+linear-gradient(90deg,rgba(30,65,90,.13) 1px,transparent 1px),
+#050d15;
+background-size:45px 45px;
+touch-action:none;
 }
 
-canvas{
-    width:100%;
-    height:100%;
-    display:block;
+#chart{
+width:100%;
+height:100%;
+display:block;
+}
+
+.price-scale{
+width:82px;
+background:#07121d;
+border-left:1px solid #193247;
+position:relative;
+overflow:hidden;
+}
+
+.scale-label{
+position:absolute;
+right:8px;
+font-size:9px;
+color:#71899a;
+transform:translateY(-50%);
+white-space:nowrap;
+}
+
+.current-price-label{
+position:absolute;
+right:0;
+background:#159ff0;
+color:white;
+font-size:9px;
+padding:4px 6px;
+border-radius:3px 0 0 3px;
+z-index:5;
+}
+
+.crosshair-label{
+position:absolute;
+right:0;
+background:#263746;
+color:#fff;
+font-size:9px;
+padding:4px 6px;
+display:none;
+z-index:6;
 }
 
 .chart-status{
-    position:absolute;
-    top:12px;
-    left:12px;
-    padding:7px 9px;
-    background:rgba(5,13,21,.9);
-    border:1px solid #1c3c54;
-    border-radius:5px;
-    font-size:9px;
-    color:#7890a2;
+position:absolute;
+top:12px;
+left:12px;
+padding:7px 9px;
+background:rgba(5,13,21,.92);
+border:1px solid #1c3c54;
+border-radius:5px;
+font-size:9px;
+color:#7890a2;
+z-index:4;
+}
+
+.crosshair-v,
+.crosshair-h{
+position:absolute;
+display:none;
+pointer-events:none;
+z-index:3;
+}
+
+.crosshair-v{
+top:0;
+bottom:0;
+width:1px;
+background:rgba(255,255,255,.25);
+}
+
+.crosshair-h{
+left:0;
+right:0;
+height:1px;
+background:rgba(255,255,255,.25);
 }
 
 .info{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    border-top:1px solid #193247;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-top:1px solid #193247;
 }
 
 .info-box{
-    padding:16px;
-    border-right:1px solid #193247;
+padding:16px;
+border-right:1px solid #193247;
 }
 
 .info-box:last-child{
-    border-right:0;
+border-right:0;
 }
 
 .info-label{
-    font-size:9px;
-    color:#60788a;
-    margin-bottom:6px;
+font-size:9px;
+color:#60788a;
+margin-bottom:6px;
 }
 
 .info-value{
-    font-size:13px;
-    font-weight:bold;
+font-size:13px;
+font-weight:bold;
 }
 
 .error{
-    display:none;
-    margin-top:12px;
-    padding:13px;
-    border-radius:7px;
-    background:#28151a;
-    border:1px solid #66313b;
-    color:#ff7c88;
-    font-size:11px;
+display:none;
+margin-top:12px;
+padding:13px;
+border-radius:7px;
+background:#28151a;
+border:1px solid #66313b;
+color:#ff7c88;
+font-size:11px;
 }
 
 @media(max-width:800px){
 
-    .layout{
-        grid-template-columns:1fr;
-    }
+.layout{
+grid-template-columns:1fr;
+}
 
-    .sidebar{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-    }
+.sidebar{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
 
-    .sidebar-title{
-        grid-column:1/-1;
-    }
+.sidebar-title{
+grid-column:1/-1;
+}
 
-    .top{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:12px;
-    }
+.top{
+align-items:flex-start;
+flex-direction:column;
+gap:12px;
+}
+
+.chart-wrapper{
+height:430px;
+}
+
 }
 
 @media(max-width:500px){
 
-    .page{
-        width:94%;
-    }
+.page{
+width:94%;
+}
 
-    .chart-area{
-        height:380px;
-    }
+.chart-toolbar{
+overflow-x:auto;
+justify-content:flex-start;
+gap:12px;
+}
 
-    .info{
-        grid-template-columns:1fr;
-    }
+.chart-tools{
+display:none;
+}
 
-    .info-box{
-        border-right:0;
-        border-bottom:1px solid #193247;
-    }
+.chart-wrapper{
+height:380px;
+}
 
-    .chart-toolbar{
-        overflow-x:auto;
-    }
+.price-scale{
+width:65px;
+}
+
+.info{
+grid-template-columns:1fr;
+}
+
+.info-box{
+border-right:0;
+border-bottom:1px solid #193247;
+}
+
 }
 </style>
 </head>
@@ -417,81 +516,61 @@ NEX<span>TRADE</span>
 VOLATILITY MARKETS
 </div>
 
-<button class="market active"
-data-symbol="1HZ100V"
-data-name="Volatility 100 (1s)">
+<button class="market active" data-symbol="1HZ100V" data-name="Volatility 100 (1s)">
 <span class="market-name">Volatility 100 (1s)</span>
 <span class="market-symbol">1HZ100V</span>
 <span id="p-1HZ100V" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="1HZ75V"
-data-name="Volatility 75 (1s)">
+<button class="market" data-symbol="1HZ75V" data-name="Volatility 75 (1s)">
 <span class="market-name">Volatility 75 (1s)</span>
 <span class="market-symbol">1HZ75V</span>
 <span id="p-1HZ75V" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="1HZ50V"
-data-name="Volatility 50 (1s)">
+<button class="market" data-symbol="1HZ50V" data-name="Volatility 50 (1s)">
 <span class="market-name">Volatility 50 (1s)</span>
 <span class="market-symbol">1HZ50V</span>
 <span id="p-1HZ50V" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="1HZ25V"
-data-name="Volatility 25 (1s)">
+<button class="market" data-symbol="1HZ25V" data-name="Volatility 25 (1s)">
 <span class="market-name">Volatility 25 (1s)</span>
 <span class="market-symbol">1HZ25V</span>
 <span id="p-1HZ25V" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="1HZ10V"
-data-name="Volatility 10 (1s)">
+<button class="market" data-symbol="1HZ10V" data-name="Volatility 10 (1s)">
 <span class="market-name">Volatility 10 (1s)</span>
 <span class="market-symbol">1HZ10V</span>
 <span id="p-1HZ10V" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="R_100"
-data-name="Volatility 100">
+<button class="market" data-symbol="R_100" data-name="Volatility 100">
 <span class="market-name">Volatility 100</span>
 <span class="market-symbol">R_100</span>
 <span id="p-R_100" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="R_75"
-data-name="Volatility 75">
+<button class="market" data-symbol="R_75" data-name="Volatility 75">
 <span class="market-name">Volatility 75</span>
 <span class="market-symbol">R_75</span>
 <span id="p-R_75" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="R_50"
-data-name="Volatility 50">
+<button class="market" data-symbol="R_50" data-name="Volatility 50">
 <span class="market-name">Volatility 50</span>
 <span class="market-symbol">R_50</span>
 <span id="p-R_50" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="R_25"
-data-name="Volatility 25">
+<button class="market" data-symbol="R_25" data-name="Volatility 25">
 <span class="market-name">Volatility 25</span>
 <span class="market-symbol">R_25</span>
 <span id="p-R_25" class="market-price">---</span>
 </button>
 
-<button class="market"
-data-symbol="R_10"
-data-name="Volatility 10">
+<button class="market" data-symbol="R_10" data-name="Volatility 10">
 <span class="market-name">Volatility 10</span>
 <span class="market-symbol">R_10</span>
 <span id="p-R_10" class="market-price">---</span>
@@ -541,41 +620,44 @@ Waiting for live data...
 
 <div class="timeframes">
 
-<button class="timeframe active" data-seconds="1">
-1S
+<button class="timeframe active" data-seconds="1">1S</button>
+<button class="timeframe" data-seconds="5">5S</button>
+<button class="timeframe" data-seconds="15">15S</button>
+<button class="timeframe" data-seconds="30">30S</button>
+<button class="timeframe" data-seconds="60">1M</button>
+
+</div>
+
+<div class="chart-tools">
+
+<button id="resetZoom" class="chart-tool">
+RESET
 </button>
 
-<button class="timeframe" data-seconds="5">
-5S
-</button>
-
-<button class="timeframe" data-seconds="15">
-15S
-</button>
-
-<button class="timeframe" data-seconds="30">
-30S
-</button>
-
-<button class="timeframe" data-seconds="60">
-1M
+<button id="crosshairButton" class="chart-tool">
+CROSSHAIR
 </button>
 
 </div>
 
-<div class="chart-type">
-CANDLESTICKS
 </div>
 
-</div>
+<div class="chart-wrapper">
 
-<div class="chart-area">
+<div id="chartArea" class="chart-area">
 
 <canvas id="chart"></canvas>
 
 <div id="chartStatus" class="chart-status">
 Connecting...
 </div>
+
+<div id="crossV" class="crosshair-v"></div>
+<div id="crossH" class="crosshair-h"></div>
+
+</div>
+
+<div id="priceScale" class="price-scale"></div>
 
 </div>
 
@@ -590,9 +672,7 @@ Volatility 100 (1s)
 
 <div class="info-box">
 <div class="info-label">TICKS RECEIVED</div>
-<div id="ticks" class="info-value">
-0
-</div>
+<div id="ticks" class="info-value">0</div>
 </div>
 
 <div class="info-box">
@@ -614,7 +694,6 @@ Connecting...
 
 </div>
 
-
 <script>
 
 const BACKEND =
@@ -633,6 +712,12 @@ let timeframeSeconds = 1;
 let candles = [];
 
 let currentCandle = null;
+
+let zoomLevel = 1;
+
+let panOffset = 0;
+
+let crosshairEnabled = true;
 
 
 /* ELEMENTS */
@@ -667,8 +752,20 @@ document.getElementById("chart");
 const ctx =
 canvas.getContext("2d");
 
+const chartArea =
+document.getElementById("chartArea");
 
-/* CONNECT TO WORKING BACKEND */
+const priceScale =
+document.getElementById("priceScale");
+
+const crossV =
+document.getElementById("crossV");
+
+const crossH =
+document.getElementById("crossH");
+
+
+/* BACKEND */
 
 function connectBackend(){
 
@@ -681,16 +778,13 @@ backend.textContent = "Connecting...";
 chartStatus.textContent =
 "Connecting to NEXTRADE backend...";
 
-
 try{
 
 ws = new WebSocket(BACKEND);
 
 }catch(error){
 
-showError(
-"Could not create WebSocket."
-);
+showError("Could not create WebSocket.");
 
 return;
 
@@ -729,8 +823,6 @@ return;
 }
 
 
-/* STATUS */
-
 if(data.type === "status"){
 
 if(data.connected){
@@ -756,8 +848,6 @@ return;
 }
 
 
-/* DERIV ERROR */
-
 if(data.type === "deriv_error"){
 
 showError(
@@ -777,8 +867,6 @@ return;
 }
 
 
-/* TICK */
-
 if(data.type !== "tick"){
 return;
 }
@@ -790,7 +878,7 @@ return;
 }
 
 
-/* UPDATE SIDEBAR */
+/* SIDEBAR */
 
 const sidebarPrice =
 document.getElementById(
@@ -805,7 +893,7 @@ formatPrice(tick.price);
 }
 
 
-/* IGNORE NON-SELECTED MARKET */
+/* SELECTED MARKET */
 
 if(tick.symbol !== selectedSymbol){
 return;
@@ -817,9 +905,6 @@ Number(tick.price);
 
 const now =
 Math.floor(Date.now() / 1000);
-
-
-/* UPDATE PRICE */
 
 tickCount++;
 
@@ -836,11 +921,12 @@ chartStatus.textContent =
 "LIVE • REAL-TIME CANDLES";
 
 
-/* BUILD CANDLE */
+/* CANDLE */
 
 const candleTime =
-Math.floor(now / timeframeSeconds)
-* timeframeSeconds;
+Math.floor(
+now / timeframeSeconds
+) * timeframeSeconds;
 
 
 if(
@@ -852,7 +938,7 @@ if(currentCandle){
 
 candles.push(currentCandle);
 
-if(candles.length > 80){
+if(candles.length > 150){
 candles.shift();
 }
 
@@ -891,13 +977,9 @@ price;
 
 }
 
-
-drawCandles();
+drawChart();
 
 };
-
-
-/* ERROR */
 
 ws.onerror = function(){
 
@@ -913,9 +995,6 @@ showError(
 );
 
 };
-
-
-/* CLOSED */
 
 ws.onclose = function(event){
 
@@ -962,31 +1041,26 @@ item.classList.remove("active");
 
 this.classList.add("active");
 
-
 selectedSymbol =
 this.dataset.symbol;
 
 selectedName =
 this.dataset.name;
 
-
 document.getElementById(
 "selectedName"
 ).textContent =
 selectedName;
-
 
 document.getElementById(
 "selectedSymbol"
 ).textContent =
 selectedSymbol;
 
-
 document.getElementById(
 "marketInfo"
 ).textContent =
 selectedName;
-
 
 tickCount = 0;
 
@@ -999,19 +1073,22 @@ priceStatus.textContent =
 selectedName +
 "...";
 
-
 candles = [];
 
 currentCandle = null;
 
-drawCandles();
+zoomLevel = 1;
+
+panOffset = 0;
+
+drawChart();
 
 });
 
 });
 
 
-/* TIMEFRAME BUTTONS */
+/* TIMEFRAME */
 
 document
 .querySelectorAll(".timeframe")
@@ -1029,23 +1106,61 @@ item.classList.remove("active");
 
 });
 
-
 this.classList.add("active");
 
-
 timeframeSeconds =
-Number(
-this.dataset.seconds
-);
-
+Number(this.dataset.seconds);
 
 candles = [];
 
 currentCandle = null;
 
-drawCandles();
+zoomLevel = 1;
+
+panOffset = 0;
+
+drawChart();
 
 });
+
+});
+
+
+/* RESET */
+
+document
+.getElementById("resetZoom")
+.addEventListener(
+"click",
+function(){
+
+zoomLevel = 1;
+
+panOffset = 0;
+
+drawChart();
+
+});
+
+
+/* CROSSHAIR */
+
+document
+.getElementById("crosshairButton")
+.addEventListener(
+"click",
+function(){
+
+crosshairEnabled =
+!crosshairEnabled;
+
+if(!crosshairEnabled){
+
+crossV.style.display = "none";
+
+crossH.style.display = "none";
+
+}
 
 });
 
@@ -1054,8 +1169,7 @@ drawCandles();
 
 function formatPrice(value){
 
-return Number(value)
-.toLocaleString(
+return Number(value).toLocaleString(
 undefined,
 {
 minimumFractionDigits:2,
@@ -1088,21 +1202,20 @@ ratio,
 0
 );
 
-drawCandles();
+drawChart();
 
 }
 
 
-/* DRAW CANDLESTICKS */
+/* DRAW */
 
-function drawCandles(){
+function drawChart(){
 
 const width =
 canvas.clientWidth;
 
 const height =
 canvas.clientHeight;
-
 
 ctx.clearRect(
 0,
@@ -1115,17 +1228,14 @@ height
 let data =
 candles.slice();
 
-
 if(currentCandle){
 
-data.push(
-currentCandle
-);
+data.push(currentCandle);
 
 }
 
 
-if(data.length < 1){
+if(data.length === 0){
 
 ctx.fillStyle =
 "#60788a";
@@ -1142,10 +1252,47 @@ width / 2,
 height / 2
 );
 
+priceScale.innerHTML = "";
+
 return;
 
 }
 
+
+/* ZOOM */
+
+const visibleCount =
+Math.max(
+8,
+Math.floor(
+data.length / zoomLevel
+)
+);
+
+let start =
+Math.max(
+0,
+data.length -
+visibleCount -
+panOffset
+);
+
+let end =
+Math.min(
+data.length,
+start + visibleCount
+);
+
+data =
+data.slice(start,end);
+
+
+if(data.length === 0){
+return;
+}
+
+
+/* RANGE */
 
 let min =
 Infinity;
@@ -1153,20 +1300,13 @@ Infinity;
 let max =
 -Infinity;
 
-
 data.forEach(function(c){
 
 min =
-Math.min(
-min,
-c.low
-);
+Math.min(min,c.low);
 
 max =
-Math.max(
-max,
-c.high
-);
+Math.max(max,c.high);
 
 });
 
@@ -1180,13 +1320,13 @@ max += 1;
 }
 
 
-const paddingTop = 30;
+const paddingTop = 25;
 
-const paddingBottom = 30;
+const paddingBottom = 25;
 
-const paddingLeft = 20;
+const paddingLeft = 15;
 
-const paddingRight = 20;
+const paddingRight = 10;
 
 const chartHeight =
 height -
@@ -1199,74 +1339,141 @@ paddingLeft -
 paddingRight;
 
 
-const candleWidth =
-Math.max(
-4,
-Math.min(
-16,
-chartWidth /
-data.length *
-0.65
-)
-);
-
-
 function priceToY(price){
 
 return paddingTop +
 (
-(max - price) /
-(max - min)
+(max-price) /
+(max-min)
 ) *
 chartHeight;
 
 }
 
 
+/* GRID PRICE SCALE */
+
+priceScale.innerHTML = "";
+
+for(let i=0;i<=6;i++){
+
+const value =
+max -
+(
+(max-min) *
+(i/6)
+);
+
+const y =
+paddingTop +
+chartHeight *
+(i/6);
+
+const label =
+document.createElement("div");
+
+label.className =
+"scale-label";
+
+label.style.top =
+y + "px";
+
+label.textContent =
+formatPrice(value);
+
+priceScale.appendChild(label);
+
+}
+
+
+/* CURRENT PRICE */
+
+if(currentCandle){
+
+const currentY =
+priceToY(
+currentCandle.close
+);
+
+const currentLabel =
+document.createElement("div");
+
+currentLabel.className =
+"current-price-label";
+
+currentLabel.style.top =
+Math.max(
+0,
+Math.min(
+height-20,
+currentY-10
+)
+)
++
+"px";
+
+currentLabel.textContent =
+formatPrice(
+currentCandle.close
+);
+
+priceScale.appendChild(
+currentLabel
+);
+
+}
+
+
 /* CANDLES */
 
-data.forEach(function(candle,index){
-
-const x =
-paddingLeft +
-(
-index + 0.5
-) *
-(
+const slot =
 chartWidth /
-data.length
+data.length;
+
+const candleWidth =
+Math.max(
+3,
+Math.min(
+18,
+slot * 0.65
+)
 );
 
 
+data.forEach(function(c,index){
+
+const x =
+paddingLeft +
+index * slot +
+slot/2;
+
 const openY =
-priceToY(candle.open);
+priceToY(c.open);
 
 const closeY =
-priceToY(candle.close);
+priceToY(c.close);
 
 const highY =
-priceToY(candle.high);
+priceToY(c.high);
 
 const lowY =
-priceToY(candle.low);
+priceToY(c.low);
 
 
 /* WICK */
 
 ctx.beginPath();
 
-ctx.moveTo(
-x,
-highY
-);
+ctx.moveTo(x,highY);
 
-ctx.lineTo(
-x,
-lowY
-);
+ctx.lineTo(x,lowY);
 
 ctx.strokeStyle =
-"#9db2c0";
+c.close >= c.open
+?
+"#2edb9c"
+:
+"#ff5969";
 
 ctx.lineWidth = 1;
 
@@ -1275,7 +1482,7 @@ ctx.stroke();
 
 /* BODY */
 
-const bodyTop =
+const top =
 Math.min(
 openY,
 closeY
@@ -1285,35 +1492,20 @@ const bodyHeight =
 Math.max(
 1,
 Math.abs(
-closeY -
-openY
+closeY-openY
 )
 );
 
-
-if(candle.close >= candle.open){
-
 ctx.fillStyle =
-"#2edb9c";
-
-ctx.strokeStyle =
-"#2edb9c";
-
-}else{
-
-ctx.fillStyle =
+c.close >= c.open
+?
+"#2edb9c"
+:
 "#ff5969";
-
-ctx.strokeStyle =
-"#ff5969";
-
-}
-
 
 ctx.fillRect(
-x -
-candleWidth / 2,
-bodyTop,
+x-candleWidth/2,
+top,
 candleWidth,
 bodyHeight
 );
@@ -1321,16 +1513,13 @@ bodyHeight
 });
 
 
-/* CURRENT PRICE LINE */
+/* LIVE PRICE LINE */
 
 if(currentCandle){
 
-const currentPrice =
-currentCandle.close;
-
 const y =
 priceToY(
-currentPrice
+currentCandle.close
 );
 
 ctx.beginPath();
@@ -1341,8 +1530,7 @@ y
 );
 
 ctx.lineTo(
-width -
-paddingRight,
+width-paddingRight,
 y
 );
 
@@ -1351,9 +1539,7 @@ ctx.strokeStyle =
 
 ctx.lineWidth = 1;
 
-ctx.setLineDash(
-[5,5]
-);
+ctx.setLineDash([5,5]);
 
 ctx.stroke();
 
@@ -1361,8 +1547,190 @@ ctx.setLineDash([]);
 
 }
 
+}
+
+
+/* CROSSHAIR */
+
+chartArea.addEventListener(
+"pointermove",
+function(event){
+
+if(!crosshairEnabled){
+return;
+}
+
+const rect =
+chartArea.getBoundingClientRect();
+
+let x =
+event.clientX -
+rect.left;
+
+let y =
+event.clientY -
+rect.top;
+
+x =
+Math.max(
+0,
+Math.min(
+rect.width,
+x
+)
+);
+
+y =
+Math.max(
+0,
+Math.min(
+rect.height,
+y
+)
+);
+
+crossV.style.left =
+x + "px";
+
+crossH.style.top =
+y + "px";
+
+crossV.style.display =
+"block";
+
+crossH.style.display =
+"block";
+
+});
+
+
+chartArea.addEventListener(
+"pointerleave",
+function(){
+
+crossV.style.display =
+"none";
+
+crossH.style.display =
+"none";
+
+});
+
+
+/* ZOOM WITH WHEEL */
+
+chartArea.addEventListener(
+"wheel",
+function(event){
+
+event.preventDefault();
+
+if(event.deltaY < 0){
+
+zoomLevel =
+Math.min(
+8,
+zoomLevel * 1.25
+);
+
+}else{
+
+zoomLevel =
+Math.max(
+1,
+zoomLevel / 1.25
+);
 
 }
+
+drawChart();
+
+},
+{passive:false}
+);
+
+
+/* DRAG / PAN */
+
+let dragging = false;
+
+let dragStartX = 0;
+
+let dragStartPan = 0;
+
+
+chartArea.addEventListener(
+"pointerdown",
+function(event){
+
+dragging = true;
+
+dragStartX =
+event.clientX;
+
+dragStartPan =
+panOffset;
+
+chartArea.setPointerCapture(
+event.pointerId
+);
+
+});
+
+
+chartArea.addEventListener(
+"pointerup",
+function(){
+
+dragging = false;
+
+});
+
+
+chartArea.addEventListener(
+"pointermove",
+function(event){
+
+if(!dragging){
+return;
+}
+
+const distance =
+event.clientX -
+dragStartX;
+
+const candleCount =
+Math.max(
+1,
+candles.length
+);
+
+const pixelsPerCandle =
+chartArea.clientWidth /
+Math.max(
+8,
+Math.floor(
+candleCount /
+zoomLevel
+)
+);
+
+panOffset =
+Math.max(
+0,
+Math.min(
+candles.length-1,
+dragStartPan -
+Math.round(
+distance /
+pixelsPerCandle
+)
+)
+);
+
+drawChart();
+
+});
 
 
 /* ERROR */
@@ -1400,4 +1768,4 @@ connectBackend();
 </script>
 
 </body>
-</html>
+    </html>
