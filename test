@@ -1,55 +1,35 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Deriv Connection Test</title>
+<title>Deriv Diagnostic</title>
 
 <style>
 body{
-  margin:0;
-  padding:30px 20px;
-  background:#06101b;
+  background:#07111f;
   color:white;
-  font-family:Arial,sans-serif;
+  font-family:Arial;
+  padding:25px;
 }
-
 .box{
   max-width:600px;
-  margin:40px auto;
-  padding:30px;
-  background:#0a1826;
-  border:1px solid #21445e;
+  margin:auto;
+  background:#0b1928;
+  padding:25px;
   border-radius:15px;
+  border:1px solid #24445d;
 }
-
-h1{
-  color:#18a6ff;
+h1{color:#19a7ff}
+#status{color:#ffd166}
+#error{
+  color:#ff6572;
+  margin-top:15px;
+  line-height:1.5;
 }
-
-.status{
+#price{
+  font-size:32px;
   margin-top:20px;
-  padding:15px;
-  border-radius:8px;
-  background:#07111d;
-}
-
-#status{
-  color:#ffd166;
-}
-
-.price{
-  margin-top:20px;
-  font-size:35px;
-  font-weight:bold;
-}
-
-.small{
-  margin-top:10px;
-  color:#8da4b7;
-  line-height:1.6;
 }
 </style>
 </head>
@@ -58,168 +38,140 @@ h1{
 
 <div class="box">
 
-  <h1>DERIV CONNECTION TEST</h1>
+<h1>DERIV DIAGNOSTIC</h1>
 
-  <div class="status">
-    Status:
-    <strong id="status">
-      Connecting...
-    </strong>
-  </div>
+<p>Status:</p>
+<strong id="status">Connecting...</strong>
 
-  <div class="price">
-    <span id="price">---</span>
-  </div>
+<div id="error"></div>
 
-  <div class="small">
-    Symbol: 1HZ100V<br>
-    Ticks received:
-    <span id="ticks">0</span>
-  </div>
+<div id="price">LIVE PRICE: ---</div>
+
+<p>
+Ticks received:
+<strong id="ticks">0</strong>
+</p>
 
 </div>
 
-
 <script>
-
-const status =
-  document.getElementById("status");
-
-const price =
-  document.getElementById("price");
-
-const ticks =
-  document.getElementById("ticks");
-
-let count = 0;
 
 let socket;
 
+let count = 0;
 
-/*
-  DERIV PUBLIC WEBSOCKET
-*/
+const status =
+document.getElementById("status");
 
-function connect(){
+const errorBox =
+document.getElementById("error");
 
-  status.textContent =
-    "Connecting...";
+const price =
+document.getElementById("price");
 
-  status.style.color =
-    "#ffd166";
-
-
-  socket = new WebSocket(
-    "wss://ws.derivws.com/websockets/v3"
-  );
+const ticks =
+document.getElementById("ticks");
 
 
-  socket.onopen = function(){
-
-    status.textContent =
-      "CONNECTED — requesting ticks";
-
-    status.style.color =
-      "#2edb9c";
+socket = new WebSocket(
+"wss://ws.binaryws.com/websockets/v3"
+);
 
 
-    socket.send(
-      JSON.stringify({
+socket.onopen = function(){
 
-        ticks: "1HZ100V",
+status.textContent =
+"CONNECTED";
 
-        subscribe: 1
+status.style.color =
+"#2edb9c";
 
-      })
-    );
+socket.send(
+JSON.stringify({
+ticks:"1HZ100V",
+subscribe:1
+})
+);
 
-  };
-
-
-  socket.onmessage =
-    function(event){
-
-      console.log(
-        "DERIV:",
-        event.data
-      );
+};
 
 
-      const data =
-        JSON.parse(event.data);
+socket.onmessage = function(event){
+
+console.log(event.data);
+
+const data =
+JSON.parse(event.data);
 
 
-      if(data.tick){
+if(data.error){
 
-        count++;
+status.textContent =
+"DERIV ERROR";
 
-        ticks.textContent =
-          count;
+status.style.color =
+"#ff6572";
 
+errorBox.textContent =
+"Exact error: " +
+data.error.code +
+" — " +
+data.error.message;
 
-        price.textContent =
-          data.tick.quote;
-
-
-        status.textContent =
-          "CONNECTED — TICKS RECEIVING";
-
-        status.style.color =
-          "#2edb9c";
-
-      }
-
-
-      if(data.error){
-
-        status.textContent =
-          "DERIV ERROR: " +
-          data.error.message;
-
-        status.style.color =
-          "#ff5f6d";
-
-        console.log(
-          data.error
-        );
-
-      }
-
-    };
-
-
-  socket.onerror =
-    function(error){
-
-      status.textContent =
-        "CONNECTION ERROR";
-
-      status.style.color =
-        "#ff5f6d";
-
-      console.log(
-        "WebSocket error:",
-        error
-      );
-
-    };
-
-
-  socket.onclose =
-    function(){
-
-      status.textContent =
-        "CONNECTION CLOSED";
-
-      status.style.color =
-        "#ff5f6d";
-
-    };
+return;
 
 }
 
 
-connect();
+if(data.tick){
+
+count++;
+
+ticks.textContent =
+count;
+
+price.textContent =
+"LIVE PRICE: " +
+data.tick.quote;
+
+status.textContent =
+"TICKS RECEIVING";
+
+status.style.color =
+"#2edb9c";
+
+}
+
+};
+
+
+socket.onerror = function(){
+
+status.textContent =
+"WEBSOCKET ERROR";
+
+status.style.color =
+"#ff6572";
+
+errorBox.textContent =
+"Browser could not establish the WebSocket connection.";
+
+};
+
+
+socket.onclose = function(){
+
+if(count === 0){
+
+status.textContent =
+"CONNECTION CLOSED";
+
+status.style.color =
+"#ff6572";
+
+}
+
+};
 
 </script>
 
