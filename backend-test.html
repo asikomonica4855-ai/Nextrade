@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NEXTRADE Backend Test</title>
+</head>
 
+<body style="font-family:Arial;background:#07111f;color:white;padding:25px">
+
+<h2>NEXTRADE Backend Test</h2>
+
+<p id="status">Connecting...</p>
+<p>Ticks received: <b id="count">0</b></p>
+<h1 id="price">---</h1>
+
+<script>
+
+const status =
+document.getElementById("status");
+
+const count =
+document.getElementById("count");
+
+const price =
+document.getElementById("price");
+
+let ticks = 0;
+
+const ws = new WebSocket(
+"wss://nextrade-backened.onrender.com"
+);
+
+ws.onopen = function(){
+
+status.textContent =
+"CONNECTED TO NEXTRADE BACKEND";
+
+};
+
+ws.onmessage = function(event){
+
+const data =
+JSON.parse(event.data);
+
+console.log(data);
+
+if(data.type === "status"){
+
+status.textContent =
+data.connected
+? "BACKEND CONNECTED TO DERIV"
+: "BACKEND WAITING FOR DERIV";
+
+}
+
+if(data.type === "tick"){
+
+ticks++;
+
+count.textContent =
+ticks;
+
+price.textContent =
+data.data.price;
+
+status.textContent =
+"LIVE — BACKEND RECEIVING DATA";
+
+}
+
+};
+
+ws.onerror = function(){
+
+status.textContent =
+"WEBSOCKET ERROR";
+
+};
+
+ws.onclose = function(event){
+
+status.textContent =
+"CLOSED — CODE " +
+event.code;
+
+};
+
+</script>
+
+</body>
+</html>
