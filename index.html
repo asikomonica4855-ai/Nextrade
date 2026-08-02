@@ -1,22 +1,1160 @@
-EXTRADE
-LOGIN
-SIGN UP
-● LIVE MARKET TECHNOLOGY
-Trade smarter.
-See the market.
-NEXTRADE brings live market data, powerful analysis tools and a clean trading environment together in one platform.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE | Smart Trading</title>
 
-Explore Markets →
-Trading Tools
-Volatility 100 (1s)
-LIVE
-LIVE PRICE
-Connecting...
-Live market connection active
-LIVE • 1 SECOND CANDLES
-LIVE
-Real-time market data
-10+
-Markets to monitor
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#040b14;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  height:72px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#07111d;
+  border-bottom:1px solid #19344c;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.logo span{
+  color:#18a6ff;
+}
+
+nav{
+  display:flex;
+  gap:24px;
+}
+
+nav a{
+  color:#9db1c3;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#20aaff;
+}
+
+.auth{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.login{
+  color:#d9e6f0;
+  text-decoration:none;
+  padding:10px 14px;
+  font-size:13px;
+}
+
+.signup{
+  background:#159ff0;
+  color:white;
+  text-decoration:none;
+  padding:11px 17px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.hero{
+  min-height:670px;
+  padding:65px 6%;
+  display:grid;
+  grid-template-columns:43% 57%;
+  align-items:center;
+  gap:30px;
+  background:
+    radial-gradient(circle at 85% 45%,rgba(0,142,255,.17),transparent 38%),
+    radial-gradient(circle at 10% 80%,rgba(0,70,160,.12),transparent 35%);
+}
+
+.hero-content{
+  z-index:2;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 13px;
+  border-radius:20px;
+  background:#09233a;
+  border:1px solid #20587f;
+  color:#58bfff;
+  font-size:11px;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  font-size:clamp(45px,6vw,73px);
+  line-height:1;
+  margin-bottom:23px;
+}
+
+.hero h1 span{
+  color:#19a7ff;
+}
+
+.hero p{
+  color:#8fa5b8;
+  max-width:540px;
+  line-height:1.7;
+  font-size:16px;
+  margin-bottom:30px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  text-decoration:none;
+  padding:15px 23px;
+  border-radius:9px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.primary{
+  background:#159ff0;
+  color:white;
+}
+
+.secondary{
+  background:#091725;
+  border:1px solid #29465e;
+  color:white;
+}
+
+.terminal{
+  background:#081421;
+  border:1px solid #25465f;
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 35px 90px rgba(0,0,0,.55);
+}
+
+.terminal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:5px 5px 13px;
+}
+
+.symbol{
+  font-size:13px;
+  font-weight:bold;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#2fdb9c;
+  font-size:10px;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#2fdb9c;
+  box-shadow:0 0 10px #2fdb9c;
+}
+
+.price-panel{
+  background:#050e18;
+  border:1px solid #18344b;
+  border-radius:9px;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.price-title{
+  color:#6f8598;
+  font-size:9px;
+}
+
+#price{
+  font-size:24px;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+#movement{
+  font-size:10px;
+  margin-top:4px;
+  color:#7890a3;
+}
+
+.chart{
+  position:relative;
+  height:315px;
+  border-radius:10px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(34,72,98,.17) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(34,72,98,.17) 1px,transparent 1px),
+    #050d17;
+  background-size:42px 42px;
+}
+
+#candleChart{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.chart-tag{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:rgba(4,13,23,.9);
+  border:1px solid #1d4058;
+  padding:6px 8px;
+  border-radius:5px;
+  font-size:9px;
+  color:#8ea5b7;
+}
+
+.stats{
+  max-width:1100px;
+  margin:-30px auto 0;
+  padding:0 6%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.stat{
+  background:#091624;
+  border:1px solid #19364e;
+  border-radius:12px;
+  padding:20px;
+}
+
+.stat strong{
+  display:block;
+  font-size:22px;
+  margin-bottom:5px;
+}
+
+.stat span{
+  color:#70869a;
+  font-size:12px;
+}
+
+section:not(.hero){
+  padding:90px 6%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.title h2{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.title p{
+  color:#8095a8;
+  max-width:600px;
+  margin:auto;
+  line-height:1.6;
+}
+
+.cards{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:#091522;
+  border:1px solid #19364e;
+  border-radius:15px;
+  padding:30px;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#092a43;
+  color:#36adff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#8096aa;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.market-section{
+  background:#06101b;
+}
+
+.market-box{
+  max-width:1000px;
+  margin:auto;
+  border:1px solid #19364e;
+  border-radius:15px;
+  overflow:hidden;
+  background:#091624;
+}
+
+.market-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  padding:18px 22px;
+  border-bottom:1px solid #142c40;
+  font-size:13px;
+}
+
+.market-row:last-child{
+  border-bottom:0;
+}
+
+.market-head{
+  color:#71879a;
+  font-size:10px;
+}
+
+.green{
+  color:#2fdb9c;
+}
+
+.cta{
+  text-align:center;
+  background:
+    radial-gradient(circle,rgba(0,125,255,.16),transparent 50%),
+    #050e18;
+}
+
+.cta h2{
+  font-size:40px;
+  margin-bottom:14px;
+}
+
+.cta p{
+  color:#8096a9;
+  margin-bottom:25px;
+}
+
+footer{
+  padding:30px 6%;
+  border-top:1px solid #162e43;
+  display:flex;
+  justify-content:space-between;
+  color:#60788c;
+  font-size:12px;
+}
+
+@media(max-width:950px){
+
+  nav{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:50px;
+  }
+
+  .hero-content{
+    text-align:center;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+    margin-top:20px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:550px){
+
+  header{
+    padding:0 5%;
+  }
+
+  .logo{
+    font-size:22px;
+  }
+
+  .hero{
+    padding-left:5%;
+    padding-right:5%;
+  }
+
+  .hero h1{
+    font-size:46px;
+  }
+
+  .chart{
+    height:260px;
+  }
+
+  .market-row{
+    grid-template-columns:1.7fr 1fr 1fr;
+    padding:15px 12px;
+    font-size:11px;
+  }
+
+  section:not(.hero){
+    padding:65px 5%;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    NEX<span>TRADE</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="#tools">Tools</a>
+    <a href="#analysis">Analysis</a>
+  </nav>
+
+  <div class="auth">
+    <a href="login.html" class="login">LOGIN</a>
+    <a href="signup.html" class="signup">SIGN UP</a>
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      ● LIVE MARKET TECHNOLOGY
+    </div>
+
+    <h1>
+      Trade smarter.<br>
+      <span>See the market.</span>
+    </h1>
+
+    <p>
+      NEXTRADE brings live market data, powerful analysis tools
+      and a clean trading environment together in one platform.
+    </p>
+
+    <div class="buttons">
+
+      <a href="markets.html" class="btn primary">
+        Explore Markets →
+      </a>
+
+      <a href="#tools" class="btn secondary">
+        Trading Tools
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="terminal">
+
+    <div class="terminal-header">
+
+      <div class="symbol">
+        Volatility 100 (1s)
+      </div>
+
+      <div class="live">
+        <span class="live-dot"></span>
+        LIVE
+      </div>
+
+    </div>
+
+
+    <div class="price-panel">
+
+      <div class="price-title">
+        LIVE PRICE
+      </div>
+
+      <div id="price">
+        Connecting...
+      </div>
+
+      <div id="movement">
+        Connecting to market...
+      </div>
+
+    </div>
+
+
+    <div class="chart">
+
+      <div class="chart-tag">
+        LIVE • 1 SECOND CANDLES
+      </div>
+
+      <canvas id="candleChart"></canvas>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="stats">
+
+  <div class="stat">
+    <strong>LIVE</strong>
+    <span>Real-time market data</span>
+  </div>
+
+  <div class="stat">
+    <strong>10+</strong>
+    <span>Markets to monitor</span>
+  </div>
+
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>Market availability</span>
+  </div>
+
+</div>
+
+
+<section id="tools">
+
+  <div class="title">
+
+    <h2>Built for smarter trading</h2>
+
+    <p>
+      Monitor markets, study price movement and prepare
+      your next trading decision from one clean interface.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">⌁</div>
+
+      <h3>Manual Trading</h3>
+
+      <p>
+        Monitor live price movement and prepare trades
+        using a responsive trading environment.
+      </p>
+
+    </div>
+
+
+    <div class="card" id="analysis">
+
+      <div class="icon">◈</div>
+
+      <h3>Market Analysis</h3>
+
+      <p>
+        Study live price action and market movement
+        before making your next trading decision.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">⚙</div>
+
+      <h3>Trading Tools</h3>
+
+      <p>
+        Access tools designed to make market monitoring
+        easier and faster.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="market-section">
+
+  <div class="title">
+
+    <h2>Live Markets</h2>
+
+    <p>
+      Quickly access markets available on NEXTRADE.
+    </p>
+
+  </div>
+
+
+  <div class="market-box">
+
+    <div class="market-row market-head">
+      <span>MARKET</span>
+      <span>STATUS</span>
+      <span>DATA</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 100 (1s)</strong>
+      <span class="green">● Live</span>
+      <span class="green">Streaming</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 75 (1s)</strong>
+      <span class="green">● Live</span>
+      <span class="green">Streaming</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 50 (1s)</strong>
+      <span class="green">● Live</span>
+      <span class="green">Streaming</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 25 (1s)</strong>
+      <span class="green">● Live</span>
+      <span class="green">Streaming</span>
+    </div>
+
+  </div>
+
+
+  <div style="text-align:center;margin-top:28px;">
+
+    <a href="markets.html" class="btn primary">
+      View All Markets →
+    </a>
+
+  </div>
+
+</section>
+
+
+<section class="cta">
+
+  <h2>Ready to explore the markets?</h2>
+
+  <p>
+    Create your NEXTRADE account and start analyzing live markets.
+  </p>
+
+  <a href="signup.html" class="btn primary">
+    Create Your Account →
+  </a>
+
+</section>
+
+
+<footer>
+
+  <span>© 2026 NEXTRADE</span>
+
+  <span>Smart Market Analysis Platform</span>
+
+</footer>
+
+
+<script>
+
+const priceElement =
+  document.getElementById("price");
+
+const movementElement =
+  document.getElementById("movement");
+
+const canvas =
+  document.getElementById("candleChart");
+
+const ctx =
+  canvas.getContext("2d");
+
+let socket = null;
+
+let candles = [];
+
+let currentCandle = null;
+
+let previousPrice = null;
+
+
+/* -------------------------
+   CANVAS
+------------------------- */
+
+function resizeCanvas(){
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  const ratio =
+    window.devicePixelRatio || 1;
+
+  canvas.width =
+    rect.width * ratio;
+
+  canvas.height =
+    rect.height * ratio;
+
+  ctx.setTransform(
+    ratio,
+    0,
+    0,
+    ratio,
+    0,
+    0
+  );
+
+  drawCandles();
+}
+
+
+/* -------------------------
+   PROCESS TICK
+------------------------- */
+
+function processTick(price, epoch){
+
+  const second =
+    Math.floor(epoch);
+
+  if(
+    currentCandle === null ||
+    currentCandle.time !== second
+  ){
+
+    if(currentCandle !== null){
+
+      candles.push(
+        currentCandle
+      );
+
+      if(candles.length > 50){
+        candles.shift();
+      }
+
+    }
+
+    currentCandle = {
+
+      time:second,
+      open:price,
+      high:price,
+      low:price,
+      close:price
+
+    };
+
+  }else{
+
+    currentCandle.high =
+      Math.max(
+        currentCandle.high,
+        price
+      );
+
+    currentCandle.low =
+      Math.min(
+        currentCandle.low,
+        price
+      );
+
+    currentCandle.close =
+      price;
+
+  }
+
+  drawCandles();
+}
+
+
+/* -------------------------
+   DRAW CANDLES
+------------------------- */
+
+function drawCandles(){
+
+  const width =
+    canvas.clientWidth;
+
+  const height =
+    canvas.clientHeight;
+
+  ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+  let data =
+    candles.slice();
+
+  if(currentCandle){
+    data.push(currentCandle);
+  }
+
+  if(data.length < 2){
+    return;
+  }
+
+  let min =
+    Math.min(
+      ...data.map(c => c.low)
+    );
+
+  let max =
+    Math.max(
+      ...data.map(c => c.high)
+    );
+
+  if(max === min){
+    max += 0.01;
+    min -= 0.01;
+  }
+
+  const padding = 25;
+
+  const chartWidth =
+    width - padding * 2;
+
+  const chartHeight =
+    height - padding * 2;
+
+  function y(value){
+
+    return (
+      height -
+      padding -
+      (
+        (value - min) /
+        (max - min)
+      ) *
+      chartHeight
+    );
+
+  }
+
+  const spacing =
+    chartWidth / data.length;
+
+  const candleWidth =
+    Math.max(
+      3,
+      spacing * 0.55
+    );
+
+
+  data.forEach((candle,index)=>{
+
+    const x =
+      padding +
+      index * spacing +
+      spacing / 2;
+
+    const openY =
+      y(candle.open);
+
+    const closeY =
+      y(candle.close);
+
+    const highY =
+      y(candle.high);
+
+    const lowY =
+      y(candle.low);
+
+    const bullish =
+      candle.close >=
+      candle.open;
+
+    const candleColor =
+      bullish
+      ? "#2edb9c"
+      : "#ff5f6d";
+
+    ctx.strokeStyle =
+      candleColor;
+
+    ctx.fillStyle =
+      candleColor;
+
+    /* WICK */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      x,
+      highY
+    );
+
+    ctx.lineTo(
+      x,
+      lowY
+    );
+
+    ctx.lineWidth = 1;
+
+    ctx.stroke();
+
+
+    /* BODY */
+
+    const top =
+      Math.min(
+        openY,
+        closeY
+      );
+
+    const bodyHeight =
+      Math.max(
+        2,
+        Math.abs(
+          closeY -
+          openY
+        )
+      );
+
+    ctx.fillRect(
+      x - candleWidth / 2,
+      top,
+      candleWidth,
+      bodyHeight
+    );
+
+  });
+
+}
+
+
+/* -------------------------
+   DERIV CONNECTION
+------------------------- */
+
+function connect(){
+
+  movementElement.textContent =
+    "Connecting to market...";
+
+  socket =
+    new WebSocket(
+      "wss://ws.binaryws.com/websockets/v3"
+    );
+
+
+  socket.onopen =
+    function(){
+
+      movementElement.textContent =
+        "Live market connection active";
+
+      socket.send(
+        JSON.stringify({
+          ticks:"1HZ100V",
+          subscribe:1
+        })
+      );
+
+    };
+
+
+  socket.onmessage =
+    function(event){
+
+      try{
+
+        const data =
+          JSON.parse(event.data);
+
+        if(!data.tick){
+          return;
+        }
+
+        const price =
+          Number(
+            data.tick.quote
+          );
+
+        const epoch =
+          Number(
+            data.tick.epoch
+          );
+
+
+        priceElement.textContent =
+          price.toFixed(2);
+
+
+        if(previousPrice !== null){
+
+          if(price > previousPrice){
+
+            movementElement.textContent =
+              "▲ Market moving higher";
+
+            movementElement.style.color =
+              "#2edb9c";
+
+          }
+
+          else if(price < previousPrice){
+
+            movementElement.textContent =
+              "▼ Market moving lower";
+
+            movementElement.style.color =
+              "#ff5f6d";
+
+          }
+
+          else{
+
+            movementElement.textContent =
+              "● Market unchanged";
+
+          }
+
+        }
+
+
+        previousPrice =
+          price;
+
+
+        processTick(
+          price,
+          epoch
+        );
+
+      }
+
+      catch(error){
+
+        console.log(
+          "Tick error:",
+          error
+        );
+
+      }
+
+    };
+
+
+  socket.onerror =
+    function(){
+
+      movementElement.textContent =
+        "Connection error — retrying...";
+
+    };
+
+
+  socket.onclose =
+    function(){
+
+      movementElement.textContent =
+        "Connection closed — reconnecting...";
+
+      setTimeout(
+        connect,
+        3000
+      );
+
+    };
+
+}
+
+
+/* START */
+
+window.addEventListener(
+  "resize",
+  resizeCanvas
+);
+
+resizeCanvas();
+
+connect();
+
+</script>
+
+</body>
+  </html>
 
 
