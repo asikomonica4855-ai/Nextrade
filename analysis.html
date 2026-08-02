@@ -1,1 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>NEXTRADE | Market Analysis</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:#fff;
+min-height:100vh;
+}
+
+header{
+min-height:72px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 5%;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.logo span{
+color:#159ff0;
+}
+
+.nav{
+display:flex;
+align-items:center;
+gap:4px;
+overflow-x:auto;
+}
+
+.nav a{
+color:#8ea5b7;
+text-decoration:none;
+font-size:10px;
+font-weight:bold;
+padding:10px;
+border-radius:6px;
+white-space:nowrap;
+}
+
+.nav a:hover{
+color:#fff;
+background:#102536;
+}
+
+.nav a.active{
+color:#159ff0;
+}
+
+.nav .signup{
+background:#159ff0;
+color:#fff;
+}
+
+.page{
+width:92%;
+max-width:1400px;
+margin:auto;
+padding:40px 0 70px;
+}
+
+.heading{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+gap:20px;
+margin-bottom:25px;
+}
+
+.heading h1{
+font-size:34px;
+margin-bottom:8px;
+}
+
+.heading p{
+color:#71899a;
+font-size:12px;
+line-height:1.6;
+}
+
+.scanner-status{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:9px;
+color:#8ea5b7;
+}
+
+.status-dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#f0ad28;
+}
+
+.status-dot.live{
+background:#2edb9c;
+box-shadow:0 0 10px #2edb9c;
+}
+
+.status-dot.error{
+background:#ff5969;
+}
+
+/* SCANNER */
+
+.scanner{
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden;
+}
+
+.scanner-head{
+padding:20px;
+border-bottom:1px solid #193247;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+}
+
+.scanner-title{
+font-size:15px;
+font-weight:bold;
+}
+
+.scanner-subtitle{
+font-size:9px;
+color:#61798b;
+margin-top:5px;
+}
+
+.scan-button{
+border:0;
+background:#159ff0;
+color:#fff;
+padding:10px 15px;
+border-radius:7px;
+font-size:9px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.scan-button:hover{
+background:#0d8bd7;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:750px;
+}
+
+th{
+text-align:left;
+font-size:8px;
+color:#60788a;
+font-weight:bold;
+letter-spacing:.6px;
+padding:14px 16px;
+border-bottom:1px solid #193247;
+background:#07111b;
+}
+
+td{
+padding:15px 16px;
+border-bottom:1px solid #132a3b;
+font-size:10px;
+}
+
+tr:hover td{
+background:#0a1b29;
+}
+
+.market-name{
+font-weight:bold;
+font-size:11px;
+}
+
+.symbol{
+color:#60788a;
+font-size:8px;
+margin-top:4px;
+}
+
+.price{
+font-weight:bold;
+}
+
+.live{
+color:#2edb9c;
+}
+
+.up{
+color:#2edb9c;
+}
+
+.down{
+color:#ff5969;
+}
+
+.neutral{
+color:#f0ad28;
+}
+
+.scan-link{
+display:inline-block;
+padding:7px 10px;
+border:1px solid #23465d;
+border-radius:6px;
+color:#8eaabd;
+text-decoration:none;
+font-size:8px;
+}
+
+.scan-link:hover{
+color:#fff;
+border-color:#159ff0;
+}
+
+/* ANALYSIS GRID */
+
+.analysis-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:16px;
+margin-top:18px;
+}
+
+.card{
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:20px;
+}
+
+.card h2{
+font-size:13px;
+margin-bottom:7px;
+}
+
+.card p{
+font-size:9px;
+color:#647d8e;
+line-height:1.6;
+}
+
+.big-value{
+font-size:24px;
+font-weight:bold;
+margin-top:18px;
+}
+
+.signal{
+margin-top:16px;
+padding:12px;
+border-radius:7px;
+background:#071923;
+border:1px solid #244352;
+}
+
+.signal-title{
+font-size:8px;
+color:#60788a;
+margin-bottom:5px;
+}
+
+.signal-value{
+font-size:13px;
+font-weight:bold;
+}
+
+/* TOP MOVERS */
+
+.movers{
+margin-top:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+}
+
+.mover-list{
+margin-top:15px;
+}
+
+.mover{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid #142a3b;
+}
+
+.mover:last-child{
+border-bottom:0;
+}
+
+.mover-name{
+font-size:10px;
+font-weight:bold;
+}
+
+.mover-symbol{
+font-size:8px;
+color:#60788a;
+margin-top:4px;
+}
+
+.mover-value{
+font-size:11px;
+font-weight:bold;
+}
+
+/* NOTICE */
+
+.notice{
+margin-top:18px;
+padding:14px 16px;
+background:#171208;
+border:1px solid #5b471d;
+border-radius:8px;
+color:#a9915b;
+font-size:9px;
+line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+border-top:1px solid #193247;
+background:#06101a;
+padding:28px 5%;
+display:flex;
+justify-content:space-between;
+color:#526a7c;
+font-size:9px;
+}
+
+.footer-logo{
+color:#fff;
+font-size:14px;
+font-weight:bold;
+}
+
+.footer-logo span{
+color:#159ff0;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.analysis-grid{
+grid-template-columns:1fr;
+}
+
+.movers{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:700px){
+
+header{
+align-items:flex-start;
+}
+
+.nav{
+max-width:72%;
+}
+
+.heading{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.heading h1{
+font-size:28px;
+}
+
+.scanner-head{
+align-items:flex-start;
+flex-direction:column;
+}
+
+footer{
+flex-direction:column;
+gap:12px;
+text-align:center;
+}
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+NEX<span>TRADE</span>
+</div>
+
+<nav class="nav">
+
+<a href="index.html">HOME</a>
+
+<a href="markets.html">MARKETS</a>
+
+<a href="tools.html">TOOLS</a>
+
+<a href="bots.html">BOTS</a>
+
+<a href="analysis.html" class="active">ANALYSIS</a>
+
+<a href="manual-trading.html">MANUAL TRADING</a>
+
+<a href="login.html">LOGIN</a>
+
+<a href="signup.html" class="signup">SIGN UP</a>
+
+</nav>
+
+</header>
+
+
+<div class="page">
+
+
+<div class="heading">
+
+<div>
+
+<h1>Market Analysis</h1>
+
+<p>
+Scan live Deriv volatility markets and identify markets showing
+the strongest recent movement.
+</p>
+
+</div>
+
+<div class="scanner-status">
+
+<span id="statusDot" class="status-dot"></span>
+
+<span id="statusText">
+CONNECTING SCANNER
+</span>
+
+</div>
+
+</div>
+
+
+<!-- SCANNER -->
+
+<section class="scanner">
+
+<div class="scanner-head">
+
+<div>
+
+<div class="scanner-title">
+Live Market Scanner
+</div>
+
+<div class="scanner-subtitle">
+Monitoring 10 volatility markets through the NEXTRADE live backend.
+</div>
+
+</div>
+
+<button
+class="scan-button"
+onclick="scanMarkets()"
+>
+SCAN NOW
+</button>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>MARKET</th>
+
+<th>PRICE</th>
+
+<th>MOVEMENT</th>
+
+<th>ACTIVITY</th>
+
+<th>STATUS</th>
+
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody id="scannerBody">
+
+<tr>
+
+<td colspan="6">
+Waiting for live market data...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- ANALYSIS CARDS -->
+
+<div class="analysis-grid">
+
+
+<div class="card">
+
+<h2>
+Strongest Market
+</h2>
+
+<p>
+The market showing the largest recent movement in the scanner.
+</p>
+
+<div
+id="strongestMarket"
+class="big-value"
+>
+---
+</div>
+
+<div
+id="strongestMove"
+class="signal"
+>
+
+<div class="signal-title">
+RECENT MOVEMENT
+</div>
+
+<div
+id="strongestMoveValue"
+class="signal-value"
+>
+Waiting...
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Market Activity
+</h2>
+
+<p>
+Overall activity based on the number of recent live ticks received.
+</p>
+
+<div
+id="activeMarkets"
+class="big-value"
+>
+0 / 10
+</div>
+
+<div class="signal">
+
+<div class="signal-title">
+SCANNER STATUS
+</div>
+
+<div
+id="activityText"
+class="signal-value"
+>
+Waiting for data
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Scanner Update
+</h2>
+
+<p>
+The scanner continuously receives prices from the NEXTRADE
+backend and updates the market table.
+</p>
+
+<div
+id="lastUpdate"
+class="big-value"
+>
+---
+</div>
+
+<div class="signal">
+
+<div class="signal-title">
+DATA SOURCE
+</div>
+
+<div class="signal-value live">
+NEXTRADE LIVE BACKEND
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOP MOVERS -->
+
+<div class="movers">
+
+
+<div class="card">
+
+<h2>
+Top Upward Movement
+</h2>
+
+<p>
+Markets with the strongest positive movement in the current sample.
+</p>
+
+<div
+id="upMovers"
+class="mover-list"
+>
+Waiting for data...
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Top Downward Movement
+</h2>
+
+<p>
+Markets with the strongest negative movement in the current sample.
+</p>
+
+<div
+id="downMovers"
+class="mover-list"
+>
+Waiting for data...
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="notice">
+
+<strong>ANALYSIS NOTICE:</strong>
+The scanner displays live market information and simple movement measurements.
+It does not guarantee future price direction or trading results. Use it as an
+analysis aid rather than as a guaranteed buy or sell signal.
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+<div class="footer-logo">
+NEX<span>TRADE</span>
+</div>
+
+<div>
+© 2026 NEXTRADE. Market analysis platform.
+</div>
+
+</footer>
+
+
+<script>
+
+
+const BACKEND =
+"wss://nextrade-backened.onrender.com";
+
+
+const markets = [
+
+{
+symbol:"1HZ100V",
+name:"Volatility 100 (1s)"
+},
+
+{
+symbol:"1HZ75V",
+name:"Volatility 75 (1s)"
+},
+
+{
+symbol:"1HZ50V",
+name:"Volatility 50 (1s)"
+},
+
+{
+symbol:"1HZ25V",
+name:"Volatility 25 (1s)"
+},
+
+{
+symbol:"1HZ10V",
+name:"Volatility 10 (1s)"
+},
+
+{
+symbol:"R_100",
+name:"Volatility 100"
+},
+
+{
+symbol:"R_75",
+name:"Volatility 75"
+},
+
+{
+symbol:"R_50",
+name:"Volatility 50"
+},
+
+{
+symbol:"R_25",
+name:"Volatility 25"
+},
+
+{
+symbol:"R_10",
+name:"Volatility 10"
+}
+
+];
+
+
+let socket;
+
+let marketData = {};
+
+let tickCounter = 0;
+
+
+/* CREATE DATA OBJECT */
+
+markets.forEach(market => {
+
+marketData[market.symbol] = {
+
+name:market.name,
+
+price:null,
+
+previous:null,
+
+movement:0,
+
+ticks:0,
+
+history:[]
+
+};
+
+});
+
+
+const statusDot =
+document.getElementById("statusDot");
+
+const statusText =
+document.getElementById("statusText");
+
+
+function connectScanner(){
+
+
+statusText.textContent =
+"CONNECTING SCANNER";
+
+statusDot.className =
+"status-dot";
+
+
+try{
+
+socket =
+new WebSocket(BACKEND);
+
+}catch(error){
+
+statusText.textContent =
+"CONNECTION ERROR";
+
+statusDot.className =
+"status-dot error";
+
+return;
+
+}
+
+
+socket.onopen = function(){
+
+statusText.textContent =
+"SCANNER CONNECTED";
+
+statusDot.className =
+"status-dot live";
+
+};
+
+
+socket.onmessage = function(event){
+
+let data;
+
+try{
+
+data =
+JSON.parse(event.data);
+
+}catch(error){
+
+return;
+
+}
+
+
+if(data.type === "status"){
+
+if(data.connected){
+
+statusText.textContent =
+"LIVE SCANNER";
+
+statusDot.className =
+"status-dot live";
+
+}
+
+return;
+
+}
+
+
+if(data.type !== "tick"){
+
+return;
+
+}
+
+
+const tick =
+data.data;
+
+if(!tick || !tick.symbol){
+
+return;
+
+}
+
+
+const market =
+marketData[tick.symbol];
+
+if(!market){
+
+return;
+
+}
+
+
+const price =
+Number(tick.price);
+
+
+market.previous =
+market.price;
+
+market.price =
+price;
+
+market.ticks++;
+
+market.history.push(price);
+
+
+if(market.history.length > 20){
+
+market.history.shift();
+
+}
+
+
+if(
+market.history.length > 1
+){
+
+const first =
+market.history[0];
+
+market.movement =
+(
+(price - first) /
+first
+) * 100;
+
+}
+
+
+tickCounter++;
+
+renderScanner();
+
+};
+
+
+socket.onerror = function(){
+
+statusText.textContent =
+"SCANNER ERROR";
+
+statusDot.className =
+"status-dot error";
+
+};
+
+
+socket.onclose = function(){
+
+statusText.textContent =
+"RECONNECTING";
+
+statusDot.className =
+"status-dot";
+
+setTimeout(
+connectScanner,
+4000
+);
+
+};
+
+}
+
+
+/* FORMAT PRICE */
+
+function formatPrice(value){
+
+if(value === null){
+
+return "---";
+
+}
+
+return Number(value)
+.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
+
+}
+
+
+/* FORMAT MOVEMENT */
+
+function formatMovement(value){
+
+if(!Number.isFinite(value)){
+
+return "0.00%";
+
+}
+
+return (
+value >= 0
+? "+"
+: ""
+) +
+value.toFixed(3) +
+"%";
+
+}
+
+
+/* ACTIVITY */
+
+function getActivity(market){
+
+if(market.ticks === 0){
+
+return "WAITING";
+
+}
+
+if(market.ticks >= 50){
+
+return "HIGH";
+
+}
+
+if(market.ticks >= 15){
+
+return "ACTIVE";
+
+}
+
+return "LOW";
+
+}
+
+
+/* RENDER */
+
+function renderScanner(){
+
+const body =
+document.getElementById(
+"scannerBody"
+);
+
+
+const sorted =
+markets
+.map(market =>
+marketData[market.symbol]
+)
+.sort(
+(a,b) =>
+Math.abs(b.movement)
+-
+Math.abs(a.movement)
+);
+
+
+let html = "";
+
+
+sorted.forEach(market => {
+
+
+let movementClass =
+"neutral";
+
+if(market.movement > 0){
+
+movementClass =
+"up";
+
+}
+
+if(market.movement < 0){
+
+movementClass =
+"down";
+
+}
+
+
+const activity =
+getActivity(market);
+
+
+html += `
+
+<tr>
+
+<td>
+
+<div class="market-name">
+${market.name}
+</div>
+
+<div class="symbol">
+${market.symbol}
+</div>
+
+</td>
+
+<td class="price">
+
+${formatPrice(market.price)}
+
+</td>
+
+<td class="${movementClass}">
+
+${formatMovement(market.movement)}
+
+</td>
+
+<td>
+
+${activity}
+
+</td>
+
+<td class="live">
+
+● LIVE
+
+</td>
+
+<td>
+
+<a
+class="scan-link"
+href="markets.html"
+>
+OPEN
+</a>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+body.innerHTML =
+html;
+
+
+updateSummary();
+
+}
+
+
+/* SUMMARY */
+
+function updateSummary(){
+
+const all =
+Object.values(marketData);
+
+
+const active =
+all.filter(
+market =>
+market.ticks > 0
+).length;
+
+
+document.getElementById(
+"activeMarkets"
+).textContent =
+active + " / 10";
+
+
+document.getElementById(
+"activityText"
+).textContent =
+active === 10
+? "All markets active"
+: active + " markets active";
+
+
+const strongest =
+all
+.filter(
+market =>
+market.price !== null
+)
+.sort(
+(a,b) =>
+Math.abs(b.movement)
+-
+Math.abs(a.movement)
+)[0];
+
+
+if(strongest){
+
+document.getElementById(
+"strongestMarket"
+).textContent =
+strongest.name;
+
+document.getElementById(
+"strongestMoveValue"
+).textContent =
+formatMovement(
+strongest.movement
+);
+
+}
+
+
+const up =
+all
+.filter(
+market =>
+market.price !== null &&
+market.movement > 0
+)
+.sort(
+(a,b) =>
+b.movement -
+a.movement
+)
+.slice(0,3);
+
+
+const down =
+all
+.filter(
+market =>
+market.price !== null &&
+market.movement < 0
+)
+.sort(
+(a,b) =>
+a.movement -
+b.movement
+)
+.slice(0,3);
+
+
+renderMovers(
+"upMovers",
+up,
+true
+);
+
+renderMovers(
+"downMovers",
+down,
+false
+);
+
+
+document.getElementById(
+"lastUpdate"
+).textContent =
+new Date()
+.toLocaleTimeString();
+
+}
+
+
+/* MOVERS */
+
+function renderMovers(
+elementId,
+list,
+positive
+){
+
+const element =
+document.getElementById(
+elementId
+);
+
+
+if(list.length === 0){
+
+element.innerHTML =
+"<div style='color:#60788a;font-size:9px'>Waiting for live movement...</div>";
+
+return;
+
+}
+
+
+element.innerHTML =
+list
+.map(
+market => `
+
+<div class="mover">
+
+<div>
+
+<div class="mover-name">
+${market.name}
+</div>
+
+<div class="mover-symbol">
+${market.symbol}
+</div>
+
+</div>
+
+<div class="mover-value ${positive ? "up" : "down"}">
+
+${formatMovement(
+market.movement
+)}
+
+</div>
+
+</div>
+
+`
+)
+.join("");
+
+}
+
+
+/* MANUAL SCAN */
+
+function scanMarkets(){
+
+renderScanner();
+
+}
+
+
+connectScanner();
+
+</script>
+
+</body>
+            </html>
