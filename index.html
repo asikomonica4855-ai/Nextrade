@@ -3,9 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEXTRADE</title>
+
+  <title>NEXTRADE Markets</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: Arial, sans-serif;
@@ -15,152 +21,266 @@
     }
 
     header {
-      padding: 20px;
+      background: #0b1b2e;
+      padding: 20px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #1b3048;
+      border-bottom: 1px solid #18344f;
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 25px;
       font-weight: bold;
-      color: #35a7ff;
+      color: #28a9ff;
     }
 
     nav a {
-      color: #cbd5e1;
+      color: white;
       text-decoration: none;
-      margin-left: 15px;
+      margin-left: 25px;
       font-size: 14px;
     }
 
+    nav a:hover {
+      color: #28a9ff;
+    }
+
     .hero {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 90px 20px;
+      padding: 60px 20px;
+      background:
+        radial-gradient(circle at center, #12395a 0%, #07111f 55%);
+    }
+
+    .hero-content {
+      max-width: 850px;
     }
 
     .hero h1 {
-      font-size: 48px;
-      margin-bottom: 18px;
+      font-size: clamp(42px, 8vw, 78px);
+      margin-bottom: 20px;
     }
 
     .hero h1 span {
-      color: #35a7ff;
+      color: #28a9ff;
     }
 
     .hero p {
-      color: #9fb1c7;
-      max-width: 600px;
-      margin: auto;
-      line-height: 1.6;
-      font-size: 17px;
+      color: #b8c8d8;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 35px;
     }
 
     .buttons {
-      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
-    button {
-      border: none;
-      padding: 14px 24px;
+    .btn {
+      padding: 15px 28px;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
-      margin: 6px;
+      display: inline-block;
     }
 
     .primary {
-      background: #35a7ff;
-      color: #06101c;
+      background: #28a9ff;
+      color: #03101c;
     }
 
     .secondary {
-      background: transparent;
+      border: 1px solid #28a9ff;
       color: white;
-      border: 1px solid #36516d;
+    }
+
+    .section {
+      padding: 70px 7%;
+    }
+
+    .section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 34px;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
     }
 
     .card {
-      background: #0d1b2d;
-      border: 1px solid #1c3550;
-      padding: 25px;
+      background: #0c1c2e;
+      border: 1px solid #19364f;
       border-radius: 12px;
+      padding: 30px;
       text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #28a9ff;
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 15px;
     }
 
     .card h3 {
-      margin-bottom: 10px;
-      color: #35a7ff;
+      margin-bottom: 12px;
     }
 
     .card p {
-      color: #9fb1c7;
-      line-height: 1.5;
+      color: #9fb1c2;
+      line-height: 1.6;
     }
 
     footer {
       text-align: center;
-      padding: 40px 20px;
-      color: #71849b;
-      font-size: 13px;
+      padding: 30px;
+      background: #050d17;
+      color: #718396;
+      border-top: 1px solid #18344f;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav a {
+        margin-left: 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">NEXTRADE</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Markets</a>
-    <a href="#">Tools</a>
-  </nav>
-</header>
+  <header>
+    <div class="logo">NEXTRADE</div>
 
-<section class="hero">
-  <h1>Trade Smarter with <span>NEXTRADE</span></h1>
-  <p>
-    A modern trading interface designed for market analysis,
-    manual trading and powerful trading tools.
-  </p>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#markets">Markets</a>
+      <a href="#tools">Tools</a>
+    </nav>
+  </header>
 
-  <div class="buttons">
-    <button class="primary">Get Started</button>
-    <button class="secondary">Explore Markets</button>
-  </div>
-</section>
+  <section class="hero" id="home">
+    <div class="hero-content">
 
-<section class="cards">
-  <div class="card">
-    <h3>Manual Trading</h3>
-    <p>Designed for a clean and simple manual trading experience.</p>
-  </div>
+      <h1>
+        Trade smarter with <span>NEXTRADE</span>
+      </h1>
 
-  <div class="card">
-    <h3>Market Analysis</h3>
-    <p>Analyze market movements and make informed trading decisions.</p>
-  </div>
+      <p>
+        A modern trading platform designed to help traders
+        analyze markets, explore trading opportunities and
+        improve their trading decisions.
+      </p>
 
-  <div class="card">
-    <h3>Trading Tools</h3>
-    <p>Build a workspace with useful tools and indicators.</p>
-  </div>
-</section>
+      <div class="buttons">
+        <a href="#markets" class="btn primary">Get Started</a>
+        <a href="#tools" class="btn secondary">Explore Markets</a>
+      </div>
 
-<footer>
-  © 2026 NEXTRADE. All rights reserved.
-</footer>
+    </div>
+  </section>
+
+  <section class="section" id="markets">
+
+    <h2>Markets</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Manual Trading</h3>
+        <p>
+          Analyze the market and make your own
+          trading decisions manually.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Market Analysis</h3>
+        <p>
+          Study market movements and identify
+          potential trading opportunities.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Trading Tools</h3>
+        <p>
+          Access useful tools designed to support
+          your trading analysis.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="section" id="tools">
+
+    <h2>Trading Tools</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📉</div>
+        <h3>Market Charts</h3>
+        <p>
+          Monitor price movements with a clean
+          and simple interface.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Trade Analysis</h3>
+        <p>
+          Organize your analysis before making
+          a trading decision.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔔</div>
+        <h3>Market Signals</h3>
+        <p>
+          Keep track of important market
+          movements and opportunities.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 NEXTRADE Markets. All rights reserved.
+  </footer>
 
 </body>
 </html>
