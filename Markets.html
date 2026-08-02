@@ -3,350 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXTRADE | Live Markets</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050b12;
-    color:#fff;
-    min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:#fff;
+min-height:100vh
 }
 
 header{
-    height:70px;
-    background:#08131f;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
+height:70px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%
 }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:.5px;
-}
+.logo{font-size:25px;font-weight:800}
+.logo span{color:#159ff0}
 
-.logo span{
-    color:#159ff0;
-}
-
-.nav{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+.nav{display:flex;gap:8px;align-items:center}
 
 .login{
-    color:#fff;
-    text-decoration:none;
-    padding:10px 13px;
-    font-size:12px;
+color:#fff;
+text-decoration:none;
+font-size:12px;
+padding:10px 13px
 }
 
 .signup{
-    color:#fff;
-    background:#159ff0;
-    text-decoration:none;
-    padding:10px 15px;
-    border-radius:7px;
-    font-size:12px;
-    font-weight:bold;
+color:#fff;
+background:#159ff0;
+text-decoration:none;
+padding:10px 15px;
+border-radius:7px;
+font-size:12px;
+font-weight:bold
 }
 
 .page{
-    width:90%;
-    max-width:1400px;
-    margin:auto;
-    padding:28px 0;
+width:92%;
+max-width:1400px;
+margin:auto;
+padding:28px 0
 }
 
 .top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:22px
 }
 
-.top h1{
-    font-size:29px;
-}
+.top h1{font-size:29px}
 
 .top p{
-    color:#72889a;
-    font-size:12px;
-    margin-top:6px;
+color:#71889b;
+font-size:12px;
+margin-top:6px
 }
 
 .connection{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:10px;
-    color:#8499a9;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:10px;
+color:#8298a9
 }
 
 .dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#f0ad28;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#f0ad28
 }
 
 .dot.live{
-    background:#2edb9c;
-    box-shadow:0 0 10px #2edb9c;
+background:#2edb9c;
+box-shadow:0 0 10px #2edb9c
 }
 
-.dot.error{
-    background:#ff5969;
-}
+.dot.error{background:#ff5969}
 
 .layout{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    gap:18px;
+display:grid;
+grid-template-columns:260px 1fr;
+gap:18px
 }
 
 .sidebar{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    overflow:hidden;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden
 }
 
 .sidebar-title{
-    padding:17px;
-    color:#72899b;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1px;
-    border-bottom:1px solid #193247;
+padding:17px;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
+color:#72899b;
+border-bottom:1px solid #193247
 }
 
 .market{
-    width:100%;
-    border:0;
-    border-bottom:1px solid #142a3b;
-    background:transparent;
-    color:white;
-    padding:15px;
-    text-align:left;
-    cursor:pointer;
-    position:relative;
+width:100%;
+padding:15px;
+background:transparent;
+border:0;
+border-bottom:1px solid #142a3b;
+color:white;
+text-align:left;
+cursor:pointer;
+position:relative
 }
 
-.market:hover{
-    background:#0b2030;
-}
+.market:hover{background:#0b2030}
 
 .market.active{
-    background:#0c263b;
-    border-left:3px solid #159ff0;
-    padding-left:12px;
+background:#0c263b;
+border-left:3px solid #159ff0;
+padding-left:12px
 }
 
 .market-name{
-    display:block;
-    font-size:12px;
-    font-weight:bold;
+display:block;
+font-size:12px;
+font-weight:bold
 }
 
 .market-symbol{
-    display:block;
-    color:#61798b;
-    font-size:9px;
-    margin-top:5px;
+display:block;
+font-size:9px;
+color:#61798b;
+margin-top:5px
 }
 
 .market-price{
-    position:absolute;
-    right:14px;
-    top:22px;
-    color:#9db2c0;
-    font-size:10px;
-}
-
-.main{
-    min-width:0;
+position:absolute;
+right:14px;
+top:21px;
+font-size:10px;
+color:#9db2c0
 }
 
 .panel{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    overflow:hidden;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden
 }
 
 .panel-head{
-    padding:18px;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+padding:18px;
+border-bottom:1px solid #193247;
+display:flex;
+justify-content:space-between;
+align-items:center
 }
 
 .selected-name{
-    font-size:16px;
-    font-weight:bold;
+font-size:16px;
+font-weight:bold
 }
 
 .selected-symbol{
-    color:#657e91;
-    font-size:10px;
-    margin-top:5px;
+font-size:10px;
+color:#657e91;
+margin-top:5px
 }
 
 .live-label{
-    color:#2edb9c;
-    font-size:10px;
+font-size:10px;
+color:#2edb9c
 }
 
 .price-area{
-    padding:20px;
-    background:#060e16;
-    border-bottom:1px solid #193247;
+padding:20px;
+background:#060e16;
+border-bottom:1px solid #193247
 }
 
 .price-label{
-    color:#60788a;
-    font-size:9px;
-    margin-bottom:7px;
+font-size:9px;
+color:#60788a;
+margin-bottom:7px
 }
 
 .price{
-    font-size:35px;
-    font-weight:bold;
-    letter-spacing:.5px;
+font-size:35px;
+font-weight:bold
 }
 
 .price-status{
-    color:#70889a;
-    font-size:10px;
-    margin-top:6px;
+font-size:10px;
+color:#71899a;
+margin-top:6px
 }
 
 .chart-area{
-    height:430px;
-    position:relative;
-    background:
-        linear-gradient(rgba(30,65,90,.16) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(30,65,90,.16) 1px,transparent 1px),
-        #050d15;
-    background-size:45px 45px;
+height:430px;
+position:relative;
+background:
+linear-gradient(rgba(30,65,90,.16) 1px,transparent 1px),
+linear-gradient(90deg,rgba(30,65,90,.16) 1px,transparent 1px),
+#050d15;
+background-size:45px 45px
 }
 
 canvas{
-    width:100%;
-    height:100%;
-    display:block;
+width:100%;
+height:100%;
+display:block
 }
 
 .chart-status{
-    position:absolute;
-    top:12px;
-    left:12px;
-    padding:7px 9px;
-    border:1px solid #1c3c54;
-    border-radius:5px;
-    background:rgba(5,13,21,.9);
-    color:#7890a2;
-    font-size:9px;
+position:absolute;
+top:12px;
+left:12px;
+padding:7px 9px;
+background:rgba(5,13,21,.9);
+border:1px solid #1c3c54;
+border-radius:5px;
+font-size:9px;
+color:#7890a2
 }
 
 .info{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    border-top:1px solid #193247;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-top:1px solid #193247
 }
 
 .info-box{
-    padding:16px;
-    border-right:1px solid #193247;
+padding:16px;
+border-right:1px solid #193247
 }
 
-.info-box:last-child{
-    border-right:0;
-}
+.info-box:last-child{border-right:0}
 
 .info-label{
-    color:#60788a;
-    font-size:9px;
-    margin-bottom:6px;
+font-size:9px;
+color:#60788a;
+margin-bottom:6px
 }
 
 .info-value{
-    font-size:13px;
-    font-weight:bold;
+font-size:13px;
+font-weight:bold
 }
 
 .error{
-    display:none;
-    margin-top:12px;
-    padding:13px;
-    border:1px solid #66313b;
-    background:#28151a;
-    border-radius:7px;
-    color:#ff7c88;
-    font-size:11px;
+display:none;
+margin-top:12px;
+padding:13px;
+border-radius:7px;
+background:#28151a;
+border:1px solid #66313b;
+color:#ff7c88;
+font-size:11px
 }
 
 @media(max-width:800px){
-
-    .layout{
-        grid-template-columns:1fr;
-    }
-
-    .sidebar{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .sidebar-title{
-        grid-column:1/-1;
-    }
-
-    .top{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:12px;
-    }
-
+.layout{grid-template-columns:1fr}
+.sidebar{
+display:grid;
+grid-template-columns:repeat(2,1fr)
+}
+.sidebar-title{grid-column:1/-1}
+.top{
+align-items:flex-start;
+flex-direction:column;
+gap:12px
+}
 }
 
 @media(max-width:500px){
-
-    .page{
-        width:94%;
-        padding-top:20px;
-    }
-
-    header{
-        padding:0 4%;
-    }
-
-    .chart-area{
-        height:350px;
-    }
-
-    .info{
-        grid-template-columns:1fr;
-    }
-
-    .info-box{
-        border-right:0;
-        border-bottom:1px solid #193247;
-    }
-
+.page{width:94%}
+.chart-area{height:350px}
+.info{grid-template-columns:1fr}
+.info-box{
+border-right:0;
+border-bottom:1px solid #193247
+}
 }
 </style>
 </head>
@@ -355,402 +301,213 @@ canvas{
 
 <header>
 
-    <div class="logo">
-        NEX<span>TRADE</span>
-    </div>
+<div class="logo">NEX<span>TRADE</span></div>
 
-    <div class="nav">
-        <a href="login.html" class="login">LOGIN</a>
-        <a href="signup.html" class="signup">SIGN UP</a>
-    </div>
+<div class="nav">
+<a href="login.html" class="login">LOGIN</a>
+<a href="signup.html" class="signup">SIGN UP</a>
+</div>
 
 </header>
 
-
 <div class="page">
 
-    <div class="top">
-
-        <div>
-            <h1>Live Markets</h1>
-            <p>Monitor live Deriv volatility markets in real time.</p>
-        </div>
-
-        <div class="connection">
-            <span id="connectionDot" class="dot"></span>
-            <span id="connectionText">CONNECTING</span>
-        </div>
-
-    </div>
-
-
-    <div class="layout">
-
-        <aside class="sidebar">
-
-            <div class="sidebar-title">
-                VOLATILITY MARKETS
-            </div>
-
-
-            <button class="market active"
-                data-symbol="1HZ100V"
-                data-name="Volatility 100 (1s)">
-
-                <span class="market-name">
-                    Volatility 100 (1s)
-                </span>
-
-                <span class="market-symbol">
-                    1HZ100V
-                </span>
-
-                <span class="market-price"
-                    id="small-1HZ100V">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="1HZ75V"
-                data-name="Volatility 75 (1s)">
-
-                <span class="market-name">
-                    Volatility 75 (1s)
-                </span>
-
-                <span class="market-symbol">
-                    1HZ75V
-                </span>
-
-                <span class="market-price"
-                    id="small-1HZ75V">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="1HZ50V"
-                data-name="Volatility 50 (1s)">
-
-                <span class="market-name">
-                    Volatility 50 (1s)
-                </span>
-
-                <span class="market-symbol">
-                    1HZ50V
-                </span>
-
-                <span class="market-price"
-                    id="small-1HZ50V">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="1HZ25V"
-                data-name="Volatility 25 (1s)">
-
-                <span class="market-name">
-                    Volatility 25 (1s)
-                </span>
-
-                <span class="market-symbol">
-                    1HZ25V
-                </span>
-
-                <span class="market-price"
-                    id="small-1HZ25V">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="1HZ10V"
-                data-name="Volatility 10 (1s)">
-
-                <span class="market-name">
-                    Volatility 10 (1s)
-                </span>
-
-                <span class="market-symbol">
-                    1HZ10V
-                </span>
-
-                <span class="market-price"
-                    id="small-1HZ10V">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="R_100"
-                data-name="Volatility 100">
-
-                <span class="market-name">
-                    Volatility 100
-                </span>
-
-                <span class="market-symbol">
-                    R_100
-                </span>
-
-                <span class="market-price"
-                    id="small-R_100">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="R_75"
-                data-name="Volatility 75">
-
-                <span class="market-name">
-                    Volatility 75
-                </span>
-
-                <span class="market-symbol">
-                    R_75
-                </span>
-
-                <span class="market-price"
-                    id="small-R_75">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="R_50"
-                data-name="Volatility 50">
-
-                <span class="market-name">
-                    Volatility 50
-                </span>
-
-                <span class="market-symbol">
-                    R_50
-                </span>
-
-                <span class="market-price"
-                    id="small-R_50">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="R_25"
-                data-name="Volatility 25">
-
-                <span class="market-name">
-                    Volatility 25
-                </span>
-
-                <span class="market-symbol">
-                    R_25
-                </span>
-
-                <span class="market-price"
-                    id="small-R_25">---</span>
-
-            </button>
-
-
-            <button class="market"
-                data-symbol="R_10"
-                data-name="Volatility 10">
-
-                <span class="market-name">
-                    Volatility 10
-                </span>
-
-                <span class="market-symbol">
-                    R_10
-                </span>
-
-                <span class="market-price"
-                    id="small-R_10">---</span>
-
-            </button>
-
-        </aside>
-
-
-        <main class="main">
-
-            <div class="panel">
-
-                <div class="panel-head">
-
-                    <div>
-                        <div id="selectedName"
-                            class="selected-name">
-                            Volatility 100 (1s)
-                        </div>
-
-                        <div id="selectedSymbol"
-                            class="selected-symbol">
-                            1HZ100V
-                        </div>
-                    </div>
-
-                    <div class="live-label">
-                        ● LIVE
-                    </div>
-
-                </div>
-
-
-                <div class="price-area">
-
-                    <div class="price-label">
-                        LIVE PRICE
-                    </div>
-
-                    <div id="livePrice"
-                        class="price">
-                        ---
-                    </div>
-
-                    <div id="priceStatus"
-                        class="price-status">
-                        Waiting for live market data...
-                    </div>
-
-                </div>
-
-
-                <div class="chart-area">
-
-                    <canvas id="chart"></canvas>
-
-                    <div id="chartStatus"
-                        class="chart-status">
-                        Connecting...
-                    </div>
-
-                </div>
-
-
-                <div class="info">
-
-                    <div class="info-box">
-
-                        <div class="info-label">
-                            MARKET
-                        </div>
-
-                        <div id="marketInfo"
-                            class="info-value">
-                            Volatility 100 (1s)
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <div class="info-label">
-                            TICKS RECEIVED
-                        </div>
-
-                        <div id="tickCount"
-                            class="info-value">
-                            0
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <div class="info-label">
-                            BACKEND
-                        </div>
-
-                        <div id="backend"
-                            class="info-value">
-                            Connecting...
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div id="error"
-                class="error">
-            </div>
-
-        </main>
-
-    </div>
+<div class="top">
+
+<div>
+<h1>Live Markets</h1>
+<p>Monitor live Deriv volatility markets in real time.</p>
+</div>
+
+<div class="connection">
+<span id="dot" class="dot"></span>
+<span id="connection">CONNECTING</span>
+</div>
 
 </div>
 
+<div class="layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-title">
+VOLATILITY MARKETS
+</div>
+
+<button class="market active" data-symbol="1HZ100V" data-name="Volatility 100 (1s)">
+<span class="market-name">Volatility 100 (1s)</span>
+<span class="market-symbol">1HZ100V</span>
+<span class="market-price" id="p-1HZ100V">---</span>
+</button>
+
+<button class="market" data-symbol="1HZ75V" data-name="Volatility 75 (1s)">
+<span class="market-name">Volatility 75 (1s)</span>
+<span class="market-symbol">1HZ75V</span>
+<span class="market-price" id="p-1HZ75V">---</span>
+</button>
+
+<button class="market" data-symbol="1HZ50V" data-name="Volatility 50 (1s)">
+<span class="market-name">Volatility 50 (1s)</span>
+<span class="market-symbol">1HZ50V</span>
+<span class="market-price" id="p-1HZ50V">---</span>
+</button>
+
+<button class="market" data-symbol="1HZ25V" data-name="Volatility 25 (1s)">
+<span class="market-name">Volatility 25 (1s)</span>
+<span class="market-symbol">1HZ25V</span>
+<span class="market-price" id="p-1HZ25V">---</span>
+</button>
+
+<button class="market" data-symbol="1HZ10V" data-name="Volatility 10 (1s)">
+<span class="market-name">Volatility 10 (1s)</span>
+<span class="market-symbol">1HZ10V</span>
+<span class="market-price" id="p-1HZ10V">---</span>
+</button>
+
+<button class="market" data-symbol="R_100" data-name="Volatility 100">
+<span class="market-name">Volatility 100</span>
+<span class="market-symbol">R_100</span>
+<span class="market-price" id="p-R_100">---</span>
+</button>
+
+<button class="market" data-symbol="R_75" data-name="Volatility 75">
+<span class="market-name">Volatility 75</span>
+<span class="market-symbol">R_75</span>
+<span class="market-price" id="p-R_75">---</span>
+</button>
+
+<button class="market" data-symbol="R_50" data-name="Volatility 50">
+<span class="market-name">Volatility 50</span>
+<span class="market-symbol">R_50</span>
+<span class="market-price" id="p-R_50">---</span>
+</button>
+
+<button class="market" data-symbol="R_25" data-name="Volatility 25">
+<span class="market-name">Volatility 25</span>
+<span class="market-symbol">R_25</span>
+<span class="market-price" id="p-R_25">---</span>
+</button>
+
+<button class="market" data-symbol="R_10" data-name="Volatility 10">
+<span class="market-name">Volatility 10</span>
+<span class="market-symbol">R_10</span>
+<span class="market-price" id="p-R_10">---</span>
+</button>
+
+</aside>
+
+<main>
+
+<div class="panel">
+
+<div class="panel-head">
+
+<div>
+<div id="selectedName" class="selected-name">
+Volatility 100 (1s)
+</div>
+
+<div id="selectedSymbol" class="selected-symbol">
+1HZ100V
+</div>
+</div>
+
+<div class="live-label">● LIVE</div>
+
+</div>
+
+<div class="price-area">
+
+<div class="price-label">LIVE PRICE</div>
+
+<div id="livePrice" class="price">---</div>
+
+<div id="priceStatus" class="price-status">
+Waiting for live data...
+</div>
+
+</div>
+
+<div class="chart-area">
+
+<canvas id="chart"></canvas>
+
+<div id="chartStatus" class="chart-status">
+Connecting...
+</div>
+
+</div>
+
+<div class="info">
+
+<div class="info-box">
+<div class="info-label">MARKET</div>
+<div id="marketInfo" class="info-value">
+Volatility 100 (1s)
+</div>
+</div>
+
+<div class="info-box">
+<div class="info-label">TICKS RECEIVED</div>
+<div id="ticks" class="info-value">0</div>
+</div>
+
+<div class="info-box">
+<div class="info-label">BACKEND</div>
+<div id="backend" class="info-value">
+Connecting...
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="error" class="error"></div>
+
+</main>
+
+</div>
+
+</div>
 
 <script>
 
 const BACKEND =
 "wss://nextrade-backened.onrender.com";
 
-let socket = null;
-
-let selectedSymbol =
-"1HZ100V";
-
-let selectedName =
-"Volatility 100 (1s)";
-
+let socket;
+let selectedSymbol = "1HZ100V";
+let selectedName = "Volatility 100 (1s)";
 let tickCount = 0;
-
 let prices = [];
 
-const connectionText =
-document.getElementById(
-"connectionText"
-);
+const connection =
+document.getElementById("connection");
 
-const connectionDot =
-document.getElementById(
-"connectionDot"
-);
+const dot =
+document.getElementById("dot");
 
 const livePrice =
-document.getElementById(
-"livePrice"
-);
+document.getElementById("livePrice");
 
 const priceStatus =
-document.getElementById(
-"priceStatus"
-);
+document.getElementById("priceStatus");
 
 const chartStatus =
-document.getElementById(
-"chartStatus"
-);
-
-const tickCounter =
-document.getElementById(
-"tickCount"
-);
+document.getElementById("chartStatus");
 
 const backend =
-document.getElementById(
-"backend"
-);
+document.getElementById("backend");
+
+const ticks =
+document.getElementById("ticks");
 
 const errorBox =
-document.getElementById(
-"error"
-);
+document.getElementById("error");
 
 const canvas =
-document.getElementById(
-"chart"
-);
+document.getElementById("chart");
 
 const ctx =
 canvas.getContext("2d");
@@ -758,469 +515,417 @@ canvas.getContext("2d");
 
 function connect(){
 
-    connectionText.textContent =
-    "CONNECTING";
+connection.textContent =
+"CONNECTING";
 
-    connectionDot.className =
-    "dot";
+dot.className =
+"dot";
 
-    backend.textContent =
-    "Connecting...";
+backend.textContent =
+"Connecting...";
 
-    chartStatus.textContent =
-    "Connecting to backend...";
+try{
 
+socket =
+new WebSocket(BACKEND);
 
-    socket =
-    new WebSocket(BACKEND);
+}catch(error){
 
+showError(
+"WebSocket could not be created."
+);
 
-    socket.onopen =
-    function(){
-
-        connectionText.textContent =
-        "CONNECTED";
-
-        connectionDot.className =
-        "dot live";
-
-        backend.textContent =
-        "Connected";
-
-        chartStatus.textContent =
-        "Waiting for live ticks...";
-
-        hideError();
-
-    };
-
-
-    socket.onmessage =
-    function(event){
-
-        let data;
-
-        try{
-            data = JSON.parse(event.data);
-        }
-        catch(e){
-            return;
-        }
-
-
-        if(data.type === "status"){
-
-            if(data.connected){
-
-                backend.textContent =
-                "Deriv connected";
-
-                connectionText.textContent =
-                "LIVE";
-
-                connectionDot.className =
-                "dot live";
-
-            }else{
-
-                backend.textContent =
-                "Waiting for Deriv";
-
-            }
-
-            return;
-        }
-
-
-        if(data.type === "deriv_error"){
-
-            showError(
-                "Deriv error: " +
-                (
-                    data.error?.message ||
-                    "Unknown error"
-                )
-            );
-
-            return;
-        }
-
-
-        if(data.type !== "tick"){
-            return;
-        }
-
-
-        const tick =
-        data.data;
-
-        if(!tick){
-            return;
-        }
-
-
-        const small =
-        document.getElementById(
-            "small-" + tick.symbol
-        );
-
-        if(small){
-
-            small.textContent =
-            formatPrice(tick.price);
-
-        }
-
-
-        if(
-            tick.symbol !==
-            selectedSymbol
-        ){
-
-            return;
-        }
-
-
-        tickCount++;
-
-        tickCounter.textContent =
-        tickCount;
-
-
-        livePrice.textContent =
-        formatPrice(tick.price);
-
-
-        priceStatus.textContent =
-        "Receiving live market data";
-
-
-        chartStatus.textContent =
-        "LIVE • REAL-TIME TICKS";
-
-
-        prices.push(
-            Number(tick.price)
-        );
-
-
-        if(prices.length > 100){
-
-            prices.shift();
-
-        }
-
-
-        drawChart();
-
-    };
-
-
-    socket.onerror =
-    function(){
-
-        connectionText.textContent =
-        "ERROR";
-
-        connectionDot.className =
-        "dot error";
-
-        backend.textContent =
-        "Connection error";
-
-        showError(
-            "Unable to connect to the NEXTRADE backend."
-        );
-
-    };
-
-
-    socket.onclose =
-    function(){
-
-        connectionText.textContent =
-        "RECONNECTING";
-
-        connectionDot.className =
-        "dot error";
-
-        backend.textContent =
-        "Reconnecting...";
-
-        chartStatus.textContent =
-        "Connection closed — reconnecting...";
-
-
-        setTimeout(
-            connect,
-            4000
-        );
-
-    };
+return;
 
 }
 
 
+socket.onopen = function(){
+
+connection.textContent =
+"CONNECTED";
+
+dot.className =
+"dot live";
+
+backend.textContent =
+"Connected";
+
+chartStatus.textContent =
+"Waiting for live ticks...";
+
+hideError();
+
+};
+
+
+socket.onmessage = function(event){
+
+let data;
+
+try{
+data = JSON.parse(event.data);
+}catch(e){
+return;
+}
+
+
+if(data.type === "status"){
+
+if(data.connected){
+
+connection.textContent =
+"LIVE";
+
+dot.className =
+"dot live";
+
+backend.textContent =
+"Deriv connected";
+
+chartStatus.textContent =
+"Receiving live data...";
+
+}else{
+
+backend.textContent =
+"Waiting for Deriv";
+
+}
+
+return;
+
+}
+
+
+if(data.type === "deriv_error"){
+
+showError(
+"Deriv error: " +
+(
+data.error &&
+data.error.message
+?
+data.error.message
+:
+"Unknown error"
+)
+);
+
+return;
+
+}
+
+
+if(data.type !== "tick"){
+return;
+}
+
+
+const tick = data.data;
+
+if(!tick){
+return;
+}
+
+
+/* Update sidebar price */
+
+const small =
+document.getElementById(
+"p-" + tick.symbol
+);
+
+if(small){
+
+small.textContent =
+formatPrice(tick.price);
+
+}
+
+
+/* Only draw selected market */
+
+if(tick.symbol !== selectedSymbol){
+return;
+}
+
+
+tickCount++;
+
+ticks.textContent =
+tickCount;
+
+livePrice.textContent =
+formatPrice(tick.price);
+
+priceStatus.textContent =
+"Receiving live market data";
+
+chartStatus.textContent =
+"LIVE • REAL-TIME TICKS";
+
+
+prices.push(
+Number(tick.price)
+);
+
+if(prices.length > 100){
+prices.shift();
+}
+
+drawChart();
+
+};
+
+
+socket.onerror = function(){
+
+connection.textContent =
+"CONNECTION ERROR";
+
+dot.className =
+"dot error";
+
+backend.textContent =
+"Connection error";
+
+showError(
+"Connection to the NEXTRADE backend failed."
+);
+
+};
+
+
+socket.onclose = function(){
+
+connection.textContent =
+"RECONNECTING";
+
+dot.className =
+"dot";
+
+backend.textContent =
+"Reconnecting...";
+
+chartStatus.textContent =
+"Connection closed — reconnecting...";
+
+setTimeout(
+connect,
+4000
+);
+
+};
+
+}
+
+
+/* Market selection */
+
 document
 .querySelectorAll(".market")
-.forEach(
-button => {
+.forEach(button => {
 
-    button.addEventListener(
-        "click",
-        function(){
+button.addEventListener(
+"click",
+function(){
 
-            document
-            .querySelectorAll(".market")
-            .forEach(
-                item =>
-                item.classList.remove(
-                    "active"
-                )
-            );
+document
+.querySelectorAll(".market")
+.forEach(item =>
+item.classList.remove("active")
+);
 
+this.classList.add("active");
 
-            this.classList.add(
-                "active"
-            );
+selectedSymbol =
+this.dataset.symbol;
 
+selectedName =
+this.dataset.name;
 
-            selectedSymbol =
-            this.dataset.symbol;
+document
+.getElementById("selectedName")
+.textContent =
+selectedName;
 
-            selectedName =
-            this.dataset.name;
+document
+.getElementById("selectedSymbol")
+.textContent =
+selectedSymbol;
 
+document
+.getElementById("marketInfo")
+.textContent =
+selectedName;
 
-            document
-            .getElementById(
-                "selectedName"
-            )
-            .textContent =
-            selectedName;
+tickCount = 0;
 
+ticks.textContent = "0";
 
-            document
-            .getElementById(
-                "selectedSymbol"
-            )
-            .textContent =
-            selectedSymbol;
+livePrice.textContent = "---";
 
+priceStatus.textContent =
+"Waiting for live data...";
 
-            document
-            .getElementById(
-                "marketInfo"
-            )
-            .textContent =
-            selectedName;
+prices = [];
 
+drawChart();
 
-            tickCount = 0;
-
-            tickCounter.textContent =
-            "0";
-
-
-            livePrice.textContent =
-            "---";
-
-
-            priceStatus.textContent =
-            "Waiting for live market data...";
-
-
-            prices = [];
-
-            drawChart();
-
-        }
-    );
-
+});
 });
 
 
 function formatPrice(value){
 
-    return Number(value)
-    .toLocaleString(
-        undefined,
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:8
-        }
-    );
+return Number(value)
+.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
 
 }
 
 
 function resizeCanvas(){
 
-    const rect =
-    canvas.getBoundingClientRect();
+const ratio =
+window.devicePixelRatio || 1;
 
-    const ratio =
-    window.devicePixelRatio || 1;
+canvas.width =
+canvas.clientWidth * ratio;
 
+canvas.height =
+canvas.clientHeight * ratio;
 
-    canvas.width =
-    rect.width * ratio;
+ctx.setTransform(
+ratio,
+0,
+0,
+ratio,
+0,
+0
+);
 
-    canvas.height =
-    rect.height * ratio;
-
-
-    ctx.setTransform(
-        ratio,
-        0,
-        0,
-        ratio,
-        0,
-        0
-    );
-
-
-    drawChart();
+drawChart();
 
 }
 
 
 function drawChart(){
 
-    const width =
-    canvas.clientWidth;
+const width =
+canvas.clientWidth;
 
-    const height =
-    canvas.clientHeight;
+const height =
+canvas.clientHeight;
 
-
-    ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-
-    if(prices.length < 2){
-
-        ctx.fillStyle =
-        "#60788a";
-
-        ctx.font =
-        "12px Arial";
-
-        ctx.textAlign =
-        "center";
-
-        ctx.fillText(
-            "Waiting for live ticks...",
-            width / 2,
-            height / 2
-        );
-
-        return;
-
-    }
+ctx.clearRect(
+0,
+0,
+width,
+height
+);
 
 
-    let min =
-    Math.min(...prices);
+if(prices.length < 2){
 
-    let max =
-    Math.max(...prices);
+ctx.fillStyle =
+"#60788a";
 
+ctx.font =
+"12px Arial";
 
-    if(max === min){
+ctx.textAlign =
+"center";
 
-        max += 1;
-        min -= 1;
+ctx.fillText(
+"Waiting for live ticks...",
+width / 2,
+height / 2
+);
 
-    }
-
-
-    const padding = 25;
-
-
-    ctx.beginPath();
-
-
-    prices.forEach(
-        (price,index) => {
-
-            const x =
-            padding +
-            (
-                index /
-                (prices.length - 1)
-            ) *
-            (
-                width -
-                padding * 2
-            );
-
-
-            const y =
-            height -
-            padding -
-            (
-                (price - min) /
-                (max - min)
-            ) *
-            (
-                height -
-                padding * 2
-            );
-
-
-            if(index === 0){
-
-                ctx.moveTo(x,y);
-
-            }else{
-
-                ctx.lineTo(x,y);
-
-            }
-
-        }
-    );
-
-
-    ctx.strokeStyle =
-    "#159ff0";
-
-    ctx.lineWidth = 2;
-
-    ctx.stroke();
+return;
 
 }
 
 
-function showError(text){
+let min =
+Math.min(...prices);
 
-    errorBox.style.display =
-    "block";
+let max =
+Math.max(...prices);
 
-    errorBox.textContent =
-    text;
+if(min === max){
+min -= 1;
+max += 1;
+}
+
+
+const padding = 25;
+
+ctx.beginPath();
+
+prices.forEach(
+(price,index) => {
+
+const x =
+padding +
+(index / (prices.length - 1)) *
+(width - padding * 2);
+
+const y =
+height -
+padding -
+((price - min) / (max - min)) *
+(height - padding * 2);
+
+if(index === 0){
+ctx.moveTo(x,y);
+}else{
+ctx.lineTo(x,y);
+}
+
+});
+
+
+ctx.strokeStyle =
+"#159ff0";
+
+ctx.lineWidth = 2;
+
+ctx.stroke();
+
+}
+
+
+function showError(message){
+
+errorBox.style.display =
+"block";
+
+errorBox.textContent =
+message;
 
 }
 
 
 function hideError(){
 
-    errorBox.style.display =
-    "none";
+errorBox.style.display =
+"none";
 
 }
 
 
 window.addEventListener(
-    "resize",
-    resizeCanvas
+"resize",
+resizeCanvas
 );
-
 
 resizeCanvas();
 
@@ -1229,4 +934,4 @@ connect();
 </script>
 
 </body>
-                                           </html>
+</html>
