@@ -7,383 +7,333 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#050c14;
-  color:#fff;
-  min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:white;
+min-height:100vh;
 }
 
 header{
-  height:70px;
-  background:#081421;
-  border-bottom:1px solid #19364e;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5%;
-  position:sticky;
-  top:0;
-  z-index:20;
+height:70px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:800;
-  letter-spacing:1px;
+font-size:25px;
+font-weight:800;
 }
 
 .logo span{
-  color:#159ff0;
+color:#159ff0;
 }
 
-nav{
-  display:flex;
-  gap:25px;
+.nav{
+display:flex;
+gap:8px;
 }
 
-nav a{
-  color:#91a5b7;
-  text-decoration:none;
-  font-size:13px;
-}
-
-.auth{
-  display:flex;
-  align-items:center;
-  gap:8px;
+.nav a{
+text-decoration:none;
+font-size:12px;
+padding:10px 14px;
 }
 
 .login{
-  color:white;
-  text-decoration:none;
-  font-size:12px;
-  padding:9px 12px;
+color:white;
 }
 
 .signup{
-  background:#159ff0;
-  color:white;
-  text-decoration:none;
-  padding:10px 14px;
-  border-radius:7px;
-  font-size:12px;
-  font-weight:bold;
+background:#159ff0;
+color:white;
+border-radius:7px;
+font-weight:bold;
 }
 
 .page{
-  padding:28px 5%;
-  max-width:1450px;
-  margin:auto;
+width:92%;
+max-width:1400px;
+margin:auto;
+padding:28px 0;
 }
 
 .top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  margin-bottom:20px;
-  gap:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:22px;
 }
 
-.title h1{
-  font-size:30px;
-  margin-bottom:7px;
+.top h1{
+font-size:29px;
 }
 
-.title p{
-  color:#71889b;
-  font-size:13px;
+.top p{
+color:#71889b;
+font-size:12px;
+margin-top:6px;
 }
 
 .connection{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#879daf;
-  font-size:11px;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:10px;
+color:#8298a9;
 }
 
-.connection-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#f0b429;
+.dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#f0ad28;
 }
 
-.connection-dot.good{
-  background:#2edb9c;
-  box-shadow:0 0 10px #2edb9c;
+.dot.live{
+background:#2edb9c;
+box-shadow:0 0 10px #2edb9c;
 }
 
-.connection-dot.bad{
-  background:#ff5d6c;
+.dot.error{
+background:#ff5969;
 }
 
 .layout{
-  display:grid;
-  grid-template-columns:270px 1fr;
-  gap:18px;
+display:grid;
+grid-template-columns:260px 1fr;
+gap:18px;
 }
 
 .sidebar{
-  background:#091521;
-  border:1px solid #19364e;
-  border-radius:12px;
-  overflow:hidden;
-  height:max-content;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden;
 }
 
 .sidebar-title{
-  padding:17px;
-  color:#72899c;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1px;
-  border-bottom:1px solid #183247;
+padding:17px;
+font-size:10px;
+font-weight:bold;
+letter-spacing:1px;
+color:#72899b;
+border-bottom:1px solid #193247;
 }
 
 .market{
-  width:100%;
-  border:0;
-  border-bottom:1px solid #142c3f;
-  background:transparent;
-  color:white;
-  text-align:left;
-  padding:15px;
-  cursor:pointer;
+width:100%;
+padding:15px;
+background:transparent;
+border:0;
+border-bottom:1px solid #142a3b;
+color:white;
+text-align:left;
+cursor:pointer;
+position:relative;
 }
 
-.market:hover{
-  background:#0c2031;
+.market:hover,
+.market.active{
+background:#0c263b;
 }
 
 .market.active{
-  background:#0c2a40;
-  border-left:3px solid #159ff0;
-  padding-left:12px;
+border-left:3px solid #159ff0;
+padding-left:12px;
 }
 
 .market-name{
-  display:block;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:5px;
+display:block;
+font-size:12px;
+font-weight:bold;
 }
 
 .market-symbol{
-  color:#60798c;
-  font-size:10px;
+display:block;
+font-size:9px;
+color:#61798b;
+margin-top:5px;
 }
 
 .market-price{
-  float:right;
-  margin-top:-28px;
-  font-size:11px;
-  color:#9db1c0;
-}
-
-.main{
-  min-width:0;
+position:absolute;
+right:14px;
+top:21px;
+font-size:10px;
+color:#9db2c0;
 }
 
 .panel{
-  background:#081421;
-  border:1px solid #19364e;
-  border-radius:12px;
-  overflow:hidden;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+overflow:hidden;
 }
 
-.panel-top{
-  padding:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #183247;
+.panel-head{
+padding:18px;
+border-bottom:1px solid #193247;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .selected-name{
-  font-size:16px;
-  font-weight:bold;
+font-size:16px;
+font-weight:bold;
 }
 
 .selected-symbol{
-  color:#6f8799;
-  font-size:10px;
-  margin-top:5px;
+font-size:10px;
+color:#657e91;
+margin-top:5px;
 }
 
-.live-badge{
-  color:#2edb9c;
-  font-size:10px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.live-badge span{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#2edb9c;
+.live-label{
+font-size:10px;
+color:#2edb9c;
 }
 
 .price-area{
-  padding:18px;
-  background:#060e17;
-  border-bottom:1px solid #162e42;
+padding:20px;
+background:#060e16;
+border-bottom:1px solid #193247;
 }
 
 .price-label{
-  color:#657d90;
-  font-size:9px;
-  margin-bottom:6px;
+font-size:9px;
+color:#60788a;
+margin-bottom:7px;
 }
 
 .price{
-  font-size:32px;
-  font-weight:bold;
+font-size:35px;
+font-weight:bold;
 }
 
-.change{
-  margin-top:5px;
-  font-size:11px;
-  color:#71889b;
+.price-status{
+font-size:10px;
+color:#71899a;
+margin-top:6px;
 }
 
-.chart-wrap{
-  height:500px;
-  position:relative;
-  background:
-    linear-gradient(rgba(30,65,90,.15) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(30,65,90,.15) 1px,transparent 1px),
-    #050d16;
-  background-size:45px 45px;
+.chart-area{
+height:430px;
+position:relative;
+background:
+linear-gradient(rgba(30,65,90,.16) 1px,transparent 1px),
+linear-gradient(90deg,rgba(30,65,90,.16) 1px,transparent 1px),
+#050d15;
+background-size:45px 45px;
 }
 
-#chart{
-  width:100%;
-  height:100%;
-  display:block;
+canvas{
+width:100%;
+height:100%;
+display:block;
 }
 
 .chart-status{
-  position:absolute;
-  top:12px;
-  left:12px;
-  padding:7px 9px;
-  border-radius:5px;
-  background:rgba(5,13,22,.92);
-  border:1px solid #1c3c54;
-  color:#7890a2;
-  font-size:9px;
-}
-
-.error{
-  display:none;
-  margin-top:12px;
-  padding:14px;
-  border-radius:7px;
-  background:#28151a;
-  border:1px solid #67303a;
-  color:#ff7a86;
-  font-size:11px;
-  line-height:1.6;
+position:absolute;
+top:12px;
+left:12px;
+padding:7px 9px;
+background:rgba(5,13,21,.9);
+border:1px solid #1c3c54;
+border-radius:5px;
+font-size:9px;
+color:#7890a2;
 }
 
 .info{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid #183247;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+border-top:1px solid #193247;
 }
 
 .info-box{
-  padding:16px;
-  border-right:1px solid #183247;
+padding:16px;
+border-right:1px solid #193247;
 }
 
 .info-box:last-child{
-  border-right:0;
+border-right:0;
 }
 
 .info-label{
-  color:#617a8d;
-  font-size:9px;
-  margin-bottom:6px;
+font-size:9px;
+color:#60788a;
+margin-bottom:6px;
 }
 
 .info-value{
-  font-size:13px;
-  font-weight:bold;
+font-size:13px;
+font-weight:bold;
 }
 
-@media(max-width:850px){
-
-  nav{
-    display:none;
-  }
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .sidebar-title{
-    grid-column:1/-1;
-  }
-
-  .chart-wrap{
-    height:420px;
-  }
+.error{
+display:none;
+margin-top:12px;
+padding:13px;
+border-radius:7px;
+background:#28151a;
+border:1px solid #66313b;
+color:#ff7c88;
+font-size:11px;
 }
 
-@media(max-width:550px){
+@media(max-width:800px){
 
-  header{
-    padding:0 4%;
-  }
+.layout{
+grid-template-columns:1fr;
+}
 
-  .logo{
-    font-size:21px;
-  }
+.sidebar{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
 
-  .page{
-    padding:20px 4%;
-  }
+.sidebar-title{
+grid-column:1/-1;
+}
 
-  .top{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+.top{
+align-items:flex-start;
+flex-direction:column;
+gap:12px;
+}
 
-  .title h1{
-    font-size:25px;
-  }
+}
 
-  .sidebar{
-    grid-template-columns:1fr;
-  }
+@media(max-width:500px){
 
-  .chart-wrap{
-    height:350px;
-  }
+.page{
+width:94%;
+}
 
-  .info{
-    grid-template-columns:1fr;
-  }
+.chart-area{
+height:350px;
+}
 
-  .info-box{
-    border-right:0;
-    border-bottom:1px solid #183247;
-  }
+.info{
+grid-template-columns:1fr;
+}
+
+.info-box{
+border-right:0;
+border-bottom:1px solid #193247;
+}
+
 }
 </style>
 </head>
@@ -392,1540 +342,621 @@ nav a{
 
 <header>
 
-  <div class="logo">
-    NEX<span>TRADE</span>
-  </div>
+<div class="logo">
+NEX<span>TRADE</span>
+</div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="markets.html">Markets</a>
-    <a href="#tools">Tools</a>
-  </nav>
-
-  <div class="auth">
-    <a href="login.html" class="login">LOGIN</a>
-    <a href="signup.html" class="signup">SIGN UP</a>
-  </div>
+<div class="nav">
+<a href="login.html" class="login">LOGIN</a>
+<a href="signup.html" class="signup">SIGN UP</a>
+</div>
 
 </header>
 
-
 <div class="page">
 
-  <div class="top">
+<div class="top">
+
+<div>
+<h1>Live Markets</h1>
+<p>Monitor live Deriv volatility markets in real time.</p>
+</div>
+
+<div class="connection">
+<span id="dot" class="dot"></span>
+<span id="connection">CONNECTING</span>
+</div>
+
+</div>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-title">
+VOLATILITY MARKETS
+</div>
+
+<button class="market active"
+data-symbol="1HZ100V"
+data-name="Volatility 100 (1s)">
+<span class="market-name">Volatility 100 (1s)</span>
+<span class="market-symbol">1HZ100V</span>
+<span id="p-1HZ100V" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="1HZ75V"
+data-name="Volatility 75 (1s)">
+<span class="market-name">Volatility 75 (1s)</span>
+<span class="market-symbol">1HZ75V</span>
+<span id="p-1HZ75V" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="1HZ50V"
+data-name="Volatility 50 (1s)">
+<span class="market-name">Volatility 50 (1s)</span>
+<span class="market-symbol">1HZ50V</span>
+<span id="p-1HZ50V" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="1HZ25V"
+data-name="Volatility 25 (1s)">
+<span class="market-name">Volatility 25 (1s)</span>
+<span class="market-symbol">1HZ25V</span>
+<span id="p-1HZ25V" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="1HZ10V"
+data-name="Volatility 10 (1s)">
+<span class="market-name">Volatility 10 (1s)</span>
+<span class="market-symbol">1HZ10V</span>
+<span id="p-1HZ10V" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="R_100"
+data-name="Volatility 100">
+<span class="market-name">Volatility 100</span>
+<span class="market-symbol">R_100</span>
+<span id="p-R_100" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="R_75"
+data-name="Volatility 75">
+<span class="market-name">Volatility 75</span>
+<span class="market-symbol">R_75</span>
+<span id="p-R_75" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="R_50"
+data-name="Volatility 50">
+<span class="market-name">Volatility 50</span>
+<span class="market-symbol">R_50</span>
+<span id="p-R_50" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="R_25"
+data-name="Volatility 25">
+<span class="market-name">Volatility 25</span>
+<span class="market-symbol">R_25</span>
+<span id="p-R_25" class="market-price">---</span>
+</button>
+
+<button class="market"
+data-symbol="R_10"
+data-name="Volatility 10">
+<span class="market-name">Volatility 10</span>
+<span class="market-symbol">R_10</span>
+<span id="p-R_10" class="market-price">---</span>
+</button>
 
-    <div class="title">
-      <h1>Live Markets</h1>
-      <p>Monitor live Deriv volatility markets in real time.</p>
-    </div>
+</aside>
 
-    <div class="connection">
-      <span id="connectionDot" class="connection-dot"></span>
-      <span id="connectionText">CONNECTING</span>
-    </div>
+<main>
 
-  </div>
+<div class="panel">
 
+<div class="panel-head">
 
-  <div class="layout">
+<div>
+<div id="selectedName" class="selected-name">
+Volatility 100 (1s)
+</div>
 
+<div id="selectedSymbol" class="selected-symbol">
+1HZ100V
+</div>
+</div>
 
-    <!-- MARKETS -->
+<div class="live-label">
+● LIVE
+</div>
 
-    <aside class="sidebar">
+</div>
 
-      <div class="sidebar-title">
-        VOLATILITY MARKETS
-      </div>
+<div class="price-area">
 
+<div class="price-label">
+LIVE PRICE
+</div>
 
-      <button class="market active"
-        data-symbol="1HZ100V"
-        data-name="Volatility 100 (1s)">
+<div id="livePrice" class="price">
+---
+</div>
 
-        <span class="market-name">
-          Volatility 100 (1s)
-        </span>
+<div id="priceStatus" class="price-status">
+Waiting for live data...
+</div>
 
-        <span class="market-symbol">
-          1HZ100V
-        </span>
+</div>
 
-        <span class="market-price"
-          id="p-1HZ100V">
-          ---
-        </span>
+<div class="chart-area">
 
-      </button>
+<canvas id="chart"></canvas>
 
+<div id="chartStatus" class="chart-status">
+Connecting...
+</div>
 
-      <button class="market"
-        data-symbol="1HZ75V"
-        data-name="Volatility 75 (1s)">
+</div>
 
-        <span class="market-name">
-          Volatility 75 (1s)
-        </span>
+<div class="info">
 
-        <span class="market-symbol">
-          1HZ75V
-        </span>
+<div class="info-box">
+<div class="info-label">MARKET</div>
+<div id="marketInfo" class="info-value">
+Volatility 100 (1s)
+</div>
+</div>
 
-        <span class="market-price"
-          id="p-1HZ75V">
-          ---
-        </span>
+<div class="info-box">
+<div class="info-label">TICKS RECEIVED</div>
+<div id="ticks" class="info-value">
+0
+</div>
+</div>
 
-      </button>
+<div class="info-box">
+<div class="info-label">BACKEND</div>
+<div id="backend" class="info-value">
+Connecting...
+</div>
+</div>
 
+</div>
 
-      <button class="market"
-        data-symbol="1HZ50V"
-        data-name="Volatility 50 (1s)">
+</div>
 
-        <span class="market-name">
-          Volatility 50 (1s)
-        </span>
+<div id="error" class="error"></div>
 
-        <span class="market-symbol">
-          1HZ50V
-        </span>
+</main>
 
-        <span class="market-price"
-          id="p-1HZ50V">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="1HZ25V"
-        data-name="Volatility 25 (1s)">
-
-        <span class="market-name">
-          Volatility 25 (1s)
-        </span>
-
-        <span class="market-symbol">
-          1HZ25V
-        </span>
-
-        <span class="market-price"
-          id="p-1HZ25V">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="1HZ10V"
-        data-name="Volatility 10 (1s)">
-
-        <span class="market-name">
-          Volatility 10 (1s)
-        </span>
-
-        <span class="market-symbol">
-          1HZ10V
-        </span>
-
-        <span class="market-price"
-          id="p-1HZ10V">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="R_100"
-        data-name="Volatility 100">
-
-        <span class="market-name">
-          Volatility 100
-        </span>
-
-        <span class="market-symbol">
-          R_100
-        </span>
-
-        <span class="market-price"
-          id="p-R_100">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="R_75"
-        data-name="Volatility 75">
-
-        <span class="market-name">
-          Volatility 75
-        </span>
-
-        <span class="market-symbol">
-          R_75
-        </span>
-
-        <span class="market-price"
-          id="p-R_75">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="R_50"
-        data-name="Volatility 50">
-
-        <span class="market-name">
-          Volatility 50
-        </span>
-
-        <span class="market-symbol">
-          R_50
-        </span>
-
-        <span class="market-price"
-          id="p-R_50">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="R_25"
-        data-name="Volatility 25">
-
-        <span class="market-name">
-          Volatility 25
-        </span>
-
-        <span class="market-symbol">
-          R_25
-        </span>
-
-        <span class="market-price"
-          id="p-R_25">
-          ---
-        </span>
-
-      </button>
-
-
-      <button class="market"
-        data-symbol="R_10"
-        data-name="Volatility 10">
-
-        <span class="market-name">
-          Volatility 10
-        </span>
-
-        <span class="market-symbol">
-          R_10
-        </span>
-
-        <span class="market-price"
-          id="p-R_10">
-          ---
-        </span>
-
-      </button>
-
-    </aside>
-
-
-    <!-- MAIN -->
-
-    <main class="main">
-
-      <div class="panel">
-
-
-        <div class="panel-top">
-
-          <div>
-
-            <div
-              id="selectedName"
-              class="selected-name">
-              Volatility 100 (1s)
-            </div>
-
-            <div
-              id="selectedSymbol"
-              class="selected-symbol">
-              1HZ100V
-            </div>
-
-          </div>
-
-
-          <div class="live-badge">
-
-            <span></span>
-
-            LIVE
-
-          </div>
-
-        </div>
-
-
-        <div class="price-area">
-
-          <div class="price-label">
-            LIVE PRICE
-          </div>
-
-          <div
-            id="livePrice"
-            class="price">
-            ---
-          </div>
-
-          <div
-            id="changeText"
-            class="change">
-            Waiting for live market data...
-          </div>
-
-        </div>
-
-
-        <div class="chart-wrap">
-
-          <canvas id="chart"></canvas>
-
-          <div
-            id="chartStatus"
-            class="chart-status">
-            Connecting to live market...
-          </div>
-
-        </div>
-
-
-        <div class="info">
-
-          <div class="info-box">
-
-            <div class="info-label">
-              MARKET
-            </div>
-
-            <div
-              id="infoMarket"
-              class="info-value">
-              Volatility 100 (1s)
-            </div>
-
-          </div>
-
-
-          <div class="info-box">
-
-            <div class="info-label">
-              TICKS RECEIVED
-            </div>
-
-            <div
-              id="tickCount"
-              class="info-value">
-              0
-            </div>
-
-          </div>
-
-
-          <div class="info-box">
-
-            <div class="info-label">
-              STREAM
-            </div>
-
-            <div
-              id="streamStatus"
-              class="info-value">
-              Connecting...
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div
-        id="errorBox"
-        class="error">
-      </div>
-
-    </main>
-
-  </div>
-
+</div>
 </div>
 
 
 <script>
 
-/*
-================================================
-NEXTRADE LIVE TICK ENGINE
-================================================
+const BACKEND =
+"wss://nextrade-backened.onrender.com";
 
-IMPORTANT:
+let ws;
+let selectedSymbol = "1HZ100V";
+let selectedName = "Volatility 100 (1s)";
+let tickCount = 0;
+let prices = [];
 
-This version DOES NOT use ticks_history.
+const connection =
+document.getElementById("connection");
 
-It only subscribes to live ticks.
-
-That means it will not repeatedly request
-historical data and will not trigger the
-ticks_history rate limit.
-================================================
-*/
-
-
-const DERIV_WS =
-  "wss://ws.binaryws.com/websockets/v3";
-
-
-let socket = null;
-
-let reconnectTimer = null;
-
-let selectedSymbol =
-  "1HZ100V";
-
-let selectedName =
-  "Volatility 100 (1s)";
-
-let tickCount =
-  0;
-
-let previousPrice =
-  null;
-
-
-/*
-CANDLE DATA
-
-Each candle represents
-one second of live ticks.
-*/
-
-let candles = [];
-
-let currentCandle =
-  null;
-
-
-/*
-ELEMENTS
-*/
-
-const connectionText =
-  document.getElementById(
-    "connectionText"
-  );
-
-const connectionDot =
-  document.getElementById(
-    "connectionDot"
-  );
+const dot =
+document.getElementById("dot");
 
 const livePrice =
-  document.getElementById(
-    "livePrice"
-  );
+document.getElementById("livePrice");
 
-const changeText =
-  document.getElementById(
-    "changeText"
-  );
-
-const tickCounter =
-  document.getElementById(
-    "tickCount"
-  );
-
-const streamStatus =
-  document.getElementById(
-    "streamStatus"
-  );
+const priceStatus =
+document.getElementById("priceStatus");
 
 const chartStatus =
-  document.getElementById(
-    "chartStatus"
-  );
+document.getElementById("chartStatus");
+
+const backend =
+document.getElementById("backend");
+
+const ticks =
+document.getElementById("ticks");
 
 const errorBox =
-  document.getElementById(
-    "errorBox"
-  );
-
-const selectedNameElement =
-  document.getElementById(
-    "selectedName"
-  );
-
-const selectedSymbolElement =
-  document.getElementById(
-    "selectedSymbol"
-  );
-
-const infoMarket =
-  document.getElementById(
-    "infoMarket"
-  );
+document.getElementById("error");
 
 const canvas =
-  document.getElementById(
-    "chart"
-  );
+document.getElementById("chart");
 
 const ctx =
-  canvas.getContext(
-    "2d"
-  );
+canvas.getContext("2d");
 
 
-/*
-================================================
-CONNECT
-================================================
-*/
+function connectBackend(){
 
-function connect(){
+connection.textContent = "CONNECTING";
+dot.className = "dot";
+backend.textContent = "Connecting...";
+chartStatus.textContent = "Connecting to backend...";
 
-  clearTimeout(
-    reconnectTimer
-  );
+ws = new WebSocket(BACKEND);
 
+ws.onopen = function(){
 
-  connectionText.textContent =
-    "CONNECTING";
+connection.textContent = "CONNECTED";
+dot.className = "dot live";
+backend.textContent = "Backend connected";
+chartStatus.textContent = "Waiting for live data...";
+hideError();
 
-  connectionDot.className =
-    "connection-dot";
+};
 
-  streamStatus.textContent =
-    "Connecting...";
 
-  chartStatus.textContent =
-    "Connecting to Deriv...";
+ws.onmessage = function(event){
 
+let data;
 
-  try{
+try{
+data = JSON.parse(event.data);
+}catch(error){
+return;
+}
 
-    socket =
-      new WebSocket(
-        DERIV_WS
-      );
 
-  }
+/* STATUS FROM BACKEND */
 
-  catch(error){
+if(data.type === "status"){
 
-    showError(
-      "WebSocket could not start: " +
-      error.message
-    );
+if(data.connected){
 
-    reconnect();
+connection.textContent = "LIVE";
+dot.className = "dot live";
+backend.textContent = "Deriv LIVE";
+chartStatus.textContent = "Receiving live data...";
 
-    return;
+}else{
 
-  }
+backend.textContent = "Waiting for Deriv";
 
+}
 
-  /*
-  OPEN
-  */
+return;
+}
 
-  socket.onopen =
-    function(){
 
-      connectionText.textContent =
-        "CONNECTED";
+/* DERIV ERROR */
 
-      connectionDot.className =
-        "connection-dot good";
+if(data.type === "deriv_error"){
 
-      streamStatus.textContent =
-        "Live";
+showError(
+"Deriv error: " +
+(
+data.error &&
+data.error.message
+?
+data.error.message
+:
+"Unknown error"
+)
+);
 
-      chartStatus.textContent =
-        "Subscribing to live ticks...";
+return;
+}
 
 
-      /*
-      ONLY ONE REQUEST:
+/* TICK */
 
-      LIVE TICK SUBSCRIPTION
+if(data.type === "tick"){
 
-      NO ticks_history.
-      */
+const tick = data.data;
 
-      socket.send(
-        JSON.stringify({
+if(!tick){
+return;
+}
 
-          ticks:
-            selectedSymbol,
 
-          subscribe:1
+/* Update sidebar price */
 
-        })
-      );
+const sidebarPrice =
+document.getElementById(
+"p-" + tick.symbol
+);
 
-    };
+if(sidebarPrice){
 
-
-  /*
-  MESSAGE
-  */
-
-  socket.onmessage =
-    function(event){
-
-      let data;
-
-      try{
-
-        data =
-          JSON.parse(
-            event.data
-          );
-
-      }
-
-      catch(error){
-
-        showError(
-          "Invalid response received."
-        );
-
-        return;
-
-      }
-
-
-      /*
-      SHOW REAL DERIV ERRORS
-      */
-
-      if(data.error){
-
-        showError(
-          "Deriv error: " +
-          (
-            data.error.code ||
-            "Unknown"
-          ) +
-          " — " +
-          (
-            data.error.message ||
-            "Unknown error"
-          )
-        );
-
-        streamStatus.textContent =
-          "API error";
-
-        return;
-
-      }
-
-
-      /*
-      LIVE TICK
-      */
-
-      if(
-        data.msg_type ===
-        "tick"
-      ){
-
-        processTick(
-          data.tick
-        );
-
-      }
-
-    };
-
-
-  /*
-  ERROR
-  */
-
-  socket.onerror =
-    function(){
-
-      connectionText.textContent =
-        "CONNECTION ERROR";
-
-      connectionDot.className =
-        "connection-dot bad";
-
-      streamStatus.textContent =
-        "Connection error";
-
-      chartStatus.textContent =
-        "WebSocket error";
-
-    };
-
-
-  /*
-  CLOSED
-  */
-
-  socket.onclose =
-    function(event){
-
-      connectionText.textContent =
-        "DISCONNECTED";
-
-      connectionDot.className =
-        "connection-dot bad";
-
-      streamStatus.textContent =
-        "Reconnecting...";
-
-
-      /*
-      Only display the close information
-      if we haven't received live data.
-      */
-
-      if(tickCount === 0){
-
-        showError(
-          "Deriv connection closed. " +
-          "Close code: " +
-          event.code +
-          (
-            event.reason
-            ? " — " + event.reason
-            : ""
-          )
-        );
-
-      }
-
-
-      reconnect();
-
-    };
+sidebarPrice.textContent =
+formatPrice(tick.price);
 
 }
 
 
-/*
-================================================
-RECONNECT
-================================================
-*/
+/* Only display selected market */
 
-function reconnect(){
-
-  clearTimeout(
-    reconnectTimer
-  );
+if(tick.symbol !== selectedSymbol){
+return;
+}
 
 
-  reconnectTimer =
-    setTimeout(
-      function(){
+tickCount++;
 
-        connect();
+ticks.textContent = tickCount;
 
-      },
-      3000
-    );
+livePrice.textContent =
+formatPrice(tick.price);
+
+priceStatus.textContent =
+"LIVE • Receiving market data";
+
+chartStatus.textContent =
+"LIVE • REAL-TIME TICKS";
+
+
+prices.push(
+Number(tick.price)
+);
+
+if(prices.length > 100){
+prices.shift();
+}
+
+drawChart();
+
+}
+
+};
+
+
+ws.onerror = function(){
+
+connection.textContent = "ERROR";
+dot.className = "dot error";
+backend.textContent = "Connection error";
+
+showError(
+"Could not connect to the NEXTRADE backend."
+);
+
+};
+
+
+ws.onclose = function(event){
+
+connection.textContent = "DISCONNECTED";
+dot.className = "dot error";
+backend.textContent = "Connection closed";
+
+chartStatus.textContent =
+"Backend connection closed";
+
+showError(
+"NEXTRADE backend disconnected. Code: " +
+event.code
+);
+
+};
 
 }
 
 
-/*
-================================================
-PROCESS TICK
-================================================
-*/
+/* MARKET BUTTONS */
 
-function processTick(tick){
+document
+.querySelectorAll(".market")
+.forEach(function(button){
 
-  if(!tick){
+button.addEventListener(
+"click",
+function(){
 
-    return;
+document
+.querySelectorAll(".market")
+.forEach(function(item){
+item.classList.remove("active");
+});
 
-  }
+this.classList.add("active");
 
+selectedSymbol =
+this.dataset.symbol;
 
-  const price =
-    Number(
-      tick.quote
-    );
+selectedName =
+this.dataset.name;
 
-  const epoch =
-    Number(
-      tick.epoch
-    );
+document.getElementById(
+"selectedName"
+).textContent =
+selectedName;
 
+document.getElementById(
+"selectedSymbol"
+).textContent =
+selectedSymbol;
 
-  if(
-    !Number.isFinite(price)
-  ){
+document.getElementById(
+"marketInfo"
+).textContent =
+selectedName;
 
-    return;
+tickCount = 0;
 
-  }
+ticks.textContent = "0";
 
+livePrice.textContent = "---";
 
-  /*
-  COUNT
-  */
+priceStatus.textContent =
+"Waiting for " +
+selectedName +
+"...";
 
-  tickCount++;
+prices = [];
 
-  tickCounter.textContent =
-    tickCount;
+drawChart();
 
+});
 
-  /*
-  LIVE PRICE
-  */
-
-  livePrice.textContent =
-    formatPrice(
-      price
-    );
-
-
-  /*
-  SIDEBAR PRICE
-  */
-
-  const miniPrice =
-    document.getElementById(
-      "p-" + selectedSymbol
-    );
+});
 
 
-  if(miniPrice){
+function formatPrice(value){
 
-    miniPrice.textContent =
-      formatPrice(
-        price
-      );
-
-  }
-
-
-  /*
-  MOVEMENT
-  */
-
-  updateMovement(
-    price
-  );
-
-
-  /*
-  BUILD CANDLE
-  */
-
-  updateCandle(
-    price,
-    epoch
-  );
-
-
-  /*
-  STATUS
-  */
-
-  streamStatus.textContent =
-    "Receiving";
-
-  chartStatus.textContent =
-    "LIVE • 1 SECOND CANDLES";
-
-
-  hideError();
+return Number(value).toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
 
 }
 
-
-/*
-================================================
-BUILD 1 SECOND CANDLE
-================================================
-*/
-
-function updateCandle(
-  price,
-  epoch
-){
-
-  /*
-  Convert timestamp to
-  one-second bucket.
-  */
-
-  const second =
-    Math.floor(
-      epoch
-    );
-
-
-  /*
-  New second
-  */
-
-  if(
-    !currentCandle ||
-    currentCandle.time !== second
-  ){
-
-    /*
-    Save previous candle.
-    */
-
-    if(currentCandle){
-
-      candles.push(
-        currentCandle
-      );
-
-    }
-
-
-    /*
-    Create new candle.
-    */
-
-    currentCandle = {
-
-      time:
-        second,
-
-      open:
-        price,
-
-      high:
-        price,
-
-      low:
-        price,
-
-      close:
-        price
-
-    };
-
-
-    /*
-    Keep the latest
-    120 candles.
-    */
-
-    if(
-      candles.length > 120
-    ){
-
-      candles.shift();
-
-    }
-
-  }
-
-  else{
-
-    /*
-    Same second:
-    update candle.
-    */
-
-    currentCandle.high =
-      Math.max(
-        currentCandle.high,
-        price
-      );
-
-    currentCandle.low =
-      Math.min(
-        currentCandle.low,
-        price
-      );
-
-    currentCandle.close =
-      price;
-
-  }
-
-
-  drawChart();
-
-}
-
-
-/*
-================================================
-MOVEMENT
-================================================
-*/
-
-function updateMovement(
-  price
-){
-
-  if(
-    previousPrice === null
-  ){
-
-    changeText.textContent =
-      "Live market price";
-
-    previousPrice =
-      price;
-
-    return;
-
-  }
-
-
-  if(
-    price > previousPrice
-  ){
-
-    changeText.textContent =
-      "▲ Price moving higher";
-
-    changeText.style.color =
-      "#2edb9c";
-
-  }
-
-  else if(
-    price < previousPrice
-  ){
-
-    changeText.textContent =
-      "▼ Price moving lower";
-
-    changeText.style.color =
-      "#ff5d6c";
-
-  }
-
-  else{
-
-    changeText.textContent =
-      "● Price unchanged";
-
-    changeText.style.color =
-      "#71889b";
-
-  }
-
-
-  previousPrice =
-    price;
-
-}
-
-
-/*
-================================================
-FORMAT PRICE
-================================================
-*/
-
-function formatPrice(
-  price
-){
-
-  return price.toLocaleString(
-    undefined,
-    {
-      minimumFractionDigits:2,
-      maximumFractionDigits:8
-    }
-  );
-
-}
-
-
-/*
-================================================
-DRAW CHART
-================================================
-*/
-
-function drawChart(){
-
-  const width =
-    canvas.clientWidth;
-
-  const height =
-    canvas.clientHeight;
-
-
-  ctx.clearRect(
-    0,
-    0,
-    width,
-    height
-  );
-
-
-  /*
-  Combine completed candles
-  with current candle.
-  */
-
-  const data =
-    candles.slice();
-
-
-  if(currentCandle){
-
-    data.push(
-      currentCandle
-    );
-
-  }
-
-
-  /*
-  Not enough data yet.
-  */
-
-  if(
-    data.length < 2
-  ){
-
-    ctx.fillStyle =
-      "#60788a";
-
-    ctx.font =
-      "12px Arial";
-
-    ctx.textAlign =
-      "center";
-
-    ctx.fillText(
-      "Waiting for live ticks...",
-      width / 2,
-      height / 2
-    );
-
-    return;
-
-  }
-
-
-  /*
-  Find chart range.
-  */
-
-  let min =
-    Math.min(
-      ...data.map(
-        candle =>
-          candle.low
-      )
-    );
-
-  let max =
-    Math.max(
-      ...data.map(
-        candle =>
-          candle.high
-      )
-    );
-
-
-  if(max === min){
-
-    max += 1;
-
-    min -= 1;
-
-  }
-
-
-  const padding =
-    35;
-
-  const chartWidth =
-    width -
-    padding * 2;
-
-  const chartHeight =
-    height -
-    padding * 2;
-
-  const spacing =
-    chartWidth /
-    data.length;
-
-  const candleWidth =
-    Math.max(
-      3,
-      spacing * .55
-    );
-
-
-  /*
-  Price → Y
-  */
-
-  function priceY(
-    value
-  ){
-
-    return (
-      height -
-      padding -
-      (
-        (value - min) /
-        (max - min)
-      ) *
-      chartHeight
-    );
-
-  }
-
-
-  /*
-  Draw candles.
-  */
-
-  data.forEach(
-    function(candle,index){
-
-      const x =
-        padding +
-        index * spacing +
-        spacing / 2;
-
-
-      const openY =
-        priceY(
-          candle.open
-        );
-
-      const closeY =
-        priceY(
-          candle.close
-        );
-
-      const highY =
-        priceY(
-          candle.high
-        );
-
-      const lowY =
-        priceY(
-          candle.low
-        );
-
-
-      const bullish =
-        candle.close >=
-        candle.open;
-
-
-      const bodyColor =
-        bullish
-        ? "#2edb9c"
-        : "#ff5d6c";
-
-
-      /*
-      WICK
-      */
-
-      ctx.strokeStyle =
-        bodyColor;
-
-      ctx.lineWidth =
-        1;
-
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        x,
-        highY
-      );
-
-      ctx.lineTo(
-        x,
-        lowY
-      );
-
-      ctx.stroke();
-
-
-      /*
-      BODY
-      */
-
-      ctx.fillStyle =
-        bodyColor;
-
-
-      const bodyTop =
-        Math.min(
-          openY,
-          closeY
-        );
-
-
-      const bodyHeight =
-        Math.max(
-          2,
-          Math.abs(
-            closeY -
-            openY
-          )
-        );
-
-
-      ctx.fillRect(
-        x -
-        candleWidth / 2,
-
-        bodyTop,
-
-        candleWidth,
-
-        bodyHeight
-      );
-
-    }
-  );
-
-}
-
-
-/*
-================================================
-CANVAS RESIZE
-================================================
-*/
 
 function resizeCanvas(){
 
-  const rect =
-    canvas.getBoundingClientRect();
+const ratio =
+window.devicePixelRatio || 1;
 
-  const ratio =
-    window.devicePixelRatio ||
-    1;
+canvas.width =
+canvas.clientWidth * ratio;
 
+canvas.height =
+canvas.clientHeight * ratio;
 
-  canvas.width =
-    rect.width *
-    ratio;
+ctx.setTransform(
+ratio,
+0,
+0,
+ratio,
+0,
+0
+);
 
-  canvas.height =
-    rect.height *
-    ratio;
-
-
-  ctx.setTransform(
-    ratio,
-    0,
-    0,
-    ratio,
-    0,
-    0
-  );
-
-
-  drawChart();
+drawChart();
 
 }
 
 
-/*
-================================================
-MARKET SWITCHING
-================================================
-*/
+function drawChart(){
 
-document
-.querySelectorAll(
-  ".market"
-)
-.forEach(
-  function(button){
+const width =
+canvas.clientWidth;
 
-    button.addEventListener(
-      "click",
-      function(){
+const height =
+canvas.clientHeight;
 
-        /*
-        Change active button.
-        */
-
-        document
-        .querySelectorAll(
-          ".market"
-        )
-        .forEach(
-          function(btn){
-
-            btn.classList.remove(
-              "active"
-            );
-
-          }
-        );
-
-
-        this.classList.add(
-          "active"
-        );
-
-
-        /*
-        New market.
-        */
-
-        selectedSymbol =
-          this.dataset.symbol;
-
-        selectedName =
-          this.dataset.name;
-
-
-        selectedNameElement.textContent =
-          selectedName;
-
-        selectedSymbolElement.textContent =
-          selectedSymbol;
-
-        infoMarket.textContent =
-          selectedName;
-
-
-        /*
-        Reset data.
-        */
-
-        tickCount =
-          0;
-
-        tickCounter.textContent =
-          "0";
-
-        previousPrice =
-          null;
-
-        livePrice.textContent =
-          "---";
-
-        changeText.textContent =
-          "Waiting for live market data...";
-
-        streamStatus.textContent =
-          "Switching...";
-
-        chartStatus.textContent =
-          "Switching market...";
-
-
-        candles =
-          [];
-
-        currentCandle =
-          null;
-
-
-        hideError();
-
-
-        /*
-        Close old subscription.
-
-        onclose will reconnect.
-        */
-
-        if(socket){
-
-          socket.close();
-
-        }
-
-        else{
-
-          connect();
-
-        }
-
-      }
-    );
-
-  }
+ctx.clearRect(
+0,
+0,
+width,
+height
 );
 
 
-/*
-================================================
-ERROR DISPLAY
-================================================
-*/
+if(prices.length < 2){
 
-function showError(
-  message
-){
+ctx.fillStyle = "#60788a";
 
-  errorBox.style.display =
-    "block";
+ctx.font = "12px Arial";
 
-  errorBox.textContent =
-    message;
+ctx.textAlign = "center";
+
+ctx.fillText(
+"Waiting for live ticks...",
+width / 2,
+height / 2
+);
+
+return;
+
+}
+
+
+let min =
+Math.min(...prices);
+
+let max =
+Math.max(...prices);
+
+if(min === max){
+
+min -= 1;
+max += 1;
+
+}
+
+
+const padding = 25;
+
+ctx.beginPath();
+
+prices.forEach(
+function(price,index){
+
+const x =
+padding +
+(index / (prices.length - 1)) *
+(width - padding * 2);
+
+const y =
+height -
+padding -
+((price - min) / (max - min)) *
+(height - padding * 2);
+
+if(index === 0){
+
+ctx.moveTo(x,y);
+
+}else{
+
+ctx.lineTo(x,y);
+
+}
+
+}
+);
+
+ctx.strokeStyle = "#159ff0";
+ctx.lineWidth = 2;
+ctx.stroke();
+
+}
+
+
+function showError(message){
+
+errorBox.style.display = "block";
+errorBox.textContent = message;
 
 }
 
 
 function hideError(){
 
-  errorBox.style.display =
-    "none";
+errorBox.style.display = "none";
 
 }
 
 
-/*
-================================================
-START
-================================================
-*/
-
 window.addEventListener(
-  "resize",
-  resizeCanvas
+"resize",
+resizeCanvas
 );
 
 resizeCanvas();
 
-connect();
+connectBackend();
 
 </script>
 
