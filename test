@@ -1,1 +1,227 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deriv Connection Test</title>
+
+<style>
+body{
+  margin:0;
+  padding:30px 20px;
+  background:#06101b;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+
+.box{
+  max-width:600px;
+  margin:40px auto;
+  padding:30px;
+  background:#0a1826;
+  border:1px solid #21445e;
+  border-radius:15px;
+}
+
+h1{
+  color:#18a6ff;
+}
+
+.status{
+  margin-top:20px;
+  padding:15px;
+  border-radius:8px;
+  background:#07111d;
+}
+
+#status{
+  color:#ffd166;
+}
+
+.price{
+  margin-top:20px;
+  font-size:35px;
+  font-weight:bold;
+}
+
+.small{
+  margin-top:10px;
+  color:#8da4b7;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>DERIV CONNECTION TEST</h1>
+
+  <div class="status">
+    Status:
+    <strong id="status">
+      Connecting...
+    </strong>
+  </div>
+
+  <div class="price">
+    <span id="price">---</span>
+  </div>
+
+  <div class="small">
+    Symbol: 1HZ100V<br>
+    Ticks received:
+    <span id="ticks">0</span>
+  </div>
+
+</div>
+
+
+<script>
+
+const status =
+  document.getElementById("status");
+
+const price =
+  document.getElementById("price");
+
+const ticks =
+  document.getElementById("ticks");
+
+let count = 0;
+
+let socket;
+
+
+/*
+  DERIV PUBLIC WEBSOCKET
+*/
+
+function connect(){
+
+  status.textContent =
+    "Connecting...";
+
+  status.style.color =
+    "#ffd166";
+
+
+  socket = new WebSocket(
+    "wss://ws.derivws.com/websockets/v3"
+  );
+
+
+  socket.onopen = function(){
+
+    status.textContent =
+      "CONNECTED — requesting ticks";
+
+    status.style.color =
+      "#2edb9c";
+
+
+    socket.send(
+      JSON.stringify({
+
+        ticks: "1HZ100V",
+
+        subscribe: 1
+
+      })
+    );
+
+  };
+
+
+  socket.onmessage =
+    function(event){
+
+      console.log(
+        "DERIV:",
+        event.data
+      );
+
+
+      const data =
+        JSON.parse(event.data);
+
+
+      if(data.tick){
+
+        count++;
+
+        ticks.textContent =
+          count;
+
+
+        price.textContent =
+          data.tick.quote;
+
+
+        status.textContent =
+          "CONNECTED — TICKS RECEIVING";
+
+        status.style.color =
+          "#2edb9c";
+
+      }
+
+
+      if(data.error){
+
+        status.textContent =
+          "DERIV ERROR: " +
+          data.error.message;
+
+        status.style.color =
+          "#ff5f6d";
+
+        console.log(
+          data.error
+        );
+
+      }
+
+    };
+
+
+  socket.onerror =
+    function(error){
+
+      status.textContent =
+        "CONNECTION ERROR";
+
+      status.style.color =
+        "#ff5f6d";
+
+      console.log(
+        "WebSocket error:",
+        error
+      );
+
+    };
+
+
+  socket.onclose =
+    function(){
+
+      status.textContent =
+        "CONNECTION CLOSED";
+
+      status.style.color =
+        "#ff5f6d";
+
+    };
+
+}
+
+
+connect();
+
+</script>
+
+</body>
+</html>
