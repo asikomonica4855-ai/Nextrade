@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +6,7 @@
 <title>NEXTRADE | Live Bots</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Arial,sans-serif;
@@ -32,9 +27,7 @@ font-size:24px;
 font-weight:bold;
 }
 
-nav{
-margin-top:12px;
-}
+nav{margin-top:12px}
 
 nav a{
 color:white;
@@ -99,7 +92,7 @@ margin-bottom:8px;
 }
 
 .market{
-color:#cbd5e1;
+color:#9fb1c7;
 font-size:13px;
 margin-bottom:15px;
 }
@@ -112,6 +105,7 @@ font-size:18px;
 letter-spacing:3px;
 word-break:break-word;
 margin-bottom:15px;
+min-height:45px;
 }
 
 .stats{
@@ -145,13 +139,7 @@ font-weight:bold;
 background:#102238;
 }
 
-.wait{
-color:#cbd5e1;
-}
-
-.watch{
-color:#ffd166;
-}
+.watch{color:#ffd166}
 
 .note{
 margin-top:25px;
@@ -180,7 +168,6 @@ cursor:pointer;
 <body>
 
 <header>
-
 <div class="logo">NEXTRADE</div>
 
 <nav>
@@ -189,7 +176,6 @@ cursor:pointer;
 <a href="tools.html">Tools</a>
 <a href="bots.html">Bots</a>
 </nav>
-
 </header>
 
 <main>
@@ -200,7 +186,7 @@ cursor:pointer;
 Automatic Volatility Index monitoring
 </p>
 
-<div class="connection" id="connection">
+<div id="connection" class="connection">
 Connecting to Deriv live market data...
 </div>
 
@@ -208,266 +194,239 @@ Connecting to Deriv live market data...
 
 <div class="note">
 <strong>Analysis mode:</strong>
-NEXTRADE is receiving public market data only. No Deriv account,
-login, API token, or real-money trading is being used.
-The WATCH status is an analytical condition, not a guarantee of profit.
+NEXTRADE is receiving public market data only.
+No Deriv account, login, API token, or real-money trading is being used.
+WATCH is an analytical condition, not a guarantee of profit.
 </div>
 
-<button onclick="location.reload()">
-Refresh Markets
+<button onclick="connect()">
+Reconnect
 </button>
 
 </main>
 
 <script>
 
-let ws;
-let markets = {};
-let subscriptions = {};
+let ws=null;
+let markets={};
+let reconnectTimer=null;
 
-const connection =
+const connection=
 document.getElementById("connection");
 
-function setConnection(text, live=false, error=false){
-
-connection.textContent = text;
-
-if(live){
-connection.className = "connection live";
-}else if(error){
-connection.className = "connection error";
-}else{
-connection.className = "connection";
+function status(text,type=""){
+connection.textContent=text;
+connection.className="connection "+type;
 }
-
-}
-
-/* Connect to Deriv public market-data WebSocket */
 
 function connect(){
 
-setConnection("Connecting to Deriv live market data...");
+if(ws){
+try{ws.close()}catch(e){}
+}
 
-ws = new WebSocket(
+clearTimeout(reconnectTimer);
+
+status("Connecting to Deriv live market data...");
+
+ws=new WebSocket(
 "wss://ws.binaryws.com/websockets/v3"
 );
 
-ws.onopen = function(){
+ws.onopen=function(){
 
-setConnection(
-"CONNECTED — LIVE DATA",
-true
+status(
+"CONNECTED — REQUESTING VOLATILITY MARKETS",
+"live"
 );
 
 ws.send(JSON.stringify({
 active_symbols:"brief",
+product_type:"basic",
 req_id:1
 }));
 
 };
 
-ws.onmessage = function(event){
+ws.onmessage=function(event){
 
-const data = JSON.parse(event.data);
+let data;
 
-if(data.msg_type === "active_symbols"){
+try{
+data=JSON.parse(event.data);
+}catch(e){
+return;
+}
 
-const symbols = data.active_symbols || [];
+if(data.error){
 
-const volatility = symbols.filter(function(s){
-
-const name =
-(s.underlying_symbol_name ||
- s.display_name ||
- "").toLowerCase();
-
-const market =
-(s.market || "").toLowerCase();
-
-return (
-market.includes("synthetic") &&
-name.includes("volatility")
-);
-
-});
-
-if(volatility.length === 0){
-
-setConnection(
-"Connected, but no Volatility Indices were returned.",
-false,
-true
+status(
+"Deriv error: "+data.error.message,
+"error"
 );
 
 return;
 }
 
-volatility.forEach(function(symbol){
+if(data.msg_type==="active_symbols"){
 
-const code =
-symbol.underlying_symbol ||
-symbol.symbol;
-
-const name =
-symbol.underlying_symbol_name ||
-symbol.display_name ||
-code;
-
-if(!markets[code]){
-
-markets[code] = {
-
-code:code,
-name:name,
-digits:[],
-pip:symbol.pip_size || symbol.pip || 0.01
-
-};
-
-createCard(code,name);
+buildMarkets(data.active_symbols||[]);
 
 }
 
-ws.send(JSON.stringify({
-
-ticks:code,
-subscribe:1
-
-}));
-
-subscriptions[code]=true;
-
-});
-
-return;
-}
-
-if(data.msg_type === "tick"){
+if(data.msg_type==="tick"){
 
 handleTick(data.tick);
 
 }
 
-if(data.error){
-
-setConnection(
-"Connection error: " + data.error.message,
-false,
-true
-);
-
-}
-
 };
 
-ws.onerror = function(){
+ws.onerror=function(){
 
-setConnection(
-"Unable to connect to live market data.",
-false,
-true
+status(
+"Connection error — attempting to reconnect...",
+"error"
 );
 
 };
 
-ws.onclose = function(){
+ws.onclose=function(){
 
-setConnection(
-"Connection closed. Refresh to reconnect.",
-false,
-true
+status(
+"Connection closed — reconnecting...",
+"error"
 );
+
+reconnectTimer=setTimeout(connect,5000);
 
 };
 
 }
 
-/* Create market card */
+function buildMarkets(symbols){
+
+let volatility=symbols.filter(function(s){
+
+let name=
+(s.underlying_symbol_name||
+s.display_name||
+"").toLowerCase();
+
+let market=
+(s.market||"").toLowerCase();
+
+let symbol=
+(s.underlying_symbol||
+s.symbol||
+"").toUpperCase();
+
+return(
+market==="synthetic_index" ||
+market==="synthetic" ||
+name.includes("volatility") ||
+symbol.includes("V")
+);
+
+});
+
+if(volatility.length===0){
+
+status(
+"Connected, but no Volatility Indices were returned.",
+"error"
+);
+
+return;
+}
+
+status(
+"LIVE DATA — Volatility Indices connected",
+"live"
+);
+
+volatility.forEach(function(s){
+
+let code=
+s.underlying_symbol||
+s.symbol;
+
+let name=
+s.underlying_symbol_name||
+s.display_name||
+code;
+
+if(!code)return;
+
+if(markets[code])return;
+
+markets[code]={
+name:name,
+digits:[],
+pip:s.pip_size||s.pip||0.01
+};
+
+createCard(code,name);
+
+ws.send(JSON.stringify({
+ticks:code,
+subscribe:1,
+req_id:Math.floor(Math.random()*100000)
+}));
+
+});
+
+}
 
 function createCard(code,name){
 
-const safe =
+let id=
 code.replace(/[^a-zA-Z0-9]/g,"");
 
-const card =
+let card=
 document.createElement("div");
 
 card.className="card";
-
-card.id="card-"+safe;
+card.id="card-"+id;
 
 card.innerHTML=`
 
 <h2>${name}</h2>
 
 <div class="market">
-Symbol: ${code}
+LIVE SYMBOL: ${code}
 </div>
 
-<div class="digits"
-id="digits-${safe}">
+<div class="digits" id="digits-${id}">
 Waiting for ticks...
 </div>
 
 <div class="stats">
 
 <div class="stat">
-<div class="label">
-OVER 2 — DIGITS 3–9
-</div>
-
-<div class="value"
-id="over-${safe}">
-0
-</div>
-
+<div class="label">OVER 2 — 3 TO 9</div>
+<div class="value" id="over-${id}">0</div>
 </div>
 
 <div class="stat">
-
-<div class="label">
-UNDER 7 — DIGITS 0–6
-</div>
-
-<div class="value"
-id="under-${safe}">
-0
-</div>
-
+<div class="label">UNDER 7 — 0 TO 6</div>
+<div class="value" id="under-${id}">0</div>
 </div>
 
 <div class="stat">
-
-<div class="label">
-SAMPLE SIZE
-</div>
-
-<div class="value"
-id="total-${safe}">
-0
-</div>
-
+<div class="label">SAMPLE SIZE</div>
+<div class="value" id="total-${id}">0</div>
 </div>
 
 <div class="stat">
-
-<div class="label">
-LAST DIGIT
-</div>
-
-<div class="value"
-id="last-${safe}">
--
+<div class="label">LAST DIGIT</div>
+<div class="value" id="last-${id}">-</div>
 </div>
 
 </div>
 
-</div>
-
-<div class="signal wait"
-id="signal-${safe}">
-OVER 2: WAIT
-<br>
+<div class="signal" id="signal-${id}">
+OVER 2: WAIT<br>
 UNDER 7: WAIT
 </div>
 
@@ -479,67 +438,52 @@ document
 
 }
 
-/* Get decimal places from pip size */
+function getLastDigit(price,pip){
 
-function decimalPlaces(pip){
+let decimals=0;
 
-if(!pip || pip >= 1) return 0;
+if(pip<1){
 
-let places=0;
+let p=pip;
 
-while(pip < 1 && places < 10){
-
-pip*=10;
-places++;
+while(p<1 && decimals<10){
+p*=10;
+decimals++;
+}
 
 }
 
-return places;
+let formatted=
+Number(price).toFixed(decimals);
+
+let char=
+formatted.charAt(formatted.length-1);
+
+return parseInt(char,10);
 
 }
-
-/* Process incoming tick */
 
 function handleTick(tick){
 
-if(!tick || !tick.symbol){
-return;
-}
+if(!tick)return;
 
-const code=tick.symbol;
+let code=tick.symbol;
 
-if(!markets[code]){
-return;
-}
+if(!markets[code])return;
 
-const market=markets[code];
+let market=markets[code];
 
-const places =
-decimalPlaces(market.pip);
+let digit=
+getLastDigit(
+Number(tick.quote),
+market.pip
+);
 
-let price =
-Number(tick.quote);
-
-if(!Number.isFinite(price)){
-return;
-}
-
-let formatted =
-price.toFixed(places);
-
-let lastChar =
-formatted.charAt(formatted.length-1);
-
-let digit =
-parseInt(lastChar,10);
-
-if(!Number.isInteger(digit)){
-return;
-}
+if(!Number.isInteger(digit))return;
 
 market.digits.push(digit);
 
-if(market.digits.length > 20){
+if(market.digits.length>20){
 market.digits.shift();
 }
 
@@ -547,90 +491,76 @@ updateCard(code);
 
 }
 
-/* Update market card */
-
 function updateCard(code){
 
-const market=markets[code];
+let market=markets[code];
 
-const safe =
+let id=
 code.replace(/[^a-zA-Z0-9]/g,"");
 
-const digits=market.digits;
+let digits=market.digits;
 
-const overCount =
-digits.filter(d => d >= 3).length;
+let over=
+digits.filter(d=>d>=3).length;
 
-const underCount =
-digits.filter(d => d <= 6).length;
+let under=
+digits.filter(d=>d<=6).length;
 
 document.getElementById(
-"digits-"+safe
-).textContent =
+"digits-"+id
+).textContent=
 digits.join(" ");
 
 document.getElementById(
-"over-"+safe
-).textContent =
-overCount;
+"over-"+id
+).textContent=over;
 
 document.getElementById(
-"under-"+safe
-).textContent =
-underCount;
+"under-"+id
+).textContent=under;
 
 document.getElementById(
-"total-"+safe
-).textContent =
-digits.length;
+"total-"+id
+).textContent=digits.length;
 
 document.getElementById(
-"last-"+safe
-).textContent =
-digits.length ?
-digits[digits.length-1] :
-"-";
+"last-"+id
+).textContent=
+digits.length?
+digits[digits.length-1]:"-";
 
 let overSignal="WAIT";
 let underSignal="WAIT";
 
-/*
-Basic analysis threshold.
+if(digits.length>=10){
 
-This is only a WATCH condition,
-not a trading guarantee.
-*/
+let overPercent=
+(over/digits.length)*100;
 
-if(digits.length >= 10){
+let underPercent=
+(under/digits.length)*100;
 
-const overPercent =
-(overCount/digits.length)*100;
-
-const underPercent =
-(underCount/digits.length)*100;
-
-if(overPercent >= 70){
+if(overPercent>=70){
 overSignal="WATCH";
 }
 
-if(underPercent >= 70){
+if(underPercent>=70){
 underSignal="WATCH";
 }
 
 }
 
-const signal =
+let signal=
 document.getElementById(
-"signal-"+safe
+"signal-"+id
 );
 
-signal.innerHTML =
-"OVER 2: " + overSignal +
-"<br>" +
-"UNDER 7: " + underSignal;
+signal.innerHTML=
+"OVER 2: "+overSignal+
+"<br>UNDER 7: "+underSignal;
 
 if(
-overSignal==="WATCH" ||
+overSignal==="WATCH"||
 underSignal==="WATCH"
 ){
 
@@ -638,7 +568,7 @@ signal.className="signal watch";
 
 }else{
 
-signal.className="signal wait";
+signal.className="signal";
 
 }
 
