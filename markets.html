@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Markets</title>
-
-<style>
+<title>NEXTRADE | Markets</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -52,12 +49,12 @@ nav a:hover{
 .container{
   max-width:1100px;
   margin:auto;
-  padding:50px 20px;
+  padding:45px 20px;
 }
 
 .title{
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:35px;
 }
 
 .title h1{
@@ -72,6 +69,77 @@ nav a:hover{
 .title p{
   color:#9fb1c7;
 }
+
+/* LIVE MARKET */
+
+.live-market{
+  background:#0d1b2d;
+  border:1px solid #1c3550;
+  border-radius:15px;
+  padding:25px;
+  margin-bottom:35px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.live-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.live-title{
+  color:#35a7ff;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.connection{
+  padding:7px 12px;
+  border-radius:20px;
+  background:#123a2a;
+  color:#58d68d;
+  font-size:12px;
+}
+
+.price-box{
+  margin-top:25px;
+}
+
+.symbol{
+  color:#9fb1c7;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.price{
+  font-size:42px;
+  font-weight:bold;
+}
+
+.tick-info{
+  margin-top:8px;
+  color:#9fb1c7;
+  font-size:13px;
+}
+
+.chart{
+  width:100%;
+  height:220px;
+  margin-top:25px;
+  background:#081525;
+  border:1px solid #1b3048;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+canvas{
+  width:100%;
+  height:100%;
+}
+
+/* MARKET CARDS */
 
 .market-grid{
   display:grid;
@@ -112,63 +180,218 @@ footer{
   color:#71849b;
   font-size:13px;
 }
-</style>
-</head>
 
-<body>
+@media(max-width:600px){
 
-<header>
+  header{
+    padding:16px;
+  }
 
-<div class="logo">NEXTRADE</div>
+  nav{
+    gap:12px;
+  }
 
-<nav>
+  nav a{
+    font-size:12px;
+  }
+
+  .container{
+    padding:35px 15px;
+  }
+
+  .title h1{
+    font-size:32px;
+  }
+
+  .price{
+    font-size:34px;
+  }
+}
+</style></head><body><header><div class="logo">NEXTRADE</div><nav>
 <a href="index.html">Home</a>
 <a href="markets.html">Markets</a>
 <a href="tools.html">Tools</a>
-</nav>
-
-</header>
-
-<div class="container">
-
-<div class="title">
+</nav></header><div class="container"><div class="title">
 <h1>Explore <span>Markets</span></h1>
-<p>Monitor markets and prepare your trading analysis.</p>
-</div>
-
-<div class="market-grid">
-
-<div class="market">
+<p>Monitor live markets and prepare your trading analysis.</p>
+</div><!-- LIVE DERIV MARKET --><div class="live-market"><div class="live-top"><div class="live-title">
+LIVE DERIV MARKET
+</div><div id="connection" class="connection">
+Connecting...
+</div></div><div class="price-box"><div class="symbol">
+Volatility 100 (1s) — 1HZ100V
+</div><div id="price" class="price">
+Waiting...
+</div><div class="tick-info">
+Ticks received: <span id="ticks">0</span>
+</div></div><div class="chart">
+<canvas id="priceChart"></canvas>
+</div></div><!-- MARKET CARDS --><div class="market-grid"><div class="market">
 <h3>Volatility Indices</h3>
-<p>Explore synthetic volatility markets and analyze price movements.</p>
-<span class="status">Available</span>
-</div>
-
-<div class="market">
+<p>Explore synthetic volatility markets and analyze live price movements.</p>
+<span class="status">Live</span>
+</div><div class="market">
 <h3>Major Markets</h3>
 <p>Monitor major market instruments and organize your analysis.</p>
 <span class="status">Available</span>
-</div>
-
-<div class="market">
+</div><div class="market">
 <h3>Market Analysis</h3>
 <p>Study market movements before making trading decisions.</p>
 <span class="status">Available</span>
-</div>
-
-<div class="market">
+</div><div class="market">
 <h3>Trading Signals</h3>
 <p>View market information and organize your trading analysis.</p>
 <span class="status">Coming Soon</span>
-</div>
-
-</div>
-
-</div>
-
-<footer>
+</div></div></div><footer>
 © 2026 NEXTRADE. All rights reserved.
-</footer>
+</footer><script>
 
-</body>
+const symbol = "1HZ100V";
+
+let socket;
+let tickCount = 0;
+let prices = [];
+
+const priceElement = document.getElementById("price");
+const ticksElement = document.getElementById("ticks");
+const connectionElement = document.getElementById("connection");
+
+const canvas = document.getElementById("priceChart");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+
+  const rect = canvas.getBoundingClientRect();
+
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  drawChart();
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+function setConnection(text, connected){
+
+  connectionElement.textContent = text;
+
+  if(connected){
+
+    connectionElement.style.background = "#123a2a";
+    connectionElement.style.color = "#58d68d";
+
+  }else{
+
+    connectionElement.style.background = "#3a2612";
+    connectionElement.style.color = "#f5b041";
+
+  }
+}
+
+function connect(){
+
+  setConnection("Connecting...", false);
+
+  socket = new WebSocket(
+    "wss://ws.derivws.com/websockets/v3?app_id=1089"
+  );
+
+  socket.onopen = function(){
+
+    setConnection("LIVE • Connected", true);
+
+    socket.send(JSON.stringify({
+      ticks: symbol,
+      subscribe: 1
+    }));
+
+  };
+
+  socket.onmessage = function(event){
+
+    const data = JSON.parse(event.data);
+
+    if(data.tick){
+
+      const price = Number(data.tick.quote);
+
+      tickCount++;
+
+      priceElement.textContent = price.toFixed(2);
+
+      ticksElement.textContent = tickCount;
+
+      prices.push(price);
+
+      if(prices.length > 60){
+        prices.shift();
+      }
+
+      drawChart();
+    }
+
+  };
+
+  socket.onerror = function(){
+
+    setConnection("Connection error", false);
+
+  };
+
+  socket.onclose = function(){
+
+    setConnection("Reconnecting...", false);
+
+    setTimeout(connect, 3000);
+
+  };
+
+}
+
+function drawChart(){
+
+  if(prices.length < 2){
+    return;
+  }
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0,0,width,height);
+
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+
+  const range = max - min || 1;
+
+  ctx.beginPath();
+
+  prices.forEach((price,index)=>{
+
+    const x =
+      (index / (prices.length - 1)) * width;
+
+    const y =
+      height -
+      ((price - min) / range) * (height - 20) -
+      10;
+
+    if(index === 0){
+      ctx.moveTo(x,y);
+    }else{
+      ctx.lineTo(x,y);
+    }
+
+  });
+
+  ctx.strokeStyle = "#35a7ff";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+}
+
+resizeCanvas();
+connect();
+
+</script></body>
 </html>
