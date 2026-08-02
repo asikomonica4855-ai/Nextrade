@@ -6,11 +6,7 @@
 <title>NEXTRADE | Signal Center</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Arial,sans-serif;
@@ -31,9 +27,7 @@ font-size:24px;
 font-weight:bold;
 }
 
-nav{
-margin-top:12px;
-}
+nav{margin-top:12px}
 
 nav a{
 color:white;
@@ -43,7 +37,7 @@ font-size:14px;
 }
 
 main{
-max-width:1250px;
+max-width:1100px;
 margin:auto;
 padding:30px 20px;
 }
@@ -79,17 +73,12 @@ color:#ff7777;
 font-weight:bold;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
-gap:20px;
-}
-
 .card{
 background:#0d1b2d;
 border:1px solid #1c3550;
 border-radius:12px;
 padding:20px;
+margin-bottom:20px;
 }
 
 .card h2{
@@ -97,7 +86,7 @@ color:#35a7ff;
 margin-bottom:6px;
 }
 
-.market{
+.symbol{
 color:#9fb1c7;
 font-size:13px;
 margin-bottom:15px;
@@ -111,23 +100,17 @@ margin-bottom:15px;
 font-weight:bold;
 }
 
-.good{
-color:#58d68d;
-}
-
-.caution{
-color:#ffd166;
-}
+.good{color:#58d68d}
+.caution{color:#ffd166}
 
 .digits{
 background:#07111f;
 border-radius:8px;
 padding:12px;
-font-size:17px;
+font-size:18px;
 letter-spacing:3px;
 word-break:break-word;
 margin-bottom:15px;
-min-height:45px;
 }
 
 .stats{
@@ -156,660 +139,16 @@ margin-top:5px;
 margin-top:18px;
 padding:15px;
 background:#081525;
-border-radius:9px;
 border:1px solid #1c3550;
+border-radius:9px;
 }
 
 .strategy h3{
 color:#35a7ff;
-margin-bottom:12px;
+margin-bottom:10px;
 }
 
 .conditions{
 font-size:13px;
 line-height:1.7;
-color:#cbd5e1;
-}
-
-.entry{
-margin-top:12px;
-padding:12px;
-border-radius:8px;
-text-align:center;
-font-weight:bold;
-background:#102238;
-}
-
-.watch{
-color:#ffd166;
-}
-
-.entrymet{
-color:#58d68d;
-}
-
-.avoid{
-color:#ff7777;
-}
-
-.wait{
-color:#cbd5e1;
-}
-
-.reason{
-margin-top:10px;
-font-size:12px;
-color:#9fb1c7;
-line-height:1.5;
-}
-
-.note{
-margin-top:25px;
-padding:15px;
-background:#0d1b2d;
-border:1px solid #1c3550;
-border-radius:10px;
-color:#9fb1c7;
-font-size:13px;
-line-height:1.6;
-}
-
-button{
-display:block;
-margin:20px auto 0;
-padding:11px 20px;
-border:0;
-border-radius:7px;
-background:#35a7ff;
-font-weight:bold;
-cursor:pointer;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">NEXTRADE</div>
-
-<nav>
-<a href="index.html">Home</a>
-<a href="markets.html">Markets</a>
-<a href="tools.html">Tools</a>
-<a href="bots.html">Bots</a>
-</nav>
-
-</header>
-
-<main>
-
-<h1>Signal Center</h1>
-
-<p class="subtitle">
-Live Volatility Index analysis — Over 2 & Under 7
-</p>
-
-<div id="connection" class="connection">
-Connecting to Deriv live market data...
-</div>
-
-<div id="markets" class="grid"></div>
-
-<div class="note">
-<strong>Analysis only:</strong>
-NEXTRADE does not place trades automatically. Entry statuses are
-statistical conditions created for this dashboard and are not
-guarantees of profitable trades. Always evaluate risk independently.
-</div>
-
-<button onclick="connect()">
-Reconnect
-</button>
-
-</main>
-
-<script>
-
-let ws=null;
-let reconnectTimer=null;
-let markets={};
-
-const connection=
-document.getElementById("connection");
-
-function setStatus(text,type=""){
-
-connection.textContent=text;
-connection.className=
-"connection "+type;
-
-}
-
-function connect(){
-
-clearTimeout(reconnectTimer);
-
-if(ws){
-
-try{
-ws.close();
-}catch(e){}
-
-}
-
-setStatus(
-"Connecting to Deriv live market data..."
-);
-
-ws=new WebSocket(
-"wss://api.derivws.com/trading/v1/options/ws/public"
-);
-
-ws.onopen=function(){
-
-setStatus(
-"CONNECTED — LIVE DATA",
-"live"
-);
-
-ws.send(JSON.stringify({
-active_symbols:"brief",
-req_id:1
-}));
-
-};
-
-ws.onmessage=function(event){
-
-let data;
-
-try{
-data=JSON.parse(event.data);
-}catch(e){
-return;
-}
-
-if(data.errors){
-
-setStatus(
-"Deriv error: "+
-JSON.stringify(data.errors),
-"error"
-);
-
-return;
-}
-
-if(data.msg_type==="active_symbols"){
-
-loadSymbols(
-data.active_symbols||[]
-);
-
-}
-
-if(data.msg_type==="tick"){
-
-processTick(data.tick);
-
-}
-
-};
-
-ws.onerror=function(){
-
-setStatus(
-"WebSocket error — reconnecting...",
-"error"
-);
-
-};
-
-ws.onclose=function(){
-
-setStatus(
-"Connection closed — reconnecting...",
-"error"
-);
-
-reconnectTimer=
-setTimeout(connect,5000);
-
-};
-
-}
-
-function loadSymbols(symbols){
-
-const volatility=
-symbols.filter(function(s){
-
-const type=
-(s.underlying_symbol_type||"")
-.toLowerCase();
-
-const name=
-(s.underlying_symbol_name||"")
-.toLowerCase();
-
-return(
-type.includes("synthetic") ||
-name.includes("volatility")
-);
-
-});
-
-if(volatility.length===0){
-
-setStatus(
-"Connected, but no Volatility Indices were returned.",
-"error"
-);
-
-return;
-}
-
-setStatus(
-"LIVE DATA — Volatility Indices connected",
-"live"
-);
-
-volatility.forEach(function(s){
-
-const code=
-s.underlying_symbol;
-
-const name=
-s.underlying_symbol_name||code;
-
-if(!code)return;
-
-if(markets[code])return;
-
-markets[code]={
-name:name,
-digits:[],
-pip:s.pip_size||0.01
-};
-
-createCard(code,name);
-
-ws.send(JSON.stringify({
-
-ticks:code,
-subscribe:1,
-req_id:
-Math.floor(Math.random()*1000000)
-
-}));
-
-});
-
-}
-
-function createCard(code,name){
-
-const id=
-code.replace(/[^a-zA-Z0-9]/g,"");
-
-const card=
-document.createElement("div");
-
-card.className="card";
-
-card.innerHTML=`
-
-<h2>${name}</h2>
-
-<div class="market">
-LIVE SYMBOL: ${code}
-</div>
-
-<div class="rating"
-id="rating-${id}">
-MARKET RATING: ANALYZING
-</div>
-
-<div class="digits"
-id="digits-${id}">
-Waiting for live ticks...
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<div class="label">
-OVER 2 — 3 TO 9
-</div>
-<div class="value"
-id="over-${id}">
-0%
-</div>
-</div>
-
-<div class="stat">
-<div class="label">
-UNDER 7 — 0 TO 6
-</div>
-<div class="value"
-id="under-${id}">
-0%
-</div>
-</div>
-
-<div class="stat">
-<div class="label">
-SAMPLE SIZE
-</div>
-<div class="value"
-id="total-${id}">
-0
-</div>
-</div>
-
-<div class="stat">
-<div class="label">
-LAST DIGIT
-</div>
-<div class="value"
-id="last-${id}">
--
-</div>
-</div>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>OVER 2</h3>
-
-<div class="conditions"
-id="overConditions-${id}">
-Waiting for enough data...
-</div>
-
-<div class="entry wait"
-id="overEntry-${id}">
-ENTRY: WAIT
-</div>
-
-<div class="reason"
-id="overReason-${id}">
-Collecting data.
-</div>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>UNDER 7</h3>
-
-<div class="conditions"
-id="underConditions-${id}">
-Waiting for enough data...
-</div>
-
-<div class="entry wait"
-id="underEntry-${id}">
-ENTRY: WAIT
-</div>
-
-<div class="reason"
-id="underReason-${id}">
-Collecting data.
-</div>
-
-</div>
-
-`;
-
-document
-.getElementById("markets")
-.appendChild(card);
-
-}
-
-function getDecimals(pip){
-
-if(!pip||pip>=1)return 0;
-
-let count=0;
-
-while(
-pip<1 &&
-count<10
-){
-
-pip*=10;
-count++;
-
-}
-
-return count;
-
-}
-
-function processTick(tick){
-
-if(!tick||!tick.symbol)return;
-
-const code=
-tick.symbol;
-
-if(!markets[code])return;
-
-const market=
-markets[code];
-
-const decimals=
-getDecimals(market.pip);
-
-const price=
-Number(tick.quote);
-
-if(!Number.isFinite(price))
-return;
-
-const formatted=
-price.toFixed(decimals);
-
-const digit=
-parseInt(
-formatted.charAt(
-formatted.length-1
-),
-10
-);
-
-if(!Number.isInteger(digit))
-return;
-
-market.digits.push(digit);
-
-if(market.digits.length>30){
-
-market.digits.shift();
-
-}
-
-updateCard(code);
-
-}
-
-function updateCard(code){
-
-const market=
-markets[code];
-
-const id=
-code.replace(
-/[^a-zA-Z0-9]/g,
-""
-);
-
-const digits=
-market.digits;
-
-const total=
-digits.length;
-
-if(total===0)return;
-
-const over=
-digits.filter(
-d=>d>=3
-).length;
-
-const under=
-digits.filter(
-d=>d<=6
-).length;
-
-const overRate=
-(over/total)*100;
-
-const underRate=
-(under/total)*100;
-
-document.getElementById(
-"digits-"+id
-).textContent=
-digits.join(" ");
-
-document.getElementById(
-"over-"+id
-).textContent=
-overRate.toFixed(0)+"%";
-
-document.getElementById(
-"under-"+id
-).textContent=
-underRate.toFixed(0)+"%";
-
-document.getElementById(
-"total-"+id
-).textContent=
-total;
-
-document.getElementById(
-"last-"+id
-).textContent=
-digits[digits.length-1];
-
-
-/* MARKET RATING */
-
-let rating="CAUTION";
-let ratingClass="caution";
-
-if(total>=20){
-
-rating="GOOD";
-ratingClass="good";
-
-}
-
-const ratingElement=
-document.getElementById(
-"rating-"+id
-);
-
-ratingElement.textContent=
-"MARKET RATING: "+rating;
-
-ratingElement.className=
-"rating "+ratingClass;
-
-
-/* OVER 2 CONDITIONS */
-
-let overMet=0;
-
-if(overRate>=60)
-overMet++;
-
-if(total>=20)
-overMet++;
-
-if(digits[digits.length-1]>=3)
-overMet++;
-
-let overEntry="WAIT";
-let overClass="wait";
-
-if(total<10){
-
-overEntry="WAIT";
-
-}else if(overMet>=3){
-
-overEntry="ENTRY CONDITION MET";
-overClass="entrymet";
-
-}else if(overMet===2){
-
-overEntry="WATCH";
-overClass="watch";
-
-}else{
-
-overEntry="AVOID";
-overClass="avoid";
-
-}
-
-document.getElementById(
-"overConditions-"+id
-).innerHTML=
-"Over 2 frequency: "+
-overRate.toFixed(1)+"%<br>"+
-"Sample requirement: "+
-(total>=20?"MET":"NOT MET")+"<br>"+
-"Last digit condition: "+
-(digits[digits.length-1]>=3?
-"MET":"NOT MET")+"<br>"+
-"Conditions met: "+
-overMet+"/3";
-
-const overEntryElement=
-document.getElementById(
-"overEntry-"+id
-);
-
-overEntryElement.textContent=
-"ENTRY: "+overEntry;
-
-overEntryElement.className=
-"entry "+overClass;
-
-document.getElementById(
-"overReason-"+id
-).textContent=
-getReason(
-"Over 2",
-overMet,
-total,
-overRate
-);
-
-
-/* UNDER 7 CONDITIONS */
-
-let underMet=0;
-
-if(underRate>=60)
-underMet++;
-
-if(total>=20)
-underMet++;
-
-if(digits[digits.length-1]<=6)
-underMet++;
-
-let underEntry="WAIT";
-let underClass="wait";
-
-if
+color:#cbd
