@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Deriv Live Test</title>
+<title>NEXTRADE Deriv Test</title>
 </head>
 
 <body style="font-family:Arial;background:#07111f;color:white;padding:25px">
@@ -13,52 +13,111 @@
 <p id="status">Connecting...</p>
 <p>Symbol: 1HZ100V</p>
 <p>Ticks received: <b id="count">0</b></p>
+
 <h1 id="price">---</h1>
 
 <script>
 
-const status = document.getElementById("status");
-const price = document.getElementById("price");
-const count = document.getElementById("count");
+const status =
+  document.getElementById("status");
+
+const price =
+  document.getElementById("price");
+
+const count =
+  document.getElementById("count");
+
 
 let ticks = 0;
 
+
+/*
+CURRENT OFFICIAL DERIV
+PUBLIC MARKET-DATA ENDPOINT
+*/
+
 const ws = new WebSocket(
-  "wss://ws.binaryws.com/websockets/v3"
+  "wss://api.derivws.com/trading/v1/options/ws/public"
 );
+
 
 ws.onopen = function(){
 
   status.textContent =
-    "CONNECTED — waiting for ticks";
+    "CONNECTED — subscribing...";
 
-  ws.send(JSON.stringify({
-    ticks: "1HZ100V",
-    subscribe: 1
-  }));
+
+  ws.send(
+    JSON.stringify({
+
+      ticks: "1HZ100V",
+
+      subscribe: 1,
+
+      req_id: 1
+
+    })
+  );
 
 };
 
+
 ws.onmessage = function(event){
 
-  const data = JSON.parse(event.data);
+  let data;
 
-  console.log(data);
+  try{
 
-  if(data.error){
+    data =
+      JSON.parse(event.data);
 
-    status.textContent =
-      "ERROR: " +
-      data.error.message;
-
-    return;
   }
 
-  if(data.msg_type === "tick"){
+  catch(error){
+
+    status.textContent =
+      "Could not read response.";
+
+    return;
+
+  }
+
+
+  console.log(
+    "DERIV:",
+    data
+  );
+
+
+  /*
+  Current API error format
+  */
+
+  if(data.errors){
+
+    status.textContent =
+      "DERIV ERROR: " +
+      data.errors[0].code +
+      " — " +
+      data.errors[0].message;
+
+    return;
+
+  }
+
+
+  /*
+  Tick received
+  */
+
+  if(
+    data.msg_type === "tick"
+  ){
 
     ticks++;
 
-    count.textContent = ticks;
+    count.textContent =
+      ticks;
 
     price.textContent =
       data.tick.quote;
@@ -70,6 +129,7 @@ ws.onmessage = function(event){
 
 };
 
+
 ws.onerror = function(){
 
   status.textContent =
@@ -77,11 +137,17 @@ ws.onerror = function(){
 
 };
 
+
 ws.onclose = function(event){
 
   status.textContent =
     "CLOSED — code " +
-    event.code;
+    event.code +
+    (
+      event.reason
+      ? " — " + event.reason
+      : ""
+    );
 
 };
 
