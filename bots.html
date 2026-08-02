@@ -1,1 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXTRADE | Bots</title>
 
+<style>
+body{
+font-family:Arial;
+background:#07111f;
+color:white;
+margin:0;
+}
+
+header{
+padding:20px;
+background:#081525;
+border-bottom:1px solid #1b3048;
+}
+
+.logo{
+color:#35a7ff;
+font-size:24px;
+font-weight:bold;
+}
+
+nav{
+margin-top:12px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-right:18px;
+}
+
+main{
+padding:35px 20px;
+max-width:1000px;
+margin:auto;
+}
+
+h1{
+color:#35a7ff;
+text-align:center;
+}
+
+.subtitle{
+text-align:center;
+color:#9fb1c7;
+margin-bottom:30px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.bot{
+background:#0d1b2d;
+border:1px solid #1c3550;
+border-radius:12px;
+padding:25px;
+}
+
+.bot h2{
+color:#35a7ff;
+}
+
+.bot p{
+color:#9fb1c7;
+line-height:1.5;
+}
+
+.status{
+margin:20px 0;
+padding:12px;
+background:#07111f;
+border-radius:8px;
+color:#9fb1c7;
+}
+
+button{
+background:#35a7ff;
+border:0;
+padding:11px 18px;
+border-radius:7px;
+font-weight:bold;
+cursor:pointer;
+margin-right:8px;
+}
+
+.stop{
+background:#26384d;
+color:white;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#71849b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">NEXTRADE</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+<a href="bots.html">Bots</a>
+</nav>
+
+</header>
+
+<main>
+
+<h1>Trading Bots</h1>
+
+<p class="subtitle">
+Analysis bots for Over 2 and Under 7 strategies.
+</p>
+
+<div class="grid">
+
+<div class="bot">
+
+<h2>Over 2 Bot</h2>
+
+<p>
+Analyzes digit results and looks for conditions
+that may support an Over 2 setup.
+</p>
+
+<div class="status" id="overStatus">
+Status: STOPPED
+</div>
+
+<button onclick="startOver()">
+Start Bot
+</button>
+
+<button class="stop" onclick="stopOver()">
+Stop
+</button>
+
+</div>
+
+
+<div class="bot">
+
+<h2>Under 7 Bot</h2>
+
+<p>
+Analyzes digit results and looks for conditions
+that may support an Under 7 setup.
+</p>
+
+<div class="status" id="underStatus">
+Status: STOPPED
+</div>
+
+<button onclick="startUnder()">
+Start Bot
+</button>
+
+<button class="stop" onclick="stopUnder()">
+Stop
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 NEXTRADE
+</footer>
+
+
+<script>
+
+function startOver(){
+document.getElementById("overStatus").innerHTML =
+"Status: WATCHING — Over 2 analysis active";
+}
+
+function stopOver(){
+document.getElementById("overStatus").innerHTML =
+"Status: STOPPED";
+}
+
+function startUnder(){
+document.getElementById("underStatus").innerHTML =
+"Status: WATCHING — Under 7 analysis active";
+}
+
+function stopUnder(){
+document.getElementById("underStatus").innerHTML =
+"Status: STOPPED";
+}
+
+</script>
+
+</body>
+</html>
