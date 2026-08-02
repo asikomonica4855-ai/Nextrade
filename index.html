@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXTRADE | Smart Trading</title>
 
 <style>
@@ -12,168 +13,436 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#07111f;
-  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#050d18;
+  color:#fff;
   min-height:100vh;
 }
 
+/* HEADER */
 header{
-  padding:18px 25px;
+  position:sticky;
+  top:0;
+  z-index:100;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border-bottom:1px solid #1b3048;
-  background:#081525;
-  position:sticky;
-  top:0;
-  z-index:10;
+  padding:17px 6%;
+  background:rgba(5,13,24,.94);
+  border-bottom:1px solid #17314d;
+  backdrop-filter:blur(12px);
 }
 
 .logo{
-  font-size:25px;
-  font-weight:bold;
-  color:#35a7ff;
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:1px;
+  color:#fff;
+}
+
+.logo span{
+  color:#20a4ff;
 }
 
 nav{
   display:flex;
-  gap:20px;
+  gap:25px;
+  align-items:center;
 }
 
 nav a{
-  color:#cbd5e1;
+  color:#aebfd2;
   text-decoration:none;
   font-size:14px;
+  transition:.2s;
 }
 
 nav a:hover{
-  color:#35a7ff;
+  color:#20a4ff;
 }
 
+.menu{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* HERO */
 .hero{
-  text-align:center;
-  padding:90px 20px 70px;
+  position:relative;
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  padding:80px 6%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 75% 30%,rgba(0,137,255,.18),transparent 35%),
+    radial-gradient(circle at 15% 70%,rgba(0,80,170,.15),transparent 30%);
+}
+
+.hero-content{
+  width:52%;
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 13px;
+  border:1px solid #245477;
+  border-radius:20px;
+  color:#55baff;
+  background:#0b2135;
+  font-size:12px;
+  margin-bottom:22px;
 }
 
 .hero h1{
-  font-size:48px;
-  margin-bottom:20px;
+  font-size:clamp(42px,6vw,72px);
+  line-height:1.02;
+  margin-bottom:22px;
 }
 
 .hero h1 span{
-  color:#35a7ff;
+  color:#20a4ff;
 }
 
 .hero p{
-  color:#9fb1c7;
-  max-width:650px;
-  margin:auto;
-  line-height:1.7;
+  color:#9fb2c7;
   font-size:17px;
+  line-height:1.7;
+  max-width:600px;
+  margin-bottom:32px;
 }
 
 .buttons{
-  margin-top:32px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
 }
 
-button{
-  border:none;
-  padding:14px 25px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-  margin:6px;
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  padding:15px 25px;
+  border-radius:9px;
+  font-weight:700;
   font-size:14px;
+  transition:.25s;
 }
 
 .primary{
-  background:#35a7ff;
-  color:#06101c;
-}
-
-.secondary{
-  background:transparent;
+  background:#159cf0;
   color:white;
-  border:1px solid #36516d;
+  box-shadow:0 10px 30px rgba(21,156,240,.2);
 }
 
 .primary:hover{
-  background:#64bcff;
+  transform:translateY(-2px);
+  background:#35adff;
+}
+
+.secondary{
+  border:1px solid #294963;
+  color:#fff;
+  background:#0a1726;
 }
 
 .secondary:hover{
-  background:#10263d;
+  border-color:#20a4ff;
+}
+
+/* TRADING MONITOR */
+.hero-visual{
+  position:absolute;
+  right:5%;
+  width:45%;
+  max-width:620px;
+  z-index:1;
+}
+
+.monitor{
+  background:#0a1524;
+  border:1px solid #25435e;
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  transform:perspective(900px) rotateY(-8deg) rotateX(3deg);
+}
+
+.monitor-top{
+  display:flex;
+  justify-content:space-between;
+  color:#7f96aa;
+  font-size:11px;
+  padding:4px 6px 12px;
+}
+
+.chart{
+  height:300px;
+  position:relative;
+  overflow:hidden;
+  border-radius:10px;
+  background:
+    linear-gradient(rgba(35,76,105,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(35,76,105,.16) 1px,transparent 1px),
+    #07111d;
+  background-size:45px 45px;
+}
+
+.chart svg{
+  width:100%;
+  height:100%;
+}
+
+.price{
+  position:absolute;
+  right:12px;
+  top:22px;
+  padding:6px 9px;
+  background:#087dca;
+  border-radius:5px;
+  font-size:11px;
+}
+
+.dollar{
+  position:absolute;
+  font-size:150px;
+  font-weight:900;
+  color:rgba(32,164,255,.045);
+  right:5%;
+  bottom:-25px;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  max-width:1100px;
+  margin:-35px auto 0;
+  position:relative;
+  z-index:5;
+  padding:0 6%;
+}
+
+.stat{
+  background:#0b1827;
+  border:1px solid #1b354e;
+  border-radius:12px;
+  padding:22px;
+}
+
+.stat strong{
+  display:block;
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.stat span{
+  color:#71869b;
+  font-size:12px;
+}
+
+/* SECTIONS */
+section{
+  padding:90px 6%;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title h2{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.section-title p{
+  color:#8196aa;
+  max-width:600px;
+  margin:auto;
+  line-height:1.6;
 }
 
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  padding:20px;
-  max-width:1050px;
+  max-width:1100px;
   margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
 .card{
-  background:#0d1b2d;
-  border:1px solid #1c3550;
-  padding:28px 22px;
+  background:#0a1625;
+  border:1px solid #19344d;
+  border-radius:15px;
+  padding:30px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#1c8bd0;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:12px;
-  text-align:center;
+  background:#0b2b45;
+  color:#35adff;
+  font-size:22px;
+  margin-bottom:20px;
 }
 
 .card h3{
   margin-bottom:12px;
-  color:#35a7ff;
 }
 
 .card p{
-  color:#9fb1c7;
+  color:#8499ad;
   line-height:1.6;
+  font-size:14px;
 }
 
-footer{
+/* MARKETS PREVIEW */
+.market-section{
+  background:#07121f;
+}
+
+.market-table{
+  max-width:1000px;
+  margin:auto;
+  background:#0a1726;
+  border:1px solid #1a344d;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.market-row{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  padding:18px 22px;
+  border-bottom:1px solid #152b40;
+  align-items:center;
+}
+
+.market-row:last-child{
+  border-bottom:none;
+}
+
+.market-head{
+  color:#70869a;
+  font-size:12px;
+}
+
+.up{
+  color:#29d391;
+}
+
+.live{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#6f8498;
+  font-size:12px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  background:#28d58f;
+  border-radius:50%;
+}
+
+/* CTA */
+.cta{
   text-align:center;
-  padding:50px 20px 30px;
-  color:#71849b;
-  font-size:13px;
+  background:
+    radial-gradient(circle,rgba(0,132,255,.18),transparent 50%),
+    #07111e;
 }
 
-/* Mobile */
-@media(max-width:600px){
+.cta h2{
+  font-size:40px;
+  margin-bottom:15px;
+}
 
-  header{
-    padding:16px;
-  }
+.cta p{
+  color:#879caf;
+  margin-bottom:28px;
+}
 
-  .logo{
-    font-size:21px;
-  }
+/* FOOTER */
+footer{
+  border-top:1px solid #172c40;
+  padding:30px 6%;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#657b8f;
+  font-size:12px;
+}
+
+/* MOBILE */
+@media(max-width:850px){
 
   nav{
-    gap:10px;
+    display:none;
   }
 
-  nav a{
-    font-size:12px;
+  .menu{
+    display:block;
   }
 
   .hero{
-    padding:70px 18px 50px;
+    min-height:auto;
+    padding-top:65px;
+    padding-bottom:40px;
+  }
+
+  .hero-content{
+    width:100%;
+  }
+
+  .hero-visual{
+    display:none;
   }
 
   .hero h1{
-    font-size:34px;
+    font-size:48px;
   }
 
-  .hero p{
-    font-size:15px;
+  .stats{
+    grid-template-columns:1fr;
+    margin-top:20px;
   }
 
   .cards{
-    padding:15px;
+    grid-template-columns:1fr;
+  }
+
+  .market-row{
+    grid-template-columns:1.7fr 1fr 1fr;
+    font-size:12px;
+  }
+
+  section{
+    padding:65px 5%;
+  }
+
+  footer{
+    flex-direction:column;
   }
 }
 </style>
@@ -182,84 +451,228 @@ footer{
 <body>
 
 <header>
-
-  <div class="logo">NEXTRADE</div>
+  <div class="logo">NEX<span>TRADE</span></div>
 
   <nav>
     <a href="index.html">Home</a>
     <a href="markets.html">Markets</a>
-    <a href="tools.html">Tools</a>
+    <a href="#tools">Tools</a>
+    <a href="#analysis">Analysis</a>
   </nav>
 
+  <div class="menu">☰</div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
 
-  <h1>
-    Trade Smarter with <span>NEXTRADE</span>
-  </h1>
+  <div class="hero-content">
 
-  <p>
-    A modern trading platform designed for market analysis,
-    manual trading, signals and powerful trading tools.
-  </p>
+    <div class="badge">● LIVE MARKET TECHNOLOGY</div>
 
-  <div class="buttons">
+    <h1>
+      Trade smarter.<br>
+      <span>See the market.</span>
+    </h1>
 
-    <button
-      class="primary"
-      onclick="window.location.href='markets.html'">
-      Get Started
-    </button>
+    <p>
+      NEXTRADE gives traders a clean environment to monitor live markets,
+      study price movement and make smarter trading decisions.
+    </p>
 
-    <button
-      class="secondary"
-      onclick="window.location.href='markets.html'">
-      Explore Markets
-    </button>
+    <div class="buttons">
+      <a href="markets.html" class="btn primary">Explore Markets →</a>
+      <a href="#tools" class="btn secondary">Trading Tools</a>
+    </div>
+
+  </div>
+
+  <div class="hero-visual">
+
+    <div class="monitor">
+
+      <div class="monitor-top">
+        <span>NEXTRADE • LIVE CHART</span>
+        <span>MARKET OPEN</span>
+      </div>
+
+      <div class="chart">
+
+        <div class="price">LIVE</div>
+
+        <svg viewBox="0 0 700 300" preserveAspectRatio="none">
+
+          <polyline
+            points="0,235 35,220 60,245 95,205 125,215
+                    160,175 190,190 220,145 250,160
+                    280,130 315,145 345,100 380,120
+                    415,90 450,105 485,70 520,85
+                    555,50 590,70 625,35 665,55 700,25"
+            fill="none"
+            stroke="#25a8ff"
+            stroke-width="4"
+          />
+
+          <polyline
+            points="0,265 35,250 70,270 105,240 140,250
+                    175,215 210,230 245,190 280,205
+                    315,165 350,180 385,145 420,160
+                    455,125 490,140 525,100 560,120
+                    595,85 630,100 665,65 700,80"
+            fill="none"
+            stroke="#1c557b"
+            stroke-width="2"
+          />
+
+        </svg>
+
+      </div>
+
+    </div>
+
+    <div class="dollar">$</div>
 
   </div>
 
 </section>
 
-<section class="cards">
+<!-- STATS -->
+<div class="stats">
 
-  <div class="card">
-    <h3>Manual Trading</h3>
+  <div class="stat">
+    <strong>LIVE</strong>
+    <span>Market data</span>
+  </div>
+
+  <div class="stat">
+    <strong>10+</strong>
+    <span>Markets to monitor</span>
+  </div>
+
+  <div class="stat">
+    <strong>24/7</strong>
+    <span>Market monitoring</span>
+  </div>
+
+</div>
+
+<!-- TOOLS -->
+<section id="tools">
+
+  <div class="section-title">
+    <h2>Everything you need</h2>
     <p>
-      A clean workspace designed for manual trading
-      and market observation.
+      A simple trading environment designed to help you understand
+      the market before making a decision.
     </p>
   </div>
 
-  <div class="card">
-    <h3>Market Analysis</h3>
+  <div class="cards">
+
+    <div class="card">
+      <div class="icon">⌁</div>
+      <h3>Manual Trading</h3>
+      <p>
+        Monitor price movement and use a clean interface designed
+        for manual market analysis.
+      </p>
+    </div>
+
+    <div class="card" id="analysis">
+      <div class="icon">◈</div>
+      <h3>Market Analysis</h3>
+      <p>
+        Study live price movement through charts and market data
+        before entering a trade.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚙</div>
+      <h3>Trading Tools</h3>
+      <p>
+        Access useful tools designed to make market monitoring
+        faster and easier.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MARKET PREVIEW -->
+<section class="market-section">
+
+  <div class="section-title">
+    <h2>Live Markets</h2>
     <p>
-      Analyze market movements and identify potential
-      trading opportunities.
+      Quickly check the markets available on NEXTRADE.
     </p>
   </div>
 
-  <div class="card">
-    <h3>Trading Tools</h3>
-    <p>
-      Access useful tools and indicators from one
-      convenient workspace.
-    </p>
+  <div class="market-table">
+
+    <div class="market-row market-head">
+      <span>MARKET</span>
+      <span>STATUS</span>
+      <span>CHANGE</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 100 (1s)</strong>
+      <span class="live"><i class="dot"></i>Live</span>
+      <span class="up">+0.00%</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 75 (1s)</strong>
+      <span class="live"><i class="dot"></i>Live</span>
+      <span class="up">+0.00%</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 50 (1s)</strong>
+      <span class="live"><i class="dot"></i>Live</span>
+      <span class="up">+0.00%</span>
+    </div>
+
+    <div class="market-row">
+      <strong>Volatility 25 (1s)</strong>
+      <span class="live"><i class="dot"></i>Live</span>
+      <span class="up">+0.00%</span>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h3>Signals</h3>
-    <p>
-      View market information and organize your
-      trading analysis.
-    </p>
+  <div style="text-align:center;margin-top:28px;">
+    <a href="markets.html" class="btn primary">View All Markets →</a>
   </div>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+
+  <h2>Ready to explore the markets?</h2>
+
+  <p>
+    Open NEXTRADE and start analyzing live market movement.
+  </p>
+
+  <a href="markets.html" class="btn primary">
+    Get Started →
+  </a>
 
 </section>
 
 <footer>
-  © 2026 NEXTRADE. All rights reserved.
+
+  <span>© 2026 NEXTRADE</span>
+
+  <span>
+    Smart market analysis platform
+  </span>
+
 </footer>
 
 </body>
