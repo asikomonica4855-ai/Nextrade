@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE | Markets</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #1b3048;
+  background:#081525;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+  color:#35a7ff;
+}
+
+nav{
+  display:flex;
+  gap:20px;
+}
+
+nav a{
+  color:#cbd5e1;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#35a7ff;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:50px 20px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.title h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.title h1 span{
+  color:#35a7ff;
+}
+
+.title p{
+  color:#9fb1c7;
+}
+
+.market-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+
+.market{
+  background:#0d1b2d;
+  border:1px solid #1c3550;
+  border-radius:12px;
+  padding:25px;
+}
+
+.market h3{
+  color:#35a7ff;
+  margin-bottom:10px;
+}
+
+.market p{
+  color:#9fb1c7;
+  line-height:1.6;
+}
+
+.status{
+  margin-top:18px;
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#123a2a;
+  color:#58d68d;
+  font-size:12px;
+}
+
+footer{
+  text-align:center;
+  padding:50px 20px 30px;
+  color:#71849b;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">NEXTRADE</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="title">
+<h1>Explore <span>Markets</span></h1>
+<p>Monitor markets and prepare your trading analysis.</p>
+</div>
+
+<div class="market-grid">
+
+<div class="market">
+<h3>Volatility Indices</h3>
+<p>Explore synthetic volatility markets and analyze price movements.</p>
+<span class="status">Available</span>
+</div>
+
+<div class="market">
+<h3>Major Markets</h3>
+<p>Monitor major market instruments and organize your analysis.</p>
+<span class="status">Available</span>
+</div>
+
+<div class="market">
+<h3>Market Analysis</h3>
+<p>Study market movements before making trading decisions.</p>
+<span class="status">Available</span>
+</div>
+
+<div class="market">
+<h3>Trading Signals</h3>
+<p>View market information and organize your trading analysis.</p>
+<span class="status">Coming Soon</span>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 NEXTRADE. All rights reserved.
+</footer>
+
+</body>
+</html>
