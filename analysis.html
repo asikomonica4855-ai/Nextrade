@@ -2,17 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXTRADE | Analysis</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
 background:#050b12;
 color:#fff;
-min-height:100vh
+min-height:100vh;
 }
 
 header{
@@ -25,20 +30,23 @@ justify-content:space-between;
 padding:12px 5%;
 position:sticky;
 top:0;
-z-index:100
+z-index:100;
 }
 
 .logo{
 font-size:25px;
-font-weight:800
+font-weight:800;
+white-space:nowrap;
 }
 
-.logo span{color:#159ff0}
+.logo span{
+color:#159ff0;
+}
 
 .nav{
 display:flex;
 gap:4px;
-overflow-x:auto
+overflow-x:auto;
 }
 
 .nav a{
@@ -48,43 +56,45 @@ font-size:10px;
 font-weight:bold;
 padding:10px;
 white-space:nowrap;
-border-radius:6px
+border-radius:6px;
 }
 
 .nav a:hover{
 background:#102536;
-color:#fff
+color:#fff;
 }
 
-.nav a.active{color:#159ff0}
+.nav a.active{
+color:#159ff0;
+}
 
 .nav .signup{
 background:#159ff0;
-color:#fff
+color:#fff;
 }
 
 .page{
 width:92%;
 max-width:1400px;
 margin:auto;
-padding:40px 0 70px
+padding:40px 0 70px;
 }
 
 .heading{
 display:flex;
 justify-content:space-between;
 align-items:flex-end;
-margin-bottom:25px
+margin-bottom:25px;
 }
 
 .heading h1{
 font-size:34px;
-margin-bottom:8px
+margin-bottom:8px;
 }
 
 .heading p{
 font-size:12px;
-color:#71899a
+color:#71899a;
 }
 
 .status{
@@ -92,24 +102,26 @@ display:flex;
 gap:8px;
 align-items:center;
 font-size:9px;
-color:#8ea5b7
+color:#8ea5b7;
 }
 
 .status-dot{
 width:9px;
 height:9px;
 border-radius:50%;
-background:#f0ad28
+background:#f0ad28;
 }
 
 .status-dot.live{
 background:#2edb9c;
-box-shadow:0 0 10px #2edb9c
+box-shadow:0 0 10px #2edb9c;
 }
 
-.status-dot.error{background:#ff5969}
+.status-dot.error{
+background:#ff5969;
+}
 
-/* SELECTOR */
+/* MARKET */
 
 .selector{
 background:#08131f;
@@ -119,13 +131,13 @@ padding:18px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:18px
+margin-bottom:18px;
 }
 
 .selector-title{
 font-size:8px;
 color:#60788a;
-margin-bottom:7px
+margin-bottom:7px;
 }
 
 select{
@@ -134,15 +146,16 @@ color:#fff;
 border:1px solid #23465d;
 border-radius:7px;
 padding:10px;
-font-size:11px
+font-size:11px;
+outline:none;
 }
 
 .price{
 font-size:25px;
-font-weight:bold
+font-weight:bold;
 }
 
-/* SAMPLE STATUS */
+/* SAMPLE */
 
 .sample-status{
 margin-bottom:18px;
@@ -152,42 +165,42 @@ background:#07131e;
 border:1px solid #193247;
 display:flex;
 align-items:center;
-justify-content:space-between
+justify-content:space-between;
 }
 
 .sample-left{
 display:flex;
 align-items:center;
-gap:12px
+gap:12px;
 }
 
 .sample-icon{
 width:10px;
 height:10px;
 border-radius:50%;
-background:#f0ad28
+background:#f0ad28;
 }
 
 .sample-icon.full{
 background:#2edb9c;
-box-shadow:0 0 10px #2edb9c
+box-shadow:0 0 10px #2edb9c;
 }
 
 .sample-title{
 font-size:11px;
-font-weight:bold
+font-weight:bold;
 }
 
 .sample-sub{
 font-size:8px;
 color:#60788a;
-margin-top:4px
+margin-top:4px;
 }
 
 .sample-percent{
 font-size:18px;
 font-weight:bold;
-color:#159ff0
+color:#159ff0;
 }
 
 /* SCANNER */
@@ -196,30 +209,35 @@ color:#159ff0
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
-padding:22px
+padding:22px;
 }
 
 .scanner-head{
 display:flex;
 justify-content:space-between;
-margin-bottom:8px
+margin-bottom:8px;
 }
 
 .scanner-head h2{
-font-size:15px
+font-size:15px;
+}
+
+.sample-count{
+font-size:9px;
+color:#60788a;
 }
 
 .description{
 font-size:9px;
 line-height:1.6;
 color:#647d8e;
-margin-bottom:25px
+margin-bottom:25px;
 }
 
 .digits{
 display:grid;
 grid-template-columns:repeat(10,1fr);
-gap:10px
+gap:10px;
 }
 
 .digit{
@@ -235,24 +253,36 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-transition:.2s
+transition:.2s;
+}
+
+.rank{
+position:absolute;
+top:-5px;
+right:-5px;
+font-size:7px;
+background:#102536;
+border:1px solid #29485c;
+border-radius:20px;
+padding:4px 6px;
+color:#7891a2;
 }
 
 .digit-number{
 font-size:22px;
-font-weight:bold
+font-weight:bold;
 }
 
 .digit-percent{
 font-size:10px;
 color:#8da3b2;
-margin-top:3px
+margin-top:3px;
 }
 
 .digit-count{
 font-size:8px;
 color:#60788a;
-margin-top:2px
+margin-top:2px;
 }
 
 .badge{
@@ -263,43 +293,98 @@ font-weight:bold;
 padding:4px 7px;
 border-radius:20px;
 background:#102536;
-border:1px solid #29485c
+border:1px solid #29485c;
+display:none;
 }
 
 .digit.strong{
 border-color:#2edb9c;
 background:#09231e;
-box-shadow:0 0 18px rgba(46,219,156,.45)
+box-shadow:0 0 18px rgba(46,219,156,.45);
 }
 
 .digit.strong .digit-number,
 .digit.strong .digit-percent{
-color:#2edb9c
+color:#2edb9c;
 }
 
 .digit.strong .badge{
 color:#2edb9c;
-border-color:#2edb9c
+border-color:#2edb9c;
 }
 
 .digit.weak{
 border-color:#ff5969;
 background:#241216;
-box-shadow:0 0 18px rgba(255,89,105,.3)
+box-shadow:0 0 18px rgba(255,89,105,.3);
 }
 
 .digit.weak .digit-number,
 .digit.weak .digit-percent{
-color:#ff5969
+color:#ff5969;
 }
 
 .digit.weak .badge{
 color:#ff5969;
-border-color:#ff5969
+border-color:#ff5969;
 }
 
 .digit.flash{
-transform:scale(1.08)
+transform:scale(1.08);
+}
+
+/* RANKING */
+
+.ranking{
+margin-top:20px;
+border-top:1px solid #193247;
+padding-top:18px;
+}
+
+.ranking-title{
+font-size:10px;
+font-weight:bold;
+margin-bottom:12px;
+color:#8ea5b7;
+}
+
+.rank-row{
+display:grid;
+grid-template-columns:45px 45px 1fr 70px;
+align-items:center;
+gap:10px;
+margin-bottom:8px;
+}
+
+.rank-position{
+font-size:9px;
+color:#60788a;
+}
+
+.rank-digit{
+font-size:13px;
+font-weight:bold;
+}
+
+.rank-bar{
+height:7px;
+background:#0c1c29;
+border-radius:20px;
+overflow:hidden;
+}
+
+.rank-fill{
+height:100%;
+width:0%;
+background:#159ff0;
+border-radius:20px;
+transition:width .3s;
+}
+
+.rank-percent{
+font-size:9px;
+text-align:right;
+color:#8ea5b7;
 }
 
 /* SUMMARY */
@@ -308,29 +393,34 @@ transform:scale(1.08)
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:14px;
-margin-top:18px
+margin-top:18px;
 }
 
 .card{
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
-padding:20px
+padding:20px;
 }
 
 .label{
 font-size:8px;
 color:#60788a;
-margin-bottom:9px
+margin-bottom:9px;
 }
 
 .value{
 font-size:20px;
-font-weight:bold
+font-weight:bold;
 }
 
-.green{color:#2edb9c}
-.red{color:#ff5969}
+.green{
+color:#2edb9c;
+}
+
+.red{
+color:#ff5969;
+}
 
 /* CHART */
 
@@ -339,21 +429,23 @@ margin-top:18px;
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
-overflow:hidden
+overflow:hidden;
 }
 
 .chart-head{
 padding:18px 20px;
 border-bottom:1px solid #193247;
 display:flex;
-justify-content:space-between
+justify-content:space-between;
 }
 
-.chart-head h2{font-size:13px}
+.chart-head h2{
+font-size:13px;
+}
 
 .chart-live{
 font-size:8px;
-color:#2edb9c
+color:#2edb9c;
 }
 
 .chart{
@@ -364,13 +456,13 @@ background:
 linear-gradient(rgba(30,65,90,.15) 1px,transparent 1px),
 linear-gradient(90deg,rgba(30,65,90,.15) 1px,transparent 1px),
 #050d15;
-background-size:45px 45px
+background-size:45px 45px;
 }
 
 #canvas{
 width:100%;
 height:100%;
-display:block
+display:block;
 }
 
 .pointer{
@@ -381,7 +473,7 @@ width:2px;
 background:#159ff0;
 box-shadow:0 0 10px #159ff0;
 pointer-events:none;
-transition:left .08s linear
+transition:left .08s linear;
 }
 
 .pointer-dot{
@@ -394,7 +486,7 @@ border:2px solid #fff;
 box-shadow:0 0 15px #159ff0;
 transform:translate(-50%,-50%);
 pointer-events:none;
-transition:left .08s linear,top .08s linear
+transition:left .08s linear,top .08s linear;
 }
 
 .pointer-label{
@@ -405,7 +497,7 @@ padding:8px 10px;
 background:rgba(5,13,21,.95);
 border:1px solid #23465d;
 border-radius:6px;
-font-size:9px
+font-size:9px;
 }
 
 /* RECENT */
@@ -415,18 +507,18 @@ margin-top:18px;
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
-padding:20px
+padding:20px;
 }
 
 .recent h2{
 font-size:13px;
-margin-bottom:15px
+margin-bottom:15px;
 }
 
 .recent-digits{
 display:flex;
 gap:7px;
-flex-wrap:wrap
+flex-wrap:wrap;
 }
 
 .recent-digit{
@@ -439,7 +531,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:11px;
-font-weight:bold
+font-weight:bold;
 }
 
 .notice{
@@ -450,7 +542,7 @@ border:1px solid #5b471d;
 border-radius:8px;
 color:#a9915b;
 font-size:9px;
-line-height:1.6
+line-height:1.6;
 }
 
 footer{
@@ -460,25 +552,27 @@ padding:28px 5%;
 display:flex;
 justify-content:space-between;
 color:#526a7c;
-font-size:9px
+font-size:9px;
 }
 
 .footer-logo{
 color:#fff;
 font-size:14px;
-font-weight:bold
+font-weight:bold;
 }
 
-.footer-logo span{color:#159ff0}
+.footer-logo span{
+color:#159ff0;
+}
 
 @media(max-width:1000px){
 
 .digits{
-grid-template-columns:repeat(5,1fr)
+grid-template-columns:repeat(5,1fr);
 }
 
 .summary{
-grid-template-columns:repeat(2,1fr)
+grid-template-columns:repeat(2,1fr);
 }
 
 }
@@ -488,25 +582,31 @@ grid-template-columns:repeat(2,1fr)
 .heading{
 flex-direction:column;
 align-items:flex-start;
-gap:15px
+gap:15px;
 }
 
-.heading h1{font-size:28px}
+.heading h1{
+font-size:28px;
+}
 
 .selector{
 flex-direction:column;
 align-items:flex-start;
-gap:18px
+gap:18px;
 }
 
 .summary{
-grid-template-columns:1fr
+grid-template-columns:1fr;
+}
+
+.rank-row{
+grid-template-columns:35px 35px 1fr 55px;
 }
 
 footer{
 flex-direction:column;
 gap:12px;
-text-align:center
+text-align:center;
 }
 
 }
@@ -575,16 +675,45 @@ ANALYZING MARKET
 
 <select id="marketSelect">
 
-<option value="1HZ100V">Volatility 100 (1s)</option>
-<option value="1HZ75V">Volatility 75 (1s)</option>
-<option value="1HZ50V">Volatility 50 (1s)</option>
-<option value="1HZ25V">Volatility 25 (1s)</option>
-<option value="1HZ10V">Volatility 10 (1s)</option>
-<option value="R_100">Volatility 100</option>
-<option value="R_75">Volatility 75</option>
-<option value="R_50">Volatility 50</option>
-<option value="R_25">Volatility 25</option>
-<option value="R_10">Volatility 10</option>
+<option value="1HZ100V">
+Volatility 100 (1s)
+</option>
+
+<option value="1HZ75V">
+Volatility 75 (1s)
+</option>
+
+<option value="1HZ50V">
+Volatility 50 (1s)
+</option>
+
+<option value="1HZ25V">
+Volatility 25 (1s)
+</option>
+
+<option value="1HZ10V">
+Volatility 10 (1s)
+</option>
+
+<option value="R_100">
+Volatility 100
+</option>
+
+<option value="R_75">
+Volatility 75
+</option>
+
+<option value="R_50">
+Volatility 50
+</option>
+
+<option value="R_25">
+Volatility 25
+</option>
+
+<option value="R_10">
+Volatility 10
+</option>
 
 </select>
 
@@ -646,7 +775,7 @@ class="sample-percent"
 </div>
 
 
-<!-- SCANNER -->
+<!-- DIGITS -->
 
 <div class="scanner">
 
@@ -658,7 +787,7 @@ Digit Strength Scanner
 
 <div
 id="sampleCount"
-class="sample"
+class="sample-count"
 >
 0 / 100 TICKS
 </div>
@@ -667,9 +796,8 @@ class="sample"
 
 <p class="description">
 
-Each circle shows the digit, percentage and number of
-appearances. The strongest and weakest digits are
-automatically highlighted.
+The scanner builds a 100-tick sample. Strongest and weakest
+labels are only activated after the sample reaches 100 ticks.
 
 </p>
 
@@ -677,6 +805,20 @@ automatically highlighted.
 id="digits"
 class="digits"
 ></div>
+
+
+<!-- RANKING -->
+
+<div class="ranking">
+
+<div class="ranking-title">
+DIGIT RANKING
+</div>
+
+<div id="rankingRows">
+</div>
+
+</div>
 
 </div>
 
@@ -695,7 +837,7 @@ STRONGEST DIGIT
 id="strong"
 class="value green"
 >
----
+WAITING
 </div>
 
 </div>
@@ -710,7 +852,7 @@ WEAKEST DIGIT
 id="weak"
 class="value red"
 >
----
+WAITING
 </div>
 
 </div>
@@ -748,7 +890,7 @@ class="value"
 </div>
 
 
-<!-- MOVING POINTER -->
+<!-- CHART -->
 
 <div class="chart-panel">
 
@@ -764,10 +906,7 @@ Live Tick Movement
 
 </div>
 
-<div
-id="chart"
-class="chart"
->
+<div id="chart" class="chart">
 
 <canvas id="canvas"></canvas>
 
@@ -793,7 +932,7 @@ Waiting for ticks...
 </div>
 
 
-<!-- RECENT DIGITS -->
+<!-- RECENT -->
 
 <div class="recent">
 
@@ -813,12 +952,11 @@ class="recent-digits"
 
 <strong>ANALYSIS NOTICE:</strong>
 
-Digit frequency describes what has appeared in the current
-100-tick sample. Once 100 ticks are reached, the oldest tick
-is continuously replaced by the newest tick.
+The scanner uses the latest 100 ticks. Before 100 ticks are
+collected, the data is only a building sample. After 100 ticks,
+the oldest tick is continuously replaced by the newest tick.
 
-This is an analysis visualization and does not guarantee the
-next digit.
+Digit frequency does not guarantee the next digit.
 
 </div>
 
@@ -840,12 +978,12 @@ NEX<span>TRADE</span>
 
 <script>
 
-const BACKEND =
+const BACKEND=
 "wss://nextrade-backened.onrender.com";
 
 let socket;
 
-let selectedSymbol =
+let selectedSymbol=
 "1HZ100V";
 
 let digits=[];
@@ -892,6 +1030,9 @@ document.getElementById("total");
 const digitsBox=
 document.getElementById("digits");
 
+const rankingRows=
+document.getElementById("rankingRows");
+
 const recent=
 document.getElementById("recent");
 
@@ -920,24 +1061,38 @@ const pointerLabel=
 document.getElementById("pointerLabel");
 
 
-/* CREATE DIGITS */
+/* BUILD DIGITS */
 
 function buildDigits(){
 
 digitsBox.innerHTML="";
 
-for(let i=0;i<10;i++){
+for(
+let i=0;
+i<10;
+i++
+){
 
 const el=
 document.createElement("div");
 
 el.className="digit";
 
-el.id="digit-"+i;
+el.id=
+"digit-"+i;
 
 el.innerHTML=`
 
-<div class="digit-number">${i}</div>
+<div
+id="rank-${i}"
+class="rank"
+>
+—
+</div>
+
+<div class="digit-number">
+${i}
+</div>
 
 <div
 id="percent-${i}"
@@ -956,8 +1111,8 @@ class="digit-count"
 <div
 id="badge-${i}"
 class="badge"
-style="display:none"
-></div>
+>
+</div>
 
 `;
 
@@ -973,9 +1128,12 @@ digitsBox.appendChild(el);
 function lastDigit(value){
 
 const text=
-String(value).replace(/\D/g,"");
+String(value)
+.replace(/\D/g,"");
 
-if(!text)return null;
+if(!text){
+return null;
+}
 
 return Number(
 text[text.length-1]
@@ -984,7 +1142,7 @@ text[text.length-1]
 }
 
 
-/* FORMAT PRICE */
+/* PRICE */
 
 function formatPrice(value){
 
@@ -1000,24 +1158,20 @@ maximumFractionDigits:8
 }
 
 
-/* UPDATE SAMPLE */
+/* SAMPLE */
 
 function updateSample(){
 
 const n=
 digits.length;
 
-const percent=
-Math.min(
-100,
-n
-);
-
 sample.textContent=
-n+" / 100 TICKS";
+n+
+" / 100 TICKS";
 
 samplePercent.textContent=
-percent+"%";
+Math.min(n,100)+
+"%";
 
 
 if(n<100){
@@ -1049,7 +1203,80 @@ sampleIcon.className=
 }
 
 
-/* UPDATE SCANNER */
+/* RANKING */
+
+function updateRanking(){
+
+const sorted=
+Array
+.from(
+{length:10},
+(_,i)=>i
+)
+.sort(
+(a,b)=>
+counts[b]-counts[a]
+);
+
+rankingRows.innerHTML="";
+
+
+sorted.forEach(
+(digit,index)=>{
+
+const n=
+digits.length;
+
+const percent=
+n?
+counts[digit]/n*100:
+0;
+
+const row=
+document.createElement("div");
+
+row.className=
+"rank-row";
+
+row.innerHTML=`
+
+<div class="rank-position">
+#${index+1}
+</div>
+
+<div class="rank-digit">
+${digit}
+</div>
+
+<div class="rank-bar">
+<div
+class="rank-fill"
+style="width:${percent}%"
+></div>
+</div>
+
+<div class="rank-percent">
+${percent.toFixed(1)}%
+</div>
+
+`;
+
+rankingRows.appendChild(row);
+
+
+/* Circle ranking */
+
+document.getElementById(
+"rank-"+digit
+).textContent=
+"#"+(index+1);
+
+});
+
+}
+
+
+/* SCANNER */
 
 function updateScanner(){
 
@@ -1060,10 +1287,68 @@ updateSample();
 
 total.textContent=n;
 
-let strongest=0;
-let weakest=0;
 
-for(let i=0;i<10;i++){
+/* Reset labels */
+
+for(
+let i=0;
+i<10;
+i++
+){
+
+const box=
+document.getElementById(
+"digit-"+i
+);
+
+const badge=
+document.getElementById(
+"badge-"+i
+);
+
+box.classList.remove(
+"strong",
+"weak"
+);
+
+badge.style.display=
+"none";
+
+const percent=
+n?
+counts[i]/n*100:
+0;
+
+document.getElementById(
+"percent-"+i
+).textContent=
+percent.toFixed(1)+
+"%";
+
+document.getElementById(
+"count-"+i
+).textContent=
+counts[i]+
+" hits";
+
+}
+
+
+/* CONFIRM ONLY AT 100 */
+
+if(n>=100){
+
+let strongest=
+0;
+
+let weakest=
+0;
+
+for(
+let i=1;
+i<10;
+i++
+){
 
 if(
 counts[i]>
@@ -1086,45 +1371,6 @@ weakest=i;
 }
 
 
-for(let i=0;i<10;i++){
-
-const box=
-document.getElementById(
-"digit-"+i
-);
-
-const badge=
-document.getElementById(
-"badge-"+i
-);
-
-box.classList.remove(
-"strong",
-"weak"
-);
-
-badge.style.display="none";
-
-const percent=
-n?
-counts[i]/n*100:
-0;
-
-document.getElementById(
-"percent-"+i
-).textContent=
-percent.toFixed(1)+"%";
-
-document.getElementById(
-"count-"+i
-).textContent=
-counts[i]+" hits";
-
-}
-
-
-if(n>=5){
-
 const strongBox=
 document.getElementById(
 "digit-"+strongest
@@ -1142,6 +1388,7 @@ strongBox.classList.add(
 weakBox.classList.add(
 "weak"
 );
+
 
 const strongBadge=
 document.getElementById(
@@ -1170,17 +1417,33 @@ strong.textContent=
 strongest+
 " • "+
 (
-counts[strongest]/n*100
-).toFixed(1)+
+counts[strongest]
+).toFixed(0)+
 "%";
+
+strong.textContent=
+strongest+
+" • "+
+(
+counts[strongest]
+).toFixed(0)+
+" hits";
 
 weak.textContent=
 weakest+
 " • "+
 (
-counts[weakest]/n*100
-).toFixed(1)+
-"%";
+counts[weakest]
+).toFixed(0)+
+" hits";
+
+}else{
+
+strong.textContent=
+"WAITING";
+
+weak.textContent=
+"WAITING";
 
 }
 
@@ -1192,12 +1455,14 @@ digits[n-1];
 
 }
 
+updateRanking();
+
 renderRecent();
 
 }
 
 
-/* RECENT DIGITS */
+/* RECENT */
 
 function renderRecent(){
 
@@ -1205,7 +1470,8 @@ recent.innerHTML="";
 
 digits
 .slice(-30)
-.forEach(d=>{
+.forEach(
+d=>{
 
 const el=
 document.createElement("div");
@@ -1233,7 +1499,7 @@ const digit=
 lastDigit(value);
 
 if(
-!Number.isFinite(number) ||
+!Number.isFinite(number)||
 digit===null
 ){
 
@@ -1282,11 +1548,15 @@ document.getElementById(
 "digit-"+digit
 );
 
-box.classList.add("flash");
+box.classList.add(
+"flash"
+);
 
 setTimeout(
 ()=>{
-box.classList.remove("flash");
+box.classList.remove(
+"flash"
+);
 },
 120
 );
@@ -1301,18 +1571,21 @@ movePointer();
 }
 
 
-/* RESIZE CANVAS */
+/* CANVAS */
 
 function resize(){
 
 const ratio=
-window.devicePixelRatio||1;
+window.devicePixelRatio||
+1;
 
 canvas.width=
-canvas.clientWidth*ratio;
+canvas.clientWidth*
+ratio;
 
 canvas.height=
-canvas.clientHeight*ratio;
+canvas.clientHeight*
+ratio;
 
 ctx.setTransform(
 ratio,
@@ -1347,7 +1620,9 @@ w,
 h
 );
 
-if(prices.length<2){
+if(
+prices.length<2
+){
 
 return;
 
@@ -1375,12 +1650,14 @@ prices.forEach(
 
 const x=
 pad+
-i/(prices.length-1)*
+i/
+(prices.length-1)*
 (w-pad*2);
 
 const y=
 h-pad-
-(p-min)/(max-min)*
+(p-min)/
+(max-min)*
 (h-pad*2);
 
 if(i===0){
@@ -1406,11 +1683,13 @@ ctx.stroke();
 }
 
 
-/* MOVING POINTER */
+/* POINTER */
 
 function movePointer(){
 
-if(!prices.length){
+if(
+!prices.length
+){
 
 return;
 
@@ -1431,7 +1710,8 @@ prices.length===1
 w/2
 :
 22+
-index/(prices.length-1)*
+index/
+(prices.length-1)*
 (w-44);
 
 
@@ -1453,7 +1733,8 @@ prices[index];
 
 const y=
 h-22-
-(p-min)/(max-min)*
+(p-min)/
+(max-min)*
 (h-44);
 
 
@@ -1565,8 +1846,8 @@ const tick=
 data.data;
 
 if(
-!tick ||
-tick.symbol!==selectedSymbol ||
+!tick||
+tick.symbol!==selectedSymbol||
 tick.price===undefined
 ){
 
@@ -1632,10 +1913,10 @@ price.textContent=
 "---";
 
 strong.textContent=
-"---";
+"WAITING";
 
 weak.textContent=
-"---";
+"WAITING";
 
 latest.textContent=
 "---";
@@ -1658,6 +1939,8 @@ buildDigits();
 
 updateSample();
 
+updateRanking();
+
 resize();
 
 connect();
@@ -1670,4 +1953,4 @@ resize
 </script>
 
 </body>
-</html>
+  </html>
