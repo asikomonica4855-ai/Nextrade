@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Login</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NEXTRADE | Login</title><style>
 *{
 box-sizing:border-box;
 margin:0;
@@ -155,6 +154,55 @@ color:#71899a;
 color:#2edb9c;
 }
 
+.status{
+display:none;
+margin-top:15px;
+padding:12px;
+border-radius:7px;
+font-size:9px;
+text-align:center;
+line-height:1.6;
+}
+
+.status.success{
+display:block;
+background:#071b16;
+border:1px solid #1c765e;
+color:#2edb9c;
+}
+
+.status.error{
+display:block;
+background:#1b0c0c;
+border:1px solid #743030;
+color:#ff7777;
+}
+
+.status.loading{
+display:block;
+background:#07131d;
+border:1px solid #193247;
+color:#8ba6b8;
+}
+
+.open-markets{
+display:none;
+margin-top:12px;
+width:100%;
+padding:13px;
+border-radius:7px;
+background:#159ff0;
+color:#fff;
+text-decoration:none;
+text-align:center;
+font-size:10px;
+font-weight:bold;
+}
+
+.open-markets:hover{
+background:#078bd8;
+}
+
 .divider{
 display:flex;
 align-items:center;
@@ -182,19 +230,6 @@ color:#71899a;
 color:#159ff0;
 text-decoration:none;
 font-weight:bold;
-}
-
-.status{
-display:none;
-margin-top:15px;
-padding:10px;
-border-radius:7px;
-background:#171208;
-border:1px solid #5b471d;
-color:#b59c61;
-font-size:8px;
-text-align:center;
-line-height:1.5;
 }
 
 footer{
@@ -263,8 +298,17 @@ should never collect or store it.
 id="status"
 class="status"
 >
-Redirecting you to Deriv's official authentication page...
-</div><div class="divider">
+</div><a
+href="markets.html"
+id="openMarkets"
+class="open-markets"
+
+«»
+
+OPEN MARKETS
+</a>
+
+<div class="divider">
 OR
 </div><div class="signup">Don't have a NEXTRADE account?
 
@@ -280,11 +324,127 @@ document.getElementById("derivLogin");
 const status =
 document.getElementById("status");
 
+const openMarkets =
+document.getElementById("openMarkets");
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const oauth =
+params.get("oauth");
+
+const oauthError =
+params.get("oauth_error");
+
+/*
+---------------------------------------------------------
+SUCCESS
+---------------------------------------------------------
+*/
+
+if(oauth === "success"){
+
+status.className =
+"status success";
+
+status.textContent =
+"✓ Deriv Connected Successfully. Your Deriv account has been authorized. You can now continue to NEXTRADE.";
+
+openMarkets.style.display =
+"block";
+
+/*
+Remove OAuth parameters
+from the visible URL.
+*/
+
+window.history.replaceState(
+{},
+document.title,
+"login.html"
+);
+
+}
+
+/*
+---------------------------------------------------------
+OAUTH ERROR
+---------------------------------------------------------
+*/
+
+else if(oauthError){
+
+status.className =
+"status error";
+
+let message =
+"Deriv connection failed.";
+
+if(
+oauthError ===
+"missing_authorization_data"
+){
+message =
+"Missing authorization data. Please try connecting again.";
+}
+
+else if(
+oauthError ===
+"invalid_or_expired_state"
+){
+message =
+"The authorization session expired. Please try again.";
+}
+
+else if(
+oauthError ===
+"token_exchange_failed"
+){
+message =
+"Deriv authorization could not be completed. Please try again.";
+}
+
+else if(
+oauthError ===
+"callback_failed"
+){
+message =
+"The NEXTRADE server could not complete the Deriv connection.";
+}
+
+else if(
+oauthError ===
+"access_denied"
+){
+message =
+"Deriv authorization was cancelled.";
+}
+
+status.textContent =
+"✕ " + message;
+
+window.history.replaceState(
+{},
+document.title,
+"login.html"
+);
+
+}
+
+/*
+---------------------------------------------------------
+BUTTON
+---------------------------------------------------------
+*/
+
 button.addEventListener(
 "click",
 function(){
 
-status.style.display="block";
+status.className =
+"status loading";
 
 status.textContent =
 "Redirecting you to Deriv's official authentication page...";
