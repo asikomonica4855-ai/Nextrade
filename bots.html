@@ -10,95 +10,100 @@
 
 body{
 font-family:Arial,Helvetica,sans-serif;
-background:#040a10;
+background:#050b12;
 color:#fff;
 min-height:100vh
 }
 
 header{
-min-height:70px;
+min-height:72px;
 background:#08131f;
 border-bottom:1px solid #193247;
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:12px 5%;
-gap:15px
+position:sticky;
+top:0;
+z-index:100
 }
 
 .logo{
-font-size:24px;
-font-weight:900;
+font-size:25px;
+font-weight:800;
 white-space:nowrap
 }
 
 .logo span{color:#159ff0}
 
-nav{
+.nav{
 display:flex;
-gap:3px;
+gap:4px;
 overflow-x:auto
 }
 
-nav a{
-color:#8097a8;
+.nav a{
+color:#8ea5b7;
 text-decoration:none;
-font-size:9px;
+font-size:10px;
 font-weight:bold;
-padding:9px;
+padding:10px;
 white-space:nowrap;
 border-radius:6px
 }
 
-nav a:hover,
-nav a.active{
-color:#159ff0;
-background:#102333
+.nav a:hover{
+background:#102536;
+color:#fff
 }
 
-main{
-max-width:1250px;
+.nav a.active{
+color:#159ff0
+}
+
+.nav .signup{
+background:#159ff0;
+color:#fff
+}
+
+.page{
+width:94%;
+max-width:1450px;
 margin:auto;
-padding:32px 5%
+padding:28px 0 70px
 }
 
 .top{
 display:flex;
 justify-content:space-between;
-align-items:flex-start;
-gap:20px;
-margin-bottom:22px
+align-items:flex-end;
+gap:15px;
+margin-bottom:20px
 }
 
-h1{
+.top h1{
 font-size:30px;
-margin-bottom:8px
+margin-bottom:7px
 }
 
-.subtitle{
-font-size:10px;
-line-height:1.6;
-color:#71899a;
-max-width:700px
+.top p{
+font-size:11px;
+color:#71899a
 }
 
 .live-status{
+font-size:9px;
+color:#f0ad28;
 display:flex;
 align-items:center;
-gap:7px;
-border:1px solid #193247;
-border-radius:20px;
-padding:8px 12px;
-font-size:8px;
-color:#71899a;
-white-space:nowrap
+gap:7px
 }
 
 .live-dot{
-width:7px;
-height:7px;
+width:8px;
+height:8px;
 border-radius:50%;
-background:#71899a
+background:#f0ad28
 }
 
 .live-dot.on{
@@ -108,32 +113,24 @@ box-shadow:0 0 9px #2edb9c
 
 .layout{
 display:grid;
-grid-template-columns:230px 1fr 270px;
-gap:14px
+grid-template-columns:240px 1fr 285px;
+gap:15px
 }
 
 .card{
 background:#08131f;
 border:1px solid #193247;
-border-radius:10px;
-padding:16px
+border-radius:11px;
+padding:17px
 }
 
 .card-title{
 font-size:11px;
 font-weight:bold;
-margin-bottom:14px;
-display:flex;
-justify-content:space-between;
-align-items:center
+margin-bottom:13px;
+text-transform:uppercase;
+color:#9db0bd
 }
-
-.card-title span{
-font-size:7px;
-color:#60788a
-}
-
-/* MARKETS */
 
 .market-list{
 display:flex;
@@ -142,80 +139,70 @@ gap:6px
 }
 
 .market{
-padding:10px;
-border:1px solid #193247;
+padding:11px;
 border-radius:7px;
 background:#07111b;
+border:1px solid #193247;
 cursor:pointer
+}
+
+.market:hover{
+border-color:#159ff0
 }
 
 .market.active{
 border-color:#159ff0;
-background:#0b1d2c
+background:#0a1b29
 }
 
 .market-name{
-font-size:8px;
+font-size:9px;
 font-weight:bold
 }
 
 .market-code{
-font-size:6px;
+font-size:7px;
 color:#60788a;
-margin-top:3px
+margin-top:4px
 }
 
 .market-price{
-font-size:10px;
-margin-top:5px
+font-size:9px;
+margin-top:7px;
+color:#dce7ed
 }
 
-/* CENTER */
-
-.market-head{
-display:flex;
-justify-content:space-between;
-align-items:flex-start
+.chart-card{
+min-height:500px
 }
 
-.selected-name{
-font-size:14px;
-font-weight:bold
+.market-head h2{
+font-size:17px
 }
 
 .price{
-font-size:28px;
-font-weight:900;
-margin-top:8px
+font-size:29px;
+font-weight:bold;
+margin-top:9px
 }
 
 .price-change{
 font-size:8px;
-color:#60788a;
-margin-top:5px
+color:#71899a;
+margin-top:4px
 }
 
 .chart{
-height:220px;
-margin-top:18px;
+height:270px;
+margin-top:20px;
 border:1px solid #193247;
 border-radius:8px;
 background:
-linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
-#06101a;
-background-size:25px 25px;
+linear-gradient(#0c1b28 1px,transparent 1px),
+linear-gradient(90deg,#0c1b28 1px,transparent 1px);
+background-size:40px 40px;
 position:relative;
 overflow:hidden
-}
-
-.chart-label{
-position:absolute;
-top:10px;
-left:12px;
-font-size:7px;
-color:#60788a;
-z-index:2
 }
 
 .chart-line{
@@ -225,107 +212,104 @@ right:0;
 top:50%;
 height:2px;
 background:#159ff0;
-transform-origin:center;
-opacity:.7
+transform-origin:left center;
+box-shadow:0 0 8px rgba(21,159,240,.4)
 }
 
-.pointer{
+.chart-pointer{
 position:absolute;
-right:18px;
-top:50%;
-width:10px;
-height:10px;
+width:12px;
+height:12px;
+border:2px solid #fff;
 border-radius:50%;
-background:#2edb9c;
-box-shadow:0 0 14px #2edb9c;
-transform:translateY(-50%);
-transition:top .15s
+background:#159ff0;
+right:25px;
+top:48%;
+box-shadow:0 0 12px #159ff0
+}
+
+.chart-label{
+position:absolute;
+top:10px;
+left:12px;
+font-size:8px;
+color:#60788a
 }
 
 .tick-strip{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:5px;
-margin-top:8px
+display:flex;
+gap:8px;
+overflow-x:auto;
+margin-top:13px;
+padding-bottom:5px
 }
 
 .tick{
+min-width:75px;
+padding:9px;
 background:#07111b;
 border:1px solid #193247;
-border-radius:6px;
-padding:7px;
-text-align:center
+border-radius:6px
 }
 
 .tick small{
 display:block;
-font-size:5px;
-color:#60788a
+font-size:7px;
+color:#60788a;
+margin-bottom:5px
 }
 
 .tick strong{
-display:block;
-font-size:8px;
-margin-top:4px
+font-size:9px
 }
 
-/* BOT */
-
 .bot-panel{
-margin-top:12px
+margin-top:15px
 }
 
 .field{
 margin-bottom:12px
 }
 
-label{
+.field label{
 display:block;
 font-size:7px;
-font-weight:bold;
-color:#8da3b1;
+color:#60788a;
 margin-bottom:6px
 }
 
-select,
-input{
+select{
 width:100%;
-height:40px;
-background:#07111b;
-border:1px solid #29465a;
-border-radius:6px;
+background:#050d15;
 color:#fff;
-padding:0 10px;
+border:1px solid #23465d;
+border-radius:6px;
+padding:10px;
 font-size:9px;
 outline:none
 }
 
-select:focus,
-input:focus{
-border-color:#159ff0
-}
-
 .start{
 width:100%;
-height:42px;
+padding:13px;
 border:0;
-border-radius:6px;
+border-radius:7px;
 background:#159ff0;
 color:#fff;
-font-size:9px;
+font-size:10px;
 font-weight:bold;
 cursor:pointer
 }
 
 .stop{
 width:100%;
-height:40px;
-margin-top:7px;
-border:1px solid #61313a;
-border-radius:6px;
-background:#190d11;
-color:#ff6878;
-font-size:8px;
+padding:12px;
+margin-top:8px;
+border-radius:7px;
+background:#241018;
+border:1px solid #ff5969;
+color:#ff5969;
+font-size:9px;
 font-weight:bold;
 cursor:pointer
 }
@@ -336,74 +320,98 @@ opacity:.35
 
 .notice{
 margin-top:12px;
-padding:9px;
+padding:10px;
 border-radius:6px;
 background:#07111b;
 border:1px solid #193247;
+color:#71899a;
 font-size:7px;
-line-height:1.6;
-color:#71899a
+line-height:1.5
 }
 
-/* SIGNAL */
-
 .signal-box{
-margin-top:12px;
+margin-top:15px;
 padding:25px 15px;
 border:1px solid #193247;
 border-radius:9px;
-background:
-radial-gradient(circle,rgba(21,159,240,.09),transparent 60%),
-#07111b;
+background:#07111b;
 text-align:center
 }
 
 .signal-label{
-font-size:7px;
+font-size:8px;
 letter-spacing:2px;
 color:#60788a
 }
 
 .signal{
 font-size:32px;
-font-weight:900;
-margin-top:9px
+font-weight:bold;
+margin-top:10px
 }
 
-.signal.buy{color:#2edb9c}
-.signal.wait{color:#f0b84b}
+.signal.buy{
+color:#2edb9c
+}
+
+.signal.wait{
+color:#f0ad28
+}
 
 .confidence{
 font-size:9px;
 color:#71899a;
-margin-top:7px
+margin-top:8px
 }
 
-.bar{
+.confidence-bar{
 height:6px;
 background:#142433;
 border-radius:10px;
-overflow:hidden;
-margin-top:13px
+margin-top:12px;
+overflow:hidden
 }
 
-.bar-fill{
+.confidence-fill{
 height:100%;
-width:0;
+width:0%;
 background:#159ff0;
 transition:width .3s
 }
 
-/* DIGITS */
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+
+.stat{
+background:#07111b;
+border:1px solid #193247;
+border-radius:7px;
+padding:12px
+}
+
+.stat-label{
+font-size:7px;
+color:#60788a;
+margin-bottom:6px
+}
+
+.stat-value{
+font-size:15px;
+font-weight:bold
+}
 
 .digits{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:7px
+gap:6px;
+margin-top:12px
 }
 
 .digit{
-height:45px;
+height:43px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -422,4 +430,1614 @@ margin-top:3px
 }
 
 .digit.strong{
-border-color:#
+border-color:#2edb9c;
+box-shadow:0 0 8px rgba(46,219,156,.25)
+}
+
+.digit.weak{
+border-color:#ff5969;
+box-shadow:0 0 8px rgba(255,89,105,.2)
+}
+
+.summary{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:12px
+}
+
+.summary-box{
+background:#07111b;
+border:1px solid #193247;
+border-radius:7px;
+padding:11px
+}
+
+.summary-box small{
+font-size:6px;
+color:#60788a
+}
+
+.summary-box strong{
+display:block;
+font-size:10px;
+margin-top:5px
+}
+
+.strong{
+color:#2edb9c
+}
+
+.weak{
+color:#ff5969
+}
+
+.history{
+margin-top:13px;
+display:flex;
+flex-direction:column;
+gap:6px;
+max-height:220px;
+overflow:auto
+}
+
+.history-row{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+padding:9px;
+border-radius:6px;
+background:#07111b;
+border:1px solid #193247;
+font-size:7px
+}
+
+.buy{
+color:#2edb9c
+}
+
+.wait{
+color:#f0ad28
+}
+
+footer{
+border-top:1px solid #193247;
+background:#06101a;
+padding:27px 5%;
+display:flex;
+justify-content:space-between;
+color:#526a7c;
+font-size:9px
+}
+
+@media(max-width:1100px){
+
+.layout{
+grid-template-columns:210px 1fr
+}
+
+.right{
+grid-column:1 / -1
+}
+
+}
+
+@media(max-width:700px){
+
+.top{
+flex-direction:column;
+align-items:flex-start
+}
+
+.layout{
+grid-template-columns:1fr
+}
+
+.market-list{
+display:grid;
+grid-template-columns:1fr 1fr
+}
+
+.right{
+grid-column:auto
+}
+
+footer{
+flex-direction:column;
+gap:10px;
+text-align:center
+}
+
+}
+
+@media(max-width:420px){
+
+.market-list{
+grid-template-columns:1fr
+}
+
+.price{
+font-size:25px
+}
+
+.chart{
+height:240px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+NEX<span>TRADE</span>
+</div>
+
+<nav class="nav">
+
+<a href="index.html">HOME</a>
+
+<a href="markets.html">MARKETS</a>
+
+<a href="tools.html">TOOLS</a>
+
+<a href="bots.html" class="active">BOTS</a>
+
+<a href="analysis.html">ANALYSIS</a>
+
+<a href="manual-trading.html">MANUAL TRADING</a>
+
+<a href="login.html">LOGIN</a>
+
+<a href="signup.html" class="signup">SIGN UP</a>
+
+</nav>
+
+</header>
+
+
+<div class="page">
+
+<div class="top">
+
+<div>
+
+<h1>Trading Bots</h1>
+
+<p>
+Configure NEXTRADE strategy engines, monitor live
+signals and study automated-style analysis using
+the same live market feed as Manual Trading.
+</p>
+
+</div>
+
+<div class="live-status">
+
+<span id="liveDot" class="live-dot"></span>
+
+<span id="connection">
+CONNECTING
+</span>
+
+</div>
+
+</div>
+
+
+<div class="layout">
+
+
+<!-- MARKETS -->
+
+<div class="card">
+
+<div class="card-title">
+Volatility Markets
+</div>
+
+<div
+id="marketList"
+class="market-list"
+></div>
+
+</div>
+
+
+<!-- CENTER -->
+
+<div>
+
+<div class="card chart-card">
+
+<div class="market-head">
+
+<h2 id="selectedName">
+Volatility 100 (1s)
+</h2>
+
+<div
+id="selectedCode"
+class="market-code"
+>
+1HZ100V
+</div>
+
+<div
+id="price"
+class="price"
+>
+---
+</div>
+
+<div
+id="change"
+class="price-change"
+>
+WAITING FOR LIVE DATA
+</div>
+
+</div>
+
+
+<div class="chart">
+
+<div class="chart-label">
+LIVE TICK MOVEMENT
+</div>
+
+<div
+id="chartLine"
+class="chart-line"
+></div>
+
+<div
+id="pointer"
+class="chart-pointer"
+></div>
+
+</div>
+
+
+<div
+id="ticks"
+class="tick-strip"
+></div>
+
+
+<!-- BOT CONTROL -->
+
+<div class="card bot-panel">
+
+<div class="card-title">
+Bot Control
+</div>
+
+<div class="field">
+
+<label>
+STRATEGY
+</label>
+
+<select id="strategy">
+
+<option value="digit">
+Digit Strength
+</option>
+
+<option value="movement">
+Recent Movement
+</option>
+
+</select>
+
+</div>
+
+
+<button
+id="start"
+class="start"
+>
+START ANALYSIS
+</button>
+
+
+<button
+id="stop"
+class="stop"
+disabled
+>
+STOP
+</button>
+
+
+<div class="notice">
+
+<strong>
+LIVE ANALYSIS ONLY
+</strong>
+
+<br>
+
+The engine analyzes the live NEXTRADE market
+feed. It does not place real Deriv trades or
+use real-money funds.
+
+</div>
+
+</div>
+
+
+<!-- SIGNAL -->
+
+<div class="signal-box">
+
+<div class="signal-label">
+LATEST BOT SIGNAL
+</div>
+
+<div
+id="signal"
+class="signal wait"
+>
+WAITING
+</div>
+
+<div
+id="confidence"
+class="confidence"
+>
+Build a 100-tick sample
+</div>
+
+<div class="confidence-bar">
+
+<div
+id="confidenceFill"
+class="confidence-fill"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- HISTORY -->
+
+<div class="card" style="margin-top:15px">
+
+<div class="card-title">
+Recent Signals
+</div>
+
+<div
+id="history"
+class="history"
+>
+
+<div style="font-size:8px;color:#60788a">
+No signals yet.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT -->
+
+<div class="right">
+
+<div class="card">
+
+<div class="card-title">
+Live Statistics
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-label">
+LATEST DIGIT
+</div>
+
+<div
+id="latestDigit"
+class="stat-value"
+>
+-
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+TICKS
+</div>
+
+<div
+id="tickCount"
+class="stat-value"
+>
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-title" style="margin-top:20px">
+Digit Strength
+</div>
+
+<div
+id="digits"
+class="digits"
+></div>
+
+
+<div class="summary">
+
+<div class="summary-box">
+
+<small>
+STRONGEST
+</small>
+
+<strong
+id="strongest"
+class="strong"
+>
+WAITING
+</strong>
+
+</div>
+
+
+<div class="summary-box">
+
+<small>
+WEAKEST
+</small>
+
+<strong
+id="weakest"
+class="weak"
+>
+WAITING
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div>
+NEX<span style="color:#159ff0">TRADE</span>
+</div>
+
+<div>
+© 2026 NEXTRADE
+</div>
+
+</footer>
+
+
+<script>
+
+/*
+==================================================
+EXACT LIVE CONNECTION FROM MANUAL TRADING
+==================================================
+*/
+
+const BACKEND =
+"wss://nextrade-backened.onrender.com";
+
+
+const markets = [
+
+{
+name:"Volatility 100 (1s)",
+code:"1HZ100V"
+},
+
+{
+name:"Volatility 75 (1s)",
+code:"1HZ75V"
+},
+
+{
+name:"Volatility 50 (1s)",
+code:"1HZ50V"
+},
+
+{
+name:"Volatility 25 (1s)",
+code:"1HZ25V"
+},
+
+{
+name:"Volatility 10 (1s)",
+code:"1HZ10V"
+},
+
+{
+name:"Volatility 100",
+code:"R_100"
+},
+
+{
+name:"Volatility 75",
+code:"R_75"
+},
+
+{
+name:"Volatility 50",
+code:"R_50"
+},
+
+{
+name:"Volatility 25",
+code:"R_25"
+},
+
+{
+name:"Volatility 10",
+code:"R_10"
+}
+
+];
+
+
+let selected =
+markets[0];
+
+let socket;
+
+let ticks=[];
+
+let digits =
+Array(10).fill(0);
+
+let totalTicks=0;
+
+let previousPrice=null;
+
+let botRunning=false;
+
+let signalHistory=[];
+
+
+/* ELEMENTS */
+
+const marketList =
+document.getElementById(
+"marketList"
+);
+
+const selectedName =
+document.getElementById(
+"selectedName"
+);
+
+const selectedCode =
+document.getElementById(
+"selectedCode"
+);
+
+const price =
+document.getElementById(
+"price"
+);
+
+const change =
+document.getElementById(
+"change"
+);
+
+const ticksBox =
+document.getElementById(
+"ticks"
+);
+
+const latestDigit =
+document.getElementById(
+"latestDigit"
+);
+
+const tickCount =
+document.getElementById(
+"tickCount"
+);
+
+const digitsBox =
+document.getElementById(
+"digits"
+);
+
+
+/* MARKETS */
+
+function renderMarkets(){
+
+marketList.innerHTML="";
+
+markets.forEach(
+m=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className =
+"market"+
+(
+m.code===selected.code
+?
+" active"
+:
+""
+);
+
+div.innerHTML=`
+
+<div class="market-name">
+${m.name}
+</div>
+
+<div class="market-code">
+${m.code}
+</div>
+
+<div
+class="market-price"
+id="p-${m.code}"
+>
+---
+</div>
+
+`;
+
+div.onclick =
+function(){
+
+selectMarket(m);
+
+};
+
+marketList.appendChild(div);
+
+});
+
+}
+
+
+function selectMarket(m){
+
+selected=m;
+
+ticks=[];
+
+digits=
+Array(10).fill(0);
+
+totalTicks=0;
+
+previousPrice=null;
+
+signalHistory=[];
+
+selectedName.textContent =
+m.name;
+
+selectedCode.textContent =
+m.code;
+
+price.textContent =
+"---";
+
+change.textContent =
+"WAITING FOR LIVE DATA";
+
+latestDigit.textContent =
+"-";
+
+tickCount.textContent =
+"0";
+
+document.getElementById(
+"signal"
+).textContent =
+"WAITING";
+
+document.getElementById(
+"signal"
+).className =
+"signal wait";
+
+document.getElementById(
+"confidence"
+).textContent =
+"Build a 100-tick sample";
+
+document.getElementById(
+"confidenceFill"
+).style.width =
+"0%";
+
+document.getElementById(
+"strongest"
+).textContent =
+"WAITING";
+
+document.getElementById(
+"weakest"
+).textContent =
+"WAITING";
+
+document.getElementById(
+"history"
+).innerHTML = `
+
+<div style="
+font-size:8px;
+color:#60788a;
+">
+No signals yet.
+</div>
+
+`;
+
+renderMarkets();
+
+renderDigits();
+
+renderTicks();
+
+connect();
+
+}
+
+
+/* DIGIT */
+
+function getLastDigit(value){
+
+const clean =
+String(value)
+.replace(/\D/g,"");
+
+if(!clean)
+return null;
+
+return Number(
+clean[clean.length-1]
+);
+
+}
+
+
+function renderDigits(){
+
+digitsBox.innerHTML="";
+
+let strongest=-1;
+
+let weakest=-1;
+
+
+/*
+Strongest and weakest are activated
+only after 100 ticks.
+*/
+
+if(totalTicks>=100){
+
+strongest =
+digits.indexOf(
+Math.max(...digits)
+);
+
+weakest =
+digits.indexOf(
+Math.min(...digits)
+);
+
+}
+
+
+for(let i=0;i<10;i++){
+
+const percent =
+totalTicks
+?
+(digits[i]/totalTicks)*100
+:
+0;
+
+const div =
+document.createElement(
+"div"
+);
+
+let cls="digit";
+
+
+if(
+i===strongest &&
+totalTicks>=100
+){
+
+cls+=" strong";
+
+}
+
+
+if(
+i===weakest &&
+totalTicks>=100
+){
+
+cls+=" weak";
+
+}
+
+
+div.className=cls;
+
+div.innerHTML=`
+
+${i}
+
+<span>
+${percent.toFixed(1)}%
+</span>
+
+`;
+
+digitsBox.appendChild(div);
+
+}
+
+
+if(totalTicks>=100){
+
+document.getElementById(
+"strongest"
+).textContent =
+strongest+
+" • "+
+(
+digits[strongest]/100*100
+).toFixed(1)+
+"%";
+
+
+document.getElementById(
+"weakest"
+).textContent =
+weakest+
+" • "+
+(
+digits[weakest]/100*100
+).toFixed(1)+
+"%";
+
+}
+
+}
+
+
+/* TICKS */
+
+function renderTicks(){
+
+ticksBox.innerHTML="";
+
+ticks
+.slice(-12)
+.reverse()
+.forEach(
+(t,i)=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className="tick";
+
+div.innerHTML=`
+
+<small>
+${i===0?"LATEST":"TICK"}
+</small>
+
+<strong>
+${t}
+</strong>
+
+`;
+
+ticksBox.appendChild(div);
+
+});
+
+}
+
+
+/* CHART */
+
+function updateChart(value){
+
+if(
+previousPrice===null
+){
+
+return;
+
+}
+
+
+const difference =
+value-previousPrice;
+
+
+const line =
+document.getElementById(
+"chartLine"
+);
+
+const pointer =
+document.getElementById(
+"pointer"
+);
+
+
+const movement =
+Math.max(
+-25,
+Math.min(
+25,
+difference*10
+)
+);
+
+
+line.style.transform =
+"rotate("+
+movement+
+"deg)";
+
+
+const top =
+48-
+Math.max(
+-35,
+Math.min(
+35,
+difference*20
+)
+);
+
+
+pointer.style.top =
+top+"%";
+
+}
+
+
+/* TICK PROCESSING */
+
+function processTick(value){
+
+if(!Number.isFinite(value))
+return;
+
+
+updateChart(value);
+
+
+if(
+previousPrice!==null
+){
+
+const difference =
+value-previousPrice;
+
+const percent =
+previousPrice
+?
+(difference/
+previousPrice)*100
+:
+0;
+
+
+change.textContent =
+(
+difference>=0
+?
+"+"
+:
+""
+)+
+difference.toFixed(5)+
+" ("+
+(
+percent>=0
+?
+"+"
+:
+""
+)+
+percent.toFixed(3)+
+"%)";
+
+
+change.style.color =
+difference>=0
+?
+"#2edb9c"
+:
+"#ff5969";
+
+}
+
+
+previousPrice=value;
+
+
+price.textContent =
+value.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
+
+
+const digit =
+getLastDigit(value);
+
+
+if(digit!==null){
+
+digits[digit]++;
+
+latestDigit.textContent =
+digit;
+
+}
+
+
+totalTicks++;
+
+tickCount.textContent =
+totalTicks;
+
+
+ticks.push(
+value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:8
+}
+)
+);
+
+
+if(ticks.length>30)
+ticks.shift();
+
+
+renderTicks();
+
+renderDigits();
+
+
+const mini =
+document.getElementById(
+"p-"+selected.code
+);
+
+
+if(mini){
+
+mini.textContent =
+value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:6
+}
+);
+
+}
+
+
+if(botRunning){
+
+runBot();
+
+}
+
+}
+
+
+/*
+==================================================
+EXACT CONNECT FUNCTION FROM MANUAL TRADING
+==================================================
+*/
+
+function connect(){
+
+if(socket){
+
+try{
+
+socket.close();
+
+}catch(e){}
+
+}
+
+
+document.getElementById(
+"connection"
+).textContent =
+"CONNECTING";
+
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot";
+
+
+try{
+
+socket =
+new WebSocket(BACKEND);
+
+}catch(e){
+
+return;
+
+}
+
+
+socket.onopen =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"LIVE";
+
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot on";
+
+};
+
+
+socket.onmessage =
+function(event){
+
+let data;
+
+
+try{
+
+data =
+JSON.parse(event.data);
+
+}catch(e){
+
+return;
+
+}
+
+
+if(
+data.type!=="tick"
+)
+return;
+
+
+const tick =
+data.data;
+
+
+if(
+!tick ||
+tick.symbol!==selected.code ||
+tick.price===undefined
+)
+return;
+
+
+processTick(
+Number(tick.price)
+);
+
+};
+
+
+socket.onclose =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"RECONNECTING";
+
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot";
+
+
+setTimeout(
+connect,
+4000
+);
+
+};
+
+
+socket.onerror =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"CONNECTION ERROR";
+
+};
+
+}
+
+
+/* BOT ENGINE */
+
+function runBot(){
+
+if(totalTicks<100){
+
+document.getElementById(
+"signal"
+).textContent =
+"BUILDING";
+
+document.getElementById(
+"signal"
+).className =
+"signal wait";
+
+document.getElementById(
+"confidence"
+).textContent =
+"Collecting live ticks • "+
+totalTicks+
+" / 100";
+
+document.getElementById(
+"confidenceFill"
+).style.width =
+totalTicks+"%";
+
+return;
+
+}
+
+
+const strongest =
+digits.indexOf(
+Math.max(...digits)
+);
+
+
+const strongestPercent =
+digits[strongest];
+
+
+let result="WAIT";
+
+let confidence=50;
+
+
+/*
+Informational strength model.
+
+It describes the current
+100-tick sample only.
+*/
+
+if(
+strongestPercent>=15
+){
+
+result="BUY";
+
+confidence =
+Math.min(
+95,
+Math.round(
+50+
+(
+strongestPercent-10
+)*4
+)
+);
+
+}else{
+
+result="WAIT";
+
+confidence =
+Math.round(
+50+
+strongestPercent
+);
+
+}
+
+
+document.getElementById(
+"signal"
+).textContent =
+result;
+
+
+document.getElementById(
+"signal"
+).className =
+"signal "+
+(
+result==="BUY"
+?
+"buy"
+:
+"wait"
+);
+
+
+document.getElementById(
+"confidence"
+).textContent =
+"Confidence: "+
+confidence+
+"% • Based on 100 live ticks";
+
+
+document.getElementById(
+"confidenceFill"
+).style.width =
+confidence+"%";
+
+
+addSignal(
+result,
+confidence,
+strongest
+);
+
+}
+
+
+/* SIGNAL HISTORY */
+
+function addSignal(
+result,
+confidence,
+digit
+){
+
+/*
+Only create a new signal every
+10 ticks so the history remains
+useful instead of filling instantly.
+*/
+
+if(
+totalTicks%10!==0
+)
+return;
+
+
+signalHistory.unshift({
+
+market:selected.name,
+
+signal:result,
+
+confidence:confidence,
+
+digit:digit
+
+});
+
+
+if(signalHistory.length>8)
+signalHistory.pop();
+
+
+renderHistory();
+
+}
+
+
+function renderHistory(){
+
+const box =
+document.getElementById(
+"history"
+);
+
+if(!signalHistory.length){
+
+box.innerHTML=`
+
+<div style="
+font-size:8px;
+color:#60788a;
+">
+No signals yet.
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML="";
+
+
+signalHistory.forEach(
+item=>{
+
+const row =
+document.createElement(
+"div"
+);
+
+row.className =
+"history-row";
+
+row.innerHTML=`
+
+<div>
+${item.market}
+</div>
+
+<div class="${
+item.signal==="BUY"
+?
+"buy"
+:
+"wait"
+}">
+${item.signal}
+</div>
+
+<div>
+${item.confidence}%
+</div>
+
+`;
+
+box.appendChild(row);
+
+});
+
+}
+
+
+/* START */
+
+document.getElementById(
+"start"
+).onclick =
+function(){
+
+botRunning=true;
+
+this.disabled=true;
+
+document.getElementById(
+"stop"
+).disabled=false;
+
+document.getElementById(
+"signal"
+).textContent =
+"BUILDING";
+
+document.getElementById(
+"confidence"
+).textContent =
+"Collecting live ticks...";
+
+};
+
+
+/* STOP */
+
+document.getElementById(
+"stop"
+).onclick =
+function(){
+
+botRunning=false;
+
+document.getElementById(
+"start"
+).disabled=false;
+
+this.disabled=true;
+
+document.getElementById(
+"signal"
+).textContent =
+"STOPPED";
+
+document.getElementById(
+"signal"
+).className =
+"signal wait";
+
+document.getElementById(
+"confidence"
+).textContent =
+"Analysis engine stopped.";
+
+document.getElementById(
+"confidenceFill"
+).style.width =
+"0%";
+
+};
+
+
+/* INITIALIZE */
+
+renderMarkets();
+
+renderDigits();
+
+renderTicks();
+
+connect();
+
+</script>
+
+</body>
+  </html>
