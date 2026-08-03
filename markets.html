@@ -1,644 +1,763 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>NEXTRADE | Live Markets</title>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NEXTRADE | Live Markets</title><style>
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#040a10;
-color:#fff;
-min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#040a10;
+    color:#fff;
+    min-height:100vh;
 }
 
 header{
-height:72px;
-background:#08131f;
-border-bottom:1px solid #193247;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 5%;
+    height:72px;
+    background:#08131f;
+    border-bottom:1px solid #193247;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .logo{
-font-size:24px;
-font-weight:900;
+    font-size:25px;
+    font-weight:900;
 }
 
 .logo span{
-color:#159ff0;
+    color:#159ff0;
 }
 
-.nav{
-display:flex;
-gap:20px;
-align-items:center;
+nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
 }
 
-.nav a{
-color:#8aa0b0;
-text-decoration:none;
-font-size:10px;
-font-weight:bold;
+nav a{
+    color:#8198a9;
+    text-decoration:none;
+    font-size:9px;
+    font-weight:bold;
 }
 
-.nav a:hover{
-color:#159ff0;
+nav a:hover{
+    color:#159ff0;
 }
 
 .account{
-background:#07111b;
-border:1px solid #193247;
-border-radius:8px;
-padding:9px 12px;
-font-size:9px;
-}
-
-.account-dot{
-display:inline-block;
-width:7px;
-height:7px;
-border-radius:50%;
-background:#777;
-margin-right:5px;
-}
-
-.account-dot.live{
-background:#2edb9c;
-box-shadow:0 0 8px #2edb9c;
-}
-
-main{
-padding:25px 5%;
-}
-
-.page-title{
-margin-bottom:20px;
-}
-
-.page-title h1{
-font-size:28px;
-margin-bottom:7px;
-}
-
-.page-title p{
-font-size:11px;
-color:#71899a;
-}
-
-/* ACCOUNT */
-
-.account-panel{
-background:#08131f;
-border:1px solid #193247;
-border-radius:12px;
-padding:18px;
-margin-bottom:22px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-}
-
-.account-left{
-display:flex;
-align-items:center;
-gap:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#07111b;
+    border:1px solid #193247;
+    border-radius:9px;
+    padding:8px 12px;
 }
 
 .account-icon{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#159ff0;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#159ff0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:bold;
 }
 
-.account-title{
-font-size:13px;
-font-weight:bold;
-margin-bottom:5px;
+.account-info{
+    min-width:90px;
+}
+
+.account-name{
+    font-size:9px;
+    font-weight:bold;
 }
 
 .account-status{
-font-size:9px;
-color:#71899a;
+    font-size:7px;
+    color:#708798;
+    margin-top:3px;
 }
 
-.account-right{
-text-align:right;
-}
-
-.balance-label{
-font-size:8px;
-color:#71899a;
-margin-bottom:4px;
-}
-
-.balance{
-font-size:20px;
-font-weight:bold;
+.account-balance{
+    font-size:9px;
+    font-weight:bold;
+    color:#2edb9c;
+    margin-top:3px;
 }
 
 .logout{
-border:1px solid #28465a;
-background:transparent;
-color:#8aa0b0;
-border-radius:6px;
-padding:8px 12px;
-font-size:8px;
-cursor:pointer;
-margin-top:8px;
+    border:0;
+    background:none;
+    color:#708798;
+    font-size:7px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .logout:hover{
-border-color:#159ff0;
-color:#fff;
+    color:#ff6575;
 }
 
-/* LAYOUT */
+main{
+    width:92%;
+    max-width:1250px;
+    margin:0 auto;
+    padding:35px 0 60px;
+}
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.page-title p{
+    color:#71899a;
+    font-size:10px;
+}
+
+.connection{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:14px;
+    font-size:8px;
+    color:#71899a;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#e04b5b;
+    box-shadow:0 0 8px rgba(224,75,91,.5);
+}
+
+.dot.live{
+    background:#2edb9c;
+    box-shadow:0 0 8px rgba(46,219,156,.6);
+}
 
 .market-layout{
-display:grid;
-grid-template-columns:300px 1fr;
-gap:20px;
+    display:grid;
+    grid-template-columns:330px 1fr;
+    gap:20px;
 }
-
-/* MARKET LIST */
 
 .market-list{
-background:#08131f;
-border:1px solid #193247;
-border-radius:12px;
-overflow:hidden;
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:14px;
+    overflow:hidden;
 }
 
-.list-title{
-padding:15px;
-border-bottom:1px solid #193247;
-font-size:10px;
-font-weight:bold;
-color:#159ff0;
+.market-list-header{
+    padding:18px;
+    border-bottom:1px solid #193247;
+}
+
+.market-list-header h2{
+    font-size:12px;
+}
+
+.market-list-header p{
+    font-size:7px;
+    color:#627a8b;
+    margin-top:5px;
 }
 
 .market{
-padding:14px;
-border-bottom:1px solid #122638;
-cursor:pointer;
-transition:.2s;
+    padding:15px 17px;
+    border-bottom:1px solid #142a3b;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.market:last-child{
+    border-bottom:0;
 }
 
 .market:hover{
-background:#0b1b29;
+    background:#0b1b2a;
 }
 
 .market.active{
-background:#0c2030;
-border-left:3px solid #159ff0;
+    background:#0b1f30;
+    border-left:3px solid #159ff0;
+    padding-left:14px;
+}
+
+.market-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
 }
 
 .market-name{
-font-size:10px;
-font-weight:bold;
-margin-bottom:5px;
-}
-
-.market-symbol{
-font-size:8px;
-color:#617889;
+    font-size:9px;
+    font-weight:bold;
 }
 
 .market-price{
-font-size:12px;
-font-weight:bold;
-margin-top:7px;
+    font-size:10px;
+    font-weight:bold;
+    color:#2edb9c;
 }
 
-/* CHART */
+.market-symbol{
+    font-size:7px;
+    color:#60798b;
+    margin-top:5px;
+}
 
 .chart-card{
-background:#08131f;
-border:1px solid #193247;
-border-radius:12px;
-padding:20px;
-min-height:520px;
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:14px;
+    overflow:hidden;
+    min-height:540px;
 }
 
 .chart-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
+    padding:20px;
+    border-bottom:1px solid #193247;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .selected-name{
-font-size:15px;
-font-weight:bold;
+    font-size:15px;
+    font-weight:bold;
 }
 
 .selected-symbol{
-font-size:9px;
-color:#71899a;
-margin-top:5px;
+    font-size:8px;
+    color:#657e90;
+    margin-top:5px;
 }
 
 .live-badge{
-font-size:8px;
-color:#2edb9c;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:#071b16;
+    border:1px solid #164a3c;
+    color:#2edb9c;
+    padding:7px 10px;
+    border-radius:6px;
+    font-size:7px;
+    font-weight:bold;
 }
 
-.live-badge span{
-display:inline-block;
-width:7px;
-height:7px;
-border-radius:50%;
-background:#2edb9c;
-margin-right:5px;
+.live-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#2edb9c;
+    box-shadow:0 0 7px #2edb9c;
 }
 
-.price-box{
-margin-bottom:15px;
+.price-panel{
+    padding:22px 20px 5px;
 }
 
-.live-price{
-font-size:30px;
-font-weight:bold;
+.price-label{
+    font-size:7px;
+    color:#62798a;
+    letter-spacing:1px;
 }
 
-.price-caption{
-font-size:8px;
-color:#71899a;
-margin-top:4px;
+.current-price{
+    font-size:32px;
+    font-weight:900;
+    margin-top:6px;
+}
+
+.price-change{
+    font-size:8px;
+    color:#2edb9c;
+    margin-top:5px;
+}
+
+.chart{
+    height:350px;
+    margin:15px 20px 0;
+    position:relative;
+    background:
+        linear-gradient(#102333 1px,transparent 1px),
+        linear-gradient(90deg,#102333 1px,transparent 1px);
+    background-size:50px 50px;
+    border:1px solid #193247;
+    border-radius:9px;
+    overflow:hidden;
 }
 
 canvas{
-width:100%;
-height:330px;
-background:#050c13;
-border:1px solid #142a3b;
-border-radius:8px;
+    width:100%;
+    height:100%;
+    display:block;
 }
 
-.timeframes{
-display:flex;
-gap:7px;
-margin-top:15px;
+.time-buttons{
+    display:flex;
+    gap:6px;
+    padding:15px 20px 20px;
 }
 
-.timeframes button{
-background:#07111b;
-border:1px solid #193247;
-color:#71899a;
-padding:8px 12px;
-border-radius:5px;
-font-size:8px;
-cursor:pointer;
+.time-button{
+    background:#07111b;
+    border:1px solid #193247;
+    color:#6e8798;
+    border-radius:5px;
+    padding:7px 10px;
+    font-size:7px;
+    cursor:pointer;
 }
 
-.timeframes button.active{
-background:#159ff0;
-border-color:#159ff0;
-color:#fff;
+.time-button.active,
+.time-button:hover{
+    color:#fff;
+    border-color:#159ff0;
+    background:#0a1b2a;
+}
+
+.market-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    padding:0 20px 20px;
+}
+
+.stat{
+    background:#07111b;
+    border:1px solid #193247;
+    border-radius:7px;
+    padding:12px;
+}
+
+.stat-label{
+    color:#5e7788;
+    font-size:6px;
+    margin-bottom:5px;
+}
+
+.stat-value{
+    font-size:9px;
+    font-weight:bold;
 }
 
 .message{
-margin-top:15px;
-padding:10px;
-border-radius:7px;
-background:#07131d;
-border:1px solid #193247;
-font-size:8px;
-color:#71899a;
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:7px;
+    background:#171208;
+    border:1px solid #5b471d;
+    color:#c1a968;
+    font-size:8px;
 }
 
-@media(max-width:800px){
-
-.market-layout{
-grid-template-columns:1fr;
+.message.show{
+    display:block;
 }
 
-.market-list{
-order:2;
+@media(max-width:900px){
+
+    .market-layout{
+        grid-template-columns:1fr;
+    }
+
+    .market-list{
+        max-height:380px;
+        overflow-y:auto;
+    }
 }
 
-.chart-card{
-order:1;
+@media(max-width:600px){
+
+    header{
+        height:auto;
+        min-height:65px;
+        padding:10px 4%;
+        gap:10px;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .account{
+        padding:6px 8px;
+    }
+
+    .account-info{
+        min-width:65px;
+    }
+
+    main{
+        width:94%;
+        padding-top:25px;
+    }
+
+    .page-title h1{
+        font-size:25px;
+    }
+
+    .chart-card{
+        min-height:500px;
+    }
+
+    .chart{
+        height:280px;
+    }
+
+    .current-price{
+        font-size:27px;
+    }
+
+    .market-stats{
+        grid-template-columns:1fr;
+    }
 }
-
-.account-panel{
-align-items:flex-start;
-flex-direction:column;
-}
-
-.account-right{
-text-align:left;
-}
-
-.nav{
-gap:10px;
-}
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">
-NEX<span>TRADE</span>
+</style></head><body><header><div class="logo">
+    NEX<span>TRADE</span>
 </div>
 
-<div class="nav">
-
-<a href="index.html">
-HOME
-</a>
-
-<a href="tools.html">
-TOOLS
-</a>
+<nav>
+    <a href="index.html">HOME</a>
+    <a href="markets.html">MARKETS</a>
+    <a href="tools.html">TOOLS</a>
+    <a href="bots.html">BOTS</a>
+</nav>
 
 <div class="account">
-<span
-id="headerDot"
-class="account-dot"
-></span>
 
-<span id="headerStatus">
-CHECKING
-</span>
-</div>
+    <div class="account-icon">D</div>
 
-</div>
+    <div class="account-info">
 
-</header>
+        <div class="account-name">
+            Deriv Account
+        </div>
 
-<main>
+        <div
+            id="accountStatus"
+            class="account-status"
+        >
+            Checking...
+        </div>
 
-<div class="page-title">
+        <div
+            id="accountBalance"
+            class="account-balance"
+        >
+            --
+        </div>
 
-<h1>
-Live Markets
-</h1>
+    </div>
 
-<p>
-Monitor live Deriv volatility markets in real time.
-</p>
-
-</div>
-
-
-<!-- ACCOUNT PANEL -->
-
-<div class="account-panel">
-
-<div class="account-left">
-
-<div class="account-icon">
-D
-</div>
-
-<div>
-
-<div class="account-title">
-Deriv Account
-</div>
-
-<div
-id="accountStatus"
-class="account-status"
->
-Checking authentication...
-</div>
+    <button
+        id="logoutButton"
+        class="logout"
+    >
+        LOG OUT
+    </button>
 
 </div>
 
-</div>
+</header><main><section class="page-title">
 
+    <h1>
+        Live Markets
+    </h1>
 
-<div class="account-right">
+    <p>
+        Monitor live Deriv volatility markets in real time.
+    </p>
 
-<div class="balance-label">
-BALANCE
-</div>
+    <div class="connection">
 
-<div
-id="balance"
-class="balance"
->
---
-</div>
+        <span
+            id="connectionDot"
+            class="dot"
+        ></span>
 
-<button
-id="logout"
-class="logout"
->
-LOG OUT
-</button>
+        <span
+            id="connectionText"
+        >
+            CONNECTING TO LIVE DATA...
+        </span>
 
-</div>
+    </div>
 
-</div>
+</section>
 
 
 <div class="market-layout">
 
+    <section class="market-list">
 
-<!-- MARKET LIST -->
+        <div class="market-list-header">
 
-<div class="market-list">
+            <h2>
+                VOLATILITY MARKETS
+            </h2>
 
-<div class="list-title">
-VOLATILITY MARKETS
+            <p>
+                Select a market to view live price movement.
+            </p>
+
+        </div>
+
+        <div
+            id="marketList"
+        ></div>
+
+    </section>
+
+
+    <section class="chart-card">
+
+        <div class="chart-header">
+
+            <div>
+
+                <div
+                    id="selectedName"
+                    class="selected-name"
+                >
+                    Volatility 100 (1s)
+                </div>
+
+                <div
+                    id="selectedSymbol"
+                    class="selected-symbol"
+                >
+                    1HZ100V
+                </div>
+
+            </div>
+
+            <div class="live-badge">
+
+                <span class="live-dot"></span>
+
+                LIVE
+
+            </div>
+
+        </div>
+
+
+        <div class="price-panel">
+
+            <div class="price-label">
+                LIVE PRICE
+            </div>
+
+            <div
+                id="currentPrice"
+                class="current-price"
+            >
+                --
+            </div>
+
+            <div
+                id="priceChange"
+                class="price-change"
+            >
+                LIVE • RECEIVING MARKET DATA
+            </div>
+
+        </div>
+
+
+        <div class="chart">
+
+            <canvas
+                id="priceCanvas"
+            ></canvas>
+
+        </div>
+
+
+        <div class="time-buttons">
+
+            <button class="time-button active">
+                1S
+            </button>
+
+            <button class="time-button">
+                5S
+            </button>
+
+            <button class="time-button">
+                15S
+            </button>
+
+            <button class="time-button">
+                30S
+            </button>
+
+            <button class="time-button">
+                1M
+            </button>
+
+        </div>
+
+
+        <div class="market-stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    SYMBOL
+                </div>
+
+                <div
+                    id="statSymbol"
+                    class="stat-value"
+                >
+                    1HZ100V
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    LAST PRICE
+                </div>
+
+                <div
+                    id="statPrice"
+                    class="stat-value"
+                >
+                    --
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    MARKET STATUS
+                </div>
+
+                <div
+                    id="statStatus"
+                    class="stat-value"
+                >
+                    CONNECTING
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </div>
 
-<div id="marketList"></div>
-
-</div>
-
-
-<!-- CHART -->
-
-<div class="chart-card">
-
-<div class="chart-header">
-
-<div>
 
 <div
-id="selectedName"
-class="selected-name"
->
-Volatility 100 (1s)
-</div>
+    id="message"
+    class="message"
+></div>
 
-<div
-id="selectedSymbol"
-class="selected-symbol"
->
-1HZ100V
-</div>
+</main><script>
 
-</div>
-
-<div class="live-badge">
-
-<span></span>
-LIVE
-
-</div>
-
-</div>
-
-
-<div class="price-box">
-
-<div
-id="livePrice"
-class="live-price"
->
---
-</div>
-
-<div class="price-caption">
-LIVE • RECEIVING MARKET DATA
-</div>
-
-</div>
-
-
-<canvas
-id="chart"
-></canvas>
-
-
-<div class="timeframes">
-
-<button class="active">
-1S
-</button>
-
-<button>
-5S
-</button>
-
-<button>
-15S
-</button>
-
-<button>
-30S
-</button>
-
-<button>
-1M
-</button>
-
-</div>
-
-
-<div
-id="message"
-class="message"
->
-Connecting to NEXTRADE live market data...
-</div>
-
-</div>
-
-</div>
-
-</main>
-
-
-<script>
-
-/*
- * Your Render backend
- */
 const BACKEND =
-"https://nextrade-backened.onrender.com";
+    "https://nextrade-backened.onrender.com";
 
 
-/*
- * Ten markets
- */
 const markets = [
 
-{
-name:"Volatility 100 (1s)",
-symbol:"1HZ100V"
-},
+    {
+        name:"Volatility 100 (1s)",
+        symbol:"1HZ100V"
+    },
 
-{
-name:"Volatility 75 (1s)",
-symbol:"1HZ75V"
-},
+    {
+        name:"Volatility 75 (1s)",
+        symbol:"1HZ75V"
+    },
 
-{
-name:"Volatility 50 (1s)",
-symbol:"1HZ50V"
-},
+    {
+        name:"Volatility 50 (1s)",
+        symbol:"1HZ50V"
+    },
 
-{
-name:"Volatility 25 (1s)",
-symbol:"1HZ25V"
-},
+    {
+        name:"Volatility 25 (1s)",
+        symbol:"1HZ25V"
+    },
 
-{
-name:"Volatility 10 (1s)",
-symbol:"1HZ10V"
-},
+    {
+        name:"Volatility 10 (1s)",
+        symbol:"1HZ10V"
+    },
 
-{
-name:"Volatility 100",
-symbol:"R_100"
-},
+    {
+        name:"Volatility 100",
+        symbol:"R_100"
+    },
 
-{
-name:"Volatility 75",
-symbol:"R_75"
-},
+    {
+        name:"Volatility 75",
+        symbol:"R_75"
+    },
 
-{
-name:"Volatility 50",
-symbol:"R_50"
-},
+    {
+        name:"Volatility 50",
+        symbol:"R_50"
+    },
 
-{
-name:"Volatility 25",
-symbol:"R_25"
-},
+    {
+        name:"Volatility 25",
+        symbol:"R_25"
+    },
 
-{
-name:"Volatility 10",
-symbol:"R_10"
-}
+    {
+        name:"Volatility 10",
+        symbol:"R_10"
+    }
 
 ];
 
 
-const prices = {};
-const history = {};
+let selectedSymbol =
+    "1HZ100V";
 
-let selected =
-"1HZ100V";
+let prices = {};
+
+let history = {};
+
+let socket = null;
+
+let reconnectTimer = null;
 
 
 /*
@@ -646,748 +765,1049 @@ let selected =
  */
 
 const marketList =
-document.getElementById(
-"marketList"
-);
-
-const livePrice =
-document.getElementById(
-"livePrice"
-);
+    document.getElementById("marketList");
 
 const selectedName =
-document.getElementById(
-"selectedName"
-);
+    document.getElementById("selectedName");
 
-const selectedSymbol =
-document.getElementById(
-"selectedSymbol"
-);
+const selectedSymbolElement =
+    document.getElementById("selectedSymbol");
+
+const currentPrice =
+    document.getElementById("currentPrice");
+
+const priceChange =
+    document.getElementById("priceChange");
+
+const statSymbol =
+    document.getElementById("statSymbol");
+
+const statPrice =
+    document.getElementById("statPrice");
+
+const statStatus =
+    document.getElementById("statStatus");
+
+const connectionDot =
+    document.getElementById("connectionDot");
+
+const connectionText =
+    document.getElementById("connectionText");
+
+const accountStatus =
+    document.getElementById("accountStatus");
+
+const accountBalance =
+    document.getElementById("accountBalance");
+
+const logoutButton =
+    document.getElementById("logoutButton");
 
 const message =
-document.getElementById(
-"message"
-);
-
-
-/*
- * Create market list
- */
-
-markets.forEach(
-market => {
-
-history[market.symbol] = [];
-
-const div =
-document.createElement("div");
-
-div.className =
-"market";
-
-if (
-market.symbol === selected
-) {
-
-div.classList.add(
-"active"
-);
-
-}
-
-div.innerHTML = `
-
-<div class="market-name">
-${market.name}
-</div>
-
-<div class="market-symbol">
-${market.symbol}
-</div>
-
-<div
-class="market-price"
-id="price-${market.symbol}"
->
---
-</div>
-
-`;
-
-div.addEventListener(
-"click",
-() => {
-
-selected =
-market.symbol;
-
-selectedName.textContent =
-market.name;
-
-selectedSymbol.textContent =
-market.symbol;
-
-document
-.querySelectorAll(
-".market"
-)
-.forEach(
-item =>
-item.classList.remove(
-"active"
-)
-);
-
-div.classList.add(
-"active"
-);
-
-updateSelectedPrice();
-
-drawChart();
-
-});
-
-marketList.appendChild(
-div
-);
-
-});
-
-
-/*
- * Update selected price
- */
-
-function updateSelectedPrice(){
-
-const price =
-prices[selected];
-
-if (
-price !== undefined
-){
-
-livePrice.textContent =
-formatPrice(price);
-
-}
-
-}
-
-
-/*
- * Format prices
- */
-
-function formatPrice(
-value
-){
-
-return Number(
-value
-).toLocaleString(
-"en-US",
-{
-maximumFractionDigits:8
-}
-);
-
-}
-
-
-/*
- * Canvas
- */
+    document.getElementById("message");
 
 const canvas =
-document.getElementById(
-"chart"
-);
+    document.getElementById("priceCanvas");
 
 const ctx =
-canvas.getContext("2d");
+    canvas.getContext("2d");
 
+
+/*
+ * Format price
+ */
+
+function formatPrice(value){
+
+    if(
+        value === undefined ||
+        value === null ||
+        Number.isNaN(Number(value))
+    ){
+        return "--";
+    }
+
+    const number =
+        Number(value);
+
+    return number.toLocaleString(
+        "en-US",
+        {
+            minimumFractionDigits:
+                number >= 100000
+                ? 2
+                : number >= 100
+                ? 2
+                : 2,
+
+            maximumFractionDigits:
+                number >= 100000
+                ? 2
+                : number >= 100
+                ? 2
+                : 4
+        }
+    );
+}
+
+
+/*
+ * Show message
+ */
+
+function showMessage(text){
+
+    message.textContent =
+        text;
+
+    message.classList.add(
+        "show"
+    );
+
+}
+
+
+/*
+ * Render market list
+ */
+
+function renderMarkets(){
+
+    marketList.innerHTML =
+        "";
+
+    markets.forEach(
+        market => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "market" +
+                (
+                    market.symbol ===
+                    selectedSymbol
+                    ? " active"
+                    : ""
+                );
+
+            item.dataset.symbol =
+                market.symbol;
+
+            item.innerHTML = `
+
+                <div class="market-top">
+
+                    <div class="market-name">
+                        ${market.name}
+                    </div>
+
+                    <div
+                        class="market-price"
+                        id="price-${market.symbol}"
+                    >
+                        --
+                    </div>
+
+                </div>
+
+                <div class="market-symbol">
+                    ${market.symbol}
+                </div>
+
+            `;
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    selectedSymbol =
+                        market.symbol;
+
+                    updateSelectedMarket();
+
+                    renderMarkets();
+
+                    drawChart();
+
+                }
+            );
+
+            marketList.appendChild(
+                item
+            );
+
+        }
+    );
+
+    updateMarketPrices();
+
+}
+
+
+/*
+ * Update selected market
+ */
+
+function updateSelectedMarket(){
+
+    const market =
+        markets.find(
+            item =>
+                item.symbol ===
+                selectedSymbol
+        );
+
+    if(!market) return;
+
+    selectedName.textContent =
+        market.name;
+
+    selectedSymbolElement.textContent =
+        market.symbol;
+
+    statSymbol.textContent =
+        market.symbol;
+
+    const price =
+        prices[selectedSymbol];
+
+    currentPrice.textContent =
+        formatPrice(price);
+
+    statPrice.textContent =
+        formatPrice(price);
+
+}
+
+
+/*
+ * Update all market prices
+ */
+
+function updateMarketPrices(){
+
+    markets.forEach(
+        market => {
+
+            const element =
+                document.getElementById(
+                    "price-" +
+                    market.symbol
+                );
+
+            if(element){
+
+                element.textContent =
+                    formatPrice(
+                        prices[
+                            market.symbol
+                        ]
+                    );
+
+            }
+
+        }
+    );
+
+    updateSelectedMarket();
+
+}
+
+
+/*
+ * Save price history
+ */
+
+function addHistory(
+    symbol,
+    price
+){
+
+    if(!history[symbol]){
+
+        history[symbol] =
+            [];
+
+    }
+
+    history[symbol].push(
+        Number(price)
+    );
+
+    if(
+        history[symbol].length >
+        80
+    ){
+
+        history[symbol].shift();
+
+    }
+
+}
+
+
+/*
+ * Resize canvas
+ */
 
 function resizeCanvas(){
 
-const rect =
-canvas.getBoundingClientRect();
+    const rect =
+        canvas.getBoundingClientRect();
 
-canvas.width =
-rect.width *
-window.devicePixelRatio;
+    const ratio =
+        window.devicePixelRatio ||
+        1;
 
-canvas.height =
-rect.height *
-window.devicePixelRatio;
+    canvas.width =
+        rect.width * ratio;
 
-ctx.scale(
-window.devicePixelRatio,
-window.devicePixelRatio
-);
+    canvas.height =
+        rect.height * ratio;
 
-drawChart();
+    ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+    drawChart();
 
 }
 
+
+/*
+ * Draw live chart
+ */
 
 function drawChart(){
 
-const width =
-canvas.clientWidth;
+    const rect =
+        canvas.getBoundingClientRect();
 
-const height =
-canvas.clientHeight;
+    const width =
+        rect.width;
 
-ctx.clearRect(
-0,
-0,
-width,
-height
-);
+    const height =
+        rect.height;
 
-const data =
-history[selected] || [];
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
 
-if (
-data.length < 2
-){
+    const data =
+        history[selectedSymbol] ||
+        [];
 
-ctx.fillStyle =
-"#71899a";
+    if(data.length < 2){
 
-ctx.font =
-"11px Arial";
+        ctx.fillStyle =
+            "#60798b";
 
-ctx.textAlign =
-"center";
+        ctx.font =
+            "10px Arial";
 
-ctx.fillText(
-"Waiting for live price data...",
-width / 2,
-height / 2
-);
+        ctx.textAlign =
+            "center";
 
-return;
+        ctx.fillText(
+            "Waiting for live price data...",
+            width / 2,
+            height / 2
+        );
+
+        return;
+
+    }
+
+    let min =
+        Math.min(...data);
+
+    let max =
+        Math.max(...data);
+
+    if(min === max){
+
+        min -= 1;
+        max += 1;
+
+    }
+
+    const padding =
+        25;
+
+    const chartWidth =
+        width -
+        padding * 2;
+
+    const chartHeight =
+        height -
+        padding * 2;
+
+    ctx.beginPath();
+
+    data.forEach(
+        (value,index) => {
+
+            const x =
+                padding +
+                (
+                    index /
+                    (data.length - 1)
+                ) *
+                chartWidth;
+
+            const y =
+                padding +
+                (
+                    1 -
+                    (
+                        value - min
+                    ) /
+                    (
+                        max - min
+                    )
+                ) *
+                chartHeight;
+
+            if(index === 0){
+
+                ctx.moveTo(
+                    x,
+                    y
+                );
+
+            }else{
+
+                ctx.lineTo(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+    );
+
+    ctx.strokeStyle =
+        "#159ff0";
+
+    ctx.lineWidth =
+        2;
+
+    ctx.stroke();
+
+
+    /*
+     * Current price marker
+     */
+
+    const last =
+        data[data.length - 1];
+
+    const lastX =
+        padding +
+        chartWidth;
+
+    const lastY =
+        padding +
+        (
+            1 -
+            (
+                last - min
+            ) /
+            (
+                max - min
+            )
+        ) *
+        chartHeight;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        lastX,
+        lastY,
+        4,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+        "#2edb9c";
+
+    ctx.fill();
 
 }
 
 
-const values =
-data.map(
-item => item.price
-);
-
-const min =
-Math.min(...values);
-
-const max =
-Math.max(...values);
-
-const range =
-max - min || 1;
-
-
 /*
- * Grid
+ * Connect to backend WebSocket
  */
 
-ctx.strokeStyle =
-"#102535";
+function connectSocket(){
 
-ctx.lineWidth =
-1;
+    if(socket){
 
-for (
-let i=1;
-i<5;
-i++
-){
+        try{
+            socket.close();
+        }catch(e){}
 
-const y =
-(i/5)*height;
+    }
 
-ctx.beginPath();
+    connectionText.textContent =
+        "CONNECTING TO LIVE DATA...";
 
-ctx.moveTo(
-0,
-y
-);
+    connectionDot.classList.remove(
+        "live"
+    );
 
-ctx.lineTo(
-width,
-y
-);
+    statStatus.textContent =
+        "CONNECTING";
 
-ctx.stroke();
+
+    const wsUrl =
+        BACKEND.replace(
+            "https://",
+            "wss://"
+        );
+
+
+    socket =
+        new WebSocket(
+            wsUrl
+        );
+
+
+    socket.addEventListener(
+        "open",
+        () => {
+
+            connectionText.textContent =
+                "LIVE • RECEIVING MARKET DATA";
+
+            connectionDot.classList.add(
+                "live"
+            );
+
+            statStatus.textContent =
+                "LIVE";
+
+            showMessage(
+                ""
+            );
+
+            message.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    socket.addEventListener(
+        "message",
+        event => {
+
+            try{
+
+                const data =
+                    JSON.parse(
+                        event.data
+                    );
+
+
+                if(
+                    data.type ===
+                    "status"
+                ){
+
+                    if(
+                        data.connected
+                    ){
+
+                        connectionText.textContent =
+                            "LIVE • RECEIVING MARKET DATA";
+
+                        connectionDot.classList.add(
+                            "live"
+                        );
+
+                        statStatus.textContent =
+                            "LIVE";
+
+                    }
+
+                    return;
+
+                }
+
+
+                if(
+                    data.type ===
+                    "tick" &&
+                    data.data
+                ){
+
+                    const symbol =
+                        data.data.symbol;
+
+                    const price =
+                        Number(
+                            data.data.price
+                        );
+
+
+                    if(
+                        !symbol ||
+                        !Number.isFinite(
+                            price
+                        )
+                    ){
+
+                        return;
+
+                    }
+
+
+                    prices[symbol] =
+                        price;
+
+
+                    addHistory(
+                        symbol,
+                        price
+                    );
+
+
+                    updateMarketPrices();
+
+
+                    if(
+                        symbol ===
+                        selectedSymbol
+                    ){
+
+                        currentPrice.textContent =
+                            formatPrice(
+                                price
+                            );
+
+                        statPrice.textContent =
+                            formatPrice(
+                                price
+                            );
+
+                        priceChange.textContent =
+                            "LIVE • RECEIVING MARKET DATA";
+
+                        drawChart();
+
+                    }
+
+                }
+
+
+                if(
+                    data.type ===
+                    "deriv_error"
+                ){
+
+                    console.error(
+                        "Deriv error:",
+                        data.error
+                    );
+
+                    statStatus.textContent =
+                        "ERROR";
+
+                }
+
+            }catch(error){
+
+                console.error(
+                    "WebSocket message error:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+
+    socket.addEventListener(
+        "close",
+        () => {
+
+            connectionText.textContent =
+                "RECONNECTING...";
+
+            connectionDot.classList.remove(
+                "live"
+            );
+
+            statStatus.textContent =
+                "RECONNECTING";
+
+            clearTimeout(
+                reconnectTimer
+            );
+
+            reconnectTimer =
+                setTimeout(
+                    connectSocket,
+                    5000
+                );
+
+        }
+    );
+
+
+    socket.addEventListener(
+        "error",
+        error => {
+
+            console.error(
+                "WebSocket error:",
+                error
+            );
+
+            connectionText.textContent =
+                "CONNECTION ERROR";
+
+            connectionDot.classList.remove(
+                "live"
+            );
+
+            statStatus.textContent =
+                "ERROR";
+
+        }
+    );
 
 }
 
 
 /*
- * Price line
+ * Check Deriv session
  */
 
-ctx.strokeStyle =
-"#159ff0";
+async function checkSession(){
 
-ctx.lineWidth =
-2;
+    try{
 
-ctx.beginPath();
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/session",
+                {
+                    method:
+                        "GET",
 
-data.forEach(
-(item,index) => {
+                    credentials:
+                        "include"
+                }
+            );
 
-const x =
-(index /
-(data.length-1))
-* width;
 
-const y =
-height -
-(
-(item.price-min) /
-range
-) *
-(height-20)
--10;
+        const data =
+            await response.json();
 
-if(index===0){
 
-ctx.moveTo(
-x,
-y
-);
+        if(
+            data.authenticated
+        ){
 
-}else{
+            accountStatus.textContent =
+                "Connected";
 
-ctx.lineTo(
-x,
-y
-);
+            accountStatus.style.color =
+                "#2edb9c";
+
+            await loadAccount();
+
+        }else{
+
+            accountStatus.textContent =
+                "Not connected";
+
+            accountStatus.style.color =
+                "#e06a78";
+
+            accountBalance.textContent =
+                "--";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Session check failed:",
+            error
+        );
+
+        accountStatus.textContent =
+            "Connection error";
+
+        accountBalance.textContent =
+            "--";
+
+    }
 
 }
-
-});
-
-ctx.stroke();
-
-}
-
-
-window.addEventListener(
-"resize",
-resizeCanvas
-);
-
-resizeCanvas();
 
 
 /*
- * WebSocket
- */
-
-let socket;
-
-
-function connect(){
-
-message.textContent =
-"Connecting to live market data...";
-
-socket =
-new WebSocket(
-BACKEND
-.replace(
-"https://",
-"wss://"
-)
-);
-
-
-socket.onopen =
-() => {
-
-message.textContent =
-"LIVE • Receiving market data";
-
-};
-
-
-socket.onmessage =
-event => {
-
-try{
-
-const msg =
-JSON.parse(
-event.data
-);
-
-if(
-msg.type === "tick" &&
-msg.data
-){
-
-const symbol =
-msg.data.symbol;
-
-const price =
-Number(
-msg.data.price
-);
-
-prices[symbol] =
-price;
-
-if(
-!history[symbol]
-){
-
-history[symbol] = [];
-
-}
-
-history[symbol].push({
-price,
-epoch:
-msg.data.epoch
-});
-
-
-if(
-history[symbol].length >
-100
-){
-
-history[symbol].shift();
-
-}
-
-
-const priceElement =
-document.getElementById(
-`price-${symbol}`
-);
-
-if(
-priceElement
-){
-
-priceElement.textContent =
-formatPrice(price);
-
-}
-
-
-if(
-symbol === selected
-){
-
-updateSelectedPrice();
-
-drawChart();
-
-}
-
-}
-
-}catch(error){
-
-console.error(
-"WebSocket message error:",
-error
-);
-
-}
-
-};
-
-
-socket.onclose =
-() => {
-
-message.textContent =
-"Connection closed — reconnecting...";
-
-setTimeout(
-connect,
-3000
-);
-
-};
-
-
-socket.onerror =
-() => {
-
-message.textContent =
-"Live connection error — reconnecting...";
-
-};
-
-}
-
-
-connect();
-
-
-/*
- * Account authentication
+ * Load Deriv account
  */
 
 async function loadAccount(){
 
-const accountStatus =
-document.getElementById(
-"accountStatus"
-);
+    try{
 
-const balance =
-document.getElementById(
-"balance"
-);
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/accounts",
+                {
+                    method:
+                        "GET",
 
-const headerStatus =
-document.getElementById(
-"headerStatus"
-);
-
-const headerDot =
-document.getElementById(
-"headerDot"
-);
-
-try{
-
-/*
- * Check session.
- */
-
-const sessionResponse =
-await fetch(
-`${BACKEND}/api/session`,
-{
-credentials:"include"
-}
-);
-
-const session =
-await sessionResponse.json();
+                    credentials:
+                        "include"
+                }
+            );
 
 
-if(
-!session.authenticated
-){
-
-accountStatus.textContent =
-"Not connected";
-
-headerStatus.textContent =
-"NOT CONNECTED";
-
-return;
-
-}
+        const data =
+            await response.json();
 
 
-/*
- * Authenticated.
- */
+        if(
+            !response.ok
+        ){
 
-accountStatus.textContent =
-"Deriv account connected";
+            console.error(
+                "Account error:",
+                data
+            );
 
-headerStatus.textContent =
-"CONNECTED";
+            accountBalance.textContent =
+                "--";
 
-headerDot.classList.add(
-"live"
-);
+            return;
 
-
-/*
- * Request account data.
- */
-
-const accountResponse =
-await fetch(
-`${BACKEND}/api/accounts`,
-{
-credentials:"include"
-}
-);
-
-const data =
-await accountResponse.json();
+        }
 
 
-console.log(
-"Deriv account response:",
-data
-);
+        /*
+         * Deriv account response formats
+         * can vary. Search common structures.
+         */
+
+        const accounts =
+            data.accounts;
 
 
-/*
- * Different Deriv API versions can
- * return slightly different structures.
- *
- * We therefore search common balance
- * fields instead of assuming one format.
- */
-
-let foundBalance = null;
+        let account = null;
 
 
-function searchBalance(
-object
-){
+        if(
+            Array.isArray(
+                accounts
+            )
+        ){
 
-if(
-!object ||
-typeof object !==
-"object"
-){
+            account =
+                accounts[0];
 
-return null;
+        }else if(
+            accounts &&
+            Array.isArray(
+                accounts.accounts
+            )
+        ){
 
-}
+            account =
+                accounts.accounts[0];
 
-if(
-typeof object.balance ===
-"number"
-){
+        }else if(
+            accounts &&
+            typeof accounts ===
+            "object"
+        ){
 
-return object.balance;
+            const keys =
+                Object.keys(
+                    accounts
+                );
 
-}
+            if(keys.length){
 
-if(
-typeof object.balance ===
-"string"
-&&
-!isNaN(
-Number(object.balance)
-)
-){
+                account =
+                    accounts[
+                        keys[0]
+                    ];
 
-return Number(
-object.balance
-);
+            }
 
-}
+        }
 
 
-for(
-const key in object
-){
+        if(account){
 
-const result =
-searchBalance(
-object[key]
-);
+            const balance =
+                account.balance ??
+                account.balance_available ??
+                account.available_balance ??
+                account.amount;
 
-if(
-result !== null
-){
 
-return result;
+            const currency =
+                account.currency ||
+                "USD";
+
+
+            if(
+                balance !== undefined
+            ){
+
+                accountBalance.textContent =
+                    `${currency} ${Number(balance).toLocaleString("en-US",{
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    })}`;
+
+            }else{
+
+                accountBalance.textContent =
+                    "CONNECTED";
+
+            }
+
+        }else{
+
+            accountBalance.textContent =
+                "CONNECTED";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Account loading failed:",
+            error
+        );
+
+        accountBalance.textContent =
+            "CONNECTED";
+
+    }
 
 }
-
-}
-
-return null;
-
-}
-
-
-foundBalance =
-searchBalance(
-data
-);
-
-
-if(
-foundBalance !== null
-){
-
-balance.textContent =
-foundBalance.toLocaleString(
-"en-US",
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-}
-);
-
-}else{
-
-balance.textContent =
-"--";
-
-accountStatus.textContent =
-"Deriv connected • account data available";
-
-}
-
-}catch(error){
-
-console.error(
-"Account loading error:",
-error
-);
-
-accountStatus.textContent =
-"Connected, but account information could not be loaded.";
-
-}
-
-}
-
-
-loadAccount();
 
 
 /*
  * Logout
  */
 
-document
-.getElementById("logout")
-.addEventListener(
-"click",
-async () => {
+logoutButton.addEventListener(
+    "click",
+    async () => {
 
-try{
+        try{
 
-await fetch(
-`${BACKEND}/api/logout`,
-{
-method:"POST",
-credentials:"include"
-}
+            await fetch(
+                BACKEND +
+                "/api/logout",
+                {
+                    method:
+                        "POST",
+
+                    credentials:
+                        "include"
+                }
+            );
+
+        }catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+        }
+
+        window.location.href =
+            "login.html";
+
+    }
 );
 
-window.location.href =
-"login.html";
 
-}catch(error){
+/*
+ * Time buttons
+ */
 
-console.error(
-"Logout error:",
-error
+document.querySelectorAll(
+    ".time-button"
+).forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document.querySelectorAll(
+                    ".time-button"
+                ).forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+    }
 );
 
-}
 
-});
+/*
+ * Start
+ */
 
+renderMarkets();
 
-</script>
+updateSelectedMarket();
 
-</body>
+checkSession();
+
+connectSocket();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+setTimeout(
+    resizeCanvas,
+    100
+);
+
+</script></body>
 </html>
