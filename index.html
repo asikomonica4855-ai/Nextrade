@@ -3,626 +3,703 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXTRADE | Trade Smarter</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050b12;
-    color:#fff;
-    min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#040a10;
+color:#fff;
+overflow-x:hidden;
 }
 
 /* ================= HEADER ================= */
 
 header{
-    height:72px;
-    background:#08131f;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
-    position:sticky;
-    top:0;
-    z-index:1000;
+height:72px;
+background:rgba(5,12,20,.94);
+border-bottom:1px solid #173044;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
+position:relative;
+z-index:20;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:.5px;
-    white-space:nowrap;
+font-size:25px;
+font-weight:900;
+letter-spacing:-1px;
 }
 
 .logo span{
-    color:#159ff0;
+color:#159ff0;
 }
 
 .nav{
-    display:flex;
-    align-items:center;
-    gap:4px;
+display:flex;
+gap:4px;
+overflow-x:auto;
 }
 
 .nav a{
-    color:#8ea5b7;
-    text-decoration:none;
-    font-size:11px;
-    font-weight:bold;
-    padding:10px 11px;
-    border-radius:6px;
-    transition:.2s;
+text-decoration:none;
+color:#8299a9;
+font-size:9px;
+font-weight:bold;
+padding:10px;
+white-space:nowrap;
+border-radius:6px;
 }
 
 .nav a:hover{
-    color:#fff;
-    background:#102536;
+color:#fff;
+background:#102333;
 }
 
 .nav a.active{
-    color:#159ff0;
+color:#159ff0;
 }
 
-.nav .signup{
-    background:#159ff0;
-    color:#fff;
-    margin-left:5px;
-    padding:10px 15px;
-}
-
-.nav .signup:hover{
-    background:#0d8bd7;
+.nav a.signup{
+background:#159ff0;
+color:#fff;
 }
 
 /* ================= HERO ================= */
 
 .hero{
-    width:92%;
-    max-width:1400px;
-    margin:auto;
-    min-height:620px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-    padding:65px 0;
+min-height:650px;
+position:relative;
+display:flex;
+align-items:center;
+overflow:hidden;
+padding:65px 5%;
+background:
+radial-gradient(circle at 70% 45%,rgba(21,159,240,.12),transparent 34%),
+radial-gradient(circle at 20% 70%,rgba(21,159,240,.06),transparent 30%);
 }
 
-.hero-text{
-    max-width:600px;
+.hero-content{
+width:48%;
+position:relative;
+z-index:5;
 }
 
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border:1px solid #193b53;
-    background:#091824;
-    border-radius:30px;
-    color:#7e9bae;
-    font-size:10px;
-    margin-bottom:22px;
-}
-
-.badge-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#2edb9c;
-    box-shadow:0 0 8px #2edb9c;
+.eyebrow{
+font-size:9px;
+letter-spacing:3px;
+color:#159ff0;
+font-weight:bold;
+margin-bottom:17px;
 }
 
 .hero h1{
-    font-size:58px;
-    line-height:1.02;
-    letter-spacing:-2px;
-    margin-bottom:20px;
+font-size:clamp(42px,6vw,76px);
+line-height:.95;
+letter-spacing:-4px;
+margin-bottom:22px;
 }
 
 .hero h1 span{
-    color:#159ff0;
+color:#159ff0;
 }
 
 .hero p{
-    color:#7f96a8;
-    font-size:15px;
-    line-height:1.7;
-    max-width:520px;
+max-width:510px;
+font-size:14px;
+line-height:1.7;
+color:#8299a9;
+margin-bottom:30px;
 }
 
 .hero-buttons{
-    display:flex;
-    gap:12px;
-    margin-top:30px;
+display:flex;
+gap:12px;
+flex-wrap:wrap;
 }
 
-.primary-btn,
-.secondary-btn{
-    text-decoration:none;
-    padding:14px 20px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:bold;
+.btn{
+display:inline-block;
+padding:14px 22px;
+border-radius:7px;
+font-size:10px;
+font-weight:bold;
+text-decoration:none;
 }
 
-.primary-btn{
-    background:#159ff0;
-    color:#fff;
+.btn-primary{
+background:#159ff0;
+color:#fff;
 }
 
-.primary-btn:hover{
-    background:#0d8bd7;
+.btn-secondary{
+border:1px solid #29475b;
+color:#a7b9c5;
+background:#07131e;
 }
 
-.secondary-btn{
-    border:1px solid #28465b;
-    color:#fff;
-    background:#091723;
-}
+/* ================= MONITOR WALL ================= */
 
-.secondary-btn:hover{
-    background:#102536;
-}
-
-.hero-note{
-    margin-top:22px;
-    color:#536b7c;
-    font-size:10px;
-}
-
-/* ================= TRADING VISUAL ================= */
-
-.visual{
-    position:relative;
-    min-height:420px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.monitor-scene{
+position:absolute;
+right:-3%;
+top:70px;
+width:56%;
+height:500px;
+transform:perspective(900px) rotateY(-7deg);
 }
 
 .monitor{
-    width:92%;
-    height:330px;
-    background:#09131e;
-    border:1px solid #234157;
-    border-radius:15px;
-    box-shadow:0 25px 70px rgba(0,0,0,.45);
-    padding:18px;
-    position:relative;
-    transform:perspective(1000px) rotateY(-5deg);
+position:absolute;
+background:#07131e;
+border:7px solid #182935;
+border-radius:13px;
+box-shadow:
+0 25px 60px rgba(0,0,0,.65),
+inset 0 0 25px rgba(21,159,240,.05);
+overflow:hidden;
+}
+
+.monitor.one{
+width:48%;
+height:48%;
+left:0;
+top:12%;
+}
+
+.monitor.two{
+width:48%;
+height:48%;
+right:0;
+top:0;
+}
+
+.monitor.three{
+width:48%;
+height:48%;
+left:8%;
+bottom:0;
+}
+
+.monitor.four{
+width:48%;
+height:48%;
+right:-3%;
+bottom:8%;
 }
 
 .monitor-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #1a3041;
-    padding-bottom:12px;
-    margin-bottom:15px;
+height:22px;
+background:#0c1c29;
+display:flex;
+align-items:center;
+gap:5px;
+padding:0 8px;
 }
 
-.monitor-title{
-    font-size:11px;
-    font-weight:bold;
+.light{
+width:5px;
+height:5px;
+border-radius:50%;
+background:#159ff0;
 }
 
-.monitor-live{
-    color:#2edb9c;
-    font-size:9px;
+.screen{
+height:calc(100% - 22px);
+padding:10px;
+position:relative;
+background:
+linear-gradient(rgba(21,159,240,.06) 1px,transparent 1px),
+linear-gradient(90deg,rgba(21,159,240,.06) 1px,transparent 1px);
+background-size:25px 25px;
+overflow:hidden;
 }
 
-.chart{
-    height:235px;
-    position:relative;
-    overflow:hidden;
-    background:
-        linear-gradient(rgba(30,65,90,.14) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(30,65,90,.14) 1px,transparent 1px),
-        #050c14;
-    background-size:35px 35px;
-    border-radius:7px;
+.screen-title{
+font-size:7px;
+color:#6e899b;
+position:absolute;
+top:7px;
+left:9px;
 }
 
-.chart svg{
-    width:100%;
-    height:100%;
+.price-tag{
+position:absolute;
+right:9px;
+top:7px;
+font-size:8px;
+color:#2edb9c;
+font-weight:bold;
 }
 
-.monitor-bottom{
-    display:flex;
-    justify-content:space-between;
-    margin-top:10px;
-    color:#60788a;
-    font-size:9px;
+.candles{
+position:absolute;
+left:8px;
+right:8px;
+top:30px;
+bottom:8px;
+display:flex;
+align-items:center;
+justify-content:space-around;
 }
 
-.money-card{
-    position:absolute;
-    right:0;
-    bottom:10px;
-    width:170px;
-    padding:17px;
-    background:#0b1a28;
-    border:1px solid #24465e;
-    border-radius:10px;
-    box-shadow:0 20px 50px rgba(0,0,0,.45);
+.candle{
+width:7px;
+position:relative;
+border-radius:1px;
+animation:floatCandle 2.5s ease-in-out infinite;
 }
 
-.money-label{
-    color:#647c8d;
-    font-size:9px;
-    margin-bottom:8px;
+.candle:before{
+content:"";
+position:absolute;
+width:1px;
+height:145%;
+left:3px;
+top:-22%;
+background:currentColor;
 }
+
+.candle.up{
+height:35%;
+background:#2edb9c;
+color:#2edb9c;
+}
+
+.candle.down{
+height:25%;
+background:#ff5969;
+color:#ff5969;
+}
+
+.candle:nth-child(2){height:52%}
+.candle:nth-child(3){height:30%}
+.candle:nth-child(4){height:65%}
+.candle:nth-child(5){height:42%}
+.candle:nth-child(6){height:73%}
+.candle:nth-child(7){height:48%}
+.candle:nth-child(8){height:62%}
+.candle:nth-child(9){height:37%}
+.candle:nth-child(10){height:70%}
+
+@keyframes floatCandle{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-3px)}
+}
+
+/* ================= FLOATING DOLLARS ================= */
 
 .money{
-    font-size:24px;
-    font-weight:bold;
+position:absolute;
+color:rgba(46,219,156,.15);
+font-size:65px;
+font-weight:900;
+pointer-events:none;
 }
 
-.money span{
-    color:#2edb9c;
-    font-size:10px;
-    margin-left:5px;
+.money.m1{
+right:41%;
+top:7%;
+transform:rotate(-12deg);
 }
 
-/* ================= QUICK ACCESS ================= */
-
-.quick{
-    width:92%;
-    max-width:1400px;
-    margin:0 auto 55px;
+.money.m2{
+right:7%;
+top:38%;
+font-size:85px;
+transform:rotate(14deg);
 }
 
-.section-heading{
-    margin-bottom:20px;
+.money.m3{
+right:31%;
+bottom:3%;
+font-size:48px;
+transform:rotate(8deg);
 }
 
-.section-heading h2{
-    font-size:23px;
+/* ================= MARKET STRIP ================= */
+
+.market-strip{
+background:#07111b;
+border-top:1px solid #173044;
+border-bottom:1px solid #173044;
+display:flex;
+overflow:hidden;
+white-space:nowrap;
 }
 
-.section-heading p{
-    color:#637b8d;
-    font-size:11px;
-    margin-top:6px;
+.market-track{
+display:flex;
+animation:scrollMarkets 25s linear infinite;
 }
 
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
+.market-item{
+min-width:190px;
+padding:17px 20px;
+border-right:1px solid #173044;
 }
 
-.quick-card{
-    text-decoration:none;
-    color:white;
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:10px;
-    padding:20px;
-    transition:.2s;
+.market-name{
+font-size:8px;
+color:#6f8797;
+margin-bottom:6px;
 }
 
-.quick-card:hover{
-    transform:translateY(-3px);
-    border-color:#159ff0;
-    background:#0a1927;
+.market-price{
+font-size:12px;
+font-weight:bold;
+}
+
+.market-move{
+font-size:7px;
+color:#2edb9c;
+margin-top:4px;
+}
+
+.market-move.red{
+color:#ff5969;
+}
+
+@keyframes scrollMarkets{
+from{transform:translateX(0)}
+to{transform:translateX(-50%)}
+}
+
+/* ================= SECTION ================= */
+
+.section{
+padding:75px 5%;
+max-width:1450px;
+margin:auto;
+}
+
+.section-head{
+margin-bottom:30px;
+}
+
+.section-head small{
+font-size:8px;
+letter-spacing:2px;
+color:#159ff0;
+}
+
+.section-head h2{
+font-size:30px;
+margin-top:8px;
+}
+
+.section-head p{
+font-size:11px;
+color:#71899a;
+margin-top:8px;
+}
+
+/* ================= FEATURE CARDS ================= */
+
+.features{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:13px;
+}
+
+.feature{
+background:#08131f;
+border:1px solid #193247;
+border-radius:10px;
+padding:22px;
+min-height:190px;
+transition:.2s;
+}
+
+.feature:hover{
+transform:translateY(-4px);
+border-color:#159ff0;
 }
 
 .icon{
-    width:35px;
-    height:35px;
-    border-radius:8px;
-    background:#0d2435;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#159ff0;
-    font-size:15px;
-    margin-bottom:15px;
+width:38px;
+height:38px;
+border-radius:8px;
+background:#0b2233;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#159ff0;
+font-size:18px;
+margin-bottom:18px;
 }
 
-.quick-card h3{
-    font-size:12px;
-    margin-bottom:7px;
+.feature h3{
+font-size:13px;
+margin-bottom:8px;
 }
 
-.quick-card p{
-    color:#627a8b;
-    font-size:9px;
-    line-height:1.5;
+.feature p{
+font-size:9px;
+line-height:1.6;
+color:#71899a;
 }
 
-/* ================= LIVE PREVIEW ================= */
-
-.live-section{
-    width:92%;
-    max-width:1400px;
-    margin:0 auto 70px;
+.feature a{
+display:inline-block;
+margin-top:15px;
+font-size:8px;
+color:#159ff0;
+text-decoration:none;
+font-weight:bold;
 }
 
-.market-preview{
-    display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:15px;
+/* ================= TERMINAL ================= */
+
+.terminal{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:15px;
 }
 
-.live-card{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    padding:22px;
+.terminal-card{
+background:#07111b;
+border:1px solid #193247;
+border-radius:10px;
+padding:20px;
 }
 
-.live-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+.terminal-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
 }
 
-.live-head h3{
-    font-size:14px;
+.terminal-head h3{
+font-size:12px;
 }
 
-.live-status{
-    color:#2edb9c;
-    font-size:9px;
+.live{
+font-size:8px;
+color:#2edb9c;
 }
 
-.market-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:14px 0;
-    border-bottom:1px solid #142a3b;
+.chart-box{
+height:260px;
+position:relative;
+overflow:hidden;
+background:
+linear-gradient(#102433 1px,transparent 1px),
+linear-gradient(90deg,#102433 1px,transparent 1px);
+background-size:38px 38px;
 }
 
-.market-row:last-child{
-    border-bottom:0;
+.chart-path{
+position:absolute;
+left:0;
+right:0;
+height:2px;
+background:#159ff0;
+top:52%;
+transform:rotate(-4deg);
+box-shadow:0 0 9px rgba(21,159,240,.4);
 }
 
-.market-info strong{
-    display:block;
-    font-size:11px;
+.chart-path:after{
+content:"";
+position:absolute;
+width:9px;
+height:9px;
+border-radius:50%;
+background:#fff;
+right:8%;
+top:-4px;
+box-shadow:0 0 12px #159ff0;
 }
 
-.market-info small{
-    color:#60788a;
-    font-size:8px;
+.digit-panel{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
 }
 
-.market-value{
-    text-align:right;
+.digit{
+height:55px;
+border-radius:50%;
+border:1px solid #193247;
+background:#08131f;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+font-weight:bold;
+font-size:13px;
 }
 
-.market-value strong{
-    display:block;
-    font-size:11px;
+.digit span{
+font-size:7px;
+color:#60788a;
+margin-top:4px;
 }
 
-.up{
-    color:#2edb9c;
-    font-size:8px;
+.digit.strong{
+border-color:#2edb9c;
+box-shadow:0 0 12px rgba(46,219,156,.2);
+}
+
+.digit.weak{
+border-color:#ff5969;
 }
 
 /* ================= CTA ================= */
 
 .cta{
-    width:92%;
-    max-width:1400px;
-    margin:0 auto 70px;
-    padding:45px;
-    border:1px solid #1b3c53;
-    border-radius:14px;
-    background:
-        radial-gradient(circle at 80% 30%,rgba(21,159,240,.13),transparent 35%),
-        #08131f;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:30px;
+margin:20px 5% 75px;
+border:1px solid #193247;
+border-radius:12px;
+padding:50px 30px;
+text-align:center;
+background:
+radial-gradient(circle at center,rgba(21,159,240,.09),transparent 60%),
+#07111b;
 }
 
 .cta h2{
-    font-size:27px;
-    margin-bottom:8px;
+font-size:30px;
+margin-bottom:10px;
 }
 
 .cta p{
-    color:#6c8495;
-    font-size:11px;
+font-size:10px;
+color:#71899a;
+margin-bottom:22px;
 }
 
 /* ================= FOOTER ================= */
 
 footer{
-    border-top:1px solid #193247;
-    background:#06101a;
-    padding:28px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:#526a7c;
-    font-size:9px;
+border-top:1px solid #193247;
+background:#06101a;
+padding:28px 5%;
+display:flex;
+justify-content:space-between;
+font-size:9px;
+color:#526a7c;
 }
 
 .footer-logo{
-    color:white;
-    font-size:14px;
-    font-weight:bold;
+font-size:15px;
+font-weight:bold;
+color:#fff;
 }
 
 .footer-logo span{
-    color:#159ff0;
+color:#159ff0;
 }
 
 /* ================= MOBILE ================= */
 
 @media(max-width:1050px){
 
-.nav a{
-    padding:9px 7px;
-    font-size:10px;
-}
-
 .hero{
-    gap:25px;
+min-height:700px;
 }
 
-.hero h1{
-    font-size:48px;
+.hero-content{
+width:100%;
+position:relative;
+z-index:8;
 }
 
-.quick-grid{
-    grid-template-columns:repeat(3,1fr);
+.monitor-scene{
+opacity:.34;
+width:95%;
+right:-15%;
+}
+
+.features{
+grid-template-columns:repeat(2,1fr);
+}
+
+.terminal{
+grid-template-columns:1fr;
 }
 
 }
 
-@media(max-width:800px){
+@media(max-width:650px){
 
 header{
-    height:auto;
-    min-height:70px;
-    padding:12px 4%;
-    align-items:flex-start;
-    gap:10px;
+height:auto;
+padding:14px 4%;
+align-items:flex-start;
 }
 
 .nav{
-    overflow-x:auto;
-    max-width:75%;
-    padding-bottom:3px;
-}
-
-.nav a{
-    white-space:nowrap;
-}
-
-.nav .signup{
-    display:none;
+margin-left:8px;
 }
 
 .hero{
-    grid-template-columns:1fr;
-    padding:45px 0;
+padding:55px 5%;
+min-height:620px;
 }
 
 .hero h1{
-    font-size:45px;
-}
-
-.visual{
-    min-height:350px;
-}
-
-.monitor{
-    width:100%;
-}
-
-.quick-grid{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.market-preview{
-    grid-template-columns:1fr;
-}
-
-.cta{
-    flex-direction:column;
-    align-items:flex-start;
-}
-
-}
-
-@media(max-width:500px){
-
-.hero{
-    padding-top:35px;
-}
-
-.hero h1{
-    font-size:39px;
+font-size:48px;
+letter-spacing:-3px;
 }
 
 .hero p{
-    font-size:13px;
+font-size:12px;
 }
 
-.hero-buttons{
-    flex-direction:column;
+.monitor-scene{
+top:220px;
+height:360px;
+width:120%;
+right:-25%;
+opacity:.25;
 }
 
-.primary-btn,
-.secondary-btn{
-    text-align:center;
+.monitor.one,
+.monitor.two,
+.monitor.three,
+.monitor.four{
+width:48%;
+height:45%;
 }
 
-.visual{
-    min-height:300px;
+.market-item{
+min-width:160px;
 }
 
-.monitor{
-    height:270px;
-    padding:12px;
+.features{
+grid-template-columns:1fr;
 }
 
-.chart{
-    height:180px;
-}
-
-.money-card{
-    width:145px;
-    right:-5px;
-}
-
-.money{
-    font-size:20px;
-}
-
-.quick-grid{
-    grid-template-columns:1fr 1fr;
-}
-
-.quick-card{
-    padding:15px;
+.section{
+padding:55px 5%;
 }
 
 .cta{
-    padding:28px;
-}
-
-.cta h2{
-    font-size:22px;
+margin:10px 5% 55px;
 }
 
 footer{
-    flex-direction:column;
-    gap:12px;
-    text-align:center;
+flex-direction:column;
+gap:10px;
+text-align:center;
 }
 
 }
+
 </style>
 </head>
 
 <body>
-
-<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -633,19 +710,12 @@ NEX<span>TRADE</span>
 <nav class="nav">
 
 <a href="index.html" class="active">HOME</a>
-
 <a href="markets.html">MARKETS</a>
-
 <a href="tools.html">TOOLS</a>
-
 <a href="bots.html">BOTS</a>
-
 <a href="analysis.html">ANALYSIS</a>
-
 <a href="manual-trading.html">MANUAL TRADING</a>
-
 <a href="login.html">LOGIN</a>
-
 <a href="signup.html" class="signup">SIGN UP</a>
 
 </nav>
@@ -653,165 +723,198 @@ NEX<span>TRADE</span>
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="hero-text">
+<div class="hero-content">
 
-<div class="badge">
-<span class="badge-dot"></span>
-LIVE DERIV MARKET MONITOR
+<div class="eyebrow">
+NEXTRADE • LIVE MARKET TECHNOLOGY
 </div>
 
 <h1>
-Trade Smarter.<br>
-Analyze <span>Better.</span>
+TRADE<br>
+<span>SMARTER.</span>
 </h1>
 
 <p>
-NEXTRADE brings live Deriv volatility markets, trading tools,
-market analysis and automated trading technology into one
-powerful platform.
+Monitor Deriv volatility markets, study live price movement,
+analyze digits and manage your trading workflow from one
+modern NEXTRADE platform.
 </p>
 
 <div class="hero-buttons">
 
-<a href="markets.html" class="primary-btn">
-EXPLORE LIVE MARKETS
+<a
+href="markets.html"
+class="btn btn-primary"
+>
+EXPLORE MARKETS
 </a>
 
-<a href="tools.html" class="secondary-btn">
-TRADING TOOLS
+<a
+href="analysis.html"
+class="btn btn-secondary"
+>
+MARKET ANALYSIS
 </a>
 
 </div>
 
-<div class="hero-note">
-Built for market analysis, strategy development and smarter trading decisions.
-</div>
-
 </div>
 
 
-<!-- TRADING MONITOR -->
+<!-- CSS MONITOR WALL -->
 
-<div class="visual">
+<div class="monitor-scene">
 
-<div class="monitor">
+<div class="money m1">$</div>
+<div class="money m2">$</div>
+<div class="money m3">$</div>
+
+
+<div class="monitor one">
 
 <div class="monitor-top">
-
-<div class="monitor-title">
-NEXTRADE • VOLATILITY 100
+<span class="light"></span>
+<span class="light"></span>
 </div>
 
-<div class="monitor-live">
-● LIVE MARKET
+<div class="screen">
+
+<div class="screen-title">
+VOLATILITY 100
 </div>
 
+<div class="price-tag">
+LIVE
 </div>
 
-<div class="chart">
+<div class="candles">
 
-<svg viewBox="0 0 600 235"
-preserveAspectRatio="none">
-
-<polyline
-points="
-0,180
-25,165
-50,175
-75,145
-100,155
-125,125
-150,140
-175,110
-200,125
-225,95
-250,115
-275,80
-300,105
-325,75
-350,90
-375,60
-400,75
-425,50
-450,70
-475,38
-500,55
-525,32
-550,45
-575,25
-600,40
-"
-fill="none"
-stroke="#159ff0"
-stroke-width="3"
-vector-effect="non-scaling-stroke"
-/>
-
-<polyline
-points="
-0,200
-25,185
-50,195
-75,165
-100,175
-125,145
-150,160
-175,130
-200,145
-225,115
-250,135
-275,100
-300,125
-325,95
-350,110
-375,80
-400,95
-425,70
-450,90
-475,58
-500,75
-525,52
-550,65
-575,45
-600,60
-"
-fill="none"
-stroke="rgba(46,219,156,.45)"
-stroke-width="1"
-vector-effect="non-scaling-stroke"
-/>
-
-</svg>
-
-</div>
-
-<div class="monitor-bottom">
-
-<span>1S</span>
-<span>5S</span>
-<span>15S</span>
-<span>30S</span>
-<span>1M</span>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
 
 </div>
 
 </div>
-
-<div class="money-card">
-
-<div class="money-label">
-LIVE MARKET VALUE
 </div>
 
-<div class="money">
-708.81
-<span>LIVE</span>
+
+<div class="monitor two">
+
+<div class="monitor-top">
+<span class="light"></span>
+<span class="light"></span>
 </div>
 
+<div class="screen">
+
+<div class="screen-title">
+MARKET SCANNER
+</div>
+
+<div class="price-tag">
++0.08%
+</div>
+
+<div class="candles">
+
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="monitor three">
+
+<div class="monitor-top">
+<span class="light"></span>
+<span class="light"></span>
+</div>
+
+<div class="screen">
+
+<div class="screen-title">
+DIGIT ANALYSIS
+</div>
+
+<div class="price-tag">
+SCANNING
+</div>
+
+<div class="candles">
+
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="monitor four">
+
+<div class="monitor-top">
+<span class="light"></span>
+<span class="light"></span>
+</div>
+
+<div class="screen">
+
+<div class="screen-title">
+NEXTRADE TERMINAL
+</div>
+
+<div class="price-tag">
+LIVE DATA
+</div>
+
+<div class="candles">
+
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle down"></div>
+<div class="candle up"></div>
+<div class="candle up"></div>
+
+</div>
+
+</div>
 </div>
 
 </div>
@@ -819,229 +922,276 @@ LIVE MARKET VALUE
 </section>
 
 
-<!-- ================= QUICK ACCESS ================= -->
+<!-- MARKET TICKER -->
 
-<section class="quick">
+<div class="market-strip">
 
-<div class="section-heading">
+<div class="market-track">
 
-<h2>Everything You Need</h2>
+<div class="market-item">
+<div class="market-name">VOLATILITY 100 (1s)</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 75 (1s)</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 50 (1s)</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 25 (1s)</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 10 (1s)</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<!-- duplicate for smooth ticker -->
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 100</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 75</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 50</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 25</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+<div class="market-item">
+<div class="market-name">VOLATILITY 10</div>
+<div class="market-price">LIVE MARKET</div>
+<div class="market-move">● LIVE</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<section class="section">
+
+<div class="section-head">
+
+<small>NEXTRADE PLATFORM</small>
+
+<h2>Everything in one terminal.</h2>
 
 <p>
-Access the main NEXTRADE tools directly from your dashboard.
+Built around live market monitoring, analysis and manual trading.
 </p>
 
 </div>
 
-<div class="quick-grid">
 
-<a href="markets.html" class="quick-card">
+<div class="features">
 
-<div class="icon">↗</div>
+<div class="feature">
+
+<div class="icon">◉</div>
 
 <h3>Live Markets</h3>
 
 <p>
-Monitor live Deriv volatility markets and real-time prices.
+Monitor the 10 core Deriv volatility markets through
+the NEXTRADE live market feed.
 </p>
 
+<a href="markets.html">
+VIEW MARKETS →
 </a>
 
-
-<a href="tools.html" class="quick-card">
-
-<div class="icon">⚙</div>
-
-<h3>Trading Tools</h3>
-
-<p>
-Use market calculators and analysis tools.
-</p>
-
-</a>
+</div>
 
 
-<a href="bots.html" class="quick-card">
-
-<div class="icon">◈</div>
-
-<h3>Trading Bots</h3>
-
-<p>
-Explore automated trading strategies and bot technology.
-</p>
-
-</a>
-
-
-<a href="analysis.html" class="quick-card">
+<div class="feature">
 
 <div class="icon">⌁</div>
 
 <h3>Market Analysis</h3>
 
 <p>
-Study price movement and develop trading setups.
+Study price movement, digit strength and recent market
+behavior using the NEXTRADE analysis tools.
 </p>
 
+<a href="analysis.html">
+OPEN ANALYSIS →
 </a>
 
+</div>
 
-<a href="manual-trading.html" class="quick-card">
 
-<div class="icon">＋</div>
+<div class="feature">
+
+<div class="icon">◎</div>
+
+<h3>Trading Tools</h3>
+
+<p>
+Use scanners, statistics, risk calculations and trade
+journaling to organize your trading process.
+</p>
+
+<a href="tools.html">
+OPEN TOOLS →
+</a>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">↗</div>
 
 <h3>Manual Trading</h3>
 
 <p>
-Analyze markets and prepare your own manual trades.
+Monitor live prices and practice manual trade decisions
+from a dedicated trading interface.
 </p>
 
+<a href="manual-trading.html">
+OPEN TERMINAL →
 </a>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- ================= LIVE PREVIEW ================= -->
+<!-- TERMINAL PREVIEW -->
 
-<section class="live-section">
+<section class="section">
 
-<div class="section-heading">
+<div class="section-head">
 
-<h2>Live Market Monitor</h2>
+<small>LIVE TERMINAL</small>
 
-<p>
-Real-time market data powered through the NEXTRADE backend.
-</p>
+<h2>See the market. Read the movement.</h2>
 
 </div>
 
-<div class="market-preview">
 
-<div class="live-card">
+<div class="terminal">
 
-<div class="live-head">
+<div class="terminal-card">
 
-<h3>Volatility Markets</h3>
+<div class="terminal-head">
 
-<div class="live-status">
+<h3>
+Volatility 100 (1s)
+</h3>
+
+<div class="live">
 ● LIVE
 </div>
 
 </div>
 
-<div class="market-row">
+<div class="chart-box">
 
-<div class="market-info">
-
-<strong>Volatility 100 (1s)</strong>
-
-<small>1HZ100V</small>
-
-</div>
-
-<div class="market-value">
-
-<strong>LIVE</strong>
-
-<span class="up">REAL-TIME</span>
-
-</div>
-
-</div>
-
-<div class="market-row">
-
-<div class="market-info">
-
-<strong>Volatility 75 (1s)</strong>
-
-<small>1HZ75V</small>
-
-</div>
-
-<div class="market-value">
-
-<strong>LIVE</strong>
-
-<span class="up">REAL-TIME</span>
-
-</div>
-
-</div>
-
-<div class="market-row">
-
-<div class="market-info">
-
-<strong>Volatility 50 (1s)</strong>
-
-<small>1HZ50V</small>
-
-</div>
-
-<div class="market-value">
-
-<strong>LIVE</strong>
-
-<span class="up">REAL-TIME</span>
-
-</div>
+<div class="chart-path"></div>
 
 </div>
 
 </div>
 
 
-<div class="live-card">
+<div class="terminal-card">
 
-<div class="live-head">
+<div class="terminal-head">
 
-<h3>Platform</h3>
+<h3>
+Digit Strength
+</h3>
 
-<div class="live-status">
-● ONLINE
+<div class="live">
+100 TICKS
 </div>
 
 </div>
 
-<div class="market-row">
+<div class="digit-panel">
 
-<div class="market-info">
-<strong>Live Markets</strong>
-<small>Real-time data</small>
+<div class="digit">
+0
+<span>7%</span>
 </div>
 
-<div class="market-value">
-<strong>ACTIVE</strong>
+<div class="digit">
+1
+<span>9%</span>
 </div>
 
+<div class="digit">
+2
+<span>11%</span>
 </div>
 
-<div class="market-row">
-
-<div class="market-info">
-<strong>Trading Tools</strong>
-<small>Analysis utilities</small>
+<div class="digit strong">
+3
+<span>16%</span>
 </div>
 
-<div class="market-value">
-<strong>READY</strong>
+<div class="digit">
+4
+<span>10%</span>
 </div>
 
+<div class="digit">
+5
+<span>12%</span>
 </div>
 
-<div class="market-row">
-
-<div class="market-info">
-<strong>Trading Bots</strong>
-<small>Automation</small>
+<div class="digit">
+6
+<span>9%</span>
 </div>
 
-<div class="market-value">
-<strong>READY</strong>
+<div class="digit">
+7
+<span>8%</span>
+</div>
+
+<div class="digit">
+8
+<span>10%</span>
+</div>
+
+<div class="digit weak">
+9
+<span>8%</span>
 </div>
 
 </div>
@@ -1053,28 +1203,27 @@ Real-time market data powered through the NEXTRADE backend.
 </section>
 
 
-<!-- ================= CTA ================= -->
+<!-- CTA -->
 
 <section class="cta">
 
-<div>
-
-<h2>Ready to explore the markets?</h2>
+<h2>
+Ready to explore NEXTRADE?
+</h2>
 
 <p>
-Open the live market terminal and start analyzing real-time volatility data.
+Start with the live markets and build your analysis from there.
 </p>
 
-</div>
-
-<a href="markets.html" class="primary-btn">
-OPEN MARKET TERMINAL
+<a
+href="markets.html"
+class="btn btn-primary"
+>
+EXPLORE MARKETS
 </a>
 
 </section>
 
-
-<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1083,7 +1232,7 @@ NEX<span>TRADE</span>
 </div>
 
 <div>
-© 2026 NEXTRADE. Market analysis platform.
+© 2026 NEXTRADE
 </div>
 
 </footer>
