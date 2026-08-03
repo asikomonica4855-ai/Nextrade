@@ -1,7 +1,8 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NEXTRADE | Live Markets</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE | Live Markets</title><style>
 *{
     box-sizing:border-box;
     margin:0;
@@ -380,7 +381,6 @@ canvas{
 }
 
 @media(max-width:900px){
-
     .market-layout{
         grid-template-columns:1fr;
     }
@@ -392,7 +392,6 @@ canvas{
 }
 
 @media(max-width:600px){
-
     header{
         height:auto;
         min-height:65px;
@@ -443,255 +442,129 @@ canvas{
 }
 </style></head><body><header><div class="logo">
     NEX<span>TRADE</span>
-</div>
-
-<nav>
+</div><nav>
     <a href="index.html">HOME</a>
     <a href="markets.html">MARKETS</a>
     <a href="tools.html">TOOLS</a>
     <a href="bots.html">BOTS</a>
-</nav>
+</nav><div class="account"><div class="account-icon">D</div>
 
-<div class="account">
+<div class="account-info">
 
-    <div class="account-icon">D</div>
-
-    <div class="account-info">
-
-        <div class="account-name">
-            Deriv Account
-        </div>
-
-        <div
-            id="accountStatus"
-            class="account-status"
-        >
-            Checking...
-        </div>
-
-        <div
-            id="accountBalance"
-            class="account-balance"
-        >
-            --
-        </div>
-
+    <div class="account-name">
+        Deriv Account
     </div>
 
-    <button
-        id="logoutButton"
-        class="logout"
+    <div
+        id="accountStatus"
+        class="account-status"
     >
-        LOG OUT
-    </button>
-
-</div>
-
-</header><main><section class="page-title">
-
-    <h1>
-        Live Markets
-    </h1>
-
-    <p>
-        Monitor live Deriv volatility markets in real time.
-    </p>
-
-    <div class="connection">
-
-        <span
-            id="connectionDot"
-            class="dot"
-        ></span>
-
-        <span
-            id="connectionText"
-        >
-            CONNECTING TO LIVE DATA...
-        </span>
-
+        Checking...
     </div>
 
-</section>
-
-
-<div class="market-layout">
-
-    <section class="market-list">
-
-        <div class="market-list-header">
-
-            <h2>
-                VOLATILITY MARKETS
-            </h2>
-
-            <p>
-                Select a market to view live price movement.
-            </p>
-
-        </div>
-
-        <div
-            id="marketList"
-        ></div>
-
-    </section>
-
-
-    <section class="chart-card">
-
-        <div class="chart-header">
-
-            <div>
-
-                <div
-                    id="selectedName"
-                    class="selected-name"
-                >
-                    Volatility 100 (1s)
-                </div>
-
-                <div
-                    id="selectedSymbol"
-                    class="selected-symbol"
-                >
-                    1HZ100V
-                </div>
-
-            </div>
-
-            <div class="live-badge">
-
-                <span class="live-dot"></span>
-
-                LIVE
-
-            </div>
-
-        </div>
-
-
-        <div class="price-panel">
-
-            <div class="price-label">
-                LIVE PRICE
-            </div>
-
-            <div
-                id="currentPrice"
-                class="current-price"
-            >
-                --
-            </div>
-
-            <div
-                id="priceChange"
-                class="price-change"
-            >
-                LIVE • RECEIVING MARKET DATA
-            </div>
-
-        </div>
-
-
-        <div class="chart">
-
-            <canvas
-                id="priceCanvas"
-            ></canvas>
-
-        </div>
-
-
-        <div class="time-buttons">
-
-            <button class="time-button active">
-                1S
-            </button>
-
-            <button class="time-button">
-                5S
-            </button>
-
-            <button class="time-button">
-                15S
-            </button>
-
-            <button class="time-button">
-                30S
-            </button>
-
-            <button class="time-button">
-                1M
-            </button>
-
-        </div>
-
-
-        <div class="market-stats">
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    SYMBOL
-                </div>
-
-                <div
-                    id="statSymbol"
-                    class="stat-value"
-                >
-                    1HZ100V
-                </div>
-
-            </div>
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    LAST PRICE
-                </div>
-
-                <div
-                    id="statPrice"
-                    class="stat-value"
-                >
-                    --
-                </div>
-
-            </div>
-
-            <div class="stat">
-
-                <div class="stat-label">
-                    MARKET STATUS
-                </div>
-
-                <div
-                    id="statStatus"
-                    class="stat-value"
-                >
-                    CONNECTING
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+    <div
+        id="accountBalance"
+        class="account-balance"
+    >
+        --
+    </div>
 
 </div>
 
+<button
+    id="logoutButton"
+    class="logout"
+>
+    LOG OUT
+</button>
 
-<div
-    id="message"
-    class="message"
-></div>
+</div></header><main><section class="page-title"><h1>Live Markets</h1>
 
-</main><script>
+<p>
+    Monitor live Deriv volatility markets in real time.
+</p>
+
+<div class="connection">
+
+    <span
+        id="connectionDot"
+        class="dot"
+    ></span>
+
+    <span id="connectionText">
+        CONNECTING TO LIVE DATA...
+    </span>
+
+</div>
+
+</section><div class="market-layout"><section class="market-list"><div class="market-list-header"><h2>VOLATILITY MARKETS</h2><p>
+Select a market to view live price movement.
+</p></div><div id="marketList"></div></section><section class="chart-card"><div class="chart-header"><div><div
+id="selectedName"
+class="selected-name"
+>
+Volatility 100 (1s)
+</div><div
+id="selectedSymbol"
+class="selected-symbol"
+>
+1HZ100V
+</div></div><div class="live-badge"><span class="live-dot"></span>
+
+LIVE
+
+</div></div><div class="price-panel"><div class="price-label">
+LIVE PRICE
+</div><div
+id="currentPrice"
+class="current-price"
+>
+--
+</div><div
+id="priceChange"
+class="price-change"
+>
+WAITING FOR MARKET DATA
+</div></div><div class="chart"><canvas id="priceCanvas"></canvas>
+
+</div><div class="time-buttons"><button class="time-button active">
+1S
+</button><button class="time-button">
+5S
+</button><button class="time-button">
+15S
+</button><button class="time-button">
+30S
+</button><button class="time-button">
+1M
+</button></div><div class="market-stats"><div class="stat"><div class="stat-label">
+SYMBOL
+</div><div
+id="statSymbol"
+class="stat-value"
+>
+1HZ100V
+</div></div><div class="stat"><div class="stat-label">
+LAST PRICE
+</div><div
+id="statPrice"
+class="stat-value"
+>
+--
+</div></div><div class="stat"><div class="stat-label">
+MARKET STATUS
+</div><div
+id="statStatus"
+class="stat-value"
+>
+CONNECTING
+</div></div></div></section></div><div
+id="message"
+class="message"
+></div></main><script>
 
 const BACKEND =
     "https://nextrade-backened.onrender.com";
-
 
 const markets = [
 
@@ -747,22 +620,22 @@ const markets = [
 
 ];
 
-
 let selectedSymbol =
     "1HZ100V";
 
 let prices = {};
-
 let history = {};
-
 let socket = null;
-
 let reconnectTimer = null;
 
+let sessionToken =
+    localStorage.getItem(
+        "nextrade_session_token"
+    );
 
-/*
- * Elements
- */
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 const marketList =
     document.getElementById("marketList");
@@ -812,19 +685,452 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
+/* ==================================================
+   AUTH HEADER
+================================================== */
 
-/*
- * Format price
- */
+function authHeaders(){
+
+    const headers = {};
+
+    if(sessionToken){
+
+        headers.Authorization =
+            "Bearer " +
+            sessionToken;
+
+    }
+
+    return headers;
+}
+
+/* ==================================================
+   HANDOFF LOGIN
+================================================== */
+
+async function processHandoff(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const handoff =
+        params.get("handoff");
+
+    if(!handoff){
+        return;
+    }
+
+    accountStatus.textContent =
+        "Connecting...";
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/handoff?token=" +
+                encodeURIComponent(
+                    handoff
+                ),
+                {
+                    method:"POST",
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            !response.ok ||
+            !data.success ||
+            !data.sessionToken
+        ){
+
+            throw new Error(
+                data.error ||
+                "Handoff failed"
+            );
+
+        }
+
+        sessionToken =
+            data.sessionToken;
+
+        localStorage.setItem(
+            "nextrade_session_token",
+            sessionToken
+        );
+
+        /*
+         * Remove the temporary handoff token
+         * from the browser address bar.
+         */
+
+        window.history.replaceState(
+            {},
+            document.title,
+            "markets.html"
+        );
+
+        accountStatus.textContent =
+            "Connected";
+
+        accountStatus.style.color =
+            "#2edb9c";
+
+        if(
+            Array.isArray(
+                data.accounts
+            ) &&
+            data.accounts.length
+        ){
+
+            displayAccount(
+                data.accounts[0]
+            );
+
+        }else{
+
+            await loadAccount();
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Handoff error:",
+            error
+        );
+
+        accountStatus.textContent =
+            "Connection error";
+
+        accountStatus.style.color =
+            "#e06a78";
+
+        accountBalance.textContent =
+            "--";
+
+        showMessage(
+            "Deriv account connection failed. Please log in again."
+        );
+
+    }
+
+}
+
+/* ==================================================
+   DISPLAY ACCOUNT
+================================================== */
+
+function displayAccount(account){
+
+    if(!account){
+
+        accountStatus.textContent =
+            "Connected";
+
+        accountStatus.style.color =
+            "#2edb9c";
+
+        accountBalance.textContent =
+            "CONNECTED";
+
+        return;
+    }
+
+    accountStatus.textContent =
+        "Connected";
+
+    accountStatus.style.color =
+        "#2edb9c";
+
+    const balance =
+        account.balance ??
+        account.balance_available ??
+        account.available_balance ??
+        account.amount;
+
+    const currency =
+        account.currency ||
+        "USD";
+
+    if(
+        balance !== undefined &&
+        balance !== null &&
+        Number.isFinite(
+            Number(balance)
+        )
+    ){
+
+        accountBalance.textContent =
+            `${currency} ${Number(balance).toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            )}`;
+
+    }else{
+
+        accountBalance.textContent =
+            "CONNECTED";
+
+    }
+
+}
+
+/* ==================================================
+   SESSION
+================================================== */
+
+async function checkSession(){
+
+    if(!sessionToken){
+
+        accountStatus.textContent =
+            "Not connected";
+
+        accountStatus.style.color =
+            "#e06a78";
+
+        accountBalance.textContent =
+            "--";
+
+        return;
+
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/session",
+                {
+                    method:"GET",
+                    headers:
+                        authHeaders()
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            data.authenticated
+        ){
+
+            accountStatus.textContent =
+                "Connected";
+
+            accountStatus.style.color =
+                "#2edb9c";
+
+            await loadAccount();
+
+        }else{
+
+            localStorage.removeItem(
+                "nextrade_session_token"
+            );
+
+            sessionToken = null;
+
+            accountStatus.textContent =
+                "Not connected";
+
+            accountStatus.style.color =
+                "#e06a78";
+
+            accountBalance.textContent =
+                "--";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Session check failed:",
+            error
+        );
+
+        accountStatus.textContent =
+            "Connection error";
+
+        accountStatus.style.color =
+            "#e06a78";
+
+        accountBalance.textContent =
+            "--";
+
+    }
+
+}
+
+/* ==================================================
+   LOAD ACCOUNT
+================================================== */
+
+async function loadAccount(){
+
+    if(!sessionToken){
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/accounts",
+                {
+                    method:"GET",
+                    headers:
+                        authHeaders()
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            response.status === 401
+        ){
+
+            localStorage.removeItem(
+                "nextrade_session_token"
+            );
+
+            sessionToken = null;
+
+            accountStatus.textContent =
+                "Not connected";
+
+            accountStatus.style.color =
+                "#e06a78";
+
+            accountBalance.textContent =
+                "--";
+
+            return;
+
+        }
+
+        if(
+            !response.ok
+        ){
+
+            console.error(
+                "Account error:",
+                data
+            );
+
+            return;
+
+        }
+
+        const accounts =
+            data.accounts;
+
+        if(
+            Array.isArray(
+                accounts
+            ) &&
+            accounts.length
+        ){
+
+            displayAccount(
+                accounts[0]
+            );
+
+        }else{
+
+            displayAccount(null);
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Account loading failed:",
+            error
+        );
+
+        accountStatus.textContent =
+            "Connection error";
+
+        accountBalance.textContent =
+            "--";
+
+    }
+
+}
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+logoutButton.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await fetch(
+                BACKEND +
+                "/api/logout",
+                {
+                    method:"POST",
+                    headers:
+                        authHeaders()
+                }
+            );
+
+        }catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+        }
+
+        localStorage.removeItem(
+            "nextrade_session_token"
+        );
+
+        sessionToken = null;
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+/* ==================================================
+   MARKET FUNCTIONS
+================================================== */
 
 function formatPrice(value){
 
     if(
         value === undefined ||
         value === null ||
-        Number.isNaN(Number(value))
+        Number.isNaN(
+            Number(value)
+        )
     ){
+
         return "--";
+
     }
 
     const number =
@@ -833,43 +1139,36 @@ function formatPrice(value){
     return number.toLocaleString(
         "en-US",
         {
-            minimumFractionDigits:
-                number >= 100000
-                ? 2
-                : number >= 100
-                ? 2
-                : 2,
-
+            minimumFractionDigits:2,
             maximumFractionDigits:
-                number >= 100000
-                ? 2
-                : number >= 100
+                number >= 100
                 ? 2
                 : 4
         }
     );
+
 }
-
-
-/*
- * Show message
- */
 
 function showMessage(text){
 
     message.textContent =
         text;
 
-    message.classList.add(
-        "show"
-    );
+    if(text){
+
+        message.classList.add(
+            "show"
+        );
+
+    }else{
+
+        message.classList.remove(
+            "show"
+        );
+
+    }
 
 }
-
-
-/*
- * Render market list
- */
 
 function renderMarkets(){
 
@@ -892,9 +1191,6 @@ function renderMarkets(){
                     ? " active"
                     : ""
                 );
-
-            item.dataset.symbol =
-                market.symbol;
 
             item.innerHTML = `
 
@@ -946,11 +1242,6 @@ function renderMarkets(){
 
 }
 
-
-/*
- * Update selected market
- */
-
 function updateSelectedMarket(){
 
     const market =
@@ -982,11 +1273,6 @@ function updateSelectedMarket(){
 
 }
 
-
-/*
- * Update all market prices
- */
-
 function updateMarketPrices(){
 
     markets.forEach(
@@ -1016,11 +1302,6 @@ function updateMarketPrices(){
 
 }
 
-
-/*
- * Save price history
- */
-
 function addHistory(
     symbol,
     price
@@ -1048,10 +1329,9 @@ function addHistory(
 
 }
 
-
-/*
- * Resize canvas
- */
+/* ==================================================
+   CHART
+================================================== */
 
 function resizeCanvas(){
 
@@ -1081,11 +1361,6 @@ function resizeCanvas(){
 
 }
 
-
-/*
- * Draw live chart
- */
-
 function drawChart(){
 
     const rect =
@@ -1108,7 +1383,9 @@ function drawChart(){
         history[selectedSymbol] ||
         [];
 
-    if(data.length < 2){
+    if(
+        data.length < 2
+    ){
 
         ctx.fillStyle =
             "#60798b";
@@ -1206,11 +1483,6 @@ function drawChart(){
 
     ctx.stroke();
 
-
-    /*
-     * Current price marker
-     */
-
     const last =
         data[data.length - 1];
 
@@ -1248,10 +1520,9 @@ function drawChart(){
 
 }
 
-
-/*
- * Connect to backend WebSocket
- */
+/* ==================================================
+   MARKET WEBSOCKET
+================================================== */
 
 function connectSocket(){
 
@@ -1259,7 +1530,7 @@ function connectSocket(){
 
         try{
             socket.close();
-        }catch(e){}
+        }catch{}
 
     }
 
@@ -1273,19 +1544,16 @@ function connectSocket(){
     statStatus.textContent =
         "CONNECTING";
 
-
     const wsUrl =
         BACKEND.replace(
             "https://",
             "wss://"
         );
 
-
     socket =
         new WebSocket(
             wsUrl
         );
-
 
     socket.addEventListener(
         "open",
@@ -1301,17 +1569,10 @@ function connectSocket(){
             statStatus.textContent =
                 "LIVE";
 
-            showMessage(
-                ""
-            );
-
-            message.classList.remove(
-                "show"
-            );
+            showMessage("");
 
         }
     );
-
 
     socket.addEventListener(
         "message",
@@ -1323,7 +1584,6 @@ function connectSocket(){
                     JSON.parse(
                         event.data
                     );
-
 
                 if(
                     data.type ===
@@ -1350,7 +1610,6 @@ function connectSocket(){
 
                 }
 
-
                 if(
                     data.type ===
                     "tick" &&
@@ -1365,7 +1624,6 @@ function connectSocket(){
                             data.data.price
                         );
 
-
                     if(
                         !symbol ||
                         !Number.isFinite(
@@ -1377,19 +1635,15 @@ function connectSocket(){
 
                     }
 
-
                     prices[symbol] =
                         price;
-
 
                     addHistory(
                         symbol,
                         price
                     );
 
-
                     updateMarketPrices();
-
 
                     if(
                         symbol ===
@@ -1414,7 +1668,6 @@ function connectSocket(){
                     }
 
                 }
-
 
                 if(
                     data.type ===
@@ -1443,7 +1696,6 @@ function connectSocket(){
         }
     );
 
-
     socket.addEventListener(
         "close",
         () => {
@@ -1471,7 +1723,6 @@ function connectSocket(){
         }
     );
 
-
     socket.addEventListener(
         "error",
         error => {
@@ -1496,267 +1747,37 @@ function connectSocket(){
 
 }
 
+/* ==================================================
+   START
+================================================== */
 
-/*
- * Check Deriv session
- */
+async function start(){
 
-async function checkSession(){
+    renderMarkets();
 
-    try{
+    updateSelectedMarket();
 
-        const response =
-            await fetch(
-                BACKEND +
-                "/api/session",
-                {
-                    method:
-                        "GET",
+    await processHandoff();
 
-                    credentials:
-                        "include"
-                }
-            );
+    await checkSession();
 
+    connectSocket();
 
-        const data =
-            await response.json();
-
-
-        if(
-            data.authenticated
-        ){
-
-            accountStatus.textContent =
-                "Connected";
-
-            accountStatus.style.color =
-                "#2edb9c";
-
-            await loadAccount();
-
-        }else{
-
-            accountStatus.textContent =
-                "Not connected";
-
-            accountStatus.style.color =
-                "#e06a78";
-
-            accountBalance.textContent =
-                "--";
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Session check failed:",
-            error
-        );
-
-        accountStatus.textContent =
-            "Connection error";
-
-        accountBalance.textContent =
-            "--";
-
-    }
+    setTimeout(
+        resizeCanvas,
+        100
+    );
 
 }
 
+start();
 
-/*
- * Load Deriv account
- */
-
-async function loadAccount(){
-
-    try{
-
-        const response =
-            await fetch(
-                BACKEND +
-                "/api/accounts",
-                {
-                    method:
-                        "GET",
-
-                    credentials:
-                        "include"
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if(
-            !response.ok
-        ){
-
-            console.error(
-                "Account error:",
-                data
-            );
-
-            accountBalance.textContent =
-                "--";
-
-            return;
-
-        }
-
-
-        /*
-         * Deriv account response formats
-         * can vary. Search common structures.
-         */
-
-        const accounts =
-            data.accounts;
-
-
-        let account = null;
-
-
-        if(
-            Array.isArray(
-                accounts
-            )
-        ){
-
-            account =
-                accounts[0];
-
-        }else if(
-            accounts &&
-            Array.isArray(
-                accounts.accounts
-            )
-        ){
-
-            account =
-                accounts.accounts[0];
-
-        }else if(
-            accounts &&
-            typeof accounts ===
-            "object"
-        ){
-
-            const keys =
-                Object.keys(
-                    accounts
-                );
-
-            if(keys.length){
-
-                account =
-                    accounts[
-                        keys[0]
-                    ];
-
-            }
-
-        }
-
-
-        if(account){
-
-            const balance =
-                account.balance ??
-                account.balance_available ??
-                account.available_balance ??
-                account.amount;
-
-
-            const currency =
-                account.currency ||
-                "USD";
-
-
-            if(
-                balance !== undefined
-            ){
-
-                accountBalance.textContent =
-                    `${currency} ${Number(balance).toLocaleString("en-US",{
-                        minimumFractionDigits:2,
-                        maximumFractionDigits:2
-                    })}`;
-
-            }else{
-
-                accountBalance.textContent =
-                    "CONNECTED";
-
-            }
-
-        }else{
-
-            accountBalance.textContent =
-                "CONNECTED";
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Account loading failed:",
-            error
-        );
-
-        accountBalance.textContent =
-            "CONNECTED";
-
-    }
-
-}
-
-
-/*
- * Logout
- */
-
-logoutButton.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            await fetch(
-                BACKEND +
-                "/api/logout",
-                {
-                    method:
-                        "POST",
-
-                    credentials:
-                        "include"
-                }
-            );
-
-        }catch(error){
-
-            console.error(
-                "Logout error:",
-                error
-            );
-
-        }
-
-        window.location.href =
-            "login.html";
-
-    }
+window.addEventListener(
+    "resize",
+    resizeCanvas
 );
 
-
-/*
- * Time buttons
- */
+/* Time buttons */
 
 document.querySelectorAll(
     ".time-button"
@@ -1786,28 +1807,5 @@ document.querySelectorAll(
     }
 );
 
-
-/*
- * Start
- */
-
-renderMarkets();
-
-updateSelectedMarket();
-
-checkSession();
-
-connectSocket();
-
-window.addEventListener(
-    "resize",
-    resizeCanvas
-);
-
-setTimeout(
-    resizeCanvas,
-    100
-);
-
 </script></body>
-</html>
+    </html>
