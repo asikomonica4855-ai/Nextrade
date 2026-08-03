@@ -1,1 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE | Login</title>
 
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#040a10;
+color:#fff;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+height:72px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
+}
+
+.logo{
+font-size:25px;
+font-weight:900;
+}
+
+.logo span{
+color:#159ff0;
+}
+
+.home{
+color:#8097a8;
+text-decoration:none;
+font-size:9px;
+font-weight:bold;
+}
+
+.home:hover{
+color:#159ff0;
+}
+
+main{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:35px 18px;
+}
+
+.login-card{
+width:100%;
+max-width:430px;
+background:#08131f;
+border:1px solid #193247;
+border-radius:14px;
+padding:35px 25px;
+box-shadow:0 25px 70px rgba(0,0,0,.45);
+}
+
+.logo-small{
+text-align:center;
+font-size:13px;
+font-weight:bold;
+color:#159ff0;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+h1{
+text-align:center;
+font-size:27px;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+font-size:10px;
+line-height:1.6;
+color:#71899a;
+margin-bottom:28px;
+}
+
+.deriv-box{
+border:1px solid #28465a;
+background:#07111b;
+border-radius:10px;
+padding:20px;
+text-align:center;
+}
+
+.deriv-icon{
+width:50px;
+height:50px;
+border-radius:50%;
+margin:0 auto 15px;
+background:#159ff0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+}
+
+.deriv-box h2{
+font-size:15px;
+margin-bottom:8px;
+}
+
+.deriv-box p{
+font-size:9px;
+line-height:1.6;
+color:#71899a;
+margin-bottom:20px;
+}
+
+.deriv-button{
+display:block;
+width:100%;
+border:0;
+border-radius:7px;
+background:#159ff0;
+color:#fff;
+padding:14px;
+font-size:10px;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+}
+
+.deriv-button:hover{
+background:#078bd8;
+}
+
+.security{
+margin-top:18px;
+padding:12px;
+border-radius:7px;
+background:#07131d;
+border:1px solid #193247;
+font-size:8px;
+line-height:1.6;
+color:#71899a;
+}
+
+.security strong{
+color:#2edb9c;
+}
+
+.divider{
+display:flex;
+align-items:center;
+gap:10px;
+margin:22px 0;
+color:#496273;
+font-size:8px;
+}
+
+.divider:before,
+.divider:after{
+content:"";
+height:1px;
+background:#193247;
+flex:1;
+}
+
+.signup{
+text-align:center;
+font-size:9px;
+color:#71899a;
+}
+
+.signup a{
+color:#159ff0;
+text-decoration:none;
+font-weight:bold;
+}
+
+.status{
+display:none;
+margin-top:15px;
+padding:10px;
+border-radius:7px;
+background:#171208;
+border:1px solid #5b471d;
+color:#b59c61;
+font-size:8px;
+text-align:center;
+line-height:1.5;
+}
+
+footer{
+border-top:1px solid #193247;
+background:#06101a;
+padding:20px;
+text-align:center;
+font-size:8px;
+color:#526a7c;
+}
+
+@media(max-width:500px){
+
+header{
+height:64px;
+}
+
+.logo{
+font-size:22px;
+}
+
+.login-card{
+padding:28px 18px;
+}
+
+h1{
+font-size:24px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+NEX<span>TRADE</span>
+</div>
+
+<a href="index.html" class="home">
+← BACK HOME
+</a>
+
+</header>
+
+
+<main>
+
+<div class="login-card">
+
+<div class="logo-small">
+NEXTRADE ACCOUNT
+</div>
+
+<h1>
+Login to NEXTRADE
+</h1>
+
+<p class="subtitle">
+Connect your existing Deriv account securely.
+NEXTRADE does not need your Deriv password.
+</p>
+
+
+<div class="deriv-box">
+
+<div class="deriv-icon">
+D
+</div>
+
+<h2>
+Continue with Deriv
+</h2>
+
+<p>
+Use your existing Deriv account to authorize
+NEXTRADE. Authentication is handled by Deriv.
+</p>
+
+
+<!--
+IMPORTANT:
+
+This is currently an OAuth placeholder.
+
+Once the NEXTRADE Deriv OAuth application is registered,
+replace the href below with the official authorization URL
+provided for the NEXTRADE application.
+
+Do NOT put a Deriv username, password, API token,
+or secret directly into this page.
+-->
+
+<a
+href="#"
+id="derivLogin"
+class="deriv-button"
+>
+CONTINUE WITH DERIV
+</a>
+
+</div>
+
+
+<div class="security">
+
+<strong>✓ SECURE AUTHENTICATION</strong><br>
+
+Your Deriv password should only be entered on
+Deriv's official authentication page. NEXTRADE
+should never collect or store it.
+
+</div>
+
+
+<div
+id="status"
+class="status"
+>
+Deriv OAuth has not been connected yet.
+The OAuth application details must be configured
+before login can be activated.
+</div>
+
+
+<div class="divider">
+OR
+</div>
+
+
+<div class="signup">
+
+Don't have a NEXTRADE account?
+
+<a href="signup.html">
+Create one
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+© 2026 NEXTRADE
+
+</footer>
+
+
+<script>
+
+const button =
+document.getElementById("derivLogin");
+
+const status =
+document.getElementById("status");
+
+
+button.addEventListener(
+"click",
+function(event){
+
+event.preventDefault();
+
+status.style.display="block";
+
+status.textContent=
+"Deriv OAuth is ready to be connected. The official NEXTRADE OAuth application details are required before authentication can be activated.";
+
+}
+);
+
+</script>
+
+</body>
+</html>
