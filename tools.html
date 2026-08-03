@@ -3,313 +3,427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NEXTRADE | Trading Tools</title>
+<title>NEXTRADE | Tools</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#050b12;
-    color:#fff;
-    min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:#fff;
+min-height:100vh;
 }
 
 header{
-    min-height:72px;
-    background:#08131f;
-    border-bottom:1px solid #193247;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px 5%;
-    position:sticky;
-    top:0;
-    z-index:1000;
+min-height:72px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 5%;
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:800;
-    white-space:nowrap;
+font-size:25px;
+font-weight:800;
+white-space:nowrap;
 }
 
 .logo span{
-    color:#159ff0;
+color:#159ff0;
 }
 
 .nav{
-    display:flex;
-    align-items:center;
-    gap:4px;
-    overflow-x:auto;
+display:flex;
+gap:4px;
+overflow-x:auto;
 }
 
 .nav a{
-    color:#8ea5b7;
-    text-decoration:none;
-    font-size:10px;
-    font-weight:bold;
-    padding:10px;
-    border-radius:6px;
-    white-space:nowrap;
+color:#8ea5b7;
+text-decoration:none;
+font-size:10px;
+font-weight:bold;
+padding:10px;
+white-space:nowrap;
+border-radius:6px;
 }
 
 .nav a:hover{
-    color:#fff;
-    background:#102536;
+background:#102536;
+color:#fff;
 }
 
 .nav a.active{
-    color:#159ff0;
+color:#159ff0;
 }
 
 .nav .signup{
-    background:#159ff0;
-    color:#fff;
+background:#159ff0;
+color:#fff;
 }
 
 .page{
-    width:92%;
-    max-width:1400px;
-    margin:auto;
-    padding:42px 0 70px;
+width:92%;
+max-width:1400px;
+margin:auto;
+padding:40px 0 70px;
 }
 
-.heading{
-    margin-bottom:30px;
+.hero{
+margin-bottom:28px;
 }
 
-.heading h1{
-    font-size:34px;
-    margin-bottom:8px;
+.hero h1{
+font-size:34px;
+margin-bottom:8px;
 }
 
-.heading p{
-    color:#71899a;
-    font-size:12px;
-    line-height:1.6;
+.hero p{
+font-size:12px;
+color:#71899a;
+line-height:1.6;
 }
 
-/* TOOL GRID */
+.section-title{
+font-size:12px;
+font-weight:bold;
+color:#8ea5b7;
+margin:30px 0 14px;
+text-transform:uppercase;
+letter-spacing:.5px;
+}
 
 .tools-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
 }
 
-.tool-card{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    padding:22px;
-    transition:.2s;
+.tool{
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:22px;
+transition:.2s;
 }
 
-.tool-card:hover{
-    border-color:#159ff0;
-    transform:translateY(-3px);
+.tool:hover{
+border-color:#159ff0;
+transform:translateY(-2px);
 }
 
 .tool-icon{
-    width:40px;
-    height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#0c2436;
-    border-radius:9px;
-    color:#159ff0;
-    font-size:17px;
-    margin-bottom:16px;
+width:42px;
+height:42px;
+border-radius:10px;
+background:#0b2030;
+border:1px solid #23465d;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+margin-bottom:16px;
 }
 
-.tool-card h2{
-    font-size:15px;
-    margin-bottom:7px;
+.tool h2{
+font-size:15px;
+margin-bottom:8px;
 }
 
-.tool-card p{
-    color:#688092;
-    font-size:10px;
-    line-height:1.6;
-    margin-bottom:18px;
+.tool p{
+font-size:9px;
+color:#657d8e;
+line-height:1.6;
+min-height:45px;
 }
 
-.tool-card label{
-    display:block;
-    color:#71899a;
-    font-size:9px;
-    margin:10px 0 6px;
+.tool a,
+.tool button{
+display:inline-block;
+margin-top:17px;
+padding:9px 13px;
+border-radius:6px;
+border:1px solid #23465d;
+background:#0b2030;
+color:#fff;
+text-decoration:none;
+font-size:9px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.tool-card input,
-.tool-card select{
-    width:100%;
-    padding:11px;
-    border-radius:6px;
-    border:1px solid #234055;
-    background:#050d15;
-    color:#fff;
-    outline:none;
-    font-size:11px;
+.tool a:hover,
+.tool button:hover{
+background:#159ff0;
+border-color:#159ff0;
 }
 
-.tool-card input:focus,
-.tool-card select:focus{
-    border-color:#159ff0;
+/* MARKET QUICK TOOL */
+
+.market-tool{
+margin-top:20px;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:22px;
 }
 
-.calculate{
-    width:100%;
-    border:0;
-    padding:11px;
-    margin-top:12px;
-    border-radius:7px;
-    background:#159ff0;
-    color:#fff;
-    font-weight:bold;
-    font-size:10px;
-    cursor:pointer;
+.market-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
 }
 
-.calculate:hover{
-    background:#0d8bd7;
+.market-header h2{
+font-size:15px;
+}
+
+.live{
+font-size:8px;
+color:#2edb9c;
+}
+
+.market-select{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+select,
+input{
+background:#050d15;
+color:#fff;
+border:1px solid #23465d;
+border-radius:7px;
+padding:11px;
+font-size:10px;
+outline:none;
+}
+
+.market-price{
+margin-top:18px;
+font-size:28px;
+font-weight:bold;
+}
+
+.market-code{
+font-size:9px;
+color:#60788a;
+margin-top:5px;
+}
+
+/* RISK CALCULATOR */
+
+.calculator{
+margin-top:20px;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:22px;
+}
+
+.calc-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.field label{
+display:block;
+font-size:8px;
+color:#60788a;
+margin-bottom:7px;
+}
+
+.field input{
+width:100%;
+}
+
+.calc-button{
+margin-top:16px;
+background:#159ff0;
+border:none;
+padding:11px 16px;
+border-radius:7px;
+color:#fff;
+font-weight:bold;
+font-size:10px;
+cursor:pointer;
+}
+
+.results{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:18px;
 }
 
 .result{
-    display:none;
-    margin-top:13px;
-    padding:12px;
-    background:#06151d;
-    border:1px solid #1c4b56;
-    border-radius:7px;
+background:#07111b;
+border:1px solid #193247;
+border-radius:8px;
+padding:15px;
 }
 
 .result-label{
-    color:#688092;
-    font-size:8px;
-    margin-bottom:5px;
+font-size:8px;
+color:#60788a;
+margin-bottom:7px;
 }
 
 .result-value{
-    color:#2edb9c;
-    font-size:16px;
-    font-weight:bold;
+font-size:17px;
+font-weight:bold;
 }
 
-/* SIMPLE TOOLS */
+/* JOURNAL */
 
-.simple-card{
-    background:#08131f;
-    border:1px solid #193247;
-    border-radius:12px;
-    padding:22px;
+.journal{
+margin-top:20px;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:22px;
 }
 
-.simple-card h2{
-    font-size:15px;
-    margin-bottom:7px;
+.journal-form{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:18px;
 }
 
-.simple-card p{
-    color:#688092;
-    font-size:10px;
-    line-height:1.5;
-    margin-bottom:18px;
+.journal-form button{
+background:#159ff0;
+border:0;
+border-radius:7px;
+color:#fff;
+font-size:9px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.simple-card a{
-    display:block;
-    text-align:center;
-    text-decoration:none;
-    color:#fff;
-    background:#0d2435;
-    border:1px solid #23465d;
-    padding:11px;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:bold;
+.journal-list{
+margin-top:18px;
+display:flex;
+flex-direction:column;
+gap:8px;
 }
 
-.simple-card a:hover{
-    background:#123149;
-    border-color:#159ff0;
+.trade-row{
+display:grid;
+grid-template-columns:1fr 1fr 1fr 1fr;
+gap:10px;
+background:#07111b;
+border:1px solid #193247;
+padding:12px;
+border-radius:7px;
+font-size:9px;
 }
 
-/* NOTICE */
+.profit{
+color:#2edb9c;
+}
+
+.loss{
+color:#ff5969;
+}
+
+.empty{
+font-size:9px;
+color:#60788a;
+padding:12px 0;
+}
 
 .notice{
-    margin-top:22px;
-    padding:15px;
-    border-radius:8px;
-    border:1px solid #273d4e;
-    background:#07111b;
-    color:#657c8d;
-    font-size:9px;
-    line-height:1.6;
+margin-top:20px;
+padding:14px 16px;
+background:#171208;
+border:1px solid #5b471d;
+border-radius:8px;
+color:#a9915b;
+font-size:9px;
+line-height:1.6;
 }
 
-/* FOOTER */
-
 footer{
-    border-top:1px solid #193247;
-    background:#06101a;
-    padding:28px 5%;
-    display:flex;
-    justify-content:space-between;
-    color:#526a7c;
-    font-size:9px;
+border-top:1px solid #193247;
+background:#06101a;
+padding:28px 5%;
+display:flex;
+justify-content:space-between;
+color:#526a7c;
+font-size:9px;
 }
 
 .footer-logo{
-    color:#fff;
-    font-size:14px;
-    font-weight:bold;
+color:#fff;
+font-size:14px;
+font-weight:bold;
 }
 
 .footer-logo span{
-    color:#159ff0;
+color:#159ff0;
 }
-
-/* MOBILE */
 
 @media(max-width:1000px){
 
 .tools-grid{
-    grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr);
+}
+
+.calc-grid,
+.results{
+grid-template-columns:repeat(2,1fr);
+}
+
+.journal-form{
+grid-template-columns:repeat(2,1fr);
 }
 
 }
 
-@media(max-width:700px){
+@media(max-width:650px){
 
-header{
-    align-items:flex-start;
-}
-
-.nav{
-    max-width:72%;
+.hero h1{
+font-size:28px;
 }
 
 .tools-grid{
-    grid-template-columns:1fr;
+grid-template-columns:1fr;
 }
 
-.heading h1{
-    font-size:28px;
+.calc-grid,
+.results,
+.journal-form{
+grid-template-columns:1fr;
+}
+
+.market-header{
+align-items:flex-start;
+gap:10px;
+}
+
+.trade-row{
+grid-template-columns:1fr 1fr;
 }
 
 footer{
-    flex-direction:column;
-    gap:12px;
-    text-align:center;
+flex-direction:column;
+gap:12px;
+text-align:center;
 }
 
 }
@@ -325,23 +439,14 @@ NEX<span>TRADE</span>
 </div>
 
 <nav class="nav">
-
 <a href="index.html">HOME</a>
-
 <a href="markets.html">MARKETS</a>
-
 <a href="tools.html" class="active">TOOLS</a>
-
 <a href="bots.html">BOTS</a>
-
 <a href="analysis.html">ANALYSIS</a>
-
 <a href="manual-trading.html">MANUAL TRADING</a>
-
 <a href="login.html">LOGIN</a>
-
 <a href="signup.html" class="signup">SIGN UP</a>
-
 </nav>
 
 </header>
@@ -349,432 +454,70 @@ NEX<span>TRADE</span>
 
 <div class="page">
 
-<div class="heading">
+<div class="hero">
 
 <h1>Trading Tools</h1>
 
 <p>
-Practical calculators and utilities designed to help you analyze trades,
-manage risk and make better trading decisions.
+Practical tools for analyzing Deriv volatility markets,
+managing trades and keeping your trading information organized.
 </p>
 
+</div>
+
+
+<div class="section-title">
+Analysis Tools
 </div>
 
 
 <div class="tools-grid">
 
-
-<!-- POSITION SIZE -->
-
-<div class="tool-card">
-
-<div class="tool-icon">◈</div>
-
-<h2>Position Size Calculator</h2>
-
-<p>
-Calculate an estimated position size from your account balance,
-risk percentage and stop-loss distance.
-</p>
-
-<label>Account Balance</label>
-
-<input
-id="balance"
-type="number"
-placeholder="Example: 100"
->
-
-<label>Risk Percentage (%)</label>
-
-<input
-id="risk"
-type="number"
-placeholder="Example: 2"
->
-
-<label>Stop Loss Distance</label>
-
-<input
-id="stop"
-type="number"
-placeholder="Example: 20"
->
-
-<button
-class="calculate"
-onclick="calculatePosition()"
->
-CALCULATE
-</button>
-
-<div
-id="positionResult"
-class="result"
->
-
-<div class="result-label">
-ESTIMATED POSITION SIZE
-</div>
-
-<div
-id="positionValue"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- RISK CALCULATOR -->
-
-<div class="tool-card">
-
-<div class="tool-icon">⚠</div>
-
-<h2>Risk Calculator</h2>
-
-<p>
-Estimate how much money is at risk on a trade based on your
-account size and selected risk percentage.
-</p>
-
-<label>Account Balance</label>
-
-<input
-id="riskBalance"
-type="number"
-placeholder="Example: 100"
->
-
-<label>Risk Percentage (%)</label>
-
-<input
-id="riskPercent"
-type="number"
-placeholder="Example: 1"
->
-
-<button
-class="calculate"
-onclick="calculateRisk()"
->
-CALCULATE RISK
-</button>
-
-<div
-id="riskResult"
-class="result"
->
-
-<div class="result-label">
-MAXIMUM PLANNED RISK
-</div>
-
-<div
-id="riskValue"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PROFIT LOSS -->
-
-<div class="tool-card">
-
-<div class="tool-icon">↗</div>
-
-<h2>Profit / Loss Calculator</h2>
-
-<p>
-Calculate the estimated profit or loss from entry, exit and trade size.
-</p>
-
-<label>Entry Price</label>
-
-<input
-id="entry"
-type="number"
-placeholder="Example: 100"
->
-
-<label>Exit Price</label>
-
-<input
-id="exit"
-type="number"
-placeholder="Example: 110"
->
-
-<label>Position Size</label>
-
-<input
-id="size"
-type="number"
-placeholder="Example: 1"
->
-
-<button
-class="calculate"
-onclick="calculateProfit()"
->
-CALCULATE P/L
-</button>
-
-<div
-id="profitResult"
-class="result"
->
-
-<div class="result-label">
-ESTIMATED RESULT
-</div>
-
-<div
-id="profitValue"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- RISK REWARD -->
-
-<div class="tool-card">
-
-<div class="tool-icon">⇄</div>
-
-<h2>Risk / Reward Calculator</h2>
-
-<p>
-Compare the amount you are risking against your potential reward.
-</p>
-
-<label>Risk Amount</label>
-
-<input
-id="rrRisk"
-type="number"
-placeholder="Example: 10"
->
-
-<label>Potential Reward</label>
-
-<input
-id="rrReward"
-type="number"
-placeholder="Example: 30"
->
-
-<button
-class="calculate"
-onclick="calculateRR()"
->
-CALCULATE RATIO
-</button>
-
-<div
-id="rrResult"
-class="result"
->
-
-<div class="result-label">
-RISK / REWARD
-</div>
-
-<div
-id="rrValue"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PERCENTAGE -->
-
-<div class="tool-card">
-
-<div class="tool-icon">%</div>
-
-<h2>Percentage Calculator</h2>
-
-<p>
-Quickly calculate a percentage of an account balance or trading amount.
-</p>
-
-<label>Amount</label>
-
-<input
-id="percentAmount"
-type="number"
-placeholder="Example: 1000"
->
-
-<label>Percentage (%)</label>
-
-<input
-id="percentValue"
-type="number"
-placeholder="Example: 5"
->
-
-<button
-class="calculate"
-onclick="calculatePercentage()"
->
-CALCULATE
-</button>
-
-<div
-id="percentResult"
-class="result"
->
-
-<div class="result-label">
-RESULT
-</div>
-
-<div
-id="percentageOutput"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- COMPOUND GROWTH -->
-
-<div class="tool-card">
-
-<div class="tool-icon">⌁</div>
-
-<h2>Account Growth Calculator</h2>
-
-<p>
-Explore how repeated percentage growth can affect an account over time.
-</p>
-
-<label>Starting Balance</label>
-
-<input
-id="growthStart"
-type="number"
-placeholder="Example: 100"
->
-
-<label>Growth Per Period (%)</label>
-
-<input
-id="growthRate"
-type="number"
-placeholder="Example: 5"
->
-
-<label>Number of Periods</label>
-
-<input
-id="growthPeriods"
-type="number"
-placeholder="Example: 10"
->
-
-<button
-class="calculate"
-onclick="calculateGrowth()"
->
-CALCULATE GROWTH
-</button>
-
-<div
-id="growthResult"
-class="result"
->
-
-<div class="result-label">
-ESTIMATED BALANCE
-</div>
-
-<div
-id="growthValue"
-class="result-value"
->
----
-</div>
-
-</div>
-
-</div>
-
-
-<!-- MARKET TERMINAL -->
-
-<div class="simple-card">
+<div class="tool">
 
 <div class="tool-icon">◉</div>
 
-<h2>Live Market Terminal</h2>
+<h2>Digit Scanner</h2>
 
 <p>
-Open the NEXTRADE live market terminal and monitor real-time
-Deriv volatility prices.
+Analyze the latest 100 ticks and identify the strongest
+and weakest digits by percentage.
 </p>
 
-<a href="markets.html">
-OPEN LIVE MARKETS
+<a href="analysis.html">
+OPEN SCANNER
 </a>
 
 </div>
 
 
-<!-- BOTS -->
-
-<div class="simple-card">
-
-<div class="tool-icon">◇</div>
-
-<h2>Trading Bots</h2>
-
-<p>
-Explore the NEXTRADE automated trading section and future bot tools.
-</p>
-
-<a href="bots.html">
-OPEN BOTS
-</a>
-
-</div>
-
-
-<!-- ANALYSIS -->
-
-<div class="simple-card">
+<div class="tool">
 
 <div class="tool-icon">⌁</div>
 
-<h2>Market Analysis</h2>
+<h2>Market Scanner</h2>
 
 <p>
-Analyze markets and build trading plans using NEXTRADE analysis tools.
+Compare the available volatility markets and identify
+markets showing stronger recent movement.
+</p>
+
+<a href="markets.html">
+OPEN MARKETS
+</a>
+
+</div>
+
+
+<div class="tool">
+
+<div class="tool-icon">◌</div>
+
+<h2>Tick Analyzer</h2>
+
+<p>
+Inspect recent tick movement and use the live market
+data to study short-term price behavior.
 </p>
 
 <a href="analysis.html">
@@ -786,12 +529,317 @@ OPEN ANALYSIS
 </div>
 
 
+<div class="section-title">
+Trading Utilities
+</div>
+
+
+<div class="tools-grid">
+
+<div class="tool">
+
+<div class="tool-icon">%</div>
+
+<h2>Digit Statistics</h2>
+
+<p>
+View digit percentages and ranking from the current
+rolling analysis sample.
+</p>
+
+<a href="analysis.html">
+VIEW STATISTICS
+</a>
+
+</div>
+
+
+<div class="tool">
+
+<div class="tool-icon">$</div>
+
+<h2>Risk Calculator</h2>
+
+<p>
+Calculate stake size, risk amount and potential profit
+before entering a trade.
+</p>
+
+<button onclick="scrollToCalculator()">
+OPEN CALCULATOR
+</button>
+
+</div>
+
+
+<div class="tool">
+
+<div class="tool-icon">✓</div>
+
+<h2>Trade Journal</h2>
+
+<p>
+Record your trades and track whether each trade ended
+in profit or loss.
+</p>
+
+<button onclick="scrollToJournal()">
+OPEN JOURNAL
+</button>
+
+</div>
+
+</div>
+
+
+<!-- MARKET QUICK VIEW -->
+
+<div class="market-tool">
+
+<div class="market-header">
+
+<h2>Quick Market View</h2>
+
+<div class="live">
+● LIVE MARKET
+</div>
+
+</div>
+
+<div class="market-select">
+
+<select id="marketSelect">
+
+<option value="1HZ100V">
+Volatility 100 (1s)
+</option>
+
+<option value="1HZ75V">
+Volatility 75 (1s)
+</option>
+
+<option value="1HZ50V">
+Volatility 50 (1s)
+</option>
+
+<option value="1HZ25V">
+Volatility 25 (1s)
+</option>
+
+<option value="1HZ10V">
+Volatility 10 (1s)
+</option>
+
+<option value="R_100">
+Volatility 100
+</option>
+
+<option value="R_75">
+Volatility 75
+</option>
+
+<option value="R_50">
+Volatility 50
+</option>
+
+<option value="R_25">
+Volatility 25
+</option>
+
+<option value="R_10">
+Volatility 10
+</option>
+
+</select>
+
+</div>
+
+<div id="marketPrice" class="market-price">
+---
+</div>
+
+<div id="marketCode" class="market-code">
+1HZ100V
+</div>
+
+</div>
+
+
+<!-- RISK CALCULATOR -->
+
+<div id="calculator" class="calculator">
+
+<div class="section-title" style="margin-top:0">
+Risk Calculator
+</div>
+
+<div class="calc-grid">
+
+<div class="field">
+
+<label>
+ACCOUNT BALANCE
+</label>
+
+<input
+id="balance"
+type="number"
+placeholder="100"
+value="100"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+RISK %
+</label>
+
+<input
+id="risk"
+type="number"
+placeholder="2"
+value="2"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+PAYOUT %
+</label>
+
+<input
+id="payout"
+type="number"
+placeholder="90"
+value="90"
+>
+
+</div>
+
+</div>
+
+<button
+class="calc-button"
+onclick="calculateRisk()"
+>
+CALCULATE
+</button>
+
+
+<div class="results">
+
+<div class="result">
+
+<div class="result-label">
+RISK AMOUNT
+</div>
+
+<div id="riskAmount" class="result-value">
+$2.00
+</div>
+
+</div>
+
+
+<div class="result">
+
+<div class="result-label">
+STAKE
+</div>
+
+<div id="stake" class="result-value">
+$2.00
+</div>
+
+</div>
+
+
+<div class="result">
+
+<div class="result-label">
+POTENTIAL PROFIT
+</div>
+
+<div id="potentialProfit" class="result-value profit">
+$1.80
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TRADE JOURNAL -->
+
+<div id="journal" class="journal">
+
+<div class="section-title" style="margin-top:0">
+Trade Journal
+</div>
+
+<div class="journal-form">
+
+<input
+id="journalMarket"
+placeholder="Market"
+>
+
+<input
+id="journalType"
+placeholder="Trade type"
+>
+
+<input
+id="journalStake"
+type="number"
+placeholder="Stake"
+>
+
+<select id="journalResult">
+
+<option value="WIN">
+WIN
+</option>
+
+<option value="LOSS">
+LOSS
+</option>
+
+</select>
+
+<button onclick="addTrade()">
+ADD TRADE
+</button>
+
+</div>
+
+
+<div id="journalList" class="journal-list">
+
+<div class="empty">
+No trades recorded yet.
+</div>
+
+</div>
+
+</div>
+
+
 <div class="notice">
 
-<strong>NEXTRADE TOOL NOTICE:</strong>
-These calculators provide estimates for analysis and educational purposes.
-They do not guarantee trading results or profits. Always verify calculations
-and understand your broker's contract specifications before placing a trade.
+<strong>TOOL NOTICE:</strong>
+
+The calculators and statistics on this page are analysis
+utilities only. They do not guarantee profitable trades.
+Always verify live market conditions before entering a trade.
 
 </div>
 
@@ -805,7 +853,7 @@ NEX<span>TRADE</span>
 </div>
 
 <div>
-© 2026 NEXTRADE. Trading analysis platform.
+© 2026 NEXTRADE
 </div>
 
 </footer>
@@ -813,46 +861,109 @@ NEX<span>TRADE</span>
 
 <script>
 
-/* POSITION SIZE */
+/* BACKEND */
 
-function calculatePosition(){
+const BACKEND =
+"wss://nextrade-backened.onrender.com";
 
-const balance =
-Number(document.getElementById("balance").value);
+let socket;
 
-const risk =
-Number(document.getElementById("risk").value);
 
-const stop =
-Number(document.getElementById("stop").value);
+/* MARKET */
 
-if(
-balance <= 0 ||
-risk <= 0 ||
-stop <= 0
-){
+const marketSelect =
+document.getElementById(
+"marketSelect"
+);
 
-alert("Enter valid numbers.");
+const marketPrice =
+document.getElementById(
+"marketPrice"
+);
+
+const marketCode =
+document.getElementById(
+"marketCode"
+);
+
+
+marketSelect.addEventListener(
+"change",
+function(){
+
+marketCode.textContent =
+this.value;
+
+});
+
+
+function connect(){
+
+try{
+
+socket =
+new WebSocket(BACKEND);
+
+}catch(e){
 
 return;
 
 }
 
-const riskMoney =
-balance * (risk / 100);
 
-const position =
-riskMoney / stop;
+socket.onmessage =
+function(event){
 
-document.getElementById(
-"positionValue"
-).textContent =
-position.toFixed(4);
+let data;
 
-document.getElementById(
-"positionResult"
-).style.display =
-"block";
+try{
+
+data =
+JSON.parse(event.data);
+
+}catch(e){
+
+return;
+
+}
+
+
+if(data.type!=="tick"){
+return;
+}
+
+const tick =
+data.data;
+
+if(
+!tick ||
+tick.symbol !==
+marketSelect.value
+){
+return;
+}
+
+marketPrice.textContent =
+Number(tick.price)
+.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
+
+};
+
+socket.onclose =
+function(){
+
+setTimeout(
+connect,
+4000
+);
+
+};
 
 }
 
@@ -864,245 +975,239 @@ function calculateRisk(){
 const balance =
 Number(
 document.getElementById(
-"riskBalance"
+"balance"
 ).value
 );
-
-const percent =
-Number(
-document.getElementById(
-"riskPercent"
-).value
-);
-
-if(
-balance <= 0 ||
-percent <= 0
-){
-
-alert("Enter valid numbers.");
-
-return;
-
-}
-
-const result =
-balance * (percent / 100);
-
-document.getElementById(
-"riskValue"
-).textContent =
-result.toFixed(2);
-
-document.getElementById(
-"riskResult"
-).style.display =
-"block";
-
-}
-
-
-/* PROFIT LOSS */
-
-function calculateProfit(){
-
-const entry =
-Number(
-document.getElementById(
-"entry"
-).value
-);
-
-const exit =
-Number(
-document.getElementById(
-"exit"
-).value
-);
-
-const size =
-Number(
-document.getElementById(
-"size"
-).value
-);
-
-if(
-entry <= 0 ||
-exit <= 0 ||
-size <= 0
-){
-
-alert("Enter valid numbers.");
-
-return;
-
-}
-
-const result =
-(exit - entry) * size;
-
-document.getElementById(
-"profitValue"
-).textContent =
-result >= 0
-? "+" + result.toFixed(2)
-: result.toFixed(2);
-
-document.getElementById(
-"profitResult"
-).style.display =
-"block";
-
-}
-
-
-/* RISK REWARD */
-
-function calculateRR(){
 
 const risk =
 Number(
 document.getElementById(
-"rrRisk"
+"risk"
 ).value
 );
 
-const reward =
+const payout =
 Number(
 document.getElementById(
-"rrReward"
+"payout"
 ).value
 );
 
 if(
-risk <= 0 ||
-reward <= 0
+!balance ||
+!risk ||
+!payout
 ){
-
-alert("Enter valid numbers.");
-
 return;
-
 }
-
-const ratio =
-reward / risk;
-
-document.getElementById(
-"rrValue"
-).textContent =
-"1 : " + ratio.toFixed(2);
-
-document.getElementById(
-"rrResult"
-).style.display =
-"block";
-
-}
-
-
-/* PERCENTAGE */
-
-function calculatePercentage(){
 
 const amount =
-Number(
+balance*(risk/100);
+
+const profit =
+amount*(payout/100);
+
 document.getElementById(
-"percentAmount"
-).value
+"riskAmount"
+).textContent =
+"$"+
+amount.toFixed(2);
+
+document.getElementById(
+"stake"
+).textContent =
+"$"+
+amount.toFixed(2);
+
+document.getElementById(
+"potentialProfit"
+).textContent =
+"$"+
+profit.toFixed(2);
+
+}
+
+
+/* SCROLL */
+
+function scrollToCalculator(){
+
+document.getElementById(
+"calculator"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function scrollToJournal(){
+
+document.getElementById(
+"journal"
+).scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* JOURNAL */
+
+let trades =
+JSON.parse(
+localStorage.getItem(
+"nextradeTrades"
+)||"[]"
 );
 
-const percent =
-Number(
+
+function renderTrades(){
+
+const list =
 document.getElementById(
-"percentValue"
-).value
+"journalList"
 );
 
-if(
-amount <= 0 ||
-percent < 0
-){
+if(!trades.length){
 
-alert("Enter valid numbers.");
+list.innerHTML = `
+<div class="empty">
+No trades recorded yet.
+</div>
+`;
 
 return;
 
 }
 
-const result =
-amount * (percent / 100);
+list.innerHTML = "";
 
-document.getElementById(
-"percentageOutput"
-).textContent =
-result.toFixed(2);
+trades.forEach(
+trade=>{
 
-document.getElementById(
-"percentResult"
-).style.display =
-"block";
+const row =
+document.createElement(
+"div"
+);
+
+row.className =
+"trade-row";
+
+row.innerHTML = `
+
+<div>
+${trade.market}
+</div>
+
+<div>
+${trade.type}
+</div>
+
+<div>
+$${trade.stake}
+</div>
+
+<div class="${
+trade.result==="WIN"
+?
+"profit"
+:
+"loss"
+}">
+${trade.result}
+</div>
+
+`;
+
+list.appendChild(row);
+
+});
 
 }
 
 
-/* ACCOUNT GROWTH */
+function addTrade(){
 
-function calculateGrowth(){
+const market =
+document.getElementById(
+"journalMarket"
+).value
+.trim();
 
-const start =
+const type =
+document.getElementById(
+"journalType"
+).value
+.trim();
+
+const stake =
 Number(
 document.getElementById(
-"growthStart"
+"journalStake"
 ).value
 );
 
-const rate =
-Number(
+const result =
 document.getElementById(
-"growthRate"
-).value
-);
-
-const periods =
-Number(
-document.getElementById(
-"growthPeriods"
-).value
-);
+"journalResult"
+).value;
 
 if(
-start <= 0 ||
-periods < 0
+!market ||
+!type ||
+!stake
 ){
-
-alert("Enter valid numbers.");
-
 return;
-
 }
 
-const result =
-start *
-Math.pow(
-1 + rate / 100,
-periods
+trades.unshift({
+
+market:market,
+
+type:type,
+
+stake:stake.toFixed(2),
+
+result:result
+
+});
+
+if(trades.length>30){
+trades.pop();
+}
+
+localStorage.setItem(
+"nextradeTrades",
+JSON.stringify(trades)
 );
 
 document.getElementById(
-"growthValue"
-).textContent =
-result.toFixed(2);
+"journalMarket"
+).value="";
 
 document.getElementById(
-"growthResult"
-).style.display =
-"block";
+"journalType"
+).value="";
+
+document.getElementById(
+"journalStake"
+).value="";
+
+renderTrades();
 
 }
+
+
+/* START */
+
+calculateRisk();
+
+renderTrades();
+
+connect();
 
 </script>
 
 </body>
-  </html>
+</html>
