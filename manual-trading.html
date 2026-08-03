@@ -1,1 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTRADE | Manual Trading</title>
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#050b12;
+color:#fff;
+min-height:100vh;
+}
+
+header{
+min-height:72px;
+background:#08131f;
+border-bottom:1px solid #193247;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 5%;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-size:25px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.logo span{color:#159ff0}
+
+.nav{
+display:flex;
+gap:4px;
+overflow-x:auto;
+}
+
+.nav a{
+color:#8ea5b7;
+text-decoration:none;
+font-size:10px;
+font-weight:bold;
+padding:10px;
+white-space:nowrap;
+border-radius:6px;
+}
+
+.nav a:hover{
+background:#102536;
+color:#fff;
+}
+
+.nav a.active{color:#159ff0}
+
+.nav .signup{
+background:#159ff0;
+color:#fff;
+}
+
+.page{
+width:94%;
+max-width:1450px;
+margin:auto;
+padding:28px 0 70px;
+}
+
+.top{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+gap:15px;
+margin-bottom:20px;
+}
+
+.top h1{
+font-size:30px;
+margin-bottom:7px;
+}
+
+.top p{
+font-size:11px;
+color:#71899a;
+}
+
+.live-status{
+font-size:9px;
+color:#f0ad28;
+display:flex;
+align-items:center;
+gap:7px;
+}
+
+.live-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#f0ad28;
+}
+
+.live-dot.on{
+background:#2edb9c;
+box-shadow:0 0 9px #2edb9c;
+}
+
+.layout{
+display:grid;
+grid-template-columns:240px 1fr 285px;
+gap:15px;
+}
+
+/* MARKET LIST */
+
+.card{
+background:#08131f;
+border:1px solid #193247;
+border-radius:11px;
+padding:17px;
+}
+
+.card-title{
+font-size:11px;
+font-weight:bold;
+margin-bottom:13px;
+text-transform:uppercase;
+color:#9db0bd;
+}
+
+.market-list{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.market{
+padding:11px;
+border-radius:7px;
+background:#07111b;
+border:1px solid #193247;
+cursor:pointer;
+}
+
+.market:hover{
+border-color:#159ff0;
+}
+
+.market.active{
+border-color:#159ff0;
+background:#0a1b29;
+}
+
+.market-name{
+font-size:9px;
+font-weight:bold;
+}
+
+.market-code{
+font-size:7px;
+color:#60788a;
+margin-top:4px;
+}
+
+.market-price{
+font-size:9px;
+margin-top:7px;
+color:#dce7ed;
+}
+
+/* CENTER */
+
+.chart-card{
+min-height:560px;
+}
+
+.market-head{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:10px;
+}
+
+.market-head h2{
+font-size:17px;
+}
+
+.price{
+font-size:29px;
+font-weight:bold;
+margin-top:9px;
+}
+
+.price-change{
+font-size:8px;
+color:#2edb9c;
+margin-top:4px;
+}
+
+.chart{
+height:315px;
+margin-top:20px;
+border:1px solid #193247;
+border-radius:8px;
+background:
+linear-gradient(#0c1b28 1px,transparent 1px),
+linear-gradient(90deg,#0c1b28 1px,transparent 1px);
+background-size:40px 40px;
+position:relative;
+overflow:hidden;
+}
+
+.chart-line{
+position:absolute;
+left:0;
+right:0;
+top:50%;
+height:2px;
+background:#159ff0;
+transform-origin:left center;
+box-shadow:0 0 8px rgba(21,159,240,.4);
+}
+
+.chart-pointer{
+position:absolute;
+width:12px;
+height:12px;
+border:2px solid #fff;
+border-radius:50%;
+background:#159ff0;
+right:25px;
+top:48%;
+box-shadow:0 0 12px #159ff0;
+}
+
+.chart-label{
+position:absolute;
+top:10px;
+left:12px;
+font-size:8px;
+color:#60788a;
+}
+
+.tick-strip{
+display:flex;
+gap:8px;
+overflow-x:auto;
+margin-top:13px;
+padding-bottom:5px;
+}
+
+.tick{
+min-width:75px;
+padding:9px;
+background:#07111b;
+border:1px solid #193247;
+border-radius:6px;
+}
+
+.tick small{
+display:block;
+font-size:7px;
+color:#60788a;
+margin-bottom:5px;
+}
+
+.tick strong{
+font-size:9px;
+}
+
+/* TRADE PANEL */
+
+.trade-panel{
+margin-top:15px;
+}
+
+.trade-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+}
+
+.field label{
+display:block;
+font-size:7px;
+color:#60788a;
+margin-bottom:6px;
+}
+
+input,select{
+width:100%;
+background:#050d15;
+color:#fff;
+border:1px solid #23465d;
+border-radius:6px;
+padding:10px;
+font-size:9px;
+outline:none;
+}
+
+.trade-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px;
+}
+
+.trade-button{
+padding:14px 8px;
+border-radius:7px;
+font-size:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.over{
+background:#0d473a;
+border:1px solid #2edb9c;
+color:#2edb9c;
+}
+
+.under{
+background:#451b24;
+border:1px solid #ff5969;
+color:#ff5969;
+}
+
+.trade-button:active{
+transform:scale(.98);
+}
+
+.demo-note{
+margin-top:12px;
+padding:10px;
+border-radius:6px;
+background:#171208;
+border:1px solid #5b471d;
+color:#a9915b;
+font-size:7px;
+line-height:1.5;
+}
+
+/* RIGHT PANEL */
+
+.stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.stat{
+background:#07111b;
+border:1px solid #193247;
+border-radius:7px;
+padding:12px;
+}
+
+.stat-label{
+font-size:7px;
+color:#60788a;
+margin-bottom:6px;
+}
+
+.stat-value{
+font-size:15px;
+font-weight:bold;
+}
+
+.digits{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:6px;
+margin-top:12px;
+}
+
+.digit{
+height:43px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:#07111b;
+border:1px solid #193247;
+border-radius:50%;
+font-size:11px;
+font-weight:bold;
+}
+
+.digit span{
+font-size:6px;
+color:#60788a;
+margin-top:3px;
+}
+
+.digit.strong{
+border-color:#2edb9c;
+box-shadow:0 0 8px rgba(46,219,156,.25);
+}
+
+.digit.weak{
+border-color:#ff5969;
+box-shadow:0 0 8px rgba(255,89,105,.2);
+}
+
+.history{
+margin-top:13px;
+display:flex;
+flex-direction:column;
+gap:6px;
+max-height:220px;
+overflow:auto;
+}
+
+.history-row{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+padding:9px;
+border-radius:6px;
+background:#07111b;
+border:1px solid #193247;
+font-size:7px;
+}
+
+.win{color:#2edb9c}
+.loss{color:#ff5969}
+
+footer{
+border-top:1px solid #193247;
+background:#06101a;
+padding:27px 5%;
+display:flex;
+justify-content:space-between;
+color:#526a7c;
+font-size:9px;
+}
+
+.footer-logo{
+font-size:14px;
+font-weight:bold;
+color:#fff;
+}
+
+.footer-logo span{color:#159ff0}
+
+@media(max-width:1100px){
+
+.layout{
+grid-template-columns:210px 1fr;
+}
+
+.right{
+grid-column:1 / -1;
+}
+
+}
+
+@media(max-width:700px){
+
+header{
+align-items:flex-start;
+}
+
+.top{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.layout{
+grid-template-columns:1fr;
+}
+
+.chart-card{
+min-height:auto;
+}
+
+.chart{
+height:270px;
+}
+
+.market-list{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+.market-name{
+font-size:8px;
+}
+
+.right{
+grid-column:auto;
+}
+
+footer{
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+}
+
+@media(max-width:420px){
+
+.market-list{
+grid-template-columns:1fr;
+}
+
+.price{
+font-size:25px;
+}
+
+.chart{
+height:240px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+NEX<span>TRADE</span>
+</div>
+
+<nav class="nav">
+<a href="index.html">HOME</a>
+<a href="markets.html">MARKETS</a>
+<a href="tools.html">TOOLS</a>
+<a href="bots.html">BOTS</a>
+<a href="analysis.html">ANALYSIS</a>
+<a href="manual-trading.html" class="active">MANUAL TRADING</a>
+<a href="login.html">LOGIN</a>
+<a href="signup.html" class="signup">SIGN UP</a>
+</nav>
+
+</header>
+
+
+<div class="page">
+
+<div class="top">
+
+<div>
+<h1>Manual Trading</h1>
+<p>Monitor live volatility markets and practice trade decisions manually.</p>
+</div>
+
+<div class="live-status">
+
+<span id="liveDot" class="live-dot"></span>
+
+<span id="connection">
+CONNECTING
+</span>
+
+</div>
+
+</div>
+
+
+<div class="layout">
+
+<!-- MARKET SELECTOR -->
+
+<div class="card">
+
+<div class="card-title">
+Volatility Markets
+</div>
+
+<div id="marketList" class="market-list"></div>
+
+</div>
+
+
+<!-- CENTER -->
+
+<div>
+
+<div class="card chart-card">
+
+<div class="market-head">
+
+<div>
+
+<h2 id="selectedName">
+Volatility 100 (1s)
+</h2>
+
+<div id="selectedCode" class="market-code">
+1HZ100V
+</div>
+
+<div id="price" class="price">
+---
+</div>
+
+<div id="change" class="price-change">
+WAITING FOR LIVE DATA
+</div>
+
+</div>
+
+</div>
+
+
+<div class="chart">
+
+<div class="chart-label">
+LIVE TICK MOVEMENT
+</div>
+
+<div id="chartLine" class="chart-line"></div>
+
+<div id="pointer" class="chart-pointer"></div>
+
+</div>
+
+
+<div id="ticks" class="tick-strip"></div>
+
+</div>
+
+
+<!-- TRADE -->
+
+<div class="card trade-panel">
+
+<div class="card-title">
+Manual Trade Setup
+</div>
+
+<div class="trade-grid">
+
+<div class="field">
+
+<label>
+STAKE
+</label>
+
+<input
+id="stake"
+type="number"
+value="1"
+min="0.35"
+step="0.01"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+CONTRACT
+</label>
+
+<select id="contract">
+
+<option value="over">
+OVER
+</option>
+
+<option value="under">
+UNDER
+</option>
+
+<option value="even">
+EVEN
+</option>
+
+<option value="odd">
+ODD
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="trade-buttons">
+
+<button
+class="trade-button over"
+onclick="placeDemoTrade('OVER')"
+>
+OVER
+</button>
+
+<button
+class="trade-button under"
+onclick="placeDemoTrade('UNDER')"
+>
+UNDER
+</button>
+
+</div>
+
+
+<div class="demo-note">
+
+DEMO MODE — These buttons only record a simulated
+trade locally. They do not place a real order or use
+real money.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT -->
+
+<div class="right">
+
+<div class="card">
+
+<div class="card-title">
+Live Statistics
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-label">
+LATEST DIGIT
+</div>
+
+<div id="latestDigit" class="stat-value">
+-
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+TICKS
+</div>
+
+<div id="tickCount" class="stat-value">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card-title" style="margin-top:20px">
+Digit Strength
+</div>
+
+<div id="digits" class="digits"></div>
+
+</div>
+
+
+<div class="card" style="margin-top:15px">
+
+<div class="card-title">
+Demo Trade History
+</div>
+
+<div id="history" class="history">
+
+<div style="font-size:8px;color:#60788a">
+No demo trades yet.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-logo">
+NEX<span>TRADE</span>
+</div>
+
+<div>
+© 2026 NEXTRADE
+</div>
+
+</footer>
+
+
+<script>
+
+const BACKEND =
+"wss://nextrade-backened.onrender.com";
+
+
+const markets = [
+
+{
+name:"Volatility 100 (1s)",
+code:"1HZ100V"
+},
+
+{
+name:"Volatility 75 (1s)",
+code:"1HZ75V"
+},
+
+{
+name:"Volatility 50 (1s)",
+code:"1HZ50V"
+},
+
+{
+name:"Volatility 25 (1s)",
+code:"1HZ25V"
+},
+
+{
+name:"Volatility 10 (1s)",
+code:"1HZ10V"
+},
+
+{
+name:"Volatility 100",
+code:"R_100"
+},
+
+{
+name:"Volatility 75",
+code:"R_75"
+},
+
+{
+name:"Volatility 50",
+code:"R_50"
+},
+
+{
+name:"Volatility 25",
+code:"R_25"
+},
+
+{
+name:"Volatility 10",
+code:"R_10"
+}
+
+];
+
+
+let selected =
+markets[0];
+
+let socket;
+
+let ticks=[];
+
+let digits =
+Array(10).fill(0);
+
+let totalTicks=0;
+
+let previousPrice=null;
+
+let demoTrades =
+JSON.parse(
+localStorage.getItem(
+"nextradeManualTrades"
+)||"[]"
+);
+
+
+/* ELEMENTS */
+
+const marketList =
+document.getElementById(
+"marketList"
+);
+
+const selectedName =
+document.getElementById(
+"selectedName"
+);
+
+const selectedCode =
+document.getElementById(
+"selectedCode"
+);
+
+const price =
+document.getElementById(
+"price"
+);
+
+const change =
+document.getElementById(
+"change"
+);
+
+const ticksBox =
+document.getElementById(
+"ticks"
+);
+
+const latestDigit =
+document.getElementById(
+"latestDigit"
+);
+
+const tickCount =
+document.getElementById(
+"tickCount"
+);
+
+const digitsBox =
+document.getElementById(
+"digits"
+);
+
+const historyBox =
+document.getElementById(
+"history"
+);
+
+
+/* MARKETS */
+
+function renderMarkets(){
+
+marketList.innerHTML="";
+
+markets.forEach(
+m=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className =
+"market"+
+(
+m.code===selected.code
+?
+" active"
+:
+""
+);
+
+div.innerHTML=`
+
+<div class="market-name">
+${m.name}
+</div>
+
+<div class="market-code">
+${m.code}
+</div>
+
+<div class="market-price" id="p-${m.code}">
+---
+</div>
+
+`;
+
+div.onclick =
+function(){
+
+selectMarket(m);
+
+};
+
+marketList.appendChild(div);
+
+});
+
+}
+
+
+function selectMarket(m){
+
+selected=m;
+
+ticks=[];
+
+digits=
+Array(10).fill(0);
+
+totalTicks=0;
+
+previousPrice=null;
+
+selectedName.textContent =
+m.name;
+
+selectedCode.textContent =
+m.code;
+
+price.textContent =
+"---";
+
+change.textContent =
+"WAITING FOR LIVE DATA";
+
+latestDigit.textContent =
+"-";
+
+tickCount.textContent =
+"0";
+
+renderMarkets();
+
+renderDigits();
+
+renderTicks();
+
+connect();
+
+}
+
+
+/* DIGITS */
+
+function getLastDigit(value){
+
+const clean =
+String(value)
+.replace(/\D/g,"");
+
+if(!clean)
+return null;
+
+return Number(
+clean[clean.length-1]
+);
+
+}
+
+
+function renderDigits(){
+
+digitsBox.innerHTML="";
+
+const max =
+Math.max(...digits,1);
+
+let strongest =
+-1;
+
+let weakest =
+-1;
+
+if(totalTicks>=10){
+
+strongest =
+digits.indexOf(
+Math.max(...digits)
+);
+
+weakest =
+digits.indexOf(
+Math.min(...digits)
+);
+
+}
+
+for(let i=0;i<10;i++){
+
+const percent =
+totalTicks
+?
+(digits[i]/totalTicks)*100
+:
+0;
+
+const div =
+document.createElement(
+"div"
+);
+
+let cls="digit";
+
+if(
+i===strongest &&
+totalTicks>=10
+){
+cls+=" strong";
+}
+
+if(
+i===weakest &&
+totalTicks>=10
+){
+cls+=" weak";
+}
+
+div.className=cls;
+
+div.innerHTML=`
+
+${i}
+
+<span>
+${percent.toFixed(0)}%
+</span>
+
+`;
+
+digitsBox.appendChild(div);
+
+}
+
+}
+
+
+/* TICKS */
+
+function renderTicks(){
+
+ticksBox.innerHTML="";
+
+ticks
+.slice(-12)
+.reverse()
+.forEach(
+(t,i)=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className="tick";
+
+div.innerHTML=`
+
+<small>
+${i===0?"LATEST":"TICK"}
+</small>
+
+<strong>
+${t}
+</strong>
+
+`;
+
+ticksBox.appendChild(div);
+
+});
+
+}
+
+
+/* CHART */
+
+function updateChart(value){
+
+if(
+previousPrice===null
+){
+return;
+}
+
+const difference =
+value-previousPrice;
+
+const line =
+document.getElementById(
+"chartLine"
+);
+
+const pointer =
+document.getElementById(
+"pointer"
+);
+
+const movement =
+Math.max(
+-25,
+Math.min(
+25,
+difference*10
+)
+);
+
+line.style.transform =
+"rotate("+
+movement+
+"deg)";
+
+const top =
+48 -
+Math.max(
+-35,
+Math.min(
+35,
+difference*20
+)
+);
+
+pointer.style.top =
+top+"%";
+
+}
+
+
+/* TICK */
+
+function processTick(value){
+
+if(!Number.isFinite(value))
+return;
+
+updateChart(value);
+
+if(
+previousPrice!==null
+){
+
+const difference =
+value-previousPrice;
+
+const percent =
+previousPrice
+?
+(difference/
+previousPrice)*100
+:
+0;
+
+change.textContent =
+(
+difference>=0
+?
+"+"
+:
+""
+)+
+difference.toFixed(5)+
+" ("+
+(
+percent>=0
+?
+"+"
+:
+""
+)+
+percent.toFixed(3)+
+"%)";
+
+change.style.color =
+difference>=0
+?
+"#2edb9c"
+:
+"#ff5969";
+
+}
+
+previousPrice=value;
+
+price.textContent =
+value.toLocaleString(
+undefined,
+{
+minimumFractionDigits:2,
+maximumFractionDigits:8
+}
+);
+
+const digit =
+getLastDigit(value);
+
+if(digit!==null){
+
+digits[digit]++;
+
+latestDigit.textContent =
+digit;
+
+}
+
+totalTicks++;
+
+tickCount.textContent =
+totalTicks;
+
+ticks.push(
+value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:8
+}
+)
+);
+
+if(ticks.length>30)
+ticks.shift();
+
+renderTicks();
+
+renderDigits();
+
+
+/* MINI MARKET PRICE */
+
+const mini =
+document.getElementById(
+"p-"+selected.code
+);
+
+if(mini){
+
+mini.textContent =
+value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:6
+}
+);
+
+}
+
+}
+
+
+/* CONNECT */
+
+function connect(){
+
+if(socket){
+
+try{
+socket.close();
+}catch(e){}
+
+}
+
+document.getElementById(
+"connection"
+).textContent =
+"CONNECTING";
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot";
+
+
+try{
+
+socket =
+new WebSocket(BACKEND);
+
+}catch(e){
+
+return;
+
+}
+
+
+socket.onopen =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"LIVE";
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot on";
+
+};
+
+
+socket.onmessage =
+function(event){
+
+let data;
+
+try{
+
+data =
+JSON.parse(event.data);
+
+}catch(e){
+
+return;
+
+}
+
+if(data.type!=="tick")
+return;
+
+const tick =
+data.data;
+
+if(
+!tick ||
+tick.symbol!==selected.code ||
+tick.price===undefined
+)
+return;
+
+processTick(
+Number(tick.price)
+);
+
+};
+
+
+socket.onclose =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"RECONNECTING";
+
+document.getElementById(
+"liveDot"
+).className =
+"live-dot";
+
+setTimeout(
+connect,
+4000
+);
+
+};
+
+
+socket.onerror =
+function(){
+
+document.getElementById(
+"connection"
+).textContent =
+"CONNECTION ERROR";
+
+};
+
+}
+
+
+/* DEMO TRADING */
+
+function placeDemoTrade(direction){
+
+const stake =
+Number(
+document.getElementById(
+"stake"
+).value
+);
+
+if(
+!stake ||
+stake<=0
+){
+return;
+}
+
+const trade={
+
+time:
+new Date()
+.toLocaleTimeString(),
+
+market:
+selected.name,
+
+direction:
+direction,
+
+stake:
+stake.toFixed(2)
+
+};
+
+demoTrades.unshift(
+trade
+);
+
+if(
+demoTrades.length>25
+){
+demoTrades.pop();
+}
+
+localStorage.setItem(
+"nextradeManualTrades",
+JSON.stringify(
+demoTrades
+)
+);
+
+renderHistory();
+
+}
+
+
+function renderHistory(){
+
+if(!demoTrades.length){
+
+historyBox.innerHTML=`
+
+<div style="
+font-size:8px;
+color:#60788a;
+">
+No demo trades yet.
+</div>
+
+`;
+
+return;
+
+}
+
+historyBox.innerHTML="";
+
+demoTrades.forEach(
+trade=>{
+
+const row =
+document.createElement(
+"div"
+);
+
+row.className =
+"history-row";
+
+row.innerHTML=`
+
+<div>
+${trade.time}
+</div>
+
+<div>
+${trade.direction}
+</div>
+
+<div>
+$${trade.stake}
+</div>
+
+`;
+
+historyBox.appendChild(
+row
+);
+
+});
+
+}
+
+
+/* START */
+
+renderMarkets();
+
+renderDigits();
+
+renderHistory();
+
+connect();
+
+</script>
+
+</body>
+  </html>
