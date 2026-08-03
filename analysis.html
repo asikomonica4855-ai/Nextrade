@@ -6,7 +6,11 @@
 <title>NEXTRADE | Analysis</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
@@ -34,7 +38,9 @@ font-weight:800;
 white-space:nowrap;
 }
 
-.logo span{color:#159ff0}
+.logo span{
+color:#159ff0;
+}
 
 .nav{
 display:flex;
@@ -57,7 +63,9 @@ background:#102536;
 color:#fff;
 }
 
-.nav a.active{color:#159ff0}
+.nav a.active{
+color:#159ff0;
+}
 
 .nav .signup{
 background:#159ff0;
@@ -265,15 +273,9 @@ font-weight:bold;
 }
 
 .digit-percent{
-font-size:10px;
+font-size:11px;
 color:#8da3b2;
-margin-top:3px;
-}
-
-.digit-count{
-font-size:8px;
-color:#60788a;
-margin-top:2px;
+margin-top:5px;
 }
 
 .badge{
@@ -405,8 +407,13 @@ font-size:20px;
 font-weight:bold;
 }
 
-.green{color:#2edb9c}
-.red{color:#ff5969}
+.green{
+color:#2edb9c;
+}
+
+.red{
+color:#ff5969;
+}
 
 /* CHART */
 
@@ -520,6 +527,70 @@ font-size:11px;
 font-weight:bold;
 }
 
+/* SIGNAL HISTORY */
+
+.history{
+margin-top:18px;
+background:#08131f;
+border:1px solid #193247;
+border-radius:12px;
+padding:20px;
+}
+
+.history h2{
+font-size:13px;
+margin-bottom:8px;
+}
+
+.history-sub{
+font-size:9px;
+color:#60788a;
+margin-bottom:16px;
+}
+
+.history-list{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.history-row{
+display:grid;
+grid-template-columns:55px 1fr 1fr 100px;
+gap:10px;
+align-items:center;
+background:#07111b;
+border:1px solid #193247;
+border-radius:7px;
+padding:11px;
+font-size:9px;
+}
+
+.history-window{
+color:#60788a;
+}
+
+.history-strong{
+color:#2edb9c;
+font-weight:bold;
+}
+
+.history-weak{
+color:#ff5969;
+font-weight:bold;
+}
+
+.history-time{
+color:#60788a;
+text-align:right;
+}
+
+.empty-history{
+color:#60788a;
+font-size:9px;
+padding:12px 0;
+}
+
 .notice{
 margin-top:18px;
 padding:14px 16px;
@@ -547,7 +618,9 @@ font-size:14px;
 font-weight:bold;
 }
 
-.footer-logo span{color:#159ff0}
+.footer-logo span{
+color:#159ff0;
+}
 
 @media(max-width:1000px){
 
@@ -585,6 +658,14 @@ grid-template-columns:1fr;
 
 .rank-row{
 grid-template-columns:35px 35px 1fr 55px;
+}
+
+.history-row{
+grid-template-columns:45px 1fr 1fr;
+}
+
+.history-time{
+display:none;
 }
 
 footer{
@@ -646,7 +727,6 @@ ANALYZING MARKET
 </div>
 
 <select id="marketSelect">
-
 <option value="1HZ100V">Volatility 100 (1s)</option>
 <option value="1HZ75V">Volatility 75 (1s)</option>
 <option value="1HZ50V">Volatility 50 (1s)</option>
@@ -657,7 +737,6 @@ ANALYZING MARKET
 <option value="R_50">Volatility 50</option>
 <option value="R_25">Volatility 25</option>
 <option value="R_10">Volatility 10</option>
-
 </select>
 
 </div>
@@ -725,6 +804,8 @@ labels activate only after the sample reaches 100 ticks.
 
 <div id="digits" class="digits"></div>
 
+
+<!-- RANKING -->
 
 <div class="ranking">
 
@@ -825,13 +906,34 @@ Waiting for ticks...
 </div>
 
 
-<!-- RECENT -->
+<!-- RECENT DIGITS -->
 
 <div class="recent">
 
 <h2>Recent Digits</h2>
 
 <div id="recent" class="recent-digits"></div>
+
+</div>
+
+
+<!-- SIGNAL HISTORY -->
+
+<div class="history">
+
+<h2>Signal History</h2>
+
+<div class="history-sub">
+Completed 100-tick analysis windows.
+</div>
+
+<div id="historyList" class="history-list">
+
+<div class="empty-history">
+History will appear after the first completed 100-tick window.
+</div>
+
+</div>
 
 </div>
 
@@ -857,7 +959,9 @@ Digit frequency does not guarantee the next digit.
 NEX<span>TRADE</span>
 </div>
 
-<div>© 2026 NEXTRADE</div>
+<div>
+© 2026 NEXTRADE
+</div>
 
 </footer>
 
@@ -879,6 +983,12 @@ Array(10).fill(0);
 
 let prices = [];
 
+let history = [];
+
+let lastHistoryStrong = null;
+
+
+/* ELEMENTS */
 
 const marketSelect =
 document.getElementById("marketSelect");
@@ -922,6 +1032,9 @@ document.getElementById("rankingRows");
 const recent =
 document.getElementById("recent");
 
+const historyList =
+document.getElementById("historyList");
+
 const statusText =
 document.getElementById("statusText");
 
@@ -958,13 +1071,18 @@ for(let i=0;i<10;i++){
 const el =
 document.createElement("div");
 
-el.className = "digit";
+el.className =
+"digit";
 
-el.id = "digit-" + i;
+el.id =
+"digit-"+i;
 
 el.innerHTML = `
 
-<div id="rank-${i}" class="rank">
+<div
+id="rank-${i}"
+class="rank"
+>
 —
 </div>
 
@@ -972,15 +1090,17 @@ el.innerHTML = `
 ${i}
 </div>
 
-<div id="percent-${i}" class="digit-percent">
+<div
+id="percent-${i}"
+class="digit-percent"
+>
 0.0%
 </div>
 
-<div id="count-${i}" class="digit-count">
-0 hits
-</div>
-
-<div id="badge-${i}" class="badge">
+<div
+id="badge-${i}"
+class="badge"
+>
 </div>
 
 `;
@@ -1010,7 +1130,7 @@ text[text.length-1]
 }
 
 
-/* PRICE FORMAT */
+/* FORMAT */
 
 function formatPrice(value){
 
@@ -1026,7 +1146,7 @@ maximumFractionDigits:8
 }
 
 
-/* SAMPLE STATUS */
+/* SAMPLE */
 
 function updateSample(){
 
@@ -1034,20 +1154,20 @@ const n =
 digits.length;
 
 sample.textContent =
-n + " / 100 TICKS";
+n+" / 100 TICKS";
 
 samplePercent.textContent =
-Math.min(n,100) + "%";
+Math.min(n,100)+"%";
 
 
-if(n < 100){
+if(n<100){
 
 sampleTitle.textContent =
 "BUILDING SAMPLE";
 
 sampleSub.textContent =
-"Collecting live ticks... " +
-(100-n) +
+"Collecting live ticks... "+
+(100-n)+
 " more needed";
 
 sampleIcon.className =
@@ -1080,13 +1200,13 @@ const sorted =
 Array.from(
 {length:10},
 (_,i)=>i
-).sort(
+)
+.sort(
 (a,b)=>
 counts[b]-counts[a]
 );
 
 rankingRows.innerHTML = "";
-
 
 sorted.forEach(
 (digit,index)=>{
@@ -1129,11 +1249,155 @@ ${percent.toFixed(1)}%
 
 rankingRows.appendChild(row);
 
-
 document.getElementById(
 "rank-"+digit
 ).textContent =
 "#"+(index+1);
+
+});
+
+}
+
+
+/* RECORD HISTORY */
+
+function recordHistory(){
+
+if(digits.length<100){
+return;
+}
+
+let strongest = 0;
+let weakest = 0;
+
+for(let i=1;i<10;i++){
+
+if(
+counts[i] >
+counts[strongest]
+){
+strongest=i;
+}
+
+if(
+counts[i] <
+counts[weakest]
+){
+weakest=i;
+}
+
+}
+
+const strongestPercent =
+(counts[strongest]/100)*100;
+
+const weakestPercent =
+(counts[weakest]/100)*100;
+
+
+/*
+Only create a history entry when
+the completed 100-tick result changes.
+*/
+
+const signature =
+strongest+"-"+weakest+"-"+
+counts[strongest]+"-"+counts[weakest];
+
+if(
+lastHistoryStrong === signature
+){
+return;
+}
+
+lastHistoryStrong =
+signature;
+
+history.unshift({
+
+window:history.length+1,
+
+strongest:strongest,
+
+strongestPercent:strongestPercent,
+
+weakest:weakest,
+
+weakestPercent:weakestPercent,
+
+time:new Date().toLocaleTimeString(
+[],
+{
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit"
+}
+)
+
+});
+
+
+if(history.length>10){
+history.pop();
+}
+
+renderHistory();
+
+}
+
+
+/* HISTORY DISPLAY */
+
+function renderHistory(){
+
+if(!history.length){
+
+historyList.innerHTML = `
+<div class="empty-history">
+History will appear after the first completed 100-tick window.
+</div>
+`;
+
+return;
+
+}
+
+historyList.innerHTML = "";
+
+history.forEach(
+(item,index)=>{
+
+const row =
+document.createElement("div");
+
+row.className =
+"history-row";
+
+row.innerHTML = `
+
+<div class="history-window">
+W${String(item.window).padStart(2,"0")}
+</div>
+
+<div class="history-strong">
+STRONG ${item.strongest}
+<br>
+${item.strongestPercent.toFixed(1)}%
+</div>
+
+<div class="history-weak">
+WEAK ${item.weakest}
+<br>
+${item.weakestPercent.toFixed(1)}%
+</div>
+
+<div class="history-time">
+${item.time}
+</div>
+
+`;
+
+historyList.appendChild(row);
 
 });
 
@@ -1181,41 +1445,32 @@ n ?
 document.getElementById(
 "percent-"+i
 ).textContent =
-percent.toFixed(1) + "%";
-
-document.getElementById(
-"count-"+i
-).textContent =
-counts[i] + " hits";
+percent.toFixed(1)+"%";
 
 }
 
 
-/*
-Only activate strongest/weakest
-after the full 100-tick sample.
-*/
+/* CONFIRMED ONLY */
 
-if(n >= 100){
+if(n>=100){
 
 let strongest = 0;
-
 let weakest = 0;
 
 for(let i=1;i<10;i++){
 
 if(
-counts[i] >
+counts[i]>
 counts[strongest]
 ){
-strongest = i;
+strongest=i;
 }
 
 if(
-counts[i] <
+counts[i]<
 counts[weakest]
 ){
-weakest = i;
+weakest=i;
 }
 
 }
@@ -1228,23 +1483,13 @@ const weakestPercent =
 (counts[weakest]/n)*100;
 
 
-const strongBox =
 document.getElementById(
 "digit-"+strongest
-);
+).classList.add("strong");
 
-const weakBox =
 document.getElementById(
 "digit-"+weakest
-);
-
-strongBox.classList.add(
-"strong"
-);
-
-weakBox.classList.add(
-"weak"
-);
+).classList.add("weak");
 
 
 const strongBadge =
@@ -1271,22 +1516,23 @@ weakBadge.style.display =
 
 
 /*
-CORRECTED SUMMARY:
-show percentages, not hits.
+SUMMARY USES PERCENTAGES
 */
 
 strong.textContent =
-strongest +
-" • " +
-strongestPercent.toFixed(1) +
+strongest+
+" • "+
+strongestPercent.toFixed(1)+
 "%";
-
 
 weak.textContent =
-weakest +
-" • " +
-weakestPercent.toFixed(1) +
+weakest+
+" • "+
+weakestPercent.toFixed(1)+
 "%";
+
+
+recordHistory();
 
 }else{
 
@@ -1313,7 +1559,7 @@ renderRecent();
 }
 
 
-/* RECENT DIGITS */
+/* RECENT */
 
 function renderRecent(){
 
@@ -1352,11 +1598,10 @@ lastDigit(value);
 
 if(
 !Number.isFinite(number) ||
-digit === null
+digit===null
 ){
 return;
 }
-
 
 digits.push(digit);
 
@@ -1365,9 +1610,9 @@ counts[digit]++;
 prices.push(number);
 
 
-/* ROLLING 100 */
+/* ROLLING WINDOW */
 
-if(digits.length > 100){
+if(digits.length>100){
 
 const removed =
 digits.shift();
@@ -1376,7 +1621,7 @@ counts[removed]--;
 
 }
 
-if(prices.length > 100){
+if(prices.length>100){
 
 prices.shift();
 
@@ -1394,15 +1639,11 @@ document.getElementById(
 "digit-"+digit
 );
 
-box.classList.add(
-"flash"
-);
+box.classList.add("flash");
 
 setTimeout(
 ()=>{
-box.classList.remove(
-"flash"
-);
+box.classList.remove("flash");
 },
 120
 );
@@ -1417,7 +1658,7 @@ movePointer();
 }
 
 
-/* RESIZE */
+/* CANVAS */
 
 function resize(){
 
@@ -1425,18 +1666,13 @@ const ratio =
 window.devicePixelRatio || 1;
 
 canvas.width =
-canvas.clientWidth * ratio;
+canvas.clientWidth*ratio;
 
 canvas.height =
-canvas.clientHeight * ratio;
+canvas.clientHeight*ratio;
 
 ctx.setTransform(
-ratio,
-0,
-0,
-ratio,
-0,
-0
+ratio,0,0,ratio,0,0
 );
 
 draw();
@@ -1457,13 +1693,10 @@ const h =
 canvas.clientHeight;
 
 ctx.clearRect(
-0,
-0,
-w,
-h
+0,0,w,h
 );
 
-if(prices.length < 2){
+if(prices.length<2){
 return;
 }
 
@@ -1473,14 +1706,14 @@ Math.min(...prices);
 let max =
 Math.max(...prices);
 
-if(min === max){
+if(min===max){
 
-min -= 1;
-max += 1;
+min-=1;
+max+=1;
 
 }
 
-const pad = 22;
+const pad=22;
 
 ctx.beginPath();
 
@@ -1488,13 +1721,13 @@ prices.forEach(
 (p,i)=>{
 
 const x =
-pad +
-i/(prices.length-1) *
+pad+
+i/(prices.length-1)*
 (w-pad*2);
 
 const y =
-h-pad -
-(p-min)/(max-min) *
+h-pad-
+(p-min)/(max-min)*
 (h-pad*2);
 
 if(i===0){
@@ -1508,14 +1741,14 @@ ctx.lineTo(x,y);
 ctx.strokeStyle =
 "#159ff0";
 
-ctx.lineWidth = 2;
+ctx.lineWidth=2;
 
 ctx.stroke();
 
 }
 
 
-/* MOVING POINTER */
+/* POINTER */
 
 function movePointer(){
 
@@ -1537,8 +1770,8 @@ prices.length===1
 ?
 w/2
 :
-22 +
-index/(prices.length-1) *
+22+
+index/(prices.length-1)*
 (w-44);
 
 
@@ -1550,8 +1783,8 @@ Math.max(...prices);
 
 if(min===max){
 
-min -= 1;
-max += 1;
+min-=1;
+max+=1;
 
 }
 
@@ -1559,8 +1792,8 @@ const p =
 prices[index];
 
 const y =
-h-22 -
-(p-min)/(max-min) *
+h-22-
+(p-min)/(max-min)*
 (h-44);
 
 
@@ -1574,9 +1807,9 @@ pointerDot.style.top =
 y+"px";
 
 pointerLabel.textContent =
-"Tick " +
-prices.length +
-" • " +
+"Tick "+
+prices.length+
+" • "+
 formatPrice(p);
 
 }
@@ -1640,7 +1873,7 @@ return;
 }
 
 
-if(data.type === "status"){
+if(data.type==="status"){
 
 if(data.connected){
 
@@ -1657,25 +1890,22 @@ return;
 }
 
 
-if(data.type !== "tick"){
+if(data.type!=="tick"){
 return;
 }
-
 
 const tick =
 data.data;
 
 if(
 !tick ||
-tick.symbol !== selectedSymbol ||
-tick.price === undefined
+tick.symbol!==selectedSymbol ||
+tick.price===undefined
 ){
 return;
 }
 
-addTick(
-tick.price
-);
+addTick(tick.price);
 
 };
 
@@ -1720,12 +1950,16 @@ function(){
 selectedSymbol =
 this.value;
 
-digits = [];
+digits=[];
 
 counts =
 Array(10).fill(0);
 
-prices = [];
+prices=[];
+
+history=[];
+
+lastHistoryStrong=null;
 
 price.textContent =
 "---";
@@ -1740,6 +1974,8 @@ latest.textContent =
 "---";
 
 buildDigits();
+
+renderHistory();
 
 updateScanner();
 
@@ -1758,6 +1994,8 @@ buildDigits();
 updateSample();
 
 updateRanking();
+
+renderHistory();
 
 resize();
 
