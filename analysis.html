@@ -125,7 +125,7 @@ box-shadow:0 0 10px #2edb9c;
 background:#ff5969;
 }
 
-/* SELECTOR */
+/* MARKET SELECTOR */
 
 .selector{
 background:#08131f;
@@ -160,23 +160,23 @@ font-size:25px;
 font-weight:bold;
 }
 
-/* DIGIT SCANNER */
+/* SCANNER */
 
-.digit-panel{
+.scanner{
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
 padding:22px;
 }
 
-.panel-title{
+.scanner-head{
 display:flex;
 justify-content:space-between;
 align-items:center;
 margin-bottom:8px;
 }
 
-.panel-title h2{
+.scanner-head h2{
 font-size:15px;
 }
 
@@ -199,9 +199,10 @@ gap:10px;
 }
 
 .digit{
+position:relative;
 width:100%;
-aspect-ratio:1/1;
-max-width:85px;
+aspect-ratio:1;
+max-width:92px;
 margin:auto;
 border-radius:50%;
 border:2px solid #29485c;
@@ -220,15 +221,31 @@ font-weight:bold;
 
 .digit-percent{
 font-size:10px;
-color:#71899a;
+color:#8da3b2;
 margin-top:3px;
+}
+
+.digit-count{
+font-size:8px;
+color:#60788a;
+margin-top:2px;
+}
+
+.badge{
+position:absolute;
+bottom:-8px;
+font-size:7px;
+font-weight:bold;
+padding:4px 7px;
+border-radius:20px;
+background:#102536;
+border:1px solid #29485c;
 }
 
 .digit.strong{
 border-color:#2edb9c;
 background:#09231e;
-box-shadow:
-0 0 15px rgba(46,219,156,.4);
+box-shadow:0 0 18px rgba(46,219,156,.45);
 }
 
 .digit.strong .digit-number,
@@ -236,11 +253,15 @@ box-shadow:
 color:#2edb9c;
 }
 
+.digit.strong .badge{
+color:#2edb9c;
+border-color:#2edb9c;
+}
+
 .digit.weak{
 border-color:#ff5969;
 background:#241216;
-box-shadow:
-0 0 15px rgba(255,89,105,.3);
+box-shadow:0 0 18px rgba(255,89,105,.3);
 }
 
 .digit.weak .digit-number,
@@ -248,30 +269,39 @@ box-shadow:
 color:#ff5969;
 }
 
+.digit.weak .badge{
+color:#ff5969;
+border-color:#ff5969;
+}
+
+.digit.flash{
+transform:scale(1.08);
+}
+
 /* SUMMARY */
 
 .summary{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:14px;
 margin-top:18px;
 }
 
-.summary-card{
+.card{
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
 padding:20px;
 }
 
-.summary-label{
+.label{
 font-size:8px;
 color:#60788a;
 margin-bottom:9px;
 }
 
-.summary-value{
-font-size:23px;
+.value{
+font-size:21px;
 font-weight:bold;
 }
 
@@ -283,7 +313,7 @@ color:#2edb9c;
 color:#ff5969;
 }
 
-/* MOVING TICK CHART */
+/* CHART */
 
 .chart-panel{
 margin-top:18px;
@@ -305,36 +335,27 @@ align-items:center;
 font-size:13px;
 }
 
-.chart-head span{
+.chart-live{
 font-size:8px;
 color:#2edb9c;
 }
 
 .chart{
-height:280px;
+height:300px;
 position:relative;
+overflow:hidden;
 background:
-linear-gradient(
-rgba(30,65,90,.15) 1px,
-transparent 1px
-),
-linear-gradient(
-90deg,
-rgba(30,65,90,.15) 1px,
-transparent 1px
-),
+linear-gradient(rgba(30,65,90,.15) 1px,transparent 1px),
+linear-gradient(90deg,rgba(30,65,90,.15) 1px,transparent 1px),
 #050d15;
 background-size:45px 45px;
-overflow:hidden;
 }
 
-#priceCanvas{
+#canvas{
 width:100%;
 height:100%;
 display:block;
 }
-
-/* MOVING POINTER */
 
 .pointer{
 position:absolute;
@@ -342,44 +363,37 @@ top:0;
 bottom:0;
 width:2px;
 background:#159ff0;
-box-shadow:
-0 0 8px #159ff0,
-0 0 16px rgba(21,159,240,.5);
+box-shadow:0 0 10px #159ff0;
 pointer-events:none;
-transition:left .12s linear;
+transition:left .08s linear;
 }
 
 .pointer-dot{
 position:absolute;
-width:13px;
-height:13px;
+width:14px;
+height:14px;
 border-radius:50%;
 background:#159ff0;
 border:2px solid #fff;
-box-shadow:
-0 0 10px #159ff0,
-0 0 20px #159ff0;
+box-shadow:0 0 15px #159ff0;
 transform:translate(-50%,-50%);
 pointer-events:none;
-transition:
-left .12s linear,
-top .12s linear;
+transition:left .08s linear,top .08s linear;
 }
 
 .pointer-label{
 position:absolute;
 top:12px;
 left:12px;
+padding:8px 10px;
 background:rgba(5,13,21,.95);
 border:1px solid #23465d;
 border-radius:6px;
-padding:8px 10px;
 font-size:9px;
-color:#d9e5ec;
 z-index:5;
 }
 
-/* RECENT DIGITS */
+/* RECENT */
 
 .recent{
 margin-top:18px;
@@ -404,16 +418,14 @@ flex-wrap:wrap;
 width:32px;
 height:32px;
 border-radius:50%;
+background:#0b2030;
+border:1px solid #23465d;
 display:flex;
 align-items:center;
 justify-content:center;
-background:#0b2030;
-border:1px solid #23465d;
 font-size:11px;
 font-weight:bold;
 }
-
-/* NOTICE */
 
 .notice{
 margin-top:18px;
@@ -446,14 +458,14 @@ font-weight:bold;
 color:#159ff0;
 }
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
 .digits{
 grid-template-columns:repeat(5,1fr);
 }
 
 .summary{
-grid-template-columns:1fr;
+grid-template-columns:repeat(2,1fr);
 }
 
 }
@@ -482,6 +494,10 @@ align-items:flex-start;
 flex-direction:column;
 }
 
+.summary{
+grid-template-columns:1fr;
+}
+
 footer{
 flex-direction:column;
 gap:12px;
@@ -493,9 +509,7 @@ text-align:center;
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -521,7 +535,6 @@ NEX<span>TRADE</span>
 
 <div class="page">
 
-
 <div class="heading">
 
 <div>
@@ -529,8 +542,7 @@ NEX<span>TRADE</span>
 <h1>Market Analysis</h1>
 
 <p>
-Live digit analysis using the latest 100 ticks from the
-selected volatility market.
+Live digit scanner using a rolling 100-tick sample.
 </p>
 
 </div>
@@ -563,50 +575,20 @@ ANALYZING MARKET
 
 <select id="marketSelect">
 
-<option value="1HZ100V">
-Volatility 100 (1s)
-</option>
-
-<option value="1HZ75V">
-Volatility 75 (1s)
-</option>
-
-<option value="1HZ50V">
-Volatility 50 (1s)
-</option>
-
-<option value="1HZ25V">
-Volatility 25 (1s)
-</option>
-
-<option value="1HZ10V">
-Volatility 10 (1s)
-</option>
-
-<option value="R_100">
-Volatility 100
-</option>
-
-<option value="R_75">
-Volatility 75
-</option>
-
-<option value="R_50">
-Volatility 50
-</option>
-
-<option value="R_25">
-Volatility 25
-</option>
-
-<option value="R_10">
-Volatility 10
-</option>
+<option value="1HZ100V">Volatility 100 (1s)</option>
+<option value="1HZ75V">Volatility 75 (1s)</option>
+<option value="1HZ50V">Volatility 50 (1s)</option>
+<option value="1HZ25V">Volatility 25 (1s)</option>
+<option value="1HZ10V">Volatility 10 (1s)</option>
+<option value="R_100">Volatility 100</option>
+<option value="R_75">Volatility 75</option>
+<option value="R_50">Volatility 50</option>
+<option value="R_25">Volatility 25</option>
+<option value="R_10">Volatility 10</option>
 
 </select>
 
 </div>
-
 
 <div>
 
@@ -615,7 +597,7 @@ LIVE PRICE
 </div>
 
 <div
-id="currentPrice"
+id="price"
 class="current-price"
 >
 ---
@@ -626,33 +608,31 @@ class="current-price"
 </div>
 
 
-<!-- DIGIT SCANNER -->
+<!-- DIGITS -->
 
-<div class="digit-panel">
+<div class="scanner">
 
-<div class="panel-title">
+<div class="scanner-head">
 
 <h2>
-Digit Strength
+Digit Strength Scanner
 </h2>
 
 <div
-id="sampleCount"
+id="sample"
 class="sample"
 >
-0 / 100 ticks
+0 / 100 TICKS
 </div>
 
 </div>
 
 <p class="description">
 
-Each circle shows the percentage of the last 100 received
-ticks ending in that digit. The strongest and weakest
-digits are highlighted automatically.
+Each circle shows the digit, its frequency percentage and
+the number of appearances in the current rolling sample.
 
 </p>
-
 
 <div
 id="digits"
@@ -667,54 +647,65 @@ class="digits"
 
 <div class="summary">
 
+<div class="card">
 
-<div class="summary-card">
-
-<div class="summary-label">
+<div class="label">
 STRONGEST DIGIT
 </div>
 
 <div
-id="strongDigit"
-class="summary-value green"
+id="strong"
+class="value green"
 >
 ---
 </div>
 
 </div>
 
+<div class="card">
 
-<div class="summary-card">
-
-<div class="summary-label">
+<div class="label">
 WEAKEST DIGIT
 </div>
 
 <div
-id="weakDigit"
-class="summary-value red"
+id="weak"
+class="value red"
 >
 ---
 </div>
 
 </div>
 
+<div class="card">
 
-<div class="summary-card">
-
-<div class="summary-label">
+<div class="label">
 LATEST DIGIT
 </div>
 
 <div
-id="latestDigit"
-class="summary-value"
+id="latest"
+class="value"
 >
 ---
 </div>
 
 </div>
 
+<div class="card">
+
+<div class="label">
+TICKS ANALYZED
+</div>
+
+<div
+id="total"
+class="value"
+>
+0
+</div>
+
+</div>
 
 </div>
 
@@ -726,12 +717,12 @@ class="summary-value"
 <div class="chart-head">
 
 <h2>
-Live Tick Pointer
+Live Tick Movement
 </h2>
 
-<span>
-● LIVE
-</span>
+<div class="chart-live">
+● REAL-TIME
+</div>
 
 </div>
 
@@ -740,9 +731,7 @@ id="chart"
 class="chart"
 >
 
-<canvas
-id="priceCanvas"
-></canvas>
+<canvas id="canvas"></canvas>
 
 <div
 id="pointer"
@@ -758,7 +747,7 @@ class="pointer-dot"
 id="pointerLabel"
 class="pointer-label"
 >
-Waiting for tick...
+Waiting for ticks...
 </div>
 
 </div>
@@ -775,7 +764,7 @@ Recent Digits
 </h2>
 
 <div
-id="recentDigits"
+id="recent"
 class="recent-digits"
 >
 </div>
@@ -786,13 +775,10 @@ class="recent-digits"
 <div class="notice">
 
 <strong>ANALYSIS NOTICE:</strong>
-Digit percentages describe the frequency of digits in the
-current 100-tick sample. A strong digit does not guarantee
-that it will appear on the next tick. This is an analysis
-visualization, not a guaranteed prediction.
+Digit frequency describes what has appeared in the current
+sample. It does not guarantee what the next tick will be.
 
 </div>
-
 
 </div>
 
@@ -804,7 +790,7 @@ NEX<span>TRADE</span>
 </div>
 
 <div>
-© 2026 NEXTRADE. Market analysis platform.
+© 2026 NEXTRADE
 </div>
 
 </footer>
@@ -812,132 +798,93 @@ NEX<span>TRADE</span>
 
 <script>
 
-
 const BACKEND =
 "wss://nextrade-backened.onrender.com";
-
 
 let socket;
 
 let selectedSymbol =
 "1HZ100V";
 
+let digits =
+[];
 
-let recentDigits = [];
-
-let digitCounts =
+let counts =
 Array(10).fill(0);
 
-let prices = [];
+let prices =
+[];
 
+const market =
+document.getElementById("marketSelect");
 
-const marketSelect =
-document.getElementById(
-"marketSelect"
-);
+const price =
+document.getElementById("price");
 
-const currentPrice =
-document.getElementById(
-"currentPrice"
-);
+const sample =
+document.getElementById("sample");
+
+const strong =
+document.getElementById("strong");
+
+const weak =
+document.getElementById("weak");
+
+const latest =
+document.getElementById("latest");
+
+const total =
+document.getElementById("total");
+
+const digitsBox =
+document.getElementById("digits");
+
+const recent =
+document.getElementById("recent");
 
 const statusText =
-document.getElementById(
-"statusText"
-);
+document.getElementById("statusText");
 
 const statusDot =
-document.getElementById(
-"statusDot"
-);
-
-const digitsContainer =
-document.getElementById(
-"digits"
-);
-
-const sampleCount =
-document.getElementById(
-"sampleCount"
-);
-
-const strongDigit =
-document.getElementById(
-"strongDigit"
-);
-
-const weakDigit =
-document.getElementById(
-"weakDigit"
-);
-
-const latestDigit =
-document.getElementById(
-"latestDigit"
-);
-
-const recentContainer =
-document.getElementById(
-"recentDigits"
-);
+document.getElementById("statusDot");
 
 const chart =
-document.getElementById(
-"chart"
-);
+document.getElementById("chart");
 
 const canvas =
-document.getElementById(
-"priceCanvas"
-);
+document.getElementById("canvas");
 
 const ctx =
 canvas.getContext("2d");
 
 const pointer =
-document.getElementById(
-"pointer"
-);
+document.getElementById("pointer");
 
 const pointerDot =
-document.getElementById(
-"pointerDot"
-);
+document.getElementById("pointerDot");
 
 const pointerLabel =
-document.getElementById(
-"pointerLabel"
-);
+document.getElementById("pointerLabel");
 
 
-/* CREATE DIGITS */
+/* DIGIT CIRCLES */
 
-function createDigits(){
+function buildDigits(){
 
-digitsContainer.innerHTML = "";
+digitsBox.innerHTML="";
 
-for(
-let i = 0;
-i < 10;
-i++
-){
+for(let i=0;i<10;i++){
 
-const div =
-document.createElement(
-"div"
-);
+const el =
+document.createElement("div");
 
-div.className =
-"digit";
+el.className="digit";
 
-div.id =
-"digit-" + i;
+el.id="digit-"+i;
 
-div.innerHTML = `
+el.innerHTML=`
 
-<div class="digit-number">
-${i}
-</div>
+<div class="digit-number">${i}</div>
 
 <div
 id="percent-${i}"
@@ -946,41 +893,39 @@ class="digit-percent"
 0.0%
 </div>
 
+<div
+id="count-${i}"
+class="digit-count"
+>
+0 hits
+</div>
+
 `;
 
-digitsContainer.appendChild(
-div
-);
+digitsBox.appendChild(el);
 
 }
 
 }
 
 
-/* GET LAST DIGIT */
+/* LAST DIGIT */
 
-function getLastDigit(price){
+function lastDigit(value){
 
 const text =
-String(price)
-.replace(/\D/g,"");
+String(value).replace(/\D/g,"");
 
-if(!text){
-
-return null;
-
-}
+if(!text)return null;
 
 return Number(
-text.charAt(
-text.length - 1
-)
+text[text.length-1]
 );
 
 }
 
 
-/* FORMAT PRICE */
+/* PRICE */
 
 function formatPrice(value){
 
@@ -996,139 +941,110 @@ maximumFractionDigits:8
 }
 
 
-/* UPDATE DIGITS */
+/* UPDATE SCANNER */
 
-function updateDigits(){
+function updateScanner(){
 
-const total =
-recentDigits.length;
+const n =
+digits.length;
 
+sample.textContent =
+n+" / 100 TICKS";
 
-sampleCount.textContent =
-total + " / 100 ticks";
-
-
-let strongest = 0;
-
-let weakest = 0;
+total.textContent =
+n;
 
 
-for(
-let i=0;
-i<10;
-i++
-){
+let strongest=0;
+let weakest=0;
+
+for(let i=0;i<10;i++){
 
 if(
-digitCounts[i] >
-digitCounts[strongest]
+counts[i] >
+counts[strongest]
 ){
-
-strongest = i;
-
+strongest=i;
 }
 
 if(
-digitCounts[i] <
-digitCounts[weakest]
+counts[i] <
+counts[weakest]
 ){
-
-weakest = i;
-
+weakest=i;
 }
 
 }
 
 
-/* RESET */
+for(let i=0;i<10;i++){
 
-for(
-let i=0;
-i<10;
-i++
-){
-
-const element =
+const box =
 document.getElementById(
-"digit-" + i
+"digit-"+i
 );
 
-element.classList.remove(
+box.classList.remove(
 "strong",
 "weak"
 );
 
-
-const percentage =
-total > 0
-?
-(
-digitCounts[i] /
-total
-) * 100
-:
+const percent =
+n ?
+counts[i]/n*100 :
 0;
 
+document.getElementById(
+"percent-"+i
+).textContent =
+percent.toFixed(1)+"%";
 
 document.getElementById(
-"percent-" + i
+"count-"+i
 ).textContent =
-percentage.toFixed(1) +
-"%";
+counts[i]+" hits";
 
 }
 
 
-/* HIGHLIGHT */
-
-if(total >= 5){
+if(n>=5){
 
 document.getElementById(
-"digit-" + strongest
+"digit-"+strongest
 ).classList.add(
 "strong"
 );
 
 document.getElementById(
-"digit-" + weakest
+"digit-"+weakest
 ).classList.add(
 "weak"
 );
 
-strongDigit.textContent =
-strongest +
-" • " +
+strong.textContent =
+strongest+
+" • "+
 (
-digitCounts[strongest] /
-total *
-100
-).toFixed(1) +
+counts[strongest]/n*100
+).toFixed(1)+
 "%";
 
-weakDigit.textContent =
-weakest +
-" • " +
+weak.textContent =
+weakest+
+" • "+
 (
-digitCounts[weakest] /
-total *
-100
-).toFixed(1) +
+counts[weakest]/n*100
+).toFixed(1)+
 "%";
 
 }
 
+if(n){
 
-if(
-recentDigits.length > 0
-){
-
-latestDigit.textContent =
-recentDigits[
-recentDigits.length - 1
-];
+latest.textContent =
+digits[n-1];
 
 }
-
 
 renderRecent();
 
@@ -1139,27 +1055,21 @@ renderRecent();
 
 function renderRecent(){
 
-recentContainer.innerHTML = "";
+recent.innerHTML="";
 
-recentDigits
+digits
 .slice(-30)
-.forEach(
-digit => {
+.forEach(d=>{
 
-const div =
-document.createElement(
-"div"
-);
+const el =
+document.createElement("div");
 
-div.className =
+el.className =
 "recent-digit";
 
-div.textContent =
-digit;
+el.textContent=d;
 
-recentContainer.appendChild(
-div
-);
+recent.appendChild(el);
 
 });
 
@@ -1168,59 +1078,51 @@ div
 
 /* ADD TICK */
 
-function addTick(price){
+function addTick(value){
+
+const number =
+Number(value);
 
 const digit =
-getLastDigit(price);
+lastDigit(value);
 
-
-if(digit === null){
+if(!Number.isFinite(number) ||
+digit===null){
 
 return;
 
 }
 
+digits.push(digit);
 
-recentDigits.push(
-digit
-);
+counts[digit]++;
 
-digitCounts[digit]++;
+prices.push(number);
 
 
-if(
-recentDigits.length > 100
-){
+/* keep 100 */
+
+if(digits.length>100){
 
 const removed =
-recentDigits.shift();
+digits.shift();
 
-digitCounts[removed]--;
+counts[removed]--;
 
 }
 
-
-prices.push(
-Number(price)
-);
-
-
-if(
-prices.length > 100
-){
+if(prices.length>100){
 
 prices.shift();
 
 }
 
+price.textContent =
+formatPrice(number);
 
-currentPrice.textContent =
-formatPrice(price);
+updateScanner();
 
-
-updateDigits();
-
-drawChart();
+draw();
 
 movePointer();
 
@@ -1229,18 +1131,16 @@ movePointer();
 
 /* CANVAS */
 
-function resizeCanvas(){
+function resize(){
 
 const ratio =
 window.devicePixelRatio || 1;
 
 canvas.width =
-canvas.clientWidth *
-ratio;
+canvas.clientWidth*ratio;
 
 canvas.height =
-canvas.clientHeight *
-ratio;
+canvas.clientHeight*ratio;
 
 ctx.setTransform(
 ratio,
@@ -1251,220 +1151,151 @@ ratio,
 0
 );
 
-drawChart();
+draw();
 
 movePointer();
 
 }
 
 
-/* DRAW PRICE */
+/* DRAW */
 
-function drawChart(){
+function draw(){
 
-const width =
+const w =
 canvas.clientWidth;
 
-const height =
+const h =
 canvas.clientHeight;
-
 
 ctx.clearRect(
 0,
 0,
-width,
-height
+w,
+h
 );
 
-
-if(
-prices.length < 2
-){
+if(prices.length<2){
 
 return;
 
 }
 
-
 let min =
-Math.min(
-...prices
-);
+Math.min(...prices);
 
 let max =
-Math.max(
-...prices
-);
+Math.max(...prices);
 
+if(min===max){
 
-if(
-min === max
-){
-
-min -= 1;
-
-max += 1;
+min-=1;
+max+=1;
 
 }
 
-
-const padding = 22;
-
+const pad=22;
 
 ctx.beginPath();
 
-
 prices.forEach(
-(price,index) => {
+(p,i)=>{
 
 const x =
-padding +
-(
-index /
-(prices.length - 1)
-) *
-(
-width -
-padding * 2
-);
-
+pad+
+i/(prices.length-1)*
+(w-pad*2);
 
 const y =
-height -
-padding -
-(
-(price - min) /
-(max - min)
-) *
-(
-height -
-padding * 2
-);
+h-pad-
+(p-min)/(max-min)*
+(h-pad*2);
 
+if(i===0){
 
-if(index === 0){
-
-ctx.moveTo(
-x,
-y
-);
+ctx.moveTo(x,y);
 
 }else{
 
-ctx.lineTo(
-x,
-y
-);
+ctx.lineTo(x,y);
 
 }
 
 });
 
-
 ctx.strokeStyle =
 "#159ff0";
 
-ctx.lineWidth = 2;
+ctx.lineWidth=2;
 
 ctx.stroke();
 
 }
 
 
-/* POINTER */
+/* MOVING POINTER */
 
 function movePointer(){
 
-if(
-prices.length < 1
-){
+if(!prices.length){
 
 return;
 
 }
 
-
-const width =
+const w =
 chart.clientWidth;
 
-const height =
+const h =
 chart.clientHeight;
 
-
 const index =
-prices.length - 1;
-
+prices.length-1;
 
 const x =
-prices.length === 1
+prices.length===1
 ?
-width / 2
+w/2
 :
-22 +
-(
-index /
-(prices.length - 1)
-) *
-(
-width -
-44
-);
-
+22+
+index/(prices.length-1)*
+(w-44);
 
 let min =
-Math.min(
-...prices
-);
+Math.min(...prices);
 
 let max =
-Math.max(
-...prices
-);
+Math.max(...prices);
 
+if(min===max){
 
-if(
-min === max
-){
-
-min -= 1;
-
-max += 1;
+min-=1;
+max+=1;
 
 }
 
-
-const price =
+const p =
 prices[index];
 
-
 const y =
-height -
-22 -
-(
-(price - min) /
-(max - min)
-) *
-(
-height -
-44
-);
+h-22-
+(p-min)/(max-min)*
+(h-44);
 
 
 pointer.style.left =
-x + "px";
+x+"px";
 
 pointerDot.style.left =
-x + "px";
+x+"px";
 
 pointerDot.style.top =
-y + "px";
-
+y+"px";
 
 pointerLabel.textContent =
-"Tick " +
-prices.length +
-"  •  " +
-formatPrice(price);
+"Tick "+prices.length+
+" • "+
+formatPrice(p);
 
 }
 
@@ -1483,11 +1314,9 @@ statusDot.className =
 try{
 
 socket =
-new WebSocket(
-BACKEND
-);
+new WebSocket(BACKEND);
 
-}catch(error){
+}catch(e){
 
 statusText.textContent =
 "ERROR";
@@ -1501,7 +1330,7 @@ return;
 
 
 socket.onopen =
-function(){
+()=>{
 
 statusText.textContent =
 "LIVE";
@@ -1509,25 +1338,20 @@ statusText.textContent =
 statusDot.className =
 "status-dot live";
 
-pointerLabel.textContent =
-"Waiting for tick...";
-
 };
 
 
 socket.onmessage =
-function(event){
+event=>{
 
 let data;
 
 try{
 
 data =
-JSON.parse(
-event.data
-);
+JSON.parse(event.data);
 
-}catch(error){
+}catch(e){
 
 return;
 
@@ -1535,12 +1359,10 @@ return;
 
 
 if(
-data.type === "status"
+data.type==="status"
 ){
 
-if(
-data.connected
-){
+if(data.connected){
 
 statusText.textContent =
 "LIVE";
@@ -1556,7 +1378,7 @@ return;
 
 
 if(
-data.type !== "tick"
+data.type!=="tick"
 ){
 
 return;
@@ -1570,8 +1392,8 @@ data.data;
 
 if(
 !tick ||
-!tick.symbol ||
-tick.price === undefined
+tick.symbol!==selectedSymbol ||
+tick.price===undefined
 ){
 
 return;
@@ -1579,38 +1401,15 @@ return;
 }
 
 
-if(
-tick.symbol !==
-selectedSymbol
-){
-
-return;
-
-}
-
-
-const price =
-Number(
+addTick(
 tick.price
 );
-
-
-if(
-!Number.isFinite(price)
-){
-
-return;
-
-}
-
-
-addTick(price);
 
 };
 
 
 socket.onerror =
-function(){
+()=>{
 
 statusText.textContent =
 "ERROR";
@@ -1622,7 +1421,7 @@ statusDot.className =
 
 
 socket.onclose =
-function(){
+()=>{
 
 statusText.textContent =
 "RECONNECTING";
@@ -1640,55 +1439,29 @@ connect,
 }
 
 
-/* MARKET CHANGE */
+/* CHANGE MARKET */
 
-marketSelect.addEventListener(
+market.addEventListener(
 "change",
-function(){
+()=>{
 
 selectedSymbol =
-this.value;
+market.value;
 
+digits=[];
+counts=Array(10).fill(0);
+prices=[];
 
-recentDigits = [];
+price.textContent="---";
+strong.textContent="---";
+weak.textContent="---";
+latest.textContent="---";
 
-digitCounts =
-Array(10).fill(0);
+buildDigits();
 
-prices = [];
+updateScanner();
 
-
-currentPrice.textContent =
-"---";
-
-strongDigit.textContent =
-"---";
-
-weakDigit.textContent =
-"---";
-
-latestDigit.textContent =
-"---";
-
-sampleCount.textContent =
-"0 / 100 ticks";
-
-
-createDigits();
-
-renderRecent();
-
-drawChart();
-
-
-pointer.style.left =
-"0px";
-
-pointerDot.style.left =
-"0px";
-
-pointerDot.style.top =
-"50%";
+draw();
 
 pointerLabel.textContent =
 "Waiting for new ticks...";
@@ -1698,19 +1471,18 @@ pointerLabel.textContent =
 
 /* START */
 
-createDigits();
+buildDigits();
 
-resizeCanvas();
+resize();
 
 connect();
 
-
 window.addEventListener(
 "resize",
-resizeCanvas
+resize
 );
 
 </script>
 
 </body>
-  </html>
+</html>
