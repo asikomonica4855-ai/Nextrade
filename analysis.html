@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXTRADE | Analysis & Digit Scanner</title>
+<title>NEXTRADE | Analysis</title>
 
 <style>
 
@@ -125,7 +125,7 @@ box-shadow:0 0 10px #2edb9c;
 background:#ff5969;
 }
 
-/* MARKET SELECTOR */
+/* SELECTOR */
 
 .selector{
 background:#08131f;
@@ -136,11 +136,11 @@ margin-bottom:18px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:15px;
+gap:20px;
 }
 
 .selector-title{
-font-size:10px;
+font-size:8px;
 color:#60788a;
 margin-bottom:7px;
 }
@@ -160,7 +160,7 @@ font-size:25px;
 font-weight:bold;
 }
 
-/* DIGIT PANEL */
+/* DIGIT SCANNER */
 
 .digit-panel{
 background:#08131f;
@@ -185,23 +185,24 @@ font-size:9px;
 color:#60788a;
 }
 
-.panel-description{
+.description{
 font-size:9px;
 color:#647d8e;
-margin-bottom:22px;
 line-height:1.6;
+margin-bottom:22px;
 }
-
-/* DIGIT CIRCLES */
 
 .digits{
 display:grid;
 grid-template-columns:repeat(10,1fr);
-gap:8px;
+gap:10px;
 }
 
 .digit{
-height:75px;
+width:100%;
+aspect-ratio:1/1;
+max-width:85px;
+margin:auto;
 border-radius:50%;
 border:2px solid #29485c;
 background:#07111b;
@@ -209,40 +210,41 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-position:relative;
-transition:.25s;
+transition:.2s;
 }
 
 .digit-number{
-font-size:20px;
+font-size:22px;
 font-weight:bold;
 }
 
-.digit-count{
-font-size:8px;
-color:#60788a;
+.digit-percent{
+font-size:10px;
+color:#71899a;
 margin-top:3px;
 }
 
 .digit.strong{
 border-color:#2edb9c;
-box-shadow:
-0 0 15px rgba(46,219,156,.35);
 background:#09231e;
+box-shadow:
+0 0 15px rgba(46,219,156,.4);
 }
 
-.digit.strong .digit-number{
+.digit.strong .digit-number,
+.digit.strong .digit-percent{
 color:#2edb9c;
 }
 
 .digit.weak{
 border-color:#ff5969;
-box-shadow:
-0 0 15px rgba(255,89,105,.2);
 background:#241216;
+box-shadow:
+0 0 15px rgba(255,89,105,.3);
 }
 
-.digit.weak .digit-number{
+.digit.weak .digit-number,
+.digit.weak .digit-percent{
 color:#ff5969;
 }
 
@@ -250,7 +252,7 @@ color:#ff5969;
 
 .summary{
 display:grid;
-grid-template-columns:1fr 1fr 1fr;
+grid-template-columns:repeat(3,1fr);
 gap:14px;
 margin-top:18px;
 }
@@ -269,99 +271,112 @@ margin-bottom:9px;
 }
 
 .summary-value{
-font-size:22px;
+font-size:23px;
 font-weight:bold;
 }
 
-.strong-value{
+.green{
 color:#2edb9c;
 }
 
-.weak-value{
+.red{
 color:#ff5969;
 }
 
-/* CURSOR AREA */
+/* MOVING TICK CHART */
 
-.cursor-panel{
+.chart-panel{
+margin-top:18px;
 background:#08131f;
 border:1px solid #193247;
 border-radius:12px;
-margin-top:18px;
 overflow:hidden;
 }
 
-.cursor-head{
+.chart-head{
 padding:18px 20px;
 border-bottom:1px solid #193247;
 display:flex;
 justify-content:space-between;
+align-items:center;
 }
 
-.cursor-head h2{
+.chart-head h2{
 font-size:13px;
 }
 
-.cursor-head span{
+.chart-head span{
 font-size:8px;
-color:#60788a;
+color:#2edb9c;
 }
 
-.cursor-chart{
-height:230px;
+.chart{
+height:280px;
 position:relative;
 background:
 linear-gradient(
-rgba(30,65,90,.14) 1px,
+rgba(30,65,90,.15) 1px,
 transparent 1px
 ),
 linear-gradient(
 90deg,
-rgba(30,65,90,.14) 1px,
+rgba(30,65,90,.15) 1px,
 transparent 1px
 ),
 #050d15;
-background-size:40px 40px;
+background-size:45px 45px;
 overflow:hidden;
 }
 
-#tickCanvas{
+#priceCanvas{
 width:100%;
 height:100%;
 display:block;
 }
 
-.cursor-line{
+/* MOVING POINTER */
+
+.pointer{
 position:absolute;
 top:0;
 bottom:0;
-width:1px;
+width:2px;
 background:#159ff0;
-box-shadow:0 0 8px #159ff0;
+box-shadow:
+0 0 8px #159ff0,
+0 0 16px rgba(21,159,240,.5);
 pointer-events:none;
+transition:left .12s linear;
 }
 
-.cursor-dot{
+.pointer-dot{
 position:absolute;
-width:10px;
-height:10px;
+width:13px;
+height:13px;
 border-radius:50%;
 background:#159ff0;
-box-shadow:0 0 12px #159ff0;
+border:2px solid #fff;
+box-shadow:
+0 0 10px #159ff0,
+0 0 20px #159ff0;
 transform:translate(-50%,-50%);
 pointer-events:none;
+transition:
+left .12s linear,
+top .12s linear;
 }
 
-.cursor-label{
+.pointer-label{
 position:absolute;
-top:10px;
-left:10px;
-background:rgba(5,13,21,.9);
+top:12px;
+left:12px;
+background:rgba(5,13,21,.95);
 border:1px solid #23465d;
-border-radius:5px;
-padding:7px 9px;
-font-size:8px;
-color:#8ca4b4;
+border-radius:6px;
+padding:8px 10px;
+font-size:9px;
+color:#d9e5ec;
+z-index:5;
 }
 
 /* RECENT DIGITS */
@@ -376,7 +391,7 @@ padding:20px;
 
 .recent h2{
 font-size:13px;
-margin-bottom:14px;
+margin-bottom:15px;
 }
 
 .recent-digits{
@@ -389,11 +404,11 @@ flex-wrap:wrap;
 width:32px;
 height:32px;
 border-radius:50%;
-background:#0b2030;
-border:1px solid #23465d;
 display:flex;
 align-items:center;
 justify-content:center;
+background:#0b2030;
+border:1px solid #23465d;
 font-size:11px;
 font-weight:bold;
 }
@@ -430,8 +445,6 @@ font-weight:bold;
 .footer-logo span{
 color:#159ff0;
 }
-
-/* MOBILE */
 
 @media(max-width:900px){
 
@@ -493,19 +506,12 @@ NEX<span>TRADE</span>
 <nav class="nav">
 
 <a href="index.html">HOME</a>
-
 <a href="markets.html">MARKETS</a>
-
 <a href="tools.html">TOOLS</a>
-
 <a href="bots.html">BOTS</a>
-
 <a href="analysis.html" class="active">ANALYSIS</a>
-
 <a href="manual-trading.html">MANUAL TRADING</a>
-
 <a href="login.html">LOGIN</a>
-
 <a href="signup.html" class="signup">SIGN UP</a>
 
 </nav>
@@ -523,8 +529,8 @@ NEX<span>TRADE</span>
 <h1>Market Analysis</h1>
 
 <p>
-Live volatility analysis with digit strength monitoring,
-recent tick activity and market movement.
+Live digit analysis using the latest 100 ticks from the
+selected volatility market.
 </p>
 
 </div>
@@ -545,7 +551,7 @@ CONNECTING
 </div>
 
 
-<!-- MARKET SELECTOR -->
+<!-- MARKET -->
 
 <div class="selector">
 
@@ -601,6 +607,7 @@ Volatility 10
 
 </div>
 
+
 <div>
 
 <div class="selector-title">
@@ -619,30 +626,30 @@ class="current-price"
 </div>
 
 
-<!-- DIGIT PANEL -->
+<!-- DIGIT SCANNER -->
 
 <div class="digit-panel">
 
 <div class="panel-title">
 
 <h2>
-Digit Strength Scanner
+Digit Strength
 </h2>
 
 <div
 id="sampleCount"
 class="sample"
 >
-0 ticks
+0 / 100 ticks
 </div>
 
 </div>
 
-<p class="panel-description">
+<p class="description">
 
-The scanner counts the last 100 digits received from the
-selected market. Strong digits are the most frequent in the
-current sample, while weak digits are the least frequent.
+Each circle shows the percentage of the last 100 received
+ticks ending in that digit. The strongest and weakest
+digits are highlighted automatically.
 
 </p>
 
@@ -669,7 +676,7 @@ STRONGEST DIGIT
 
 <div
 id="strongDigit"
-class="summary-value strong-value"
+class="summary-value green"
 >
 ---
 </div>
@@ -685,7 +692,7 @@ WEAKEST DIGIT
 
 <div
 id="weakDigit"
-class="summary-value weak-value"
+class="summary-value red"
 >
 ---
 </div>
@@ -712,46 +719,46 @@ class="summary-value"
 </div>
 
 
-<!-- MOVING CURSOR -->
+<!-- MOVING POINTER -->
 
-<div class="cursor-panel">
+<div class="chart-panel">
 
-<div class="cursor-head">
+<div class="chart-head">
 
 <h2>
-Live Tick Activity
+Live Tick Pointer
 </h2>
 
 <span>
-MOVING CURSOR
+● LIVE
 </span>
 
 </div>
 
 <div
-id="cursorChart"
-class="cursor-chart"
+id="chart"
+class="chart"
 >
 
 <canvas
-id="tickCanvas"
+id="priceCanvas"
 ></canvas>
 
 <div
-id="cursorLine"
-class="cursor-line"
+id="pointer"
+class="pointer"
 ></div>
 
 <div
-id="cursorDot"
-class="cursor-dot"
+id="pointerDot"
+class="pointer-dot"
 ></div>
 
 <div
-id="cursorLabel"
-class="cursor-label"
+id="pointerLabel"
+class="pointer-label"
 >
-Waiting for live ticks...
+Waiting for tick...
 </div>
 
 </div>
@@ -759,7 +766,7 @@ Waiting for live ticks...
 </div>
 
 
-<!-- RECENT DIGITS -->
+<!-- RECENT -->
 
 <div class="recent">
 
@@ -778,11 +785,11 @@ class="recent-digits"
 
 <div class="notice">
 
-<strong>IMPORTANT:</strong>
-Digit frequency shows what has appeared in the selected
-sample. A strong digit is not a guarantee that it will appear
-on the next tick. Use this information as an analysis tool,
-not as a guaranteed prediction.
+<strong>ANALYSIS NOTICE:</strong>
+Digit percentages describe the frequency of digits in the
+current 100-tick sample. A strong digit does not guarantee
+that it will appear on the next tick. This is an analysis
+visualization, not a guaranteed prediction.
 
 </div>
 
@@ -814,6 +821,14 @@ let socket;
 
 let selectedSymbol =
 "1HZ100V";
+
+
+let recentDigits = [];
+
+let digitCounts =
+Array(10).fill(0);
+
+let prices = [];
 
 
 const marketSelect =
@@ -866,57 +881,51 @@ document.getElementById(
 "recentDigits"
 );
 
+const chart =
+document.getElementById(
+"chart"
+);
+
 const canvas =
 document.getElementById(
-"tickCanvas"
+"priceCanvas"
 );
 
 const ctx =
 canvas.getContext("2d");
 
-const cursorChart =
+const pointer =
 document.getElementById(
-"cursorChart"
+"pointer"
 );
 
-const cursorLine =
+const pointerDot =
 document.getElementById(
-"cursorLine"
+"pointerDot"
 );
 
-const cursorDot =
+const pointerLabel =
 document.getElementById(
-"cursorDot"
+"pointerLabel"
 );
-
-const cursorLabel =
-document.getElementById(
-"cursorLabel"
-);
-
-
-/* DATA */
-
-let digitCounts =
-Array(10).fill(0);
-
-let recentTicks = [];
-
-let recentDigits = [];
-
-let chartPrices = [];
 
 
 /* CREATE DIGITS */
 
-function createDigitCircles(){
+function createDigits(){
 
 digitsContainer.innerHTML = "";
 
-for(let i=0;i<10;i++){
+for(
+let i = 0;
+i < 10;
+i++
+){
 
 const div =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 div.className =
 "digit";
@@ -931,38 +940,40 @@ ${i}
 </div>
 
 <div
-id="count-${i}"
-class="digit-count"
+id="percent-${i}"
+class="digit-percent"
 >
-0
+0.0%
 </div>
 
 `;
 
-digitsContainer.appendChild(div);
+digitsContainer.appendChild(
+div
+);
 
 }
 
 }
 
 
-/* LAST DIGIT */
+/* GET LAST DIGIT */
 
 function getLastDigit(price){
 
-const clean =
+const text =
 String(price)
 .replace(/\D/g,"");
 
-if(!clean){
+if(!text){
 
 return null;
 
 }
 
 return Number(
-clean.charAt(
-clean.length - 1
+text.charAt(
+text.length - 1
 )
 );
 
@@ -994,7 +1005,7 @@ recentDigits.length;
 
 
 sampleCount.textContent =
-total + " ticks";
+total + " / 100 ticks";
 
 
 let strongest = 0;
@@ -1002,7 +1013,11 @@ let strongest = 0;
 let weakest = 0;
 
 
-for(let i=0;i<10;i++){
+for(
+let i=0;
+i<10;
+i++
+){
 
 if(
 digitCounts[i] >
@@ -1025,11 +1040,13 @@ weakest = i;
 }
 
 
-/*
-Reset classes.
-*/
+/* RESET */
 
-for(let i=0;i<10;i++){
+for(
+let i=0;
+i<10;
+i++
+){
 
 const element =
 document.getElementById(
@@ -1041,17 +1058,28 @@ element.classList.remove(
 "weak"
 );
 
+
+const percentage =
+total > 0
+?
+(
+digitCounts[i] /
+total
+) * 100
+:
+0;
+
+
 document.getElementById(
-"count-" + i
+"percent-" + i
 ).textContent =
-digitCounts[i];
+percentage.toFixed(1) +
+"%";
 
 }
 
 
-/*
-Only highlight after enough data.
-*/
+/* HIGHLIGHT */
 
 if(total >= 5){
 
@@ -1068,20 +1096,27 @@ document.getElementById(
 );
 
 strongDigit.textContent =
-strongest;
+strongest +
+" • " +
+(
+digitCounts[strongest] /
+total *
+100
+).toFixed(1) +
+"%";
 
 weakDigit.textContent =
-weakest;
-
-}else{
-
-strongDigit.textContent =
-"---";
-
-weakDigit.textContent =
-"---";
+weakest +
+" • " +
+(
+digitCounts[weakest] /
+total *
+100
+).toFixed(1) +
+"%";
 
 }
+
 
 if(
 recentDigits.length > 0
@@ -1094,24 +1129,27 @@ recentDigits.length - 1
 
 }
 
+
 renderRecent();
 
 }
 
 
-/* RECENT DIGITS */
+/* RECENT */
 
 function renderRecent(){
 
 recentContainer.innerHTML = "";
 
-const last =
-recentDigits.slice(-30);
-
-last.forEach(digit => {
+recentDigits
+.slice(-30)
+.forEach(
+digit => {
 
 const div =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 div.className =
 "recent-digit";
@@ -1135,6 +1173,7 @@ function addTick(price){
 const digit =
 getLastDigit(price);
 
+
 if(digit === null){
 
 return;
@@ -1142,12 +1181,16 @@ return;
 }
 
 
-recentDigits.push(digit);
+recentDigits.push(
+digit
+);
 
 digitCounts[digit]++;
 
 
-if(recentDigits.length > 100){
+if(
+recentDigits.length > 100
+){
 
 const removed =
 recentDigits.shift();
@@ -1157,22 +1200,29 @@ digitCounts[removed]--;
 }
 
 
-chartPrices.push(
+prices.push(
 Number(price)
 );
 
-if(chartPrices.length > 80){
 
-chartPrices.shift();
+if(
+prices.length > 100
+){
+
+prices.shift();
 
 }
+
+
+currentPrice.textContent =
+formatPrice(price);
 
 
 updateDigits();
 
 drawChart();
 
-moveCursor();
+movePointer();
 
 }
 
@@ -1185,10 +1235,12 @@ const ratio =
 window.devicePixelRatio || 1;
 
 canvas.width =
-canvas.clientWidth * ratio;
+canvas.clientWidth *
+ratio;
 
 canvas.height =
-canvas.clientHeight * ratio;
+canvas.clientHeight *
+ratio;
 
 ctx.setTransform(
 ratio,
@@ -1201,10 +1253,12 @@ ratio,
 
 drawChart();
 
+movePointer();
+
 }
 
 
-/* DRAW ACTIVITY */
+/* DRAW PRICE */
 
 function drawChart(){
 
@@ -1223,7 +1277,9 @@ height
 );
 
 
-if(chartPrices.length < 2){
+if(
+prices.length < 2
+){
 
 return;
 
@@ -1232,16 +1288,18 @@ return;
 
 let min =
 Math.min(
-...chartPrices
+...prices
 );
 
 let max =
 Math.max(
-...chartPrices
+...prices
 );
 
 
-if(min === max){
+if(
+min === max
+){
 
 min -= 1;
 
@@ -1250,22 +1308,25 @@ max += 1;
 }
 
 
-const padding = 20;
+const padding = 22;
 
 
 ctx.beginPath();
 
 
-chartPrices.forEach(
+prices.forEach(
 (price,index) => {
 
 const x =
 padding +
 (
 index /
-(chartPrices.length - 1)
+(prices.length - 1)
 ) *
-(width - padding * 2);
+(
+width -
+padding * 2
+);
 
 
 const y =
@@ -1275,16 +1336,25 @@ padding -
 (price - min) /
 (max - min)
 ) *
-(height - padding * 2);
+(
+height -
+padding * 2
+);
 
 
 if(index === 0){
 
-ctx.moveTo(x,y);
+ctx.moveTo(
+x,
+y
+);
 
 }else{
 
-ctx.lineTo(x,y);
+ctx.lineTo(
+x,
+y
+);
 
 }
 
@@ -1301,11 +1371,13 @@ ctx.stroke();
 }
 
 
-/* MOVING CURSOR */
+/* POINTER */
 
-function moveCursor(){
+function movePointer(){
 
-if(chartPrices.length < 1){
+if(
+prices.length < 1
+){
 
 return;
 
@@ -1313,40 +1385,46 @@ return;
 
 
 const width =
-cursorChart.clientWidth;
+chart.clientWidth;
 
 const height =
-cursorChart.clientHeight;
+chart.clientHeight;
 
 
 const index =
-chartPrices.length - 1;
+prices.length - 1;
 
 
 const x =
-20 +
+prices.length === 1
+?
+width / 2
+:
+22 +
 (
 index /
-Math.max(
-chartPrices.length - 1,
-1
-)
+(prices.length - 1)
 ) *
-(width - 40);
+(
+width -
+44
+);
 
 
 let min =
 Math.min(
-...chartPrices
+...prices
 );
 
 let max =
 Math.max(
-...chartPrices
+...prices
 );
 
 
-if(min === max){
+if(
+min === max
+){
 
 min -= 1;
 
@@ -1356,31 +1434,36 @@ max += 1;
 
 
 const price =
-chartPrices[index];
+prices[index];
 
 
 const y =
 height -
-20 -
+22 -
 (
 (price - min) /
 (max - min)
 ) *
-(height - 40);
+(
+height -
+44
+);
 
 
-cursorLine.style.left =
+pointer.style.left =
 x + "px";
 
-cursorDot.style.left =
+pointerDot.style.left =
 x + "px";
 
-cursorDot.style.top =
+pointerDot.style.top =
 y + "px";
 
 
-cursorLabel.textContent =
-"Latest: " +
+pointerLabel.textContent =
+"Tick " +
+prices.length +
+"  •  " +
 formatPrice(price);
 
 }
@@ -1400,7 +1483,9 @@ statusDot.className =
 try{
 
 socket =
-new WebSocket(BACKEND);
+new WebSocket(
+BACKEND
+);
 
 }catch(error){
 
@@ -1415,7 +1500,8 @@ return;
 }
 
 
-socket.onopen = function(){
+socket.onopen =
+function(){
 
 statusText.textContent =
 "LIVE";
@@ -1423,8 +1509,8 @@ statusText.textContent =
 statusDot.className =
 "status-dot live";
 
-cursorLabel.textContent =
-"Receiving live ticks...";
+pointerLabel.textContent =
+"Waiting for tick...";
 
 };
 
@@ -1437,7 +1523,9 @@ let data;
 try{
 
 data =
-JSON.parse(event.data);
+JSON.parse(
+event.data
+);
 
 }catch(error){
 
@@ -1450,7 +1538,9 @@ if(
 data.type === "status"
 ){
 
-if(data.connected){
+if(
+data.connected
+){
 
 statusText.textContent =
 "LIVE";
@@ -1490,7 +1580,8 @@ return;
 
 
 if(
-tick.symbol !== selectedSymbol
+tick.symbol !==
+selectedSymbol
 ){
 
 return;
@@ -1499,7 +1590,9 @@ return;
 
 
 const price =
-Number(tick.price);
+Number(
+tick.price
+);
 
 
 if(
@@ -1509,10 +1602,6 @@ if(
 return;
 
 }
-
-
-currentPrice.textContent =
-formatPrice(price);
 
 
 addTick(price);
@@ -1561,12 +1650,13 @@ selectedSymbol =
 this.value;
 
 
+recentDigits = [];
+
 digitCounts =
 Array(10).fill(0);
 
-recentDigits = [];
+prices = [];
 
-chartPrices = [];
 
 currentPrice.textContent =
 "---";
@@ -1580,13 +1670,27 @@ weakDigit.textContent =
 latestDigit.textContent =
 "---";
 
-createDigitCircles();
+sampleCount.textContent =
+"0 / 100 ticks";
+
+
+createDigits();
 
 renderRecent();
 
 drawChart();
 
-cursorLabel.textContent =
+
+pointer.style.left =
+"0px";
+
+pointerDot.style.left =
+"0px";
+
+pointerDot.style.top =
+"50%";
+
+pointerLabel.textContent =
 "Waiting for new ticks...";
 
 });
@@ -1594,7 +1698,7 @@ cursorLabel.textContent =
 
 /* START */
 
-createDigitCircles();
+createDigits();
 
 resizeCanvas();
 
