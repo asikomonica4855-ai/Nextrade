@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Live Markets</title><style>
+<title>NEXTRADE | Live Markets</title>
+
+<style>
 *{
     box-sizing:border-box;
     margin:0;
@@ -190,10 +193,6 @@ main{
     transition:.2s;
 }
 
-.market:last-child{
-    border-bottom:0;
-}
-
 .market:hover{
     background:#0b1b2a;
 }
@@ -298,6 +297,8 @@ main{
     margin-top:5px;
 }
 
+/* ================= CANDLESTICK CHART ================= */
+
 .chart{
     height:350px;
     margin:15px 20px 0;
@@ -316,6 +317,8 @@ canvas{
     height:100%;
     display:block;
 }
+
+/* ================= TIME BUTTONS ================= */
 
 .time-buttons{
     display:flex;
@@ -339,6 +342,8 @@ canvas{
     border-color:#159ff0;
     background:#0a1b2a;
 }
+
+/* ================= STATS ================= */
 
 .market-stats{
     display:grid;
@@ -381,6 +386,7 @@ canvas{
 }
 
 @media(max-width:900px){
+
     .market-layout{
         grid-template-columns:1fr;
     }
@@ -392,6 +398,7 @@ canvas{
 }
 
 @media(max-width:600px){
+
     header{
         height:auto;
         min-height:65px;
@@ -440,128 +447,213 @@ canvas{
         grid-template-columns:1fr;
     }
 }
-</style></head><body><header><div class="logo">
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
     NEX<span>TRADE</span>
-</div><nav>
+</div>
+
+<nav>
     <a href="index.html">HOME</a>
     <a href="markets.html">MARKETS</a>
     <a href="tools.html">TOOLS</a>
     <a href="bots.html">BOTS</a>
-</nav><div class="account"><div class="account-icon">D</div>
+</nav>
 
-<div class="account-info">
+<div class="account">
 
-    <div class="account-name">
-        Deriv Account
+    <div class="account-icon">D</div>
+
+    <div class="account-info">
+
+        <div class="account-name">
+            Deriv Account
+        </div>
+
+        <div id="accountStatus" class="account-status">
+            Checking...
+        </div>
+
+        <div id="accountBalance" class="account-balance">
+            --
+        </div>
+
     </div>
 
-    <div
-        id="accountStatus"
-        class="account-status"
-    >
-        Checking...
-    </div>
-
-    <div
-        id="accountBalance"
-        class="account-balance"
-    >
-        --
-    </div>
+    <button id="logoutButton" class="logout">
+        LOG OUT
+    </button>
 
 </div>
 
-<button
-    id="logoutButton"
-    class="logout"
->
-    LOG OUT
-</button>
+</header>
 
-</div></header><main><section class="page-title"><h1>Live Markets</h1>
+<main>
 
-<p>
-    Monitor live Deriv volatility markets in real time.
-</p>
+<section class="page-title">
 
-<div class="connection">
+    <h1>Live Markets</h1>
 
-    <span
-        id="connectionDot"
-        class="dot"
-    ></span>
+    <p>
+        Monitor live Deriv volatility markets in real time.
+    </p>
 
-    <span id="connectionText">
-        CONNECTING TO LIVE DATA...
-    </span>
+    <div class="connection">
+
+        <span id="connectionDot" class="dot"></span>
+
+        <span id="connectionText">
+            CONNECTING TO LIVE DATA...
+        </span>
+
+    </div>
+
+</section>
+
+<div class="market-layout">
+
+<section class="market-list">
+
+    <div class="market-list-header">
+
+        <h2>VOLATILITY MARKETS</h2>
+
+        <p>
+            Select a market to view live price movement.
+        </p>
+
+    </div>
+
+    <div id="marketList"></div>
+
+</section>
+
+<section class="chart-card">
+
+    <div class="chart-header">
+
+        <div>
+
+            <div id="selectedName" class="selected-name">
+                Volatility 100 (1s)
+            </div>
+
+            <div id="selectedSymbol" class="selected-symbol">
+                1HZ100V
+            </div>
+
+        </div>
+
+        <div class="live-badge">
+
+            <span class="live-dot"></span>
+
+            LIVE
+
+        </div>
+
+    </div>
+
+    <div class="price-panel">
+
+        <div class="price-label">
+            LIVE PRICE
+        </div>
+
+        <div id="currentPrice" class="current-price">
+            --
+        </div>
+
+        <div id="priceChange" class="price-change">
+            WAITING FOR MARKET DATA
+        </div>
+
+    </div>
+
+    <div class="chart">
+
+        <canvas id="priceCanvas"></canvas>
+
+    </div>
+
+    <div class="time-buttons">
+
+        <button class="time-button active" data-seconds="1">
+            1S
+        </button>
+
+        <button class="time-button" data-seconds="5">
+            5S
+        </button>
+
+        <button class="time-button" data-seconds="15">
+            15S
+        </button>
+
+        <button class="time-button" data-seconds="30">
+            30S
+        </button>
+
+        <button class="time-button" data-seconds="60">
+            1M
+        </button>
+
+    </div>
+
+    <div class="market-stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                SYMBOL
+            </div>
+
+            <div id="statSymbol" class="stat-value">
+                1HZ100V
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-label">
+                LAST PRICE
+            </div>
+
+            <div id="statPrice" class="stat-value">
+                --
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="stat-label">
+                MARKET STATUS
+            </div>
+
+            <div id="statStatus" class="stat-value">
+                CONNECTING
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 </div>
 
-</section><div class="market-layout"><section class="market-list"><div class="market-list-header"><h2>VOLATILITY MARKETS</h2><p>
-Select a market to view live price movement.
-</p></div><div id="marketList"></div></section><section class="chart-card"><div class="chart-header"><div><div
-id="selectedName"
-class="selected-name"
->
-Volatility 100 (1s)
-</div><div
-id="selectedSymbol"
-class="selected-symbol"
->
-1HZ100V
-</div></div><div class="live-badge"><span class="live-dot"></span>
+<div id="message" class="message"></div>
 
-LIVE
+</main>
 
-</div></div><div class="price-panel"><div class="price-label">
-LIVE PRICE
-</div><div
-id="currentPrice"
-class="current-price"
->
---
-</div><div
-id="priceChange"
-class="price-change"
->
-WAITING FOR MARKET DATA
-</div></div><div class="chart"><canvas id="priceCanvas"></canvas>
-
-</div><div class="time-buttons"><button class="time-button active">
-1S
-</button><button class="time-button">
-5S
-</button><button class="time-button">
-15S
-</button><button class="time-button">
-30S
-</button><button class="time-button">
-1M
-</button></div><div class="market-stats"><div class="stat"><div class="stat-label">
-SYMBOL
-</div><div
-id="statSymbol"
-class="stat-value"
->
-1HZ100V
-</div></div><div class="stat"><div class="stat-label">
-LAST PRICE
-</div><div
-id="statPrice"
-class="stat-value"
->
---
-</div></div><div class="stat"><div class="stat-label">
-MARKET STATUS
-</div><div
-id="statStatus"
-class="stat-value"
->
-CONNECTING
-</div></div></div></section></div><div
-id="message"
-class="message"
-></div></main><script>
+<script>
 
 const BACKEND =
     "https://nextrade-backened.onrender.com";
@@ -620,12 +712,16 @@ const markets = [
 
 ];
 
-let selectedSymbol =
-    "1HZ100V";
+let selectedSymbol = "1HZ100V";
 
 let prices = {};
-let history = {};
+
+let ticks = {};
+
+let candles = {};
+
 let socket = null;
+
 let reconnectTimer = null;
 
 let sessionToken =
@@ -633,9 +729,7 @@ let sessionToken =
         "nextrade_session_token"
     );
 
-/* ==================================================
-   ELEMENTS
-================================================== */
+/* ================= ELEMENTS ================= */
 
 const marketList =
     document.getElementById("marketList");
@@ -685,9 +779,7 @@ const canvas =
 const ctx =
     canvas.getContext("2d");
 
-/* ==================================================
-   AUTH HEADER
-================================================== */
+/* ================= AUTH ================= */
 
 function authHeaders(){
 
@@ -702,446 +794,29 @@ function authHeaders(){
     }
 
     return headers;
-}
-
-/* ==================================================
-   HANDOFF LOGIN
-================================================== */
-
-async function processHandoff(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const handoff =
-        params.get("handoff");
-
-    if(!handoff){
-        return;
-    }
-
-    accountStatus.textContent =
-        "Connecting...";
-
-    try{
-
-        const response =
-            await fetch(
-                BACKEND +
-                "/api/handoff?token=" +
-                encodeURIComponent(
-                    handoff
-                ),
-                {
-                    method:"POST",
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if(
-            !response.ok ||
-            !data.success ||
-            !data.sessionToken
-        ){
-
-            throw new Error(
-                data.error ||
-                "Handoff failed"
-            );
-
-        }
-
-        sessionToken =
-            data.sessionToken;
-
-        localStorage.setItem(
-            "nextrade_session_token",
-            sessionToken
-        );
-
-        /*
-         * Remove the temporary handoff token
-         * from the browser address bar.
-         */
-
-        window.history.replaceState(
-            {},
-            document.title,
-            "markets.html"
-        );
-
-        accountStatus.textContent =
-            "Connected";
-
-        accountStatus.style.color =
-            "#2edb9c";
-
-        if(
-            Array.isArray(
-                data.accounts
-            ) &&
-            data.accounts.length
-        ){
-
-            displayAccount(
-                data.accounts[0]
-            );
-
-        }else{
-
-            await loadAccount();
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Handoff error:",
-            error
-        );
-
-        accountStatus.textContent =
-            "Connection error";
-
-        accountStatus.style.color =
-            "#e06a78";
-
-        accountBalance.textContent =
-            "--";
-
-        showMessage(
-            "Deriv account connection failed. Please log in again."
-        );
-
-    }
 
 }
 
-/* ==================================================
-   DISPLAY ACCOUNT
-================================================== */
-
-function displayAccount(account){
-
-    if(!account){
-
-        accountStatus.textContent =
-            "Connected";
-
-        accountStatus.style.color =
-            "#2edb9c";
-
-        accountBalance.textContent =
-            "CONNECTED";
-
-        return;
-    }
-
-    accountStatus.textContent =
-        "Connected";
-
-    accountStatus.style.color =
-        "#2edb9c";
-
-    const balance =
-        account.balance ??
-        account.balance_available ??
-        account.available_balance ??
-        account.amount;
-
-    const currency =
-        account.currency ||
-        "USD";
-
-    if(
-        balance !== undefined &&
-        balance !== null &&
-        Number.isFinite(
-            Number(balance)
-        )
-    ){
-
-        accountBalance.textContent =
-            `${currency} ${Number(balance).toLocaleString(
-                "en-US",
-                {
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                }
-            )}`;
-
-    }else{
-
-        accountBalance.textContent =
-            "CONNECTED";
-
-    }
-
-}
-
-/* ==================================================
-   SESSION
-================================================== */
-
-async function checkSession(){
-
-    if(!sessionToken){
-
-        accountStatus.textContent =
-            "Not connected";
-
-        accountStatus.style.color =
-            "#e06a78";
-
-        accountBalance.textContent =
-            "--";
-
-        return;
-
-    }
-
-    try{
-
-        const response =
-            await fetch(
-                BACKEND +
-                "/api/session",
-                {
-                    method:"GET",
-                    headers:
-                        authHeaders()
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if(
-            data.authenticated
-        ){
-
-            accountStatus.textContent =
-                "Connected";
-
-            accountStatus.style.color =
-                "#2edb9c";
-
-            await loadAccount();
-
-        }else{
-
-            localStorage.removeItem(
-                "nextrade_session_token"
-            );
-
-            sessionToken = null;
-
-            accountStatus.textContent =
-                "Not connected";
-
-            accountStatus.style.color =
-                "#e06a78";
-
-            accountBalance.textContent =
-                "--";
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Session check failed:",
-            error
-        );
-
-        accountStatus.textContent =
-            "Connection error";
-
-        accountStatus.style.color =
-            "#e06a78";
-
-        accountBalance.textContent =
-            "--";
-
-    }
-
-}
-
-/* ==================================================
-   LOAD ACCOUNT
-================================================== */
-
-async function loadAccount(){
-
-    if(!sessionToken){
-        return;
-    }
-
-    try{
-
-        const response =
-            await fetch(
-                BACKEND +
-                "/api/accounts",
-                {
-                    method:"GET",
-                    headers:
-                        authHeaders()
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if(
-            response.status === 401
-        ){
-
-            localStorage.removeItem(
-                "nextrade_session_token"
-            );
-
-            sessionToken = null;
-
-            accountStatus.textContent =
-                "Not connected";
-
-            accountStatus.style.color =
-                "#e06a78";
-
-            accountBalance.textContent =
-                "--";
-
-            return;
-
-        }
-
-        if(
-            !response.ok
-        ){
-
-            console.error(
-                "Account error:",
-                data
-            );
-
-            return;
-
-        }
-
-        const accounts =
-            data.accounts;
-
-        if(
-            Array.isArray(
-                accounts
-            ) &&
-            accounts.length
-        ){
-
-            displayAccount(
-                accounts[0]
-            );
-
-        }else{
-
-            displayAccount(null);
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Account loading failed:",
-            error
-        );
-
-        accountStatus.textContent =
-            "Connection error";
-
-        accountBalance.textContent =
-            "--";
-
-    }
-
-}
-
-/* ==================================================
-   LOGOUT
-================================================== */
-
-logoutButton.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            await fetch(
-                BACKEND +
-                "/api/logout",
-                {
-                    method:"POST",
-                    headers:
-                        authHeaders()
-                }
-            );
-
-        }catch(error){
-
-            console.error(
-                "Logout error:",
-                error
-            );
-
-        }
-
-        localStorage.removeItem(
-            "nextrade_session_token"
-        );
-
-        sessionToken = null;
-
-        window.location.href =
-            "login.html";
-
-    }
-);
-
-/* ==================================================
-   MARKET FUNCTIONS
-================================================== */
+/* ================= PRICE ================= */
 
 function formatPrice(value){
 
     if(
         value === undefined ||
         value === null ||
-        Number.isNaN(
-            Number(value)
-        )
+        !Number.isFinite(Number(value))
     ){
 
         return "--";
 
     }
 
-    const number =
-        Number(value);
-
-    return number.toLocaleString(
+    return Number(value).toLocaleString(
         "en-US",
         {
             minimumFractionDigits:2,
             maximumFractionDigits:
-                number >= 100
+                Number(value) >= 100
                 ? 2
                 : 4
         }
@@ -1149,45 +824,40 @@ function formatPrice(value){
 
 }
 
+/* ================= MESSAGE ================= */
+
 function showMessage(text){
 
-    message.textContent =
-        text;
+    message.textContent = text;
 
     if(text){
 
-        message.classList.add(
-            "show"
-        );
+        message.classList.add("show");
 
     }else{
 
-        message.classList.remove(
-            "show"
-        );
+        message.classList.remove("show");
 
     }
 
 }
 
+/* ================= MARKETS ================= */
+
 function renderMarkets(){
 
-    marketList.innerHTML =
-        "";
+    marketList.innerHTML = "";
 
     markets.forEach(
         market => {
 
             const item =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
             item.className =
                 "market" +
                 (
-                    market.symbol ===
-                    selectedSymbol
+                    market.symbol === selectedSymbol
                     ? " active"
                     : ""
                 );
@@ -1226,14 +896,12 @@ function renderMarkets(){
 
                     renderMarkets();
 
-                    drawChart();
+                    resizeCanvas();
 
                 }
             );
 
-            marketList.appendChild(
-                item
-            );
+            marketList.appendChild(item);
 
         }
     );
@@ -1247,8 +915,7 @@ function updateSelectedMarket(){
     const market =
         markets.find(
             item =>
-                item.symbol ===
-                selectedSymbol
+                item.symbol === selectedSymbol
         );
 
     if(!market) return;
@@ -1288,9 +955,7 @@ function updateMarketPrices(){
 
                 element.textContent =
                     formatPrice(
-                        prices[
-                            market.symbol
-                        ]
+                        prices[market.symbol]
                     );
 
             }
@@ -1302,35 +967,135 @@ function updateMarketPrices(){
 
 }
 
-function addHistory(
+/* ==================================================
+   CANDLE ENGINE
+================================================== */
+
+let candleSeconds = 1;
+
+function addTick(
     symbol,
-    price
+    price,
+    epoch
 ){
 
-    if(!history[symbol]){
+    if(
+        !Number.isFinite(price)
+    ){
+        return;
+    }
 
-        history[symbol] =
-            [];
+    if(
+        !candles[symbol]
+    ){
+
+        candles[symbol] = [];
 
     }
 
-    history[symbol].push(
-        Number(price)
-    );
+    const timestamp =
+        Number(epoch) ||
+        Math.floor(Date.now()/1000);
+
+    const bucket =
+        Math.floor(
+            timestamp /
+            candleSeconds
+        ) *
+        candleSeconds;
+
+    let list =
+        candles[symbol];
+
+    let current =
+        list[list.length - 1];
 
     if(
-        history[symbol].length >
-        80
+        !current ||
+        current.time !== bucket
     ){
 
-        history[symbol].shift();
+        current = {
+
+            time:bucket,
+
+            open:price,
+
+            high:price,
+
+            low:price,
+
+            close:price
+
+        };
+
+        list.push(current);
+
+    }else{
+
+        current.high =
+            Math.max(
+                current.high,
+                price
+            );
+
+        current.low =
+            Math.min(
+                current.low,
+                price
+            );
+
+        current.close =
+            price;
+
+    }
+
+    /*
+     * Keep the chart readable.
+     */
+
+    if(list.length > 80){
+
+        list.shift();
 
     }
 
 }
 
+/* ================= RESET CANDLES ================= */
+
+function rebuildCandles(){
+
+    const oldTicks =
+        ticks;
+
+    candles = {};
+
+    Object.keys(oldTicks).forEach(
+        symbol => {
+
+            const list =
+                oldTicks[symbol] || [];
+
+            list.forEach(
+                tick => {
+
+                    addTick(
+                        symbol,
+                        tick.price,
+                        tick.epoch
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
 /* ==================================================
-   CHART
+   CANVAS
 ================================================== */
 
 function resizeCanvas(){
@@ -1339,14 +1104,19 @@ function resizeCanvas(){
         canvas.getBoundingClientRect();
 
     const ratio =
-        window.devicePixelRatio ||
-        1;
+        window.devicePixelRatio || 1;
 
     canvas.width =
-        rect.width * ratio;
+        Math.max(
+            1,
+            rect.width * ratio
+        );
 
     canvas.height =
-        rect.height * ratio;
+        Math.max(
+            1,
+            rect.height * ratio
+        );
 
     ctx.setTransform(
         ratio,
@@ -1360,6 +1130,10 @@ function resizeCanvas(){
     drawChart();
 
 }
+
+/* ==================================================
+   CANDLESTICK DRAWING
+================================================== */
 
 function drawChart(){
 
@@ -1380,12 +1154,9 @@ function drawChart(){
     );
 
     const data =
-        history[selectedSymbol] ||
-        [];
+        candles[selectedSymbol] || [];
 
-    if(
-        data.length < 2
-    ){
+    if(data.length < 2){
 
         ctx.fillStyle =
             "#60798b";
@@ -1397,7 +1168,7 @@ function drawChart(){
             "center";
 
         ctx.fillText(
-            "Waiting for live price data...",
+            "Waiting for live candle data...",
             width / 2,
             height / 2
         );
@@ -1407,10 +1178,14 @@ function drawChart(){
     }
 
     let min =
-        Math.min(...data);
+        Math.min(
+            ...data.map(c => c.low)
+        );
 
     let max =
-        Math.max(...data);
+        Math.max(
+            ...data.map(c => c.high)
+        );
 
     if(min === max){
 
@@ -1419,55 +1194,196 @@ function drawChart(){
 
     }
 
-    const padding =
-        25;
+    const paddingTop = 25;
+
+    const paddingBottom = 25;
+
+    const paddingLeft = 15;
+
+    const paddingRight = 15;
 
     const chartWidth =
         width -
-        padding * 2;
+        paddingLeft -
+        paddingRight;
 
     const chartHeight =
         height -
-        padding * 2;
+        paddingTop -
+        paddingBottom;
 
-    ctx.beginPath();
+    const candleWidth =
+        Math.max(
+            4,
+            Math.min(
+                14,
+                chartWidth /
+                data.length *
+                .55
+            )
+        );
+
+    const gap =
+        chartWidth /
+        data.length;
+
+    function y(value){
+
+        return paddingTop +
+            (
+                1 -
+                (
+                    value - min
+                ) /
+                (
+                    max - min
+                )
+            ) *
+            chartHeight;
+
+    }
+
+    /*
+     * Price grid
+     */
+
+    ctx.strokeStyle =
+        "rgba(35,61,78,.45)";
+
+    ctx.lineWidth = 1;
+
+    for(
+        let i = 1;
+        i < 5;
+        i++
+    ){
+
+        const gy =
+            paddingTop +
+            (
+                i / 5
+            ) *
+            chartHeight;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            0,
+            gy
+        );
+
+        ctx.lineTo(
+            width,
+            gy
+        );
+
+        ctx.stroke();
+
+    }
+
+    /*
+     * Candles
+     */
 
     data.forEach(
-        (value,index) => {
+        (candle,index) => {
 
             const x =
-                padding +
-                (
-                    index /
-                    (data.length - 1)
-                ) *
-                chartWidth;
+                paddingLeft +
+                gap *
+                index +
+                gap / 2;
 
-            const y =
-                padding +
-                (
-                    1 -
-                    (
-                        value - min
-                    ) /
-                    (
-                        max - min
-                    )
-                ) *
-                chartHeight;
+            const openY =
+                y(candle.open);
 
-            if(index === 0){
+            const closeY =
+                y(candle.close);
 
-                ctx.moveTo(
-                    x,
-                    y
+            const highY =
+                y(candle.high);
+
+            const lowY =
+                y(candle.low);
+
+            const bullish =
+                candle.close >=
+                candle.open;
+
+            const bodyTop =
+                Math.min(
+                    openY,
+                    closeY
                 );
 
-            }else{
+            const bodyHeight =
+                Math.max(
+                    1,
+                    Math.abs(
+                        closeY -
+                        openY
+                    )
+                );
 
-                ctx.lineTo(
-                    x,
-                    y
+            /*
+             * Wick
+             */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x,
+                highY
+            );
+
+            ctx.lineTo(
+                x,
+                lowY
+            );
+
+            ctx.strokeStyle =
+                bullish
+                ? "#2edb9c"
+                : "#ff5969";
+
+            ctx.lineWidth = 1;
+
+            ctx.stroke();
+
+            /*
+             * Body
+             */
+
+            ctx.fillStyle =
+                bullish
+                ? "#2edb9c"
+                : "#ff5969";
+
+            ctx.fillRect(
+                x -
+                candleWidth / 2,
+                bodyTop,
+                candleWidth,
+                bodyHeight
+            );
+
+            /*
+             * Outline for very small candles
+             */
+
+            if(bodyHeight <= 2){
+
+                ctx.strokeStyle =
+                    bullish
+                    ? "#2edb9c"
+                    : "#ff5969";
+
+                ctx.strokeRect(
+                    x -
+                    candleWidth / 2,
+                    bodyTop,
+                    candleWidth,
+                    2
                 );
 
             }
@@ -1475,53 +1391,338 @@ function drawChart(){
         }
     );
 
-    ctx.strokeStyle =
-        "#159ff0";
-
-    ctx.lineWidth =
-        2;
-
-    ctx.stroke();
+    /*
+     * Current price line
+     */
 
     const last =
         data[data.length - 1];
 
-    const lastX =
-        padding +
-        chartWidth;
+    const currentY =
+        y(last.close);
 
-    const lastY =
-        padding +
-        (
-            1 -
-            (
-                last - min
-            ) /
-            (
-                max - min
-            )
-        ) *
-        chartHeight;
+    ctx.setLineDash([
+        5,
+        5
+    ]);
+
+    ctx.strokeStyle =
+        "rgba(21,159,240,.7)";
+
+    ctx.lineWidth = 1;
 
     ctx.beginPath();
 
-    ctx.arc(
-        lastX,
-        lastY,
-        4,
+    ctx.moveTo(
         0,
-        Math.PI * 2
+        currentY
+    );
+
+    ctx.lineTo(
+        width,
+        currentY
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+    /*
+     * Current price label
+     */
+
+    const label =
+        formatPrice(last.close);
+
+    ctx.font =
+        "bold 9px Arial";
+
+    const textWidth =
+        ctx.measureText(label).width;
+
+    ctx.fillStyle =
+        "#159ff0";
+
+    ctx.fillRect(
+        width -
+        textWidth -
+        16,
+        currentY -
+        9,
+        textWidth +
+        12,
+        18
     );
 
     ctx.fillStyle =
-        "#2edb9c";
+        "#fff";
 
-    ctx.fill();
+    ctx.textAlign =
+        "left";
+
+    ctx.fillText(
+        label,
+        width -
+        textWidth -
+        10,
+        currentY +
+        3
+    );
 
 }
 
 /* ==================================================
-   MARKET WEBSOCKET
+   SESSION
+================================================== */
+
+async function checkSession(){
+
+    if(!sessionToken){
+
+        accountStatus.textContent =
+            "Not connected";
+
+        accountStatus.style.color =
+            "#e06a78";
+
+        accountBalance.textContent =
+            "--";
+
+        return;
+
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/session",
+                {
+                    method:"GET",
+                    headers:authHeaders()
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(data.authenticated){
+
+            accountStatus.textContent =
+                "Connected";
+
+            accountStatus.style.color =
+                "#2edb9c";
+
+            await loadAccount();
+
+        }else{
+
+            localStorage.removeItem(
+                "nextrade_session_token"
+            );
+
+            sessionToken = null;
+
+            accountStatus.textContent =
+                "Not connected";
+
+            accountStatus.style.color =
+                "#e06a78";
+
+            accountBalance.textContent =
+                "--";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Session error:",
+            error
+        );
+
+        accountStatus.textContent =
+            "Connection error";
+
+        accountBalance.textContent =
+            "--";
+
+    }
+
+}
+
+/* ==================================================
+   ACCOUNT
+================================================== */
+
+function displayAccount(account){
+
+    if(!account){
+
+        accountStatus.textContent =
+            "Connected";
+
+        accountStatus.style.color =
+            "#2edb9c";
+
+        accountBalance.textContent =
+            "CONNECTED";
+
+        return;
+
+    }
+
+    accountStatus.textContent =
+        "Connected";
+
+    accountStatus.style.color =
+        "#2edb9c";
+
+    const balance =
+        account.balance ??
+        account.balance_available ??
+        account.available_balance ??
+        account.amount;
+
+    const currency =
+        account.currency ||
+        "USD";
+
+    if(
+        balance !== undefined &&
+        balance !== null
+    ){
+
+        accountBalance.textContent =
+            `${currency} ${Number(balance).toLocaleString(
+                "en-US",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            )}`;
+
+    }else{
+
+        accountBalance.textContent =
+            "CONNECTED";
+
+    }
+
+}
+
+async function loadAccount(){
+
+    if(!sessionToken){
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                BACKEND +
+                "/api/accounts",
+                {
+                    method:"GET",
+                    headers:authHeaders()
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            response.status === 401
+        ){
+
+            localStorage.removeItem(
+                "nextrade_session_token"
+            );
+
+            sessionToken = null;
+
+            accountStatus.textContent =
+                "Not connected";
+
+            accountStatus.style.color =
+                "#e06a78";
+
+            accountBalance.textContent =
+                "--";
+
+            return;
+
+        }
+
+        if(
+            response.ok &&
+            Array.isArray(
+                data.accounts
+            ) &&
+            data.accounts.length
+        ){
+
+            displayAccount(
+                data.accounts[0]
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Account loading error:",
+            error
+        );
+
+    }
+
+}
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+logoutButton.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await fetch(
+                BACKEND +
+                "/api/logout",
+                {
+                    method:"POST",
+                    headers:authHeaders()
+                }
+            );
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+        }
+
+        localStorage.removeItem(
+            "nextrade_session_token"
+        );
+
+        sessionToken = null;
+
+        window.location.href =
+            "login.html";
+
+    }
+);
+
+/* ==================================================
+   WEBSOCKET
 ================================================== */
 
 function connectSocket(){
@@ -1551,9 +1752,7 @@ function connectSocket(){
         );
 
     socket =
-        new WebSocket(
-            wsUrl
-        );
+        new WebSocket(wsUrl);
 
     socket.addEventListener(
         "open",
@@ -1585,9 +1784,12 @@ function connectSocket(){
                         event.data
                     );
 
+                /*
+                 * Backend status
+                 */
+
                 if(
-                    data.type ===
-                    "status"
+                    data.type === "status"
                 ){
 
                     if(
@@ -1610,9 +1812,12 @@ function connectSocket(){
 
                 }
 
+                /*
+                 * Tick
+                 */
+
                 if(
-                    data.type ===
-                    "tick" &&
+                    data.type === "tick" &&
                     data.data
                 ){
 
@@ -1624,23 +1829,64 @@ function connectSocket(){
                             data.data.price
                         );
 
+                    const epoch =
+                        Number(
+                            data.data.epoch
+                        ) ||
+                        Math.floor(
+                            Date.now()/1000
+                        );
+
                     if(
                         !symbol ||
-                        !Number.isFinite(
-                            price
-                        )
+                        !Number.isFinite(price)
                     ){
 
                         return;
 
                     }
 
+                    /*
+                     * Save latest price
+                     */
+
                     prices[symbol] =
                         price;
 
-                    addHistory(
+                    /*
+                     * Save tick history
+                     */
+
+                    if(
+                        !ticks[symbol]
+                    ){
+
+                        ticks[symbol] = [];
+
+                    }
+
+                    ticks[symbol].push({
+                        price,
+                        epoch
+                    });
+
+                    if(
+                        ticks[symbol].length >
+                        500
+                    ){
+
+                        ticks[symbol].shift();
+
+                    }
+
+                    /*
+                     * Build candle
+                     */
+
+                    addTick(
                         symbol,
-                        price
+                        price,
+                        epoch
                     );
 
                     updateMarketPrices();
@@ -1651,23 +1897,23 @@ function connectSocket(){
                     ){
 
                         currentPrice.textContent =
-                            formatPrice(
-                                price
-                            );
+                            formatPrice(price);
 
                         statPrice.textContent =
-                            formatPrice(
-                                price
-                            );
+                            formatPrice(price);
 
                         priceChange.textContent =
-                            "LIVE • RECEIVING MARKET DATA";
+                            "LIVE • REAL-TIME TICKS";
 
                         drawChart();
 
                     }
 
                 }
+
+                /*
+                 * Deriv error
+                 */
 
                 if(
                     data.type ===
@@ -1687,7 +1933,7 @@ function connectSocket(){
             }catch(error){
 
                 console.error(
-                    "WebSocket message error:",
+                    "Message error:",
                     error
                 );
 
@@ -1748,36 +1994,8 @@ function connectSocket(){
 }
 
 /* ==================================================
-   START
+   TIMEFRAME BUTTONS
 ================================================== */
-
-async function start(){
-
-    renderMarkets();
-
-    updateSelectedMarket();
-
-    await processHandoff();
-
-    await checkSession();
-
-    connectSocket();
-
-    setTimeout(
-        resizeCanvas,
-        100
-    );
-
-}
-
-start();
-
-window.addEventListener(
-    "resize",
-    resizeCanvas
-);
-
-/* Time buttons */
 
 document.querySelectorAll(
     ".time-button"
@@ -1801,11 +2019,50 @@ document.querySelectorAll(
                     "active"
                 );
 
+                candleSeconds =
+                    Number(
+                        button.dataset.seconds
+                    );
+
+                rebuildCandles();
+
+                drawChart();
+
             }
         );
 
     }
 );
 
-</script></body>
+/* ==================================================
+   START
+================================================== */
+
+async function start(){
+
+    renderMarkets();
+
+    updateSelectedMarket();
+
+    await checkSession();
+
+    connectSocket();
+
+    setTimeout(
+        resizeCanvas,
+        100
+    );
+
+}
+
+start();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+</script>
+
+</body>
     </html>
