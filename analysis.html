@@ -125,8 +125,6 @@ box-shadow:0 0 10px #2edb9c;
 background:#ff5969;
 }
 
-/* SCANNER */
-
 .scanner{
 background:#08131f;
 border:1px solid #193247;
@@ -176,7 +174,7 @@ overflow-x:auto;
 table{
 width:100%;
 border-collapse:collapse;
-min-width:750px;
+min-width:760px;
 }
 
 th{
@@ -206,7 +204,7 @@ font-size:11px;
 }
 
 .symbol{
-color:#60788a;
+color:#60798b;
 font-size:8px;
 margin-top:4px;
 }
@@ -246,8 +244,6 @@ color:#fff;
 border-color:#159ff0;
 }
 
-/* ANALYSIS GRID */
-
 .analysis-grid{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
@@ -274,7 +270,7 @@ line-height:1.6;
 }
 
 .big-value{
-font-size:24px;
+font-size:20px;
 font-weight:bold;
 margin-top:18px;
 }
@@ -297,8 +293,6 @@ margin-bottom:5px;
 font-size:13px;
 font-weight:bold;
 }
-
-/* TOP MOVERS */
 
 .movers{
 margin-top:18px;
@@ -339,8 +333,6 @@ font-size:11px;
 font-weight:bold;
 }
 
-/* NOTICE */
-
 .notice{
 margin-top:18px;
 padding:14px 16px;
@@ -351,8 +343,6 @@ color:#a9915b;
 font-size:9px;
 line-height:1.6;
 }
-
-/* FOOTER */
 
 footer{
 border-top:1px solid #193247;
@@ -373,8 +363,6 @@ font-weight:bold;
 .footer-logo span{
 color:#159ff0;
 }
-
-/* MOBILE */
 
 @media(max-width:900px){
 
@@ -423,9 +411,7 @@ text-align:center;
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -436,19 +422,12 @@ NEX<span>TRADE</span>
 <nav class="nav">
 
 <a href="index.html">HOME</a>
-
 <a href="markets.html">MARKETS</a>
-
 <a href="tools.html">TOOLS</a>
-
 <a href="bots.html">BOTS</a>
-
 <a href="analysis.html" class="active">ANALYSIS</a>
-
 <a href="manual-trading.html">MANUAL TRADING</a>
-
 <a href="login.html">LOGIN</a>
-
 <a href="signup.html" class="signup">SIGN UP</a>
 
 </nav>
@@ -457,7 +436,6 @@ NEX<span>TRADE</span>
 
 
 <div class="page">
-
 
 <div class="heading">
 
@@ -484,8 +462,6 @@ CONNECTING SCANNER
 
 </div>
 
-
-<!-- SCANNER -->
 
 <section class="scanner">
 
@@ -522,15 +498,10 @@ SCAN NOW
 <tr>
 
 <th>MARKET</th>
-
 <th>PRICE</th>
-
 <th>MOVEMENT</th>
-
 <th>ACTIVITY</th>
-
 <th>STATUS</th>
-
 <th></th>
 
 </tr>
@@ -556,8 +527,6 @@ Waiting for live market data...
 </section>
 
 
-<!-- ANALYSIS CARDS -->
-
 <div class="analysis-grid">
 
 
@@ -578,10 +547,7 @@ class="big-value"
 ---
 </div>
 
-<div
-id="strongestMove"
-class="signal"
->
+<div class="signal">
 
 <div class="signal-title">
 RECENT MOVEMENT
@@ -669,8 +635,6 @@ NEXTRADE LIVE BACKEND
 </div>
 
 
-<!-- TOP MOVERS -->
-
 <div class="movers">
 
 
@@ -681,7 +645,7 @@ Top Upward Movement
 </h2>
 
 <p>
-Markets with the strongest positive movement in the current sample.
+Markets with the strongest positive movement.
 </p>
 
 <div
@@ -701,7 +665,7 @@ Top Downward Movement
 </h2>
 
 <p>
-Markets with the strongest negative movement in the current sample.
+Markets with the strongest negative movement.
 </p>
 
 <div
@@ -721,11 +685,9 @@ Waiting for data...
 
 <strong>ANALYSIS NOTICE:</strong>
 The scanner displays live market information and simple movement measurements.
-It does not guarantee future price direction or trading results. Use it as an
-analysis aid rather than as a guaranteed buy or sell signal.
+It does not guarantee future price direction or trading results.
 
 </div>
-
 
 </div>
 
@@ -744,7 +706,6 @@ NEX<span>TRADE</span>
 
 
 <script>
-
 
 const BACKEND =
 "wss://nextrade-backened.onrender.com";
@@ -809,14 +770,12 @@ let socket;
 
 let marketData = {};
 
-let tickCounter = 0;
-
-
-/* CREATE DATA OBJECT */
 
 markets.forEach(market => {
 
 marketData[market.symbol] = {
+
+symbol:market.symbol,
 
 name:market.name,
 
@@ -844,13 +803,11 @@ document.getElementById("statusText");
 
 function connectScanner(){
 
-
 statusText.textContent =
 "CONNECTING SCANNER";
 
 statusDot.className =
 "status-dot";
-
 
 try{
 
@@ -924,7 +881,7 @@ return;
 const tick =
 data.data;
 
-if(!tick || !tick.symbol){
+if(!tick){
 
 return;
 
@@ -945,6 +902,13 @@ const price =
 Number(tick.price);
 
 
+if(!Number.isFinite(price)){
+
+return;
+
+}
+
+
 market.previous =
 market.price;
 
@@ -963,23 +927,20 @@ market.history.shift();
 }
 
 
-if(
-market.history.length > 1
-){
+if(market.history.length > 1){
 
 const first =
 market.history[0];
 
+if(first !== 0){
+
 market.movement =
-(
-(price - first) /
-first
-) * 100;
+((price - first) / first) * 100;
 
 }
 
+}
 
-tickCounter++;
 
 renderScanner();
 
@@ -1015,8 +976,6 @@ connectScanner,
 }
 
 
-/* FORMAT PRICE */
-
 function formatPrice(value){
 
 if(value === null){
@@ -1037,28 +996,22 @@ maximumFractionDigits:8
 }
 
 
-/* FORMAT MOVEMENT */
-
 function formatMovement(value){
 
 if(!Number.isFinite(value)){
 
-return "0.00%";
+return "0.000%";
 
 }
 
 return (
-value >= 0
-? "+"
-: ""
+value >= 0 ? "+" : ""
 ) +
 value.toFixed(3) +
 "%";
 
 }
 
-
-/* ACTIVITY */
 
 function getActivity(market){
 
@@ -1085,8 +1038,6 @@ return "LOW";
 }
 
 
-/* RENDER */
-
 function renderScanner(){
 
 const body =
@@ -1102,8 +1053,7 @@ marketData[market.symbol]
 )
 .sort(
 (a,b) =>
-Math.abs(b.movement)
--
+Math.abs(b.movement) -
 Math.abs(a.movement)
 );
 
@@ -1117,12 +1067,14 @@ sorted.forEach(market => {
 let movementClass =
 "neutral";
 
+
 if(market.movement > 0){
 
 movementClass =
 "up";
 
 }
+
 
 if(market.movement < 0){
 
@@ -1153,27 +1105,19 @@ ${market.symbol}
 </td>
 
 <td class="price">
-
 ${formatPrice(market.price)}
-
 </td>
 
 <td class="${movementClass}">
-
 ${formatMovement(market.movement)}
-
 </td>
 
 <td>
-
 ${activity}
-
 </td>
 
 <td class="live">
-
 ● LIVE
-
 </td>
 
 <td>
@@ -1202,8 +1146,6 @@ updateSummary();
 
 }
 
-
-/* SUMMARY */
 
 function updateSummary(){
 
@@ -1240,8 +1182,7 @@ market.price !== null
 )
 .sort(
 (a,b) =>
-Math.abs(b.movement)
--
+Math.abs(b.movement) -
 Math.abs(a.movement)
 )[0];
 
@@ -1299,6 +1240,7 @@ up,
 true
 );
 
+
 renderMovers(
 "downMovers",
 down,
@@ -1314,8 +1256,6 @@ new Date()
 
 }
 
-
-/* MOVERS */
 
 function renderMovers(
 elementId,
@@ -1375,8 +1315,6 @@ market.movement
 }
 
 
-/* MANUAL SCAN */
-
 function scanMarkets(){
 
 renderScanner();
@@ -1389,4 +1327,4 @@ connectScanner();
 </script>
 
 </body>
-            </html>
+</html>
