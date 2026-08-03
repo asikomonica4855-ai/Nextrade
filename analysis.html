@@ -3,15 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXTRADE | Analysis</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
@@ -39,9 +34,7 @@ font-weight:800;
 white-space:nowrap;
 }
 
-.logo span{
-color:#159ff0;
-}
+.logo span{color:#159ff0}
 
 .nav{
 display:flex;
@@ -64,9 +57,7 @@ background:#102536;
 color:#fff;
 }
 
-.nav a.active{
-color:#159ff0;
-}
+.nav a.active{color:#159ff0}
 
 .nav .signup{
 background:#159ff0;
@@ -414,13 +405,8 @@ font-size:20px;
 font-weight:bold;
 }
 
-.green{
-color:#2edb9c;
-}
-
-.red{
-color:#ff5969;
-}
+.green{color:#2edb9c}
+.red{color:#ff5969}
 
 /* CHART */
 
@@ -561,9 +547,7 @@ font-size:14px;
 font-weight:bold;
 }
 
-.footer-logo span{
-color:#159ff0;
-}
+.footer-logo span{color:#159ff0}
 
 @media(max-width:1000px){
 
@@ -622,7 +606,6 @@ NEX<span>TRADE</span>
 </div>
 
 <nav class="nav">
-
 <a href="index.html">HOME</a>
 <a href="markets.html">MARKETS</a>
 <a href="tools.html">TOOLS</a>
@@ -631,7 +614,6 @@ NEX<span>TRADE</span>
 <a href="manual-trading.html">MANUAL TRADING</a>
 <a href="login.html">LOGIN</a>
 <a href="signup.html" class="signup">SIGN UP</a>
-
 </nav>
 
 </header>
@@ -641,23 +623,13 @@ NEX<span>TRADE</span>
 <div class="heading">
 
 <div>
-
 <h1>Market Analysis</h1>
-
-<p>
-Live digit analysis using a rolling 100-tick sample.
-</p>
-
+<p>Live digit analysis using a rolling 100-tick sample.</p>
 </div>
 
 <div class="status">
-
 <span id="statusDot" class="status-dot"></span>
-
-<span id="statusText">
-CONNECTING
-</span>
-
+<span id="statusText">CONNECTING</span>
 </div>
 
 </div>
@@ -675,45 +647,16 @@ ANALYZING MARKET
 
 <select id="marketSelect">
 
-<option value="1HZ100V">
-Volatility 100 (1s)
-</option>
-
-<option value="1HZ75V">
-Volatility 75 (1s)
-</option>
-
-<option value="1HZ50V">
-Volatility 50 (1s)
-</option>
-
-<option value="1HZ25V">
-Volatility 25 (1s)
-</option>
-
-<option value="1HZ10V">
-Volatility 10 (1s)
-</option>
-
-<option value="R_100">
-Volatility 100
-</option>
-
-<option value="R_75">
-Volatility 75
-</option>
-
-<option value="R_50">
-Volatility 50
-</option>
-
-<option value="R_25">
-Volatility 25
-</option>
-
-<option value="R_10">
-Volatility 10
-</option>
+<option value="1HZ100V">Volatility 100 (1s)</option>
+<option value="1HZ75V">Volatility 75 (1s)</option>
+<option value="1HZ50V">Volatility 50 (1s)</option>
+<option value="1HZ25V">Volatility 25 (1s)</option>
+<option value="1HZ10V">Volatility 10 (1s)</option>
+<option value="R_100">Volatility 100</option>
+<option value="R_75">Volatility 75</option>
+<option value="R_50">Volatility 50</option>
+<option value="R_25">Volatility 25</option>
+<option value="R_10">Volatility 10</option>
 
 </select>
 
@@ -725,39 +668,28 @@ Volatility 10
 LIVE PRICE
 </div>
 
-<div id="price" class="price">
----
-</div>
+<div id="price" class="price">---</div>
 
 </div>
 
 </div>
 
 
-<!-- SAMPLE STATUS -->
+<!-- SAMPLE -->
 
 <div class="sample-status">
 
 <div class="sample-left">
 
-<div
-id="sampleIcon"
-class="sample-icon"
-></div>
+<div id="sampleIcon" class="sample-icon"></div>
 
 <div>
 
-<div
-id="sampleTitle"
-class="sample-title"
->
+<div id="sampleTitle" class="sample-title">
 BUILDING SAMPLE
 </div>
 
-<div
-id="sampleSub"
-class="sample-sub"
->
+<div id="sampleSub" class="sample-sub">
 Collecting live ticks...
 </div>
 
@@ -765,49 +697,34 @@ Collecting live ticks...
 
 </div>
 
-<div
-id="samplePercent"
-class="sample-percent"
->
+<div id="samplePercent" class="sample-percent">
 0%
 </div>
 
 </div>
 
 
-<!-- DIGITS -->
+<!-- DIGIT SCANNER -->
 
 <div class="scanner">
 
 <div class="scanner-head">
 
-<h2>
-Digit Strength Scanner
-</h2>
+<h2>Digit Strength Scanner</h2>
 
-<div
-id="sampleCount"
-class="sample-count"
->
+<div id="sampleCount" class="sample-count">
 0 / 100 TICKS
 </div>
 
 </div>
 
 <p class="description">
-
 The scanner builds a 100-tick sample. Strongest and weakest
-labels are only activated after the sample reaches 100 ticks.
-
+labels activate only after the sample reaches 100 ticks.
 </p>
 
-<div
-id="digits"
-class="digits"
-></div>
+<div id="digits" class="digits"></div>
 
-
-<!-- RANKING -->
 
 <div class="ranking">
 
@@ -815,8 +732,7 @@ class="digits"
 DIGIT RANKING
 </div>
 
-<div id="rankingRows">
-</div>
+<div id="rankingRows"></div>
 
 </div>
 
@@ -833,10 +749,7 @@ DIGIT RANKING
 STRONGEST DIGIT
 </div>
 
-<div
-id="strong"
-class="value green"
->
+<div id="strong" class="value green">
 WAITING
 </div>
 
@@ -848,10 +761,7 @@ WAITING
 WEAKEST DIGIT
 </div>
 
-<div
-id="weak"
-class="value red"
->
+<div id="weak" class="value red">
 WAITING
 </div>
 
@@ -863,10 +773,7 @@ WAITING
 LATEST DIGIT
 </div>
 
-<div
-id="latest"
-class="value"
->
+<div id="latest" class="value">
 ---
 </div>
 
@@ -878,10 +785,7 @@ class="value"
 TICKS ANALYZED
 </div>
 
-<div
-id="total"
-class="value"
->
+<div id="total" class="value">
 0
 </div>
 
@@ -890,15 +794,13 @@ class="value"
 </div>
 
 
-<!-- CHART -->
+<!-- LIVE CHART -->
 
 <div class="chart-panel">
 
 <div class="chart-head">
 
-<h2>
-Live Tick Movement
-</h2>
+<h2>Live Tick Movement</h2>
 
 <div class="chart-live">
 ● REAL-TIME
@@ -910,20 +812,11 @@ Live Tick Movement
 
 <canvas id="canvas"></canvas>
 
-<div
-id="pointer"
-class="pointer"
-></div>
+<div id="pointer" class="pointer"></div>
 
-<div
-id="pointerDot"
-class="pointer-dot"
-></div>
+<div id="pointerDot" class="pointer-dot"></div>
 
-<div
-id="pointerLabel"
-class="pointer-label"
->
+<div id="pointerLabel" class="pointer-label">
 Waiting for ticks...
 </div>
 
@@ -936,14 +829,9 @@ Waiting for ticks...
 
 <div class="recent">
 
-<h2>
-Recent Digits
-</h2>
+<h2>Recent Digits</h2>
 
-<div
-id="recent"
-class="recent-digits"
-></div>
+<div id="recent" class="recent-digits"></div>
 
 </div>
 
@@ -969,95 +857,93 @@ Digit frequency does not guarantee the next digit.
 NEX<span>TRADE</span>
 </div>
 
-<div>
-© 2026 NEXTRADE
-</div>
+<div>© 2026 NEXTRADE</div>
 
 </footer>
 
 
 <script>
 
-const BACKEND=
+const BACKEND =
 "wss://nextrade-backened.onrender.com";
 
 let socket;
 
-let selectedSymbol=
+let selectedSymbol =
 "1HZ100V";
 
-let digits=[];
+let digits = [];
 
-let counts=
+let counts =
 Array(10).fill(0);
 
-let prices=[];
+let prices = [];
 
 
-const marketSelect=
+const marketSelect =
 document.getElementById("marketSelect");
 
-const price=
+const price =
 document.getElementById("price");
 
-const sample=
+const sample =
 document.getElementById("sampleCount");
 
-const sampleIcon=
+const sampleIcon =
 document.getElementById("sampleIcon");
 
-const sampleTitle=
+const sampleTitle =
 document.getElementById("sampleTitle");
 
-const sampleSub=
+const sampleSub =
 document.getElementById("sampleSub");
 
-const samplePercent=
+const samplePercent =
 document.getElementById("samplePercent");
 
-const strong=
+const strong =
 document.getElementById("strong");
 
-const weak=
+const weak =
 document.getElementById("weak");
 
-const latest=
+const latest =
 document.getElementById("latest");
 
-const total=
+const total =
 document.getElementById("total");
 
-const digitsBox=
+const digitsBox =
 document.getElementById("digits");
 
-const rankingRows=
+const rankingRows =
 document.getElementById("rankingRows");
 
-const recent=
+const recent =
 document.getElementById("recent");
 
-const statusText=
+const statusText =
 document.getElementById("statusText");
 
-const statusDot=
+const statusDot =
 document.getElementById("statusDot");
 
-const chart=
+const chart =
 document.getElementById("chart");
 
-const canvas=
+const canvas =
 document.getElementById("canvas");
 
-const ctx=
+const ctx =
 canvas.getContext("2d");
 
-const pointer=
+const pointer =
 document.getElementById("pointer");
 
-const pointerDot=
+const pointerDot =
 document.getElementById("pointerDot");
 
-const pointerLabel=
+const pointerLabel =
 document.getElementById("pointerLabel");
 
 
@@ -1065,28 +951,20 @@ document.getElementById("pointerLabel");
 
 function buildDigits(){
 
-digitsBox.innerHTML="";
+digitsBox.innerHTML = "";
 
-for(
-let i=0;
-i<10;
-i++
-){
+for(let i=0;i<10;i++){
 
-const el=
+const el =
 document.createElement("div");
 
-el.className="digit";
+el.className = "digit";
 
-el.id=
-"digit-"+i;
+el.id = "digit-" + i;
 
-el.innerHTML=`
+el.innerHTML = `
 
-<div
-id="rank-${i}"
-class="rank"
->
+<div id="rank-${i}" class="rank">
 —
 </div>
 
@@ -1094,24 +972,15 @@ class="rank"
 ${i}
 </div>
 
-<div
-id="percent-${i}"
-class="digit-percent"
->
+<div id="percent-${i}" class="digit-percent">
 0.0%
 </div>
 
-<div
-id="count-${i}"
-class="digit-count"
->
+<div id="count-${i}" class="digit-count">
 0 hits
 </div>
 
-<div
-id="badge-${i}"
-class="badge"
->
+<div id="badge-${i}" class="badge">
 </div>
 
 `;
@@ -1127,9 +996,8 @@ digitsBox.appendChild(el);
 
 function lastDigit(value){
 
-const text=
-String(value)
-.replace(/\D/g,"");
+const text =
+String(value).replace(/\D/g,"");
 
 if(!text){
 return null;
@@ -1142,7 +1010,7 @@ text[text.length-1]
 }
 
 
-/* PRICE */
+/* PRICE FORMAT */
 
 function formatPrice(value){
 
@@ -1158,44 +1026,42 @@ maximumFractionDigits:8
 }
 
 
-/* SAMPLE */
+/* SAMPLE STATUS */
 
 function updateSample(){
 
-const n=
+const n =
 digits.length;
 
-sample.textContent=
-n+
-" / 100 TICKS";
+sample.textContent =
+n + " / 100 TICKS";
 
-samplePercent.textContent=
-Math.min(n,100)+
-"%";
+samplePercent.textContent =
+Math.min(n,100) + "%";
 
 
-if(n<100){
+if(n < 100){
 
-sampleTitle.textContent=
+sampleTitle.textContent =
 "BUILDING SAMPLE";
 
-sampleSub.textContent=
-"Collecting live ticks... "+
-(100-n)+
+sampleSub.textContent =
+"Collecting live ticks... " +
+(100-n) +
 " more needed";
 
-sampleIcon.className=
+sampleIcon.className =
 "sample-icon";
 
 }else{
 
-sampleTitle.textContent=
+sampleTitle.textContent =
 "FULL SAMPLE — 100 TICKS";
 
-sampleSub.textContent=
+sampleSub.textContent =
 "Rolling 100-tick analysis is active";
 
-sampleIcon.className=
+sampleIcon.className =
 "sample-icon full";
 
 }
@@ -1207,38 +1073,36 @@ sampleIcon.className=
 
 function updateRanking(){
 
-const sorted=
-Array
-.from(
+const n =
+digits.length;
+
+const sorted =
+Array.from(
 {length:10},
 (_,i)=>i
-)
-.sort(
+).sort(
 (a,b)=>
 counts[b]-counts[a]
 );
 
-rankingRows.innerHTML="";
+rankingRows.innerHTML = "";
 
 
 sorted.forEach(
 (digit,index)=>{
 
-const n=
-digits.length;
-
-const percent=
-n?
-counts[digit]/n*100:
+const percent =
+n ?
+(counts[digit]/n)*100 :
 0;
 
-const row=
+const row =
 document.createElement("div");
 
-row.className=
+row.className =
 "rank-row";
 
-row.innerHTML=`
+row.innerHTML = `
 
 <div class="rank-position">
 #${index+1}
@@ -1249,10 +1113,12 @@ ${digit}
 </div>
 
 <div class="rank-bar">
+
 <div
 class="rank-fill"
 style="width:${percent}%"
 ></div>
+
 </div>
 
 <div class="rank-percent">
@@ -1264,11 +1130,9 @@ ${percent.toFixed(1)}%
 rankingRows.appendChild(row);
 
 
-/* Circle ranking */
-
 document.getElementById(
 "rank-"+digit
-).textContent=
+).textContent =
 "#"+(index+1);
 
 });
@@ -1280,28 +1144,23 @@ document.getElementById(
 
 function updateScanner(){
 
-const n=
+const n =
 digits.length;
 
 updateSample();
 
-total.textContent=n;
+total.textContent =
+n;
 
 
-/* Reset labels */
+for(let i=0;i<10;i++){
 
-for(
-let i=0;
-i<10;
-i++
-){
-
-const box=
+const box =
 document.getElementById(
 "digit-"+i
 );
 
-const badge=
+const badge =
 document.getElementById(
 "badge-"+i
 );
@@ -1311,72 +1170,70 @@ box.classList.remove(
 "weak"
 );
 
-badge.style.display=
+badge.style.display =
 "none";
 
-const percent=
-n?
-counts[i]/n*100:
+const percent =
+n ?
+(counts[i]/n)*100 :
 0;
 
 document.getElementById(
 "percent-"+i
-).textContent=
-percent.toFixed(1)+
-"%";
+).textContent =
+percent.toFixed(1) + "%";
 
 document.getElementById(
 "count-"+i
-).textContent=
-counts[i]+
-" hits";
+).textContent =
+counts[i] + " hits";
 
 }
 
 
-/* CONFIRM ONLY AT 100 */
+/*
+Only activate strongest/weakest
+after the full 100-tick sample.
+*/
 
-if(n>=100){
+if(n >= 100){
 
-let strongest=
-0;
+let strongest = 0;
 
-let weakest=
-0;
+let weakest = 0;
 
-for(
-let i=1;
-i<10;
-i++
-){
+for(let i=1;i<10;i++){
 
 if(
-counts[i]>
+counts[i] >
 counts[strongest]
 ){
-
-strongest=i;
-
+strongest = i;
 }
 
 if(
-counts[i]<
+counts[i] <
 counts[weakest]
 ){
-
-weakest=i;
-
+weakest = i;
 }
 
 }
 
 
-const strongBox=
+const strongestPercent =
+(counts[strongest]/n)*100;
+
+const weakestPercent =
+(counts[weakest]/n)*100;
+
+
+const strongBox =
 document.getElementById(
 "digit-"+strongest
 );
 
-const weakBox=
+const weakBox =
 document.getElementById(
 "digit-"+weakest
 );
@@ -1390,59 +1247,53 @@ weakBox.classList.add(
 );
 
 
-const strongBadge=
+const strongBadge =
 document.getElementById(
 "badge-"+strongest
 );
 
-const weakBadge=
+const weakBadge =
 document.getElementById(
 "badge-"+weakest
 );
 
-strongBadge.textContent=
+strongBadge.textContent =
 "STRONG";
 
-strongBadge.style.display=
+strongBadge.style.display =
 "block";
 
-weakBadge.textContent=
+weakBadge.textContent =
 "WEAK";
 
-weakBadge.style.display=
+weakBadge.style.display =
 "block";
 
 
-strong.textContent=
-strongest+
-" • "+
-(
-counts[strongest]
-).toFixed(0)+
+/*
+CORRECTED SUMMARY:
+show percentages, not hits.
+*/
+
+strong.textContent =
+strongest +
+" • " +
+strongestPercent.toFixed(1) +
 "%";
 
-strong.textContent=
-strongest+
-" • "+
-(
-counts[strongest]
-).toFixed(0)+
-" hits";
 
-weak.textContent=
-weakest+
-" • "+
-(
-counts[weakest]
-).toFixed(0)+
-" hits";
+weak.textContent =
+weakest +
+" • " +
+weakestPercent.toFixed(1) +
+"%";
 
 }else{
 
-strong.textContent=
+strong.textContent =
 "WAITING";
 
-weak.textContent=
+weak.textContent =
 "WAITING";
 
 }
@@ -1450,7 +1301,7 @@ weak.textContent=
 
 if(n){
 
-latest.textContent=
+latest.textContent =
 digits[n-1];
 
 }
@@ -1462,24 +1313,25 @@ renderRecent();
 }
 
 
-/* RECENT */
+/* RECENT DIGITS */
 
 function renderRecent(){
 
-recent.innerHTML="";
+recent.innerHTML = "";
 
 digits
 .slice(-30)
 .forEach(
 d=>{
 
-const el=
+const el =
 document.createElement("div");
 
-el.className=
+el.className =
 "recent-digit";
 
-el.textContent=d;
+el.textContent =
+d;
 
 recent.appendChild(el);
 
@@ -1492,19 +1344,17 @@ recent.appendChild(el);
 
 function addTick(value){
 
-const number=
+const number =
 Number(value);
 
-const digit=
+const digit =
 lastDigit(value);
 
 if(
-!Number.isFinite(number)||
-digit===null
+!Number.isFinite(number) ||
+digit === null
 ){
-
 return;
-
 }
 
 
@@ -1517,33 +1367,29 @@ prices.push(number);
 
 /* ROLLING 100 */
 
-if(
-digits.length>100
-){
+if(digits.length > 100){
 
-const removed=
+const removed =
 digits.shift();
 
 counts[removed]--;
 
 }
 
-if(
-prices.length>100
-){
+if(prices.length > 100){
 
 prices.shift();
 
 }
 
 
-price.textContent=
+price.textContent =
 formatPrice(number);
 
 
 /* FLASH */
 
-const box=
+const box =
 document.getElementById(
 "digit-"+digit
 );
@@ -1571,21 +1417,18 @@ movePointer();
 }
 
 
-/* CANVAS */
+/* RESIZE */
 
 function resize(){
 
-const ratio=
-window.devicePixelRatio||
-1;
+const ratio =
+window.devicePixelRatio || 1;
 
-canvas.width=
-canvas.clientWidth*
-ratio;
+canvas.width =
+canvas.clientWidth * ratio;
 
-canvas.height=
-canvas.clientHeight*
-ratio;
+canvas.height =
+canvas.clientHeight * ratio;
 
 ctx.setTransform(
 ratio,
@@ -1607,10 +1450,10 @@ movePointer();
 
 function draw(){
 
-const w=
+const w =
 canvas.clientWidth;
 
-const h=
+const h =
 canvas.clientHeight;
 
 ctx.clearRect(
@@ -1620,137 +1463,120 @@ w,
 h
 );
 
-if(
-prices.length<2
-){
-
+if(prices.length < 2){
 return;
-
 }
 
-let min=
+let min =
 Math.min(...prices);
 
-let max=
+let max =
 Math.max(...prices);
 
-if(min===max){
+if(min === max){
 
-min-=1;
-max+=1;
+min -= 1;
+max += 1;
 
 }
 
-const pad=22;
+const pad = 22;
 
 ctx.beginPath();
 
 prices.forEach(
 (p,i)=>{
 
-const x=
-pad+
-i/
-(prices.length-1)*
+const x =
+pad +
+i/(prices.length-1) *
 (w-pad*2);
 
-const y=
-h-pad-
-(p-min)/
-(max-min)*
+const y =
+h-pad -
+(p-min)/(max-min) *
 (h-pad*2);
 
 if(i===0){
-
 ctx.moveTo(x,y);
-
 }else{
-
 ctx.lineTo(x,y);
-
 }
 
 });
 
-
-ctx.strokeStyle=
+ctx.strokeStyle =
 "#159ff0";
 
-ctx.lineWidth=2;
+ctx.lineWidth = 2;
 
 ctx.stroke();
 
 }
 
 
-/* POINTER */
+/* MOVING POINTER */
 
 function movePointer(){
 
-if(
-!prices.length
-){
-
+if(!prices.length){
 return;
-
 }
 
-const w=
+const w =
 chart.clientWidth;
 
-const h=
+const h =
 chart.clientHeight;
 
-const index=
+const index =
 prices.length-1;
 
-const x=
+const x =
 prices.length===1
 ?
 w/2
 :
-22+
-index/
-(prices.length-1)*
+22 +
+index/(prices.length-1) *
 (w-44);
 
 
-let min=
+let min =
 Math.min(...prices);
 
-let max=
+let max =
 Math.max(...prices);
 
 if(min===max){
 
-min-=1;
-max+=1;
+min -= 1;
+max += 1;
 
 }
 
-const p=
+const p =
 prices[index];
 
-const y=
-h-22-
-(p-min)/
-(max-min)*
+const y =
+h-22 -
+(p-min)/(max-min) *
 (h-44);
 
 
-pointer.style.left=
+pointer.style.left =
 x+"px";
 
-pointerDot.style.left=
+pointerDot.style.left =
 x+"px";
 
-pointerDot.style.top=
+pointerDot.style.top =
 y+"px";
 
-pointerLabel.textContent=
-"Tick "+
-prices.length+
-" • "+
+pointerLabel.textContent =
+"Tick " +
+prices.length +
+" • " +
 formatPrice(p);
 
 }
@@ -1760,24 +1586,24 @@ formatPrice(p);
 
 function connect(){
 
-statusText.textContent=
+statusText.textContent =
 "CONNECTING";
 
-statusDot.className=
+statusDot.className =
 "status-dot";
 
 
 try{
 
-socket=
+socket =
 new WebSocket(BACKEND);
 
 }catch(e){
 
-statusText.textContent=
+statusText.textContent =
 "ERROR";
 
-statusDot.className=
+statusDot.className =
 "status-dot error";
 
 return;
@@ -1785,26 +1611,26 @@ return;
 }
 
 
-socket.onopen=
+socket.onopen =
 function(){
 
-statusText.textContent=
+statusText.textContent =
 "LIVE";
 
-statusDot.className=
+statusDot.className =
 "status-dot live";
 
 };
 
 
-socket.onmessage=
+socket.onmessage =
 function(event){
 
 let data;
 
 try{
 
-data=
+data =
 JSON.parse(event.data);
 
 }catch(e){
@@ -1814,16 +1640,14 @@ return;
 }
 
 
-if(
-data.type==="status"
-){
+if(data.type === "status"){
 
 if(data.connected){
 
-statusText.textContent=
+statusText.textContent =
 "LIVE";
 
-statusDot.className=
+statusDot.className =
 "status-dot live";
 
 }
@@ -1833,26 +1657,20 @@ return;
 }
 
 
-if(
-data.type!=="tick"
-){
-
+if(data.type !== "tick"){
 return;
-
 }
 
 
-const tick=
+const tick =
 data.data;
 
 if(
-!tick||
-tick.symbol!==selectedSymbol||
-tick.price===undefined
+!tick ||
+tick.symbol !== selectedSymbol ||
+tick.price === undefined
 ){
-
 return;
-
 }
 
 addTick(
@@ -1862,25 +1680,25 @@ tick.price
 };
 
 
-socket.onerror=
+socket.onerror =
 function(){
 
-statusText.textContent=
+statusText.textContent =
 "ERROR";
 
-statusDot.className=
+statusDot.className =
 "status-dot error";
 
 };
 
 
-socket.onclose=
+socket.onclose =
 function(){
 
-statusText.textContent=
+statusText.textContent =
 "RECONNECTING";
 
-statusDot.className=
+statusDot.className =
 "status-dot";
 
 setTimeout(
@@ -1899,26 +1717,26 @@ marketSelect.addEventListener(
 "change",
 function(){
 
-selectedSymbol=
+selectedSymbol =
 this.value;
 
-digits=[];
+digits = [];
 
-counts=
+counts =
 Array(10).fill(0);
 
-prices=[];
+prices = [];
 
-price.textContent=
+price.textContent =
 "---";
 
-strong.textContent=
+strong.textContent =
 "WAITING";
 
-weak.textContent=
+weak.textContent =
 "WAITING";
 
-latest.textContent=
+latest.textContent =
 "---";
 
 buildDigits();
@@ -1927,7 +1745,7 @@ updateScanner();
 
 draw();
 
-pointerLabel.textContent=
+pointerLabel.textContent =
 "Waiting for new ticks...";
 
 });
