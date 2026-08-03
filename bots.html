@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NEXTRADE | Live Trading Bots</title>
+<title>NEXTRADE | Trading Bots</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
@@ -32,7 +36,9 @@ font-weight:900;
 white-space:nowrap
 }
 
-.logo span{color:#159ff0}
+.logo span{
+color:#159ff0
+}
 
 nav{
 display:flex;
@@ -242,9 +248,13 @@ font-size:34px;
 font-weight:900
 }
 
-.signal-value.buy{color:#2edb9c}
+.signal-value.buy{
+color:#2edb9c
+}
 
-.signal-value.wait{color:#f0b84b}
+.signal-value.wait{
+color:#f0b84b
+}
 
 .signal-strength{
 font-size:9px;
@@ -293,10 +303,6 @@ font-size:13px;
 margin-top:6px
 }
 
-.green{color:#2edb9c}
-
-.red{color:#ff6574}
-
 .digits{
 display:grid;
 grid-template-columns:repeat(5,1fr);
@@ -342,7 +348,7 @@ gap:7px
 
 .signal-row{
 display:grid;
-grid-template-columns:1.3fr .7fr .8fr;
+grid-template-columns:1.5fr .7fr .7fr;
 gap:5px;
 padding:11px;
 border-radius:7px;
@@ -385,7 +391,11 @@ margin-top:30px
 }
 
 @media(max-width:850px){
-.layout{grid-template-columns:1fr}
+
+.layout{
+grid-template-columns:1fr
+}
+
 }
 
 @media(max-width:550px){
@@ -395,7 +405,9 @@ align-items:flex-start;
 flex-direction:column
 }
 
-nav{width:100%}
+nav{
+width:100%
+}
 
 main{
 padding:28px 4%
@@ -410,14 +422,16 @@ grid-template-columns:1fr 1fr
 }
 
 .signal-row{
-grid-template-columns:1.2fr .8fr .8fr
+grid-template-columns:1.2fr .8fr .6fr
 }
 
 }
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -426,71 +440,156 @@ NEX<span>TRADE</span>
 </div>
 
 <nav>
-<a href="index.html">HOME</a>
-<a href="markets.html">MARKETS</a>
-<a href="tools.html">TOOLS</a>
-<a href="bots.html" class="active">BOTS</a>
-<a href="analysis.html">ANALYSIS</a>
-<a href="manual-trading.html">MANUAL TRADING</a>
-<a href="login.html">LOGIN</a>
-<a href="signup.html">SIGN UP</a>
+
+<a href="index.html">
+HOME
+</a>
+
+<a href="markets.html">
+MARKETS
+</a>
+
+<a href="tools.html">
+TOOLS
+</a>
+
+<a href="bots.html" class="active">
+BOTS
+</a>
+
+<a href="analysis.html">
+ANALYSIS
+</a>
+
+<a href="manual-trading.html">
+MANUAL TRADING
+</a>
+
+<a href="login.html">
+LOGIN
+</a>
+
+<a href="signup.html">
+SIGN UP
+</a>
+
 </nav>
 
 </header>
 
 
+
 <main>
+
 
 <div class="page-title">
 
-<small>NEXTRADE LIVE STRATEGY ENGINE</small>
+<small>
+NEXTRADE LIVE STRATEGY ENGINE
+</small>
 
-<h1>Trading Bots</h1>
+<h1>
+Trading Bots
+</h1>
 
 <p>
-Analyze live Deriv volatility ticks and generate strategy
-signals from real market data. This version is analysis-only
-and does not place trades.
+Configure NEXTRADE strategy engines, monitor live
+signals and study automated-style analysis using
+real-time Deriv market data.
 </p>
 
 <div class="status">
-<div class="dot" id="statusDot"></div>
-<span id="statusText">OFFLINE</span>
+
+<div
+class="dot"
+id="statusDot"
+></div>
+
+<span id="statusText">
+OFFLINE
+</span>
+
 </div>
 
 </div>
+
 
 
 <div class="layout">
 
 
+
+<!-- BOT CONTROL -->
+
 <div class="card">
 
 <div class="card-title">
-<h2>Bot Control</h2>
-<span>LIVE DATA</span>
+
+<h2>
+Bot Control
+</h2>
+
+<span>
+LIVE DATA
+</span>
+
 </div>
 
 
-<label>MARKET</label>
+
+<label>
+MARKET
+</label>
 
 <select id="market">
 
-<option value="1HZ100V">Volatility 100 (1s)</option>
-<option value="1HZ75V">Volatility 75 (1s)</option>
-<option value="1HZ50V">Volatility 50 (1s)</option>
-<option value="1HZ25V">Volatility 25 (1s)</option>
-<option value="1HZ10V">Volatility 10 (1s)</option>
-<option value="R_100">Volatility 100</option>
-<option value="R_75">Volatility 75</option>
-<option value="R_50">Volatility 50</option>
-<option value="R_25">Volatility 25</option>
-<option value="R_10">Volatility 10</option>
+<option value="1HZ100V">
+Volatility 100 (1s)
+</option>
+
+<option value="1HZ75V">
+Volatility 75 (1s)
+</option>
+
+<option value="1HZ50V">
+Volatility 50 (1s)
+</option>
+
+<option value="1HZ25V">
+Volatility 25 (1s)
+</option>
+
+<option value="1HZ10V">
+Volatility 10 (1s)
+</option>
+
+<option value="R_100">
+Volatility 100
+</option>
+
+<option value="R_75">
+Volatility 75
+</option>
+
+<option value="R_50">
+Volatility 50
+</option>
+
+<option value="R_25">
+Volatility 25
+</option>
+
+<option value="R_10">
+Volatility 10
+</option>
 
 </select>
 
 
-<label>STRATEGY</label>
+
+<label>
+STRATEGY
+</label>
 
 <select id="strategy">
 
@@ -505,11 +604,14 @@ Recent Movement
 </select>
 
 
+
 <div class="risk-row">
 
 <div>
 
-<label>RISK PER SIGNAL %</label>
+<label>
+RISK PER SIGNAL %
+</label>
 
 <input
 id="risk"
@@ -521,9 +623,12 @@ step="0.1"
 
 </div>
 
+
 <div>
 
-<label>ACCOUNT BALANCE</label>
+<label>
+ACCOUNT BALANCE
+</label>
 
 <input
 id="balance"
@@ -537,12 +642,14 @@ min="1"
 </div>
 
 
+
 <button
 class="start"
 id="start"
 >
 START ANALYSIS
 </button>
+
 
 <button
 class="stop"
@@ -553,48 +660,87 @@ STOP
 </button>
 
 
+
 <div class="notice">
 
-<strong>DEMO / ANALYSIS ONLY</strong><br>
+<strong>
+LIVE ANALYSIS ONLY
+</strong>
 
-Live market data is analyzed in your browser.
-No real order is sent to Deriv and no real money is used.
+<br>
+
+NEXTRADE analyzes public Deriv market data
+and generates informational signals.
+
+No real order is sent to Deriv and no real-money
+trade is executed by this page.
 
 </div>
 
 </div>
 
+
+
+<!-- LIVE ANALYSIS -->
 
 <div>
 
 
+
 <div class="market-info">
 
+
 <div class="stat">
-<small>MARKET</small>
+
+<small>
+MARKET
+</small>
+
 <strong id="marketName">
 Volatility 100 (1s)
 </strong>
+
 </div>
+
 
 <div class="stat">
-<small>LIVE PRICE</small>
-<strong id="price">---</strong>
+
+<small>
+LIVE PRICE
+</small>
+
+<strong id="price">
+---
+</strong>
+
 </div>
+
 
 <div class="stat">
-<small>TICKS</small>
-<strong id="ticks">0</strong>
-</div>
+
+<small>
+TICKS
+</small>
+
+<strong id="ticks">
+0
+</strong>
 
 </div>
 
+
+</div>
+
+
+
+<!-- SIGNAL -->
 
 <div class="signal">
 
 <div class="signal-label">
 LATEST BOT SIGNAL
 </div>
+
 
 <div
 id="signal"
@@ -603,6 +749,7 @@ class="signal-value wait"
 WAITING
 </div>
 
+
 <div
 id="strength"
 class="signal-strength"
@@ -610,22 +757,36 @@ class="signal-strength"
 Start analysis to connect to live market data.
 </div>
 
+
 <div class="signal-bar">
+
 <div
 id="fill"
 class="signal-fill"
 ></div>
-</div>
 
 </div>
 
+</div>
+
+
+
+<!-- DIGITS -->
 
 <div class="card">
 
 <div class="card-title">
-<h2>Digit Strength</h2>
-<span id="sampleText">0 / 100</span>
+
+<h2>
+Digit Strength
+</h2>
+
+<span id="sampleText">
+0 / 100
+</span>
+
 </div>
+
 
 <div
 class="digits"
@@ -639,15 +800,23 @@ id="digits"
 <br>
 
 
+
+<!-- SIGNAL HISTORY -->
+
 <div class="card">
 
 <div class="card-title">
 
-<h2>Recent Signals</h2>
+<h2>
+Recent Signals
+</h2>
 
-<span>LIVE</span>
+<span>
+LIVE
+</span>
 
 </div>
+
 
 <div
 id="signals"
@@ -655,14 +824,25 @@ class="signal-list"
 >
 
 <div class="signal-row">
-<span>Waiting for live data...</span>
-<span>—</span>
-<span>—</span>
-</div>
+
+<span>
+Waiting for live data...
+</span>
+
+<span>
+—
+</span>
+
+<span>
+—
+</span>
 
 </div>
 
 </div>
+
+</div>
+
 
 </div>
 
@@ -671,271 +851,358 @@ class="signal-list"
 </main>
 
 
+
 <footer>
+
 © 2026 NEXTRADE • Live analysis only
+
 </footer>
+
 
 
 <script>
 
-const market=
+
+const market =
 document.getElementById("market");
 
-const strategy=
+const strategy =
 document.getElementById("strategy");
 
-const start=
+const start =
 document.getElementById("start");
 
-const stop=
+const stop =
 document.getElementById("stop");
 
-const statusDot=
+const statusDot =
 document.getElementById("statusDot");
 
-const statusText=
+const statusText =
 document.getElementById("statusText");
 
-const price=
+const price =
 document.getElementById("price");
 
-const ticks=
+const ticks =
 document.getElementById("ticks");
 
-const marketName=
+const marketName =
 document.getElementById("marketName");
 
-const signal=
+const signal =
 document.getElementById("signal");
 
-const strength=
+const strength =
 document.getElementById("strength");
 
-const fill=
+const fill =
 document.getElementById("fill");
 
-const digitsBox=
+const digitsBox =
 document.getElementById("digits");
 
-const sampleText=
+const sampleText =
 document.getElementById("sampleText");
 
-const signals=
+const signals =
 document.getElementById("signals");
 
 
-let socket=null;
+let socket = null;
 
-let running=false;
+let running = false;
 
-let tickTotal=0;
+let tickTotal = 0;
 
-let digitHistory=[];
+let digitHistory = [];
 
-const MAX_TICKS=100;
+const MAX_TICKS = 100;
 
 
-/* DIGIT DISPLAY */
+/* =========================
+   DIGIT SCANNER
+========================= */
 
 function drawDigits(){
 
-const counts=
+const counts =
 Array(10).fill(0);
 
-digitHistory.forEach(d=>{
+digitHistory.forEach(function(d){
 counts[d]++;
 });
 
-let strongest=-1;
-let weakest=-1;
 
-if(digitHistory.length>=100){
+let strongest = -1;
 
-let max=-1;
-let min=Infinity;
+let weakest = -1;
 
-for(let i=0;i<10;i++){
 
-if(counts[i]>max){
+if(digitHistory.length >= 100){
 
-max=counts[i];
-strongest=i;
+let max = -1;
 
-}
+let min = Infinity;
 
-if(counts[i]<min){
-
-min=counts[i];
-weakest=i;
-
-}
-
-}
-
-}
-
-digitsBox.innerHTML="";
 
 for(let i=0;i<10;i++){
 
-const percentage=
+if(counts[i] > max){
+
+max = counts[i];
+
+strongest = i;
+
+}
+
+
+if(counts[i] < min){
+
+min = counts[i];
+
+weakest = i;
+
+}
+
+}
+
+}
+
+
+digitsBox.innerHTML = "";
+
+
+for(let i=0;i<10;i++){
+
+const percentage =
 digitHistory.length
-?((counts[i]/digitHistory.length)*100).toFixed(1)
-:"0.0";
+?
+((counts[i] /
+digitHistory.length) * 100).toFixed(1)
+:
+"0.0";
 
-let cls="digit";
 
-if(i===strongest)
-cls+=" strong";
+let className = "digit";
 
-if(i===weakest)
-cls+=" weak";
 
-const item=
+if(i === strongest){
+
+className += " strong";
+
+}
+
+
+if(i === weakest){
+
+className += " weak";
+
+}
+
+
+const item =
 document.createElement("div");
 
-item.className=cls;
+item.className =
+className;
 
-item.innerHTML=`
-<strong>${i}</strong>
-<span>${percentage}%</span>
+
+item.innerHTML = `
+
+<strong>
+${i}
+</strong>
+
+<span>
+${percentage}%
+</span>
+
 `;
+
 
 digitsBox.appendChild(item);
 
 }
 
-sampleText.textContent=
-digitHistory.length+
+
+sampleText.textContent =
+digitHistory.length +
 " / 100";
 
 }
 
 
-/* GET LAST DIGIT */
+/* =========================
+   LAST DIGIT
+========================= */
 
 function getLastDigit(value){
 
-const text=
+const text =
 String(value);
 
-const clean=
+const clean =
 text.replace(/\D/g,"");
 
-if(!clean)return null;
+
+if(!clean){
+
+return null;
+
+}
+
 
 return Number(
-clean.charAt(clean.length-1)
+clean.charAt(clean.length - 1)
 );
 
 }
 
 
-/* GENERATE SIGNAL */
+/* =========================
+   ANALYSIS ENGINE
+========================= */
 
 function analyze(){
 
-if(digitHistory.length<20){
+if(digitHistory.length < 20){
 
-signal.textContent="BUILDING";
+signal.textContent =
+"BUILDING";
 
-signal.className=
+signal.className =
 "signal-value wait";
 
-strength.textContent=
-"Collecting live ticks... "+
-digitHistory.length+
+
+strength.textContent =
+"Collecting live ticks... " +
+digitHistory.length +
 " / 20";
 
-fill.style.width=
+
+fill.style.width =
 Math.min(
-(digitHistory.length/20)*100,
+(digitHistory.length / 20) * 100,
 100
-)+"%";
+) + "%";
+
 
 return;
 
 }
 
 
-const counts=
+const counts =
 Array(10).fill(0);
 
-digitHistory.forEach(d=>{
+
+digitHistory.forEach(function(d){
 counts[d]++;
 });
 
 
-let strongest=0;
-let weakest=0;
+let strongest = 0;
+
+let weakest = 0;
+
 
 for(let i=1;i<10;i++){
 
-if(counts[i]>counts[strongest])
-strongest=i;
+if(
+counts[i] >
+counts[strongest]
+){
 
-if(counts[i]<counts[weakest])
-weakest=i;
+strongest = i;
 
 }
 
 
-let percentage=
-(counts[strongest]/
-digitHistory.length)*100;
-
-
-let result="WAIT";
-
-let confidence=50;
-
-
 if(
-digitHistory.length>=100 &&
-percentage>=15
+counts[i] <
+counts[weakest]
 ){
 
-result="BUY";
+weakest = i;
 
-confidence=
+}
+
+}
+
+
+const percentage =
+(counts[strongest] /
+digitHistory.length) * 100;
+
+
+let result = "WAIT";
+
+let confidence = 50;
+
+
+/*
+The signal only becomes BUY after
+the rolling sample reaches 100 ticks
+and the strongest digit reaches the
+defined strength threshold.
+*/
+
+if(
+digitHistory.length >= 100 &&
+percentage >= 15
+){
+
+result = "BUY";
+
+
+confidence =
 Math.min(
 95,
 Math.round(
-percentage*4.5
+percentage * 4.5
 )
 );
 
 }else{
 
-confidence=
+confidence =
 Math.round(
-50+
-percentage*1.5
+50 + percentage * 1.5
 );
 
 }
 
 
-signal.textContent=result;
+signal.textContent =
+result;
 
-signal.className=
-"signal-value "+
-(result==="BUY"?"buy":"wait");
 
-strength.textContent=
-"Strongest digit "+
-strongest+
-" • "+
-percentage.toFixed(1)+
-"% • Confidence "+
-confidence+
+signal.className =
+"signal-value " +
+(
+result === "BUY"
+?
+"buy"
+:
+"wait"
+);
+
+
+strength.textContent =
+"Confidence: " +
+confidence +
+"% • Based on live ticks";
+
+
+fill.style.width =
+confidence +
 "%";
 
-fill.style.width=
-confidence+"%";
 
-
-if(digitHistory.length>=20){
+if(
+digitHistory.length >= 20
+){
 
 addSignal(
 result,
@@ -947,31 +1214,45 @@ confidence
 }
 
 
-/* SIGNAL HISTORY */
+/* =========================
+   SIGNAL HISTORY
+========================= */
 
-function addSignal(result,confidence){
+function addSignal(
+result,
+confidence
+){
 
-const rows=
-signals.querySelectorAll(
+const first =
+signals.querySelector(
 ".signal-row"
 );
 
+
 if(
-rows.length &&
-rows[0].dataset.tick===
+first &&
+first.dataset.tick ===
 String(tickTotal)
-)return;
+){
+
+return;
+
+}
 
 
-const row=
+const row =
 document.createElement("div");
 
-row.className="signal-row";
 
-row.dataset.tick=
+row.className =
+"signal-row";
+
+
+row.dataset.tick =
 String(tickTotal);
 
-row.innerHTML=`
+
+row.innerHTML = `
 
 <span>
 ${marketName.textContent}
@@ -980,9 +1261,11 @@ ${marketName.textContent}
 <span>
 
 <span class="badge ${
-result==="BUY"
-?"buy"
-:"wait"
+result === "BUY"
+?
+"buy"
+:
+"wait"
 }">
 ${result}
 </span>
@@ -995,11 +1278,12 @@ ${confidence}%
 
 `;
 
+
 signals.prepend(row);
 
 
 while(
-signals.children.length>8
+signals.children.length > 8
 ){
 
 signals.removeChild(
@@ -1011,85 +1295,111 @@ signals.lastChild
 }
 
 
-/* CONNECT */
+/* =========================
+   DERIV CONNECTION
+========================= */
 
 function connect(){
 
 if(socket){
 
 try{
+
 socket.close();
+
 }catch(e){}
 
 }
 
 
-socket=
+socket =
 new WebSocket(
 "wss://ws.derivws.com/websockets/v3?app_id=1089"
 );
 
 
-socket.onopen=function(){
+socket.onopen =
+function(){
 
-statusDot.classList.add("live");
+statusDot.classList.add(
+"live"
+);
 
-statusText.textContent=
-"LIVE";
+statusText.textContent =
+"LIVE ANALYSIS";
+
 
 socket.send(
 JSON.stringify({
-ticks:market.value,
-subscribe:1
+
+ticks: market.value,
+
+subscribe: 1
+
 })
 );
 
 };
 
 
-socket.onmessage=function(event){
+socket.onmessage =
+function(event){
 
 try{
 
-const data=
+const data =
 JSON.parse(event.data);
+
 
 if(
 data.tick &&
-data.tick.quote!==undefined
+data.tick.quote !== undefined
 ){
 
-const quote=
-Number(data.tick.quote);
+const quote =
+Number(
+data.tick.quote
+);
 
-price.textContent=
+
+price.textContent =
 quote.toFixed(
 data.tick.pip_size || 2
 );
 
+
 tickTotal++;
 
-ticks.textContent=
+
+ticks.textContent =
 tickTotal;
 
-const digit=
+
+const digit =
 getLastDigit(
 data.tick.quote
 );
 
-if(digit!==null){
 
-digitHistory.push(digit);
+if(digit !== null){
+
+digitHistory.push(
+digit
+);
+
 
 if(
-digitHistory.length>MAX_TICKS
+digitHistory.length >
+MAX_TICKS
 ){
 
 digitHistory.shift();
 
 }
 
+
 drawDigits();
+
 
 if(running){
 
@@ -1104,7 +1414,7 @@ analyze();
 }catch(error){
 
 console.log(
-"Tick processing error",
+"Tick processing error:",
 error
 );
 
@@ -1113,24 +1423,33 @@ error
 };
 
 
-socket.onerror=function(){
+socket.onerror =
+function(){
 
-statusText.textContent=
+statusText.textContent =
 "CONNECTION ERROR";
 
-statusDot.classList.remove("live");
+
+statusDot.classList.remove(
+"live"
+);
 
 };
 
 
-socket.onclose=function(){
+socket.onclose =
+function(){
 
-statusDot.classList.remove("live");
+statusDot.classList.remove(
+"live"
+);
+
 
 if(running){
 
-statusText.textContent=
+statusText.textContent =
 "RECONNECTING...";
+
 
 setTimeout(
 connect,
@@ -1139,7 +1458,7 @@ connect,
 
 }else{
 
-statusText.textContent=
+statusText.textContent =
 "OFFLINE";
 
 }
@@ -1149,107 +1468,153 @@ statusText.textContent=
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
-start.onclick=function(){
+start.onclick =
+function(){
 
-running=true;
+running = true;
 
-start.disabled=true;
 
-stop.disabled=false;
+start.disabled = true;
 
-digitHistory=[];
+stop.disabled = false;
 
-tickTotal=0;
 
-ticks.textContent="0";
+digitHistory = [];
 
-price.textContent="---";
+tickTotal = 0;
 
-signals.innerHTML="";
 
-signal.textContent="CONNECTING";
+ticks.textContent =
+"0";
 
-signal.className=
+
+price.textContent =
+"---";
+
+
+signals.innerHTML = "";
+
+
+signal.textContent =
+"CONNECTING";
+
+
+signal.className =
 "signal-value wait";
 
-strength.textContent=
+
+strength.textContent =
 "Connecting to live Deriv data...";
 
-fill.style.width="0%";
 
-marketName.textContent=
+fill.style.width =
+"0%";
+
+
+marketName.textContent =
 market.options[
 market.selectedIndex
 ].text;
 
+
 drawDigits();
+
 
 connect();
 
 };
 
 
-/* STOP */
+/* =========================
+   STOP
+========================= */
 
-stop.onclick=function(){
+stop.onclick =
+function(){
 
-running=false;
+running = false;
 
-start.disabled=false;
 
-stop.disabled=true;
+start.disabled = false;
+
+stop.disabled = true;
+
 
 if(socket){
 
 try{
+
 socket.close();
+
 }catch(e){}
 
-socket=null;
+
+socket = null;
 
 }
 
-statusDot.classList.remove("live");
 
-statusText.textContent=
+statusDot.classList.remove(
+"live"
+);
+
+
+statusText.textContent =
 "OFFLINE";
 
-signal.textContent=
+
+signal.textContent =
 "STOPPED";
 
-signal.className=
+
+signal.className =
 "signal-value wait";
 
-strength.textContent=
+
+strength.textContent =
 "Live analysis stopped.";
 
-fill.style.width="0%";
+
+fill.style.width =
+"0%";
 
 };
 
 
-/* MARKET CHANGE */
+/* =========================
+   MARKET CHANGE
+========================= */
 
-market.onchange=function(){
+market.onchange =
+function(){
 
-marketName.textContent=
+marketName.textContent =
 market.options[
 market.selectedIndex
 ].text;
 
+
 if(running){
 
-digitHistory=[];
+digitHistory = [];
 
-tickTotal=0;
+tickTotal = 0;
 
-ticks.textContent="0";
 
-price.textContent="---";
+ticks.textContent =
+"0";
+
+
+price.textContent =
+"---";
+
 
 drawDigits();
+
 
 connect();
 
@@ -1258,7 +1623,9 @@ connect();
 };
 
 
-/* INITIAL */
+/* =========================
+   INITIAL STATE
+========================= */
 
 drawDigits();
 
