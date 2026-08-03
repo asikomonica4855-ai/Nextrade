@@ -1,222 +1,404 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXTRADE | Connecting</title><style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NEXTRADE | Connecting</title><style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #040a10;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#040a10;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-.card {
-  width: 90%;
-  max-width: 420px;
-  padding: 35px 25px;
-  text-align: center;
-  background: #08131f;
-  border: 1px solid #193247;
-  border-radius: 14px;
-  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+.card{
+    width:90%;
+    max-width:420px;
+    padding:35px 25px;
+    text-align:center;
+    background:#08131f;
+    border:1px solid #193247;
+    border-radius:14px;
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: 900;
-  margin-bottom: 20px;
+.logo{
+    font-size:24px;
+    font-weight:900;
+    margin-bottom:20px;
 }
 
-.logo span {
-  color: #159ff0;
+.logo span{
+    color:#159ff0;
 }
 
-.spinner {
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 20px;
-  border: 4px solid #193247;
-  border-top-color: #159ff0;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.spinner{
+    width:42px;
+    height:42px;
+    margin:0 auto 20px;
+    border:4px solid #193247;
+    border-top-color:#159ff0;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
 }
 
-h1 {
-  font-size: 21px;
-  margin-bottom: 10px;
+h1{
+    font-size:21px;
+    margin-bottom:10px;
 }
 
-p {
-  color: #71899a;
-  font-size: 10px;
-  line-height: 1.6;
+p{
+    color:#71899a;
+    font-size:10px;
+    line-height:1.6;
 }
 
-.success {
-  color: #2edb9c;
+.success{
+    color:#2edb9c;
 }
 
-.error {
-  color: #ff6675;
-  margin-top: 15px;
+.error{
+    color:#ff6675;
+    margin-top:15px;
 }
 
-.button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 20px;
-  border-radius: 7px;
-  background: #159ff0;
-  color: #fff;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: bold;
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    border-radius:7px;
+    background:#159ff0;
+    color:#fff;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:bold;
 }
-</style></head><body><div class="card">  <div class="logo">
+
+.button:hover{
+    background:#078bd8;
+}
+
+.small{
+    margin-top:12px;
+    font-size:8px;
+    color:#526a7c;
+}
+</style></head><body><div class="card"><div class="logo">
     MUK<span>HU</span>
-  </div>  <div id="content"><div class="spinner"></div>
+</div>
 
-<h1>Connecting your Deriv account...</h1>
+<div id="content">
 
-<p>
-  Please wait while MUKHU completes the secure connection.
-</p>
+    <div class="spinner"></div>
 
-  </div></div><script>
+    <h1>
+        Connecting your Deriv account...
+    </h1>
+
+    <p>
+        Please wait while MUKHU completes
+        the secure connection.
+    </p>
+
+</div>
+
+</div><script>
 
 const BACKEND =
-  "https://nextrade-backened.onrender.com";
+    "https://nextrade-backened.onrender.com";
+
+const LOGIN_PAGE =
+    "login.html";
+
+const MARKETS_PAGE =
+    "markets.html";
 
 const params =
-  new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const code =
-  params.get("code");
+    params.get("code");
 
 const state =
-  params.get("state");
+    params.get("state");
 
 const error =
-  params.get("error");
+    params.get("error");
+
+const errorDescription =
+    params.get("error_description");
 
 const content =
-  document.getElementById("content");
+    document.getElementById("content");
 
-async function connectAccount() {
 
-  if (error) {
-
-    content.innerHTML = `
-      <h1 class="error">
-        Deriv authorization was cancelled
-      </h1>
-
-      <p>
-        ${error}
-      </p>
-
-      <a class="button" href="login.html">
-        BACK TO LOGIN
-      </a>
-    `;
-
-    return;
-  }
-
-  if (!code || !state) {
+function showError(title, text){
 
     content.innerHTML = `
-      <h1 class="error">
-        Missing authorization data
-      </h1>
 
-      <p>
-        Deriv did not return the required OAuth
-        authorization information.
-      </p>
+        <h1 class="error">
+            ${title}
+        </h1>
 
-      <a class="button" href="login.html">
-        BACK TO LOGIN
-      </a>
+        <p>
+            ${text}
+        </p>
+
+        <a
+            class="button"
+            href="${LOGIN_PAGE}"
+        >
+            TRY AGAIN
+        </a>
+
     `;
 
-    return;
-  }
+}
 
-  try {
 
-    const response =
-      await fetch(
-        BACKEND +
-        "/oauth/callback?code=" +
-        encodeURIComponent(code) +
-        "&state=" +
-        encodeURIComponent(state)
-      );
+async function connectAccount(){
 
-    const data =
-      await response.json();
+    /*
+     * Deriv rejected/cancelled authorization.
+     */
 
-    if (!response.ok || !data.success) {
+    if(error){
 
-      throw new Error(
-        data.error ||
-        "OAuth connection failed."
-      );
+        const message =
+            errorDescription ||
+            error ||
+            "Deriv authorization was cancelled.";
+
+        showError(
+            "Authorization failed",
+            message
+        );
+
+        return;
+    }
+
+
+    /*
+     * Deriv must return both
+     * authorization code and state.
+     */
+
+    if(!code || !state){
+
+        showError(
+            "Missing authorization data",
+            "Deriv did not return the required OAuth authorization information."
+        );
+
+        return;
+    }
+
+
+    try{
+
+        /*
+         * IMPORTANT:
+         *
+         * credentials:"include"
+         * allows the Render backend's
+         * Secure HttpOnly session cookie
+         * to be stored by the browser.
+         */
+
+        const callbackUrl =
+            new URL(
+                "/oauth/callback",
+                BACKEND
+            );
+
+        callbackUrl.searchParams.set(
+            "code",
+            code
+        );
+
+        callbackUrl.searchParams.set(
+            "state",
+            state
+        );
+
+
+        const response =
+            await fetch(
+                callbackUrl.toString(),
+                {
+                    method:"GET",
+
+                    mode:"cors",
+
+                    credentials:"include",
+
+                    cache:"no-store"
+                }
+            );
+
+
+        /*
+         * Read the backend response safely.
+         */
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        let data;
+
+
+        if(
+            contentType.includes(
+                "application/json"
+            )
+        ){
+
+            data =
+                await response.json();
+
+        }else{
+
+            const text =
+                await response.text();
+
+            throw new Error(
+                text ||
+                "Backend returned an unexpected response."
+            );
+
+        }
+
+
+        /*
+         * Backend OAuth exchange failed.
+         */
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.error ||
+                "OAuth connection failed."
+            );
+
+        }
+
+
+        /*
+         * IMPORTANT:
+         *
+         * Verify that the session cookie
+         * actually works before declaring
+         * the login successful.
+         */
+
+        const sessionResponse =
+            await fetch(
+                BACKEND +
+                "/api/session",
+                {
+                    method:"GET",
+
+                    mode:"cors",
+
+                    credentials:"include",
+
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!sessionResponse.ok){
+
+            throw new Error(
+                "The Deriv authorization succeeded, but the NEXTRADE session could not be established."
+            );
+
+        }
+
+
+        const sessionData =
+            await sessionResponse.json();
+
+
+        if(
+            !sessionData.authenticated
+        ){
+
+            throw new Error(
+                "Deriv authorization succeeded, but NEXTRADE could not create the login session."
+            );
+
+        }
+
+
+        /*
+         * Everything succeeded.
+         */
+
+        content.innerHTML = `
+
+            <h1 class="success">
+                Deriv Connected Successfully
+            </h1>
+
+            <p>
+                Your Deriv account has been authorized
+                and your NEXTRADE session is active.
+            </p>
+
+            <a
+                class="button"
+                href="${MARKETS_PAGE}"
+            >
+                OPEN MARKETS
+            </a>
+
+            <div class="small">
+                Secure session established
+            </div>
+
+        `;
+
+
+    }catch(err){
+
+        console.error(
+            "NEXTRADE OAuth connection error:",
+            err
+        );
+
+
+        showError(
+            "Connection failed",
+            err.message ||
+            "Unable to complete the secure connection."
+        );
 
     }
 
-    content.innerHTML = `
-      <h1 class="success">
-        Deriv Connected Successfully
-      </h1>
-
-      <p>
-        Your Deriv account has been authorized.
-        You can now continue to NEXTRADE.
-      </p>
-
-      <a class="button" href="markets.html">
-        OPEN MARKETS
-      </a>
-    `;
-
-  } catch (err) {
-
-    console.error(err);
-
-    content.innerHTML = `
-      <h1 class="error">
-        Connection failed
-      </h1>
-
-      <p>
-        ${err.message}
-      </p>
-
-      <a class="button" href="login.html">
-        TRY AGAIN
-      </a>
-    `;
-
-  }
-
 }
+
 
 connectAccount();
 
