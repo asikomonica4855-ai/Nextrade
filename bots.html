@@ -3,464 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NEXTRADE | Bots</title>
+<title>NEXTRADE | Trading Bots</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 body{
 font-family:Arial,Helvetica,sans-serif;
-background:#050b12;
+background:#040a10;
 color:#fff;
-min-height:100vh;
+min-height:100vh
 }
 
 header{
-min-height:72px;
+min-height:70px;
 background:#08131f;
 border-bottom:1px solid #193247;
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:12px 5%;
-position:sticky;
-top:0;
-z-index:100;
+gap:15px
 }
 
 .logo{
-font-size:25px;
-font-weight:800;
-white-space:nowrap;
+font-size:24px;
+font-weight:900;
+white-space:nowrap
 }
 
-.logo span{color:#159ff0}
+.logo span{
+color:#159ff0
+}
 
-.nav{
+nav{
 display:flex;
-gap:4px;
-overflow-x:auto;
+gap:3px;
+overflow-x:auto
 }
 
-.nav a{
-color:#8ea5b7;
+nav a{
+color:#8097a8;
 text-decoration:none;
-font-size:10px;
+font-size:9px;
 font-weight:bold;
-padding:10px;
+padding:9px;
 white-space:nowrap;
-border-radius:6px;
+border-radius:6px
 }
 
-.nav a:hover{
-background:#102536;
-color:#fff;
+nav a:hover,
+nav a.active{
+color:#159ff0;
+background:#102333
 }
 
-.nav a.active{color:#159ff0}
-
-.nav .signup{
-background:#159ff0;
-color:#fff;
-}
-
-.page{
-width:92%;
-max-width:1400px;
+main{
+max-width:1250px;
 margin:auto;
-padding:38px 0 70px;
+padding:35px 5%
 }
 
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:flex-end;
-gap:20px;
-margin-bottom:24px;
+.page-title{
+margin-bottom:25px
 }
 
-.hero h1{
-font-size:34px;
-margin-bottom:8px;
+.page-title small{
+font-size:8px;
+letter-spacing:2px;
+color:#159ff0
 }
 
-.hero p{
-font-size:12px;
+.page-title h1{
+font-size:30px;
+margin:8px 0
+}
+
+.page-title p{
+font-size:11px;
 color:#71899a;
 line-height:1.6;
+max-width:650px
 }
 
-.bot-status{
-display:flex;
+.status{
+display:inline-flex;
 align-items:center;
-gap:8px;
-font-size:9px;
-color:#8ea5b7;
+gap:7px;
+padding:8px 12px;
+border:1px solid #28465a;
+border-radius:20px;
+font-size:8px;
+color:#8299a9;
+margin-top:15px
 }
 
-.status-dot{
-width:9px;
-height:9px;
+.dot{
+width:7px;
+height:7px;
 border-radius:50%;
-background:#697b89;
+background:#71899a
 }
 
-.status-dot.ready{
-background:#f0ad28;
-box-shadow:0 0 9px #f0ad28;
-}
-
-.status-dot.running{
+.dot.live{
 background:#2edb9c;
-box-shadow:0 0 12px #2edb9c;
+box-shadow:0 0 9px #2edb9c
 }
 
-.status-dot.error{
-background:#ff5969;
-}
-
-.grid{
+.layout{
 display:grid;
-grid-template-columns:1.3fr .7fr;
-gap:18px;
+grid-template-columns:360px 1fr;
+gap:15px
 }
 
 .card{
 background:#08131f;
 border:1px solid #193247;
-border-radius:12px;
-padding:22px;
+border-radius:11px;
+padding:20px
 }
 
-.card h2{
-font-size:14px;
-margin-bottom:7px;
+.card-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:18px
 }
 
-.card-sub{
-font-size:9px;
-color:#60788a;
-line-height:1.6;
+.card-title h2{
+font-size:13px
 }
 
-.controls{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-margin-top:20px;
+.card-title span{
+font-size:8px;
+color:#60798a
 }
 
-.field label{
+label{
 display:block;
 font-size:8px;
-color:#60788a;
-margin-bottom:7px;
+font-weight:bold;
+color:#8fa5b3;
+margin-bottom:7px
 }
 
-select,input{
+select,
+input{
 width:100%;
-background:#050d15;
-color:#fff;
-border:1px solid #23465d;
+height:43px;
+background:#07111b;
+border:1px solid #29465a;
 border-radius:7px;
-padding:11px;
+color:#fff;
+padding:0 11px;
 font-size:10px;
 outline:none;
+margin-bottom:16px
 }
 
-.buttons{
-display:flex;
-gap:9px;
-margin-top:18px;
+select:focus,
+input:focus{
+border-color:#159ff0
 }
 
-button{
-border:0;
-border-radius:7px;
-padding:11px 15px;
-font-size:9px;
-font-weight:bold;
-cursor:pointer;
+.risk-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
 }
 
 .start{
+width:100%;
+height:46px;
+border:0;
+border-radius:7px;
 background:#159ff0;
 color:#fff;
+font-size:10px;
+font-weight:bold;
+cursor:pointer
+}
+
+.start:hover{
+background:#078bd8
 }
 
 .stop{
-background:#241216;
-color:#ff5969;
-border:1px solid #65313a;
-}
-
-.clear{
-background:#0b2030;
-color:#8ea5b7;
-border:1px solid #23465d;
-}
-
-button:disabled{
-opacity:.45;
-cursor:not-allowed;
-}
-
-/* STATUS */
-
-.status-panel{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-margin-top:20px;
-}
-
-.status-box{
-background:#07111b;
-border:1px solid #193247;
-border-radius:8px;
-padding:15px;
-}
-
-.status-label{
-font-size:8px;
-color:#60788a;
-margin-bottom:7px;
-}
-
-.status-value{
-font-size:16px;
+width:100%;
+height:42px;
+border:1px solid #61313a;
+border-radius:7px;
+background:#190d11;
+color:#ff7180;
+font-size:9px;
 font-weight:bold;
+cursor:pointer;
+margin-top:9px
 }
 
-.green{color:#2edb9c}
-.red{color:#ff5969}
-.blue{color:#159ff0}
-.yellow{color:#f0ad28}
+.stop:disabled{
+opacity:.35;
+cursor:not-allowed
+}
 
-/* SIGNAL */
+.notice{
+font-size:8px;
+line-height:1.6;
+color:#71899a;
+padding:11px;
+margin-top:15px;
+border:1px solid #193247;
+background:#07111b;
+border-radius:7px
+}
 
 .signal{
-margin-top:18px;
-border-radius:10px;
-padding:20px;
-background:#07111b;
-border:1px solid #193247;
+min-height:200px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
 text-align:center;
+border:1px solid #193247;
+border-radius:9px;
+background:
+radial-gradient(circle,rgba(21,159,240,.08),transparent 55%),
+#07111b;
+margin-bottom:15px
 }
 
 .signal-label{
 font-size:8px;
-color:#60788a;
-margin-bottom:10px;
+letter-spacing:2px;
+color:#60798a;
+margin-bottom:10px
 }
 
 .signal-value{
-font-size:28px;
-font-weight:800;
+font-size:34px;
+font-weight:900
 }
 
-.signal-meta{
+.signal-value.buy{
+color:#2edb9c
+}
+
+.signal-value.wait{
+color:#f0b84b
+}
+
+.signal-value.sell{
+color:#ff6574
+}
+
+.signal-strength{
 font-size:9px;
 color:#71899a;
-margin-top:7px;
+margin-top:8px
 }
 
-/* LIVE */
-
-.live-price{
-font-size:29px;
-font-weight:bold;
-margin-top:18px;
-}
-
-.live-code{
-font-size:9px;
-color:#60788a;
-margin-top:5px;
-}
-
-.connection{
+.signal-bar{
+width:80%;
+height:7px;
+background:#132433;
+border-radius:10px;
 margin-top:15px;
-display:flex;
-align-items:center;
-gap:8px;
-font-size:9px;
-color:#60788a;
+overflow:hidden
 }
 
-.connection-dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:#f0ad28;
+.signal-fill{
+height:100%;
+width:0%;
+background:#159ff0;
+transition:width .5s
 }
 
-.connection-dot.live{
-background:#2edb9c;
-box-shadow:0 0 8px #2edb9c;
-}
-
-/* RISK */
-
-.risk-grid{
+.market-info{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:18px;
+gap:9px;
+margin-bottom:15px
 }
 
-.risk-result{
+.stat{
 background:#07111b;
 border:1px solid #193247;
 border-radius:8px;
-padding:13px;
+padding:13px
 }
 
-.risk-label{
+.stat small{
 font-size:7px;
-color:#60788a;
-margin-bottom:6px;
+color:#60798a
 }
 
-.risk-value{
-font-size:15px;
-font-weight:bold;
+.stat strong{
+display:block;
+font-size:13px;
+margin-top:6px
 }
 
-/* LOG */
-
-.log-card{
-margin-top:18px;
+.green{
+color:#2edb9c
 }
 
-.log{
-margin-top:15px;
-max-height:260px;
-overflow-y:auto;
+.red{
+color:#ff6574
+}
+
+.signal-list{
 display:flex;
 flex-direction:column;
-gap:7px;
+gap:7px
 }
 
-.log-item{
+.signal-row{
 display:grid;
-grid-template-columns:75px 1fr;
-gap:10px;
-padding:10px;
-background:#07111b;
-border:1px solid #193247;
+grid-template-columns:1.4fr .8fr .8fr;
+gap:5px;
+padding:11px;
 border-radius:7px;
-font-size:8px;
-}
-
-.log-time{
-color:#60788a;
-}
-
-.log-message{
-color:#9db0bd;
-}
-
-/* STRATEGIES */
-
-.strategy-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:20px;
-}
-
-.strategy{
-padding:16px;
-border-radius:8px;
 background:#07111b;
-border:1px solid #193247;
-}
-
-.strategy h3{
-font-size:11px;
-margin-bottom:7px;
-}
-
-.strategy p{
+border:1px solid #152b3c;
 font-size:8px;
-line-height:1.6;
-color:#60788a;
+align-items:center
 }
 
-.strategy.active{
-border-color:#159ff0;
+.signal-row span:last-child{
+text-align:right
 }
 
-/* NOTICE */
+.badge{
+display:inline-block;
+padding:5px 7px;
+border-radius:5px;
+font-size:7px;
+font-weight:bold
+}
 
-.notice{
-margin-top:18px;
-padding:15px 17px;
-background:#171208;
-border:1px solid #5b471d;
-border-radius:8px;
-color:#a9915b;
-font-size:9px;
-line-height:1.6;
+.badge.buy{
+background:#0b3027;
+color:#4de0b0
+}
+
+.badge.wait{
+background:#352a12;
+color:#e6b952
 }
 
 footer{
 border-top:1px solid #193247;
 background:#06101a;
-padding:28px 5%;
-display:flex;
-justify-content:space-between;
-color:#526a7c;
-font-size:9px;
-}
-
-.footer-logo{
-color:#fff;
-font-size:14px;
-font-weight:bold;
-}
-
-.footer-logo span{color:#159ff0}
-
-@media(max-width:900px){
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.strategy-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-@media(max-width:650px){
-
-.hero{
-flex-direction:column;
-align-items:flex-start;
-}
-
-.hero h1{
-font-size:28px;
-}
-
-.controls,
-.status-panel,
-.risk-grid,
-.strategy-grid{
-grid-template-columns:1fr;
-}
-
-.buttons{
-flex-wrap:wrap;
-}
-
-footer{
-flex-direction:column;
-gap:12px;
+padding:22px;
 text-align:center;
+font-size:8px;
+color:#526a7c;
+margin-top:30px
+}
+
+@media(max-width:850px){
+.layout{
+grid-template-columns:1fr
+}
+}
+
+@media(max-width:550px){
+
+header{
+align-items:flex-start;
+flex-direction:column
+}
+
+nav{
+width:100%
+}
+
+main{
+padding:28px 4%
+}
+
+.page-title h1{
+font-size:26px
+}
+
+.market-info{
+grid-template-columns:1fr 1fr
+}
+
+.signal-row{
+grid-template-columns:1.2fr .8fr .8fr
 }
 
 }
@@ -475,7 +410,7 @@ text-align:center;
 NEX<span>TRADE</span>
 </div>
 
-<nav class="nav">
+<nav>
 <a href="index.html">HOME</a>
 <a href="markets.html">MARKETS</a>
 <a href="tools.html">TOOLS</a>
@@ -483,57 +418,50 @@ NEX<span>TRADE</span>
 <a href="analysis.html">ANALYSIS</a>
 <a href="manual-trading.html">MANUAL TRADING</a>
 <a href="login.html">LOGIN</a>
-<a href="signup.html" class="signup">SIGN UP</a>
+<a href="signup.html">SIGN UP</a>
 </nav>
 
 </header>
 
 
-<div class="page">
+<main>
 
-<div class="hero">
+<div class="page-title">
 
-<div>
+<small>NEXTRADE STRATEGY ENGINE</small>
+
 <h1>Trading Bots</h1>
 
 <p>
 Configure NEXTRADE strategy engines, monitor live signals
-and manage bot settings from one dashboard.
+and study automated-style analysis without placing real
+trades.
 </p>
-</div>
 
-<div class="bot-status">
-
-<span id="statusDot" class="status-dot"></span>
-
-<span id="statusText">
-OFFLINE
-</span>
-
+<div class="status">
+<div class="dot" id="statusDot"></div>
+<span id="statusText">OFFLINE</span>
 </div>
 
 </div>
 
 
-<div class="grid">
+<div class="layout">
 
-<!-- BOT CONTROL -->
+
+<!-- CONTROL PANEL -->
 
 <div class="card">
 
+<div class="card-title">
 <h2>Bot Control</h2>
-
-<div class="card-sub">
-Select a market and strategy. The current version generates
-analysis signals only and does not place trades automatically.
+<span>DEMO MODE</span>
 </div>
 
 
-<div class="controls">
-
-<div class="field">
-
-<label>MARKET</label>
+<label>
+MARKET
+</label>
 
 <select id="market">
 
@@ -579,12 +507,10 @@ Volatility 10
 
 </select>
 
-</div>
 
-
-<div class="field">
-
-<label>STRATEGY</label>
+<label>
+STRATEGY
+</label>
 
 <select id="strategy">
 
@@ -592,53 +518,48 @@ Volatility 10
 Digit Strength
 </option>
 
-<option value="overunder">
-Over / Under
+<option value="movement">
+Market Movement
 </option>
 
-<option value="evenodd">
-Even / Odd
-</option>
-
-<option value="momentum">
-Momentum
-</option>
-
-<option value="combined">
-Combined Analysis
+<option value="trend">
+Tick Trend
 </option>
 
 </select>
 
-</div>
 
+<div class="risk-row">
 
-<div class="field">
+<div>
 
-<label>RISK PER SIGNAL %</label>
+<label>
+RISK PER SIGNAL %
+</label>
 
 <input
 id="risk"
 type="number"
 value="2"
-min="0"
+min="0.1"
 max="100"
 step="0.1"
 >
 
 </div>
 
+<div>
 
-<div class="field">
-
-<label>ACCOUNT BALANCE</label>
+<label>
+ACCOUNT BALANCE
+</label>
 
 <input
 id="balance"
 type="number"
 value="100"
-min="0"
-step="0.01"
+min="1"
+step="1"
 >
 
 </div>
@@ -646,107 +567,61 @@ step="0.01"
 </div>
 
 
-<div class="buttons">
-
 <button
-id="start"
 class="start"
-onclick="startBot()"
+id="start"
 >
 START ANALYSIS
 </button>
 
 <button
-id="stop"
 class="stop"
-onclick="stopBot()"
+id="stop"
 disabled
 >
 STOP
 </button>
 
-<button
-class="clear"
-onclick="clearLog()"
->
-CLEAR LOG
-</button>
 
-</div>
+<div class="notice">
 
+<strong>DEMO / ANALYSIS ONLY</strong><br>
 
-<div class="status-panel">
-
-<div class="status-box">
-
-<div class="status-label">
-BOT STATE
-</div>
-
-<div
-id="botState"
-class="status-value yellow"
->
-OFFLINE
-</div>
-
-</div>
-
-
-<div class="status-box">
-
-<div class="status-label">
-SIGNALS
-</div>
-
-<div
-id="signalCount"
-class="status-value blue"
->
-0
-</div>
-
-</div>
+This strategy engine generates simulated analysis
+signals. It does not place real Deriv trades and does
+not use real-money funds.
 
 </div>
 
 </div>
 
 
-<!-- LIVE MARKET -->
+<!-- LIVE ENGINE -->
 
-<div class="card">
+<div>
 
-<h2>Live Market</h2>
+<div class="market-info">
 
-<div class="card-sub">
-Real-time price feed from the NEXTRADE market backend.
+<div class="stat">
+<small>MARKET</small>
+<strong id="marketName">
+Volatility 100 (1s)
+</strong>
 </div>
 
-<div
-id="livePrice"
-class="live-price"
->
+<div class="stat">
+<small>PRICE</small>
+<strong id="price">
 ---
+</strong>
 </div>
 
-<div
-id="liveCode"
-class="live-code"
->
-1HZ100V
+<div class="stat">
+<small>ENGINE</small>
+<strong id="engine">
+OFF
+</strong>
 </div>
-
-<div class="connection">
-
-<span
-id="connectionDot"
-class="connection-dot"
-></span>
-
-<span id="connectionText">
-CONNECTING
-</span>
 
 </div>
 
@@ -754,193 +629,49 @@ CONNECTING
 <div class="signal">
 
 <div class="signal-label">
-CURRENT SIGNAL
+LATEST BOT SIGNAL
 </div>
 
 <div
 id="signal"
-class="signal-value"
+class="signal-value wait"
 >
 WAITING
 </div>
 
 <div
-id="signalMeta"
-class="signal-meta"
+id="strength"
+class="signal-strength"
 >
-Start the analysis engine to generate signals.
+Start analysis to generate signals.
+</div>
+
+<div class="signal-bar">
+<div
+id="fill"
+class="signal-fill"
+></div>
 </div>
 
 </div>
 
-</div>
 
-</div>
+<div class="card">
 
-
-<!-- RISK -->
-
-<div class="card log-card">
-
-<h2>Risk Monitor</h2>
-
-<div class="card-sub">
-Calculated from your balance and selected risk percentage.
-</div>
-
-<div class="risk-grid">
-
-<div class="risk-result">
-
-<div class="risk-label">
-ACCOUNT BALANCE
+<div class="card-title">
+<h2>Recent Signals</h2>
+<span id="tickCount">0 TICKS</span>
 </div>
 
 <div
-id="balanceDisplay"
-class="risk-value"
->
-$100.00
-</div>
-
-</div>
-
-
-<div class="risk-result">
-
-<div class="risk-label">
-RISK %
-</div>
-
-<div
-id="riskDisplay"
-class="risk-value"
->
-2.0%
-</div>
-
-</div>
-
-
-<div class="risk-result">
-
-<div class="risk-label">
-RISK AMOUNT
-</div>
-
-<div
-id="riskAmount"
-class="risk-value"
->
-$2.00
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- STRATEGIES -->
-
-<div class="card log-card">
-
-<h2>Available Strategies</h2>
-
-<div class="card-sub">
-Select a strategy above to change the analysis engine.
-</div>
-
-
-<div class="strategy-grid">
-
-<div class="strategy active">
-
-<h3>Digit Strength</h3>
-
-<p>
-Tracks recent digit frequency and highlights stronger
-and weaker digit behavior.
-</p>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>Over / Under</h3>
-
-<p>
-Analyzes recent digit distribution around a selected
-over or under threshold.
-</p>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>Even / Odd</h3>
-
-<p>
-Compares recent even and odd digit behavior.
-</p>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>Momentum</h3>
-
-<p>
-Monitors recent price movement and short-term directional
-behavior.
-</p>
-
-</div>
-
-
-<div class="strategy">
-
-<h3>Combined Analysis</h3>
-
-<p>
-Combines multiple market observations into one analysis
-signal.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ACTIVITY LOG -->
-
-<div class="card log-card">
-
-<h2>Bot Activity</h2>
-
-<div class="card-sub">
-Recent events generated by the analysis engine.
-</div>
-
-<div
-id="log"
-class="log"
+id="signals"
+class="signal-list"
 >
 
-<div class="log-item">
-
-<div class="log-time">
-SYSTEM
-</div>
-
-<div class="log-message">
-NEXTRADE bot engine ready.
+<div class="signal-row">
+<span>Waiting for engine...</span>
+<span>—</span>
+<span>—</span>
 </div>
 
 </div>
@@ -949,50 +680,17 @@ NEXTRADE bot engine ready.
 
 </div>
 
-
-<div class="notice">
-
-<strong>IMPORTANT:</strong>
-
-This NEXTRADE bot page currently operates as an
-analysis and signal-monitoring engine. It does not
-automatically execute trades or send orders to a
-Deriv account. Signals are informational and are not
-guaranteed trading outcomes.
-
 </div>
 
-</div>
+</main>
 
 
 <footer>
-
-<div class="footer-logo">
-NEX<span>TRADE</span>
-</div>
-
-<div>
-© 2026 NEXTRADE
-</div>
-
+© 2026 NEXTRADE • Analysis engine only
 </footer>
 
 
 <script>
-
-const BACKEND =
-"wss://nextrade-backened.onrender.com";
-
-let socket;
-
-let botRunning=false;
-
-let signalCounter=0;
-
-let prices=[];
-
-
-/* ELEMENTS */
 
 const market =
 document.getElementById("market");
@@ -1000,17 +698,35 @@ document.getElementById("market");
 const strategy =
 document.getElementById("strategy");
 
-const livePrice =
-document.getElementById("livePrice");
+const risk =
+document.getElementById("risk");
 
-const liveCode =
-document.getElementById("liveCode");
+const balance =
+document.getElementById("balance");
 
-const connectionDot =
-document.getElementById("connectionDot");
+const start =
+document.getElementById("start");
 
-const connectionText =
-document.getElementById("connectionText");
+const stop =
+document.getElementById("stop");
+
+const signal =
+document.getElementById("signal");
+
+const strength =
+document.getElementById("strength");
+
+const fill =
+document.getElementById("fill");
+
+const signals =
+document.getElementById("signals");
+
+const price =
+document.getElementById("price");
+
+const engine =
+document.getElementById("engine");
 
 const statusDot =
 document.getElementById("statusDot");
@@ -1018,65 +734,139 @@ document.getElementById("statusDot");
 const statusText =
 document.getElementById("statusText");
 
-const botState =
-document.getElementById("botState");
+const marketName =
+document.getElementById("marketName");
 
-const signal =
-document.getElementById("signal");
+const tickCount =
+document.getElementById("tickCount");
 
-const signalMeta =
-document.getElementById("signalMeta");
-
-const signalCount =
-document.getElementById("signalCount");
-
-const log =
-document.getElementById("log");
-
-const risk =
-document.getElementById("risk");
-
-const balance =
-document.getElementById("balance");
-
-const balanceDisplay =
-document.getElementById("balanceDisplay");
-
-const riskDisplay =
-document.getElementById("riskDisplay");
-
-const riskAmount =
-document.getElementById("riskAmount");
+let running=false;
+let timer=null;
+let ticks=0;
+let lastPrice=771.33;
 
 
-/* LOG */
+function selectedMarketName(){
 
-function addLog(message){
+return market.options[
+market.selectedIndex
+].text;
 
-const item =
+}
+
+
+function generateSignal(){
+
+const r=Math.random();
+
+let result;
+let strengthValue;
+
+if(r>.72){
+
+result="BUY";
+strengthValue=Math.floor(
+72+Math.random()*25
+);
+
+}else if(r<.28){
+
+result="WAIT";
+strengthValue=Math.floor(
+55+Math.random()*18
+);
+
+}else{
+
+result="WAIT";
+strengthValue=Math.floor(
+40+Math.random()*25
+);
+
+}
+
+return {
+result,
+strengthValue
+};
+
+}
+
+
+function addSignal(){
+
+const data=
+generateSignal();
+
+const currentRisk=
+parseFloat(risk.value)||2;
+
+const currentBalance=
+parseFloat(balance.value)||100;
+
+const stake=
+currentBalance*
+(currentRisk/100);
+
+signal.textContent=
+data.result;
+
+signal.className=
+"signal-value "+
+(data.result==="BUY"
+?"buy"
+:"wait");
+
+strength.textContent=
+"Signal strength "+
+data.strengthValue+
+"% • Demo analysis";
+
+fill.style.width=
+data.strengthValue+"%";
+
+ticks++;
+
+tickCount.textContent=
+ticks+" TICKS";
+
+lastPrice +=
+(Math.random()-.5)*2;
+
+price.textContent=
+lastPrice.toFixed(2);
+
+const row=
 document.createElement("div");
 
-item.className =
-"log-item";
+row.className="signal-row";
 
-item.innerHTML = `
+row.innerHTML=`
 
-<div class="log-time">
-${new Date().toLocaleTimeString()}
-</div>
+<span>${selectedMarketName()}</span>
 
-<div class="log-message">
-${message}
-</div>
+<span>
+<span class="badge ${
+data.result==="BUY"
+?"buy"
+:"wait"
+}">
+${data.result}
+</span>
+</span>
+
+<span>
+${stake.toFixed(2)}
+</span>
 
 `;
 
-log.prepend(item);
+signals.prepend(row);
 
-while(log.children.length>30){
+while(signals.children.length>6){
 
-log.removeChild(
-log.lastChild
+signals.removeChild(
+signals.lastChild
 );
 
 }
@@ -1084,536 +874,83 @@ log.lastChild
 }
 
 
-function clearLog(){
+start.addEventListener(
+"click",
+function(){
 
-log.innerHTML="";
+if(running)return;
 
-addLog(
-"Activity log cleared."
+running=true;
+
+start.disabled=true;
+stop.disabled=false;
+
+statusDot.classList.add("live");
+statusText.textContent="LIVE ANALYSIS";
+
+engine.textContent="ON";
+
+marketName.textContent=
+selectedMarketName();
+
+signal.textContent="SCANNING";
+signal.className="signal-value wait";
+
+strength.textContent=
+"Collecting live analysis data...";
+
+timer=setInterval(
+addSignal,
+1500
 );
 
-}
+});
 
 
-/* RISK */
+stop.addEventListener(
+"click",
+function(){
 
-function updateRisk(){
+running=false;
 
-const b =
-Number(balance.value)||0;
+clearInterval(timer);
 
-const r =
-Number(risk.value)||0;
+timer=null;
 
-const amount =
-b*(r/100);
+start.disabled=false;
+stop.disabled=true;
 
-balanceDisplay.textContent =
-"$"+b.toFixed(2);
+statusDot.classList.remove("live");
+statusText.textContent="OFFLINE";
 
-riskDisplay.textContent =
-r.toFixed(1)+"%";
+engine.textContent="OFF";
 
-riskAmount.textContent =
-"$"+amount.toFixed(2);
+signal.textContent="STOPPED";
+signal.className="signal-value wait";
 
-}
+strength.textContent=
+"Analysis engine stopped.";
 
-balance.addEventListener(
-"input",
-updateRisk
-);
+fill.style.width="0%";
 
-risk.addEventListener(
-"input",
-updateRisk
-);
+});
 
-
-/* MARKET */
 
 market.addEventListener(
 "change",
 function(){
 
-liveCode.textContent =
-this.value;
+marketName.textContent=
+selectedMarketName();
 
-prices=[];
+if(!running){
 
-signal.textContent =
-"WAITING";
+price.textContent="---";
 
-signalMeta.textContent =
-"Market changed. Waiting for live data.";
-
-addLog(
-"Market changed to "+this.value
-);
+}
 
 });
 
-
-/* STRATEGY */
-
-strategy.addEventListener(
-"change",
-function(){
-
-const cards =
-document.querySelectorAll(
-".strategy"
-);
-
-cards.forEach(
-c=>c.classList.remove(
-"active"
-)
-);
-
-const selected =
-this.value;
-
-let index=0;
-
-if(selected==="overunder")
-index=1;
-
-if(selected==="evenodd")
-index=2;
-
-if(selected==="momentum")
-index=3;
-
-if(selected==="combined")
-index=4;
-
-if(cards[index])
-cards[index].classList.add(
-"active"
-);
-
-addLog(
-"Strategy selected: "+
-this.options[
-this.selectedIndex
-].text
-);
-
-});
-
-
-/* START */
-
-function startBot(){
-
-if(botRunning)
-return;
-
-botRunning=true;
-
-document.getElementById(
-"start"
-).disabled=true;
-
-document.getElementById(
-"stop"
-).disabled=false;
-
-statusDot.className =
-"status-dot running";
-
-statusText.textContent =
-"RUNNING";
-
-botState.textContent =
-"RUNNING";
-
-botState.className =
-"status-value green";
-
-signal.textContent =
-"ANALYZING";
-
-signalMeta.textContent =
-"Monitoring live market conditions.";
-
-addLog(
-"Analysis engine started on "+
-market.options[
-market.selectedIndex
-].text
-);
-
-}
-
-
-/* STOP */
-
-function stopBot(){
-
-botRunning=false;
-
-document.getElementById(
-"start"
-).disabled=false;
-
-document.getElementById(
-"stop"
-).disabled=true;
-
-statusDot.className =
-"status-dot ready";
-
-statusText.textContent =
-"READY";
-
-botState.textContent =
-"READY";
-
-botState.className =
-"status-value yellow";
-
-signal.textContent =
-"STOPPED";
-
-signalMeta.textContent =
-"Analysis engine is paused.";
-
-addLog(
-"Analysis engine stopped."
-);
-
-}
-
-
-/* SIGNAL ENGINE */
-
-function generateSignal(price){
-
-if(!botRunning)
-return;
-
-prices.push(price);
-
-if(prices.length>50)
-prices.shift();
-
-
-if(prices.length<10){
-
-signal.textContent =
-"BUILDING";
-
-signalMeta.textContent =
-"Collecting market observations...";
-
-return;
-
-}
-
-
-const current =
-prices[prices.length-1];
-
-const previous =
-prices[prices.length-10];
-
-const movement =
-current-previous;
-
-
-/* DIGIT */
-
-if(strategy.value==="digit"){
-
-const digit =
-lastDigit(current);
-
-signal.textContent =
-"MONITOR";
-
-signalMeta.textContent =
-"Latest digit: "+digit;
-
-}
-
-
-/* OVER UNDER */
-
-else if(
-strategy.value==="overunder"
-){
-
-const digit =
-lastDigit(current);
-
-if(digit>=5){
-
-signal.textContent =
-"OVER";
-
-signalMeta.textContent =
-"Latest digit is "+digit;
-
-}else{
-
-signal.textContent =
-"UNDER";
-
-signalMeta.textContent =
-"Latest digit is "+digit;
-
-}
-
-}
-
-
-/* EVEN ODD */
-
-else if(
-strategy.value==="evenodd"
-){
-
-const digit =
-lastDigit(current);
-
-if(digit%2===0){
-
-signal.textContent =
-"EVEN";
-
-}else{
-
-signal.textContent =
-"ODD";
-
-}
-
-signalMeta.textContent =
-"Latest digit: "+digit;
-
-}
-
-
-/* MOMENTUM */
-
-else if(
-strategy.value==="momentum"
-){
-
-if(movement>0){
-
-signal.textContent =
-"UP";
-
-signalMeta.textContent =
-"Positive recent movement.";
-
-}else if(movement<0){
-
-signal.textContent =
-"DOWN";
-
-signalMeta.textContent =
-"Negative recent movement.";
-
-}else{
-
-signal.textContent =
-"FLAT";
-
-signalMeta.textContent =
-"Limited recent movement.";
-
-}
-
-}
-
-
-/* COMBINED */
-
-else{
-
-const digit =
-lastDigit(current);
-
-const direction =
-movement>=0
-?
-"UP"
-:
-"DOWN";
-
-signal.textContent =
-direction;
-
-signalMeta.textContent =
-"Digit "+digit+
-" • Price "+direction;
-
-}
-
-
-signalCounter++;
-
-signalCount.textContent =
-signalCounter;
-
-}
-
-
-/* LAST DIGIT */
-
-function lastDigit(value){
-
-const text =
-String(value)
-.replace(/\D/g,"");
-
-if(!text)
-return null;
-
-return Number(
-text[text.length-1]
-);
-
-}
-
-
-/* CONNECT */
-
-function connect(){
-
-connectionText.textContent =
-"CONNECTING";
-
-connectionDot.className =
-"connection-dot";
-
-
-try{
-
-socket =
-new WebSocket(BACKEND);
-
-}catch(e){
-
-connectionText.textContent =
-"ERROR";
-
-return;
-
-}
-
-
-socket.onopen =
-function(){
-
-connectionText.textContent =
-"LIVE";
-
-connectionDot.className =
-"connection-dot live";
-
-addLog(
-"Live market connection established."
-);
-
-};
-
-
-socket.onmessage =
-function(event){
-
-let data;
-
-try{
-
-data =
-JSON.parse(event.data);
-
-}catch(e){
-
-return;
-
-}
-
-
-if(data.type!=="tick")
-return;
-
-const tick =
-data.data;
-
-if(
-!tick ||
-tick.symbol!==market.value ||
-tick.price===undefined
-){
-return;
-}
-
-const value =
-Number(tick.price);
-
-if(!Number.isFinite(value))
-return;
-
-livePrice.textContent =
-value.toLocaleString(
-undefined,
-{
-minimumFractionDigits:2,
-maximumFractionDigits:8
-}
-);
-
-generateSignal(value);
-
-};
-
-
-socket.onerror =
-function(){
-
-connectionText.textContent =
-"ERROR";
-
-connectionDot.className =
-"connection-dot";
-
-addLog(
-"Market connection error."
-);
-
-};
-
-
-socket.onclose =
-function(){
-
-connectionText.textContent =
-"RECONNECTING";
-
-connectionDot.className =
-"connection-dot";
-
-setTimeout(
-connect,
-4000
-);
-
-};
-
-}
-
-
-/* STARTUP */
-
-updateRisk();
-
-connect();
 
 </script>
 
